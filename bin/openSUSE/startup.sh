@@ -2,9 +2,6 @@
 # -*- coding: UTF-8 -*-
 # This is startup file for openSUSE
 
-export PLAT_NAME="`uname -i`"
-echo "export PLAT_NAME=\"`uname -i`\"" >> $ENV_EXPORT_SCRIPT
-
 case $WINDOWMANAGER in
     '/usr/bin/gnome')
     export WIN_MGR='Gnome'
@@ -25,7 +22,7 @@ case $WINDOWMANAGER in
     ;;
 esac
 
-echo "bin/${DISTRIB_ID}/install_require_packages.sh" >> $ENV_EXPORT_SCRIPT
+echo "bin/${DISTRO_ID}/install_require_packages.sh" >> $ENV_EXPORT_SCRIPT
 
 
 

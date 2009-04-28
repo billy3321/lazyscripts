@@ -5,36 +5,49 @@
 # the function use to get distribution name and version or codename.
 function get_distro_info () {
 if which lsb_release &> /dev/null ; then
-    export DISTRIB_ID=`lsb_release -is`
-    export DISTRIB_CODENAME=`lsb_release -cs`
-    export DISTRIB_VERSION=`lsb_release -rs`
-    if [ "$DISTRIB_ID" == "SUSE LINUX" ] ; then
-        case "$DISTRIB_VERSION" in
+    export DISTRO_ID=`lsb_release -is`
+    export DISTRO_CODENAME=`lsb_release -cs`
+    export DISTRO_VERSION=`lsb_release -rs`
+    if [ "$DISTRO_ID" == "SUSE LINUX" ] ; then
+        case "$DISTRO_VERSION" in
             "11.1"|"11.0")
-                export DISTRIB_ID="openSUSE"
+                export DISTRO_ID="openSUSE"
             ;;
         esac
     fi
-    echo "export DISTRIB_CODENAME=`lsb_release -cs`" >> "$ENV_EXPORT_SCRIPT"
-    echo "export DISTRIB_VERSION=`lsb_release -rs`" >> "$ENV_EXPORT_SCRIPT"
-    echo "export DISTRIB_ID=`lsb_release -is`" >> "$ENV_EXPORT_SCRIPT"
+    echo "export DISTRO_CODENAME=`lsb_release -cs`" >> "$ENV_EXPORT_SCRIPT"
+    echo "export DISTRO_VERSION=`lsb_release -rs`" >> "$ENV_EXPORT_SCRIPT"
+    echo "export DISTRO_ID=`lsb_release -is`" >> "$ENV_EXPORT_SCRIPT"
 
 elif grep "Fedora" /etc/issue ; then
     # Fedora does not install lsb (redhat-lsb) in default setting so detect /etc/issue or let user choice...
-    export DISTRIB_ID="Fedora"
-    echo "export DISTRIB_CODENAME=\"Fedora\"" >> "$ENV_EXPORT_SCRIPT"
-    export DISTRIB_CODENAME=""
-    export DISTRIB_VERSION=$(cat /etc/fedora-release | cut -d " " -f 3)
-    echo "export DISTRIB_VERSION=$(cat /etc/fedora-release | cut -d " " -f 3)" >> $ENV_EXPORT_SCRIPT
+    export DISTRO_ID="Fedora"
+    echo "export DISTRO_CODENAME=\"Fedora\"" >> "$ENV_EXPORT_SCRIPT"
+    export DISTRO_CODENAME=""
+    export DISTRO_VERSION=$(cat /etc/fedora-release | cut -d " " -f 3)
+    echo "export DISTRO_VERSION=$(cat /etc/fedora-release | cut -d " " -f 3)" >> $ENV_EXPORT_SCRIPT
 else
 # Let user choice by them self.
     echo "Sorry, Lazyscripts can't distinguish your Linux distribution."
     echo "Please choice your distribution in the list."
     zenity --info --text "Sorry, Lazyscripts can't distinguish your Linux distribution. Please choice your distribution in the list by your self.\n      \nNote: If you can't find your Linux distribution in the list, It means Lazyscripts not support your distribution. Please contact develpers. http://code.google.com/p/lazyscripts/"
-    DISTRIB_ID=`zenity --list --title="Choice your linux distribution" --radiolist --column "" --column "Linux Distribution" FALSE Fedora FALSE others`
-    export DISTRIB_ID=${DISTRIB_ID}
-    echo "export DISTRIB_ID=${DISTRIB_ID}" >> "$ENV_EXPORT_SCRIPT"
+    DISTRO_ID=`zenity --list --title="Choice your linux distribution" --radiolist --column "" --column "Linux Distribution" FALSE Fedora FALSE others`
+    export DISTRO_ID=${DISTRO_ID}
+    echo "export DISTRO_ID=${DISTRO_ID}" >> "$ENV_EXPORT_SCRIPT"
 fi
+}
+
+function get_platname() {
+	case $(getconf LONG_BIT) in
+	    "32")
+	    export PLAT_NAME="i386"
+	    echo "export PLATNAME=\"i386\"" >> $ENV_EXPORT_SCRIPT
+	    ;;
+	    "64")
+	    export PLAT_NAME="x86_64"
+	    echo "export PLATNAME=\"x86_64\"" >> $ENV_EXPORT_SCRIPT
+	    ;;
+	esac
 }
 
 function init_export_script () {
@@ -60,9 +73,11 @@ init_export_script
 
 get_distro_info
 
-case "$DISTRIB_ID" in
+get_platname
+
+case "$DISTRO_ID" in
     "Ubuntu"|"Debian"|"openSUSE"|"Fedora")
-    source bin/${DISTRIB_ID}/startup.sh
+    source bin/${DISTRO_ID}/startup.sh
     ;;
     *)
     #else

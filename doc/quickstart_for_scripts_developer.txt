@@ -64,16 +64,16 @@ ex:
 
 VARIABLES
 ================================
-Variables is declear in startup.sh and bin/$DISTRIB_ID/startup.sh.
+Variables is declear in startup.sh and bin/$DISTRO_ID/startup.sh.
 Variables will be decleared at the fisrt stage which Lazyscripts run. It will catch the enviroment variables,
 and make a new file. After Lazyscripts get root permission, Lazyscripts will import the file and export the
 variables. 
 
 You can use the following variables to distinguish the enviroment which your scripts run.
 
-DISTRIB_ID: This is distribution name, such as Fedora, Ubuntu...etc
-DISTRIB_CODENAME: The codename of distribution, usually use in Fedora, Ubuntu and Debian, like hardy, lenny...etc
-DISTRIB_VERSION: The version of distribution, use in Fedora and openSUSE, like 11.0, 11.1.
+DISTRO_ID: This is distribution name, such as Fedora, Ubuntu...etc
+DISTRO_CODENAME: The codename of distribution, usually use in Fedora, Ubuntu and Debian, like hardy, lenny...etc
+DISTRO_VERSION: The version of distribution, use in Fedora and openSUSE, like 11.0, 11.1.
 WIN_MGR: The window manager which in use, like Gnome or KDE. It will be set in openSUSE and Fedora only.
 PLAT_NAME: The platform of OS. like i386, x86_64.
 REPO_URL: The uri of scripts repository which in use, it's an ar`ray.
