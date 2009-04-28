@@ -24,7 +24,8 @@ elif grep "Fedora" /etc/issue ; then
     export DISTRIB_ID="Fedora"
     echo "export DISTRIB_CODENAME=\"Fedora\"" >> "$ENV_EXPORT_SCRIPT"
     export DISTRIB_CODENAME=""
-    export DISTRIB_VERSION=""
+    export DISTRIB_VERSION=$(cat /etc/fedora-release | cut -d " " -f 3)
+    echo "export DISTRIB_VERSION=$(cat /etc/fedora-release | cut -d " " -f 3)" >> $ENV_EXPORT_SCRIPT
 else
 # Let user choice by them self.
     echo "Sorry, Lazyscripts can't distinguish your Linux distribution."
