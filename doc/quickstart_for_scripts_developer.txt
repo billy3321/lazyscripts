@@ -76,7 +76,7 @@ DISTRO_CODENAME: The codename of distribution, usually use in Fedora, Ubuntu and
 DISTRO_VERSION: The version of distribution, use in Fedora and openSUSE, like 11.0, 11.1.
 WIN_MGR: The window manager which in use, like Gnome or KDE. It will be set in openSUSE and Fedora only.
 PLAT_NAME: The platform of OS. like i386, x86_64.
-REPO_URL: The uri of scripts repository which in use, it's an ar`ray.
+REPO_URL: The uri of scripts repository which in use, it's an array.
 REPO_NUM: The number of scripts repository which in use.
 REAL_USER: The user who run Lazyscripts.
 REAL_HOME: The home of the user who run Lazyscripts.
