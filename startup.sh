@@ -22,28 +22,28 @@ if which lsb_release &> /dev/null ; then
 elif [ -f /etc/fedora-release ] ; then
     # Fedora does not install lsb (redhat-lsb) in default setting so detect /etc/issue or let user choice...
     export DISTRO_ID="Fedora"
-    echo "export DISTRO_CODENAME=\"Fedora\"" >> "$ENV_EXPORT_SCRIPT"
+    echo "export DISTRO_ID=\"Fedora\"" >> "$ENV_EXPORT_SCRIPT"
     export DISTRO_CODENAME=""
     export DISTRO_VERSION=$(cat /etc/fedora-release | cut -d " " -f 3)
     echo "export DISTRO_VERSION=$(cat /etc/fedora-release | cut -d " " -f 3)" >> $ENV_EXPORT_SCRIPT
 elif test -f /etc/redhat-release && grep -q "CentOS" /etc/redhat-release ; then
     # Fedora does not install lsb (redhat-lsb) in default setting so detect /etc/issue or let user choice...
     export DISTRO_ID="CentOS"
-    echo "export DISTRO_CODENAME=\"CentOS\"" >> "$ENV_EXPORT_SCRIPT"
+    echo "export DISTRO_ID=\"CentOS\"" >> "$ENV_EXPORT_SCRIPT"
     export DISTRO_CODENAME=""
     export DISTRO_VERSION=$(cat /etc/redhat-release | cut -d " " -f 3)
     echo "export DISTRO_VERSION=$(cat /etc/redhat-release | cut -d " " -f 3)" >> $ENV_EXPORT_SCRIPT
 elif test -f /etc/redhat-release && grep -q "Red Hat" /etc/redhat-release ; then
     # Fedora does not install lsb (redhat-lsb) in default setting so detect /etc/issue or let user choice...
     export DISTRO_ID="RedHat"
-    echo "export DISTRO_CODENAME=\"RedHat\"" >> "$ENV_EXPORT_SCRIPT"
+    echo "export DISTRO_ID=\"RedHat\"" >> "$ENV_EXPORT_SCRIPT"
     export DISTRO_CODENAME=""
     export DISTRO_VERSION=$(cat /etc/redhat-release | cut -d " " -f 3)
     echo "export DISTRO_VERSION=$(cat /etc/redhat-release | cut -d " " -f 3)" >> $ENV_EXPORT_SCRIPT
 elif [ -f /etc/mandrake-release ] ; then
     # Fedora does not install lsb (redhat-lsb) in default setting so detect /etc/issue or let user choice...
     export DISTRO_ID="Mandrake"
-    echo "export DISTRO_CODENAME=\"Mandrake\"" >> "$ENV_EXPORT_SCRIPT"
+    echo "export DISTRO_ID=\"Mandrake\"" >> "$ENV_EXPORT_SCRIPT"
     export DISTRO_CODENAME=""
     export DISTRO_VERSION=$(cat /etc/mandake-release | grep release | cut -d " " -f 5)
     echo "export DISTRO_VERSION=$(cat /etc/mandrake-release | grep release | cut -d " " -f 5)" >> $ENV_EXPORT_SCRIPT
