@@ -3,15 +3,28 @@
 # This is a startup file for Fedora
 
 if [ -z "$DISTRO_VERSION" ];then
-    DISTRO_VERSION=`zenity --list --title="Choice your linux distribution version" --radiolist --column "" --column "Linux Distribution Version" FALSE "Fedora 10"`
+    DISTRO_VERSION=`zenity --list --title="Choice your linux distribution version" --radiolist --column "" --column "Linux Distribution Version" FALSE "CentOS 5.3"`
     case $DISTRO_VERSION in
-        "Fedora 10")
-        export DISTRO_VERSION="10"
+        "CentOS 5.3")
+        export DISTRO_VERSION="5.3"
         ;;
     esac
     echo "export DISTRO_VERSION=${DISTRO_VERSION}" >> $ENV_EXPORT_SCRIPT
 fi
-WIN_MGR=`zenity --list --title="Choice your window manager" --radiolist --column "" --column "Linux Distribution Version" FALSE "Gnome" FALSE "KDE"`
+
+if [ -z "$DESKTOP_SESSION" ];then
+    WIN_MGR=`zenity --list --title="Choice your window manager" --radiolist --column "" --column "Linux Distribution Version" FALSE "Gnome" FALSE "KDE"`
+else
+    case ${DESKTOP_SESSION} in
+        "gnome")
+        WIN_MGR="Gnome"
+        ;;
+        "kde")
+        WIN_MGR="KDE"
+        ;;
+    esac
+fi
+
 export WIN_MGR=${WIN_MGR}
 echo "export WIN_MGR=${WIN_MGR}" >> $ENV_EXPORT_SCRIPT
 
