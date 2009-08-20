@@ -18,6 +18,7 @@ case $(getconf LONG_BIT) in
 	rpm -Uvh --nosignature rpmforge-release-0.3.6-1.el5.rf.i386.rpm
     yum check-update
 	yum -y install git gksu
+    rpm -e rpmforge-release
 	;;  
 	"64")
 	sudo yum -y install wget
@@ -29,6 +30,7 @@ case $(getconf LONG_BIT) in
 	rpm -Uvh --nosignature rpmforge-release-0.3.6-1.el5.rf.x86_64.rpm
     yum check-update
 	yum -y install git gksu
+    rpm -e rpmforge-release
 	;;  
 esac
 else
