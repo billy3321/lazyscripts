@@ -22,7 +22,7 @@ function select_repo () {
         if [ -d ${REPO_DIR[$num]} ];then
             rm -rf ${REPO_DIR[$num]}
         fi
-        echo "git clone ${REPO_URL[$num]} ${REPO_DIR[$num]}" >> $ENV_EXPORT_SCRIPT
+        git clone ${REPO_URL[$num]} ${REPO_DIR[$num]}
         echo "./lzs list build ${REPO_URL[$num]}" >> $ENV_EXPORT_SCRIPT
     done
     echo "export REPO_DIR" >> $ENV_EXPORT_SCRIPT
