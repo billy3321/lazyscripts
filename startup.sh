@@ -81,6 +81,7 @@ function init_export_script () {
     touch "$ENV_EXPORT_SCRIPT"
     chmod a+x "$ENV_EXPORT_SCRIPT"
     echo "#!/bin/bash" > "$ENV_EXPORT_SCRIPT"
+    echo "set -o xtrace" > "$ENV_EXPORT_SCRIPT"
 }
 
 # the function is use to show a repository list if has more then one repository.

@@ -5,6 +5,7 @@
 # @author '2009 Hsin Yi Chen (陳信屹) <ossug.hychen@gmail.com>'
 
 # update lazyscripts.
+set -o xtrace
 
 source startup.sh
 
