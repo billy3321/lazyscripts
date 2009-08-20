@@ -5,15 +5,9 @@ TOP_DIR=`pwd`
 pushd /tmp
 PKG_URL="http://dag.wieers.com/rpm/packages/rpmforge-release/"
 
-case $(getconf LONG_BIT) in
-     "32")
-     ;;  
-     "64")
-     ;;  
- esac
-
 DISTRO_VERSION=$(cat /etc/fedora-release | cut -d " " -f 3)
 
+if [ $USER = "root" ]; then
 case $(getconf LONG_BIT) in
 	"32")
 	sudo yum -y install wget
@@ -28,6 +22,9 @@ case $(getconf LONG_BIT) in
 	yum -y install git gksu
 	;;  
 esac
+else
+    echo "Please run as root."
+fi
 
 
 popd
