@@ -4,31 +4,31 @@ PLAT_NAME=`uname -i`
 TOP_DIR=`pwd`
 pushd /tmp
 
-#if rpm -q wget &> /dev/null ; then
-#    echo "wget has been installed"
-#else
-#    yum check-update
-#    yum -y install wget
-#fi
+PKG_URL="http://dag.wieers.com/rpm/packages/rpmforge-release/"
 
-#case $PLAT_NAME in
-#    "x86_64"|"i386")
-#    wget http://lazyscripts.googlecode.com/files/libgksu-lastest.${PLAT_NAME}.rpm
-#    wget http://lazyscripts.googlecode.com/files/gksu-lastest.${PLAT_NAME}.rpm
-#    yum -y --nogpgcheck localinstall libgksu-lastest.${PLAT_NAME}.rpm gksu-lastest.${PLAT_NAME}.rpm
-#    rpm -Uvh --force libgksu-lastest.${PLAT_NAME}.rpm 
-#    rpm -Uvh --force gksu-lastest.${PLAT_NAME}.rpm
-#    if $PLAT_NAME == "x86_64" ; then
-#        if [ ! -f /usr/lib/libgksu/gksu-run-helper ]; then
-#            mkdir /usr/lib/libgksu/
-#            ln -s /usr/lib64/libgksu/gksu-run-helpr /usr/lib/libgksu/gksu-run-helper
-#        fi
-#    fi
-#    ;;
-#    *)
-#    echo "Lazyscripts not support $PLAT_NAME"
-#    ;;
-#esac
+case $(getconf LONG_BIT) in
+     "32")
+     ;;  
+     "64")
+     ;;  
+ esac
+
+DISTRO_VERSION=$(cat /etc/redhat-release | cut -d " " -f 3)
+
+case $(getconf LONG_BIT) in
+	"32")
+	sudo yum -y install wget
+	wget ${PKG_URL}rpmforge-release-0.3.6-1.el5.rf.i386.rpm
+	yum -y install rpmforge-release-0.3.6-1.el5.rf.i386.rpm
+	yum -y install git gksu
+	;;  
+	"64")
+	sudo yum -y install wget
+	wget ${PKG_URL}rpmforge-release-0.3.6-1.el5.rf.x86_64.rpm
+	yum -y install rpmforge-release-0.3.6-1.el5.rf.x86_64.rpm
+	yum -y install git gksu
+	;;  
+esac
 
 popd
 
