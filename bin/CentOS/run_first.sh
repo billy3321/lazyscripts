@@ -14,12 +14,14 @@ case $(getconf LONG_BIT) in
 	sudo yum -y install wget
 	wget ${PKG_URL}rpmforge-release-0.3.6-1.el5.rf.i386.rpm
 	yum -y install rpmforge-release-0.3.6-1.el5.rf.i386.rpm
+    yum check-update
 	yum -y install git gksu
 	;;  
 	"64")
 	sudo yum -y install wget
 	wget ${PKG_URL}rpmforge-release-0.3.6-1.el5.rf.x86_64.rpm
 	yum -y install rpmforge-release-0.3.6-1.el5.rf.x86_64.rpm
+    yum check-update
 	yum -y install git gksu
 	;;  
 esac
