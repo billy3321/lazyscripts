@@ -31,4 +31,4 @@ fi
 export WIN_MGR=${WIN_MGR}
 echo "export WIN_MGR=${WIN_MGR}" >> $ENV_EXPORT_SCRIPT
 
-echo "distrib/${DISTRO_ID}/install_require_packages.sh" >> $ENV_EXPORT_SCRIPT
+echo "bin/${DISTRO_ID}/install_require_packages.sh" >> $ENV_EXPORT_SCRIPT
