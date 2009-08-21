@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 # This is a startup file for Debian
 
-source /etc/profile >> $ENV_EXPORT_SCRIPT
+source ~/.bashrc >> $ENV_EXPORT_SCRIPT
 
 case ${DESKTOP_SESSION} in
     'default')
