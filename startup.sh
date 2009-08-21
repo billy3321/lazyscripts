@@ -15,7 +15,7 @@ if which lsb_release &> /dev/null ; then
                 echo "export DISTRO_ID=\"openSUSE\"" >> "$ENV_EXPORT_SCRIPT"
             ;;
         esac
-    elif [ "DISTRO_ID" == "MandrivaLinux" ] ; then
+    elif [ "$DISTRO_ID" == "MandrivaLinux" ] ; then
         export DISTRO_ID="Mandriva"
         echo "export DISTRO_ID=\"Mandriva\"" >> "$ENV_EXPORT_SCRIPT"
     fi
