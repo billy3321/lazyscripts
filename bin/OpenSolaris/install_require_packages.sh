@@ -24,7 +24,7 @@ if python -c "import imp;imp.find_module('git')" &> /dev/null ; then
     echo "Require module found."
 else
     echo "Require module not found."
-    easy_install GitPython
+    easy_install-2.4 GitPython
 fi
 
 echo "執行完畢！即將啟動Lazyscripts..."
