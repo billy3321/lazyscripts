@@ -104,7 +104,7 @@ get_distro_info
 get_platname
 
 case "$DISTRO_ID" in
-    "Ubuntu"|"Debian"|"openSUSE"|"Fedora"|"CentOS"|"OpenSolaris")
+    "Ubuntu"|"Debian"|"openSUSE"|"Fedora"|"CentOS"|"OpenSolaris"|"Mandriva")
     source bin/${DISTRO_ID}/startup.sh
     ;;
     *)
