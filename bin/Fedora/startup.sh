@@ -19,16 +19,20 @@ if [ -z "$DESKTOP_SESSION" ];then
     WIN_MGR=`zenity --list --title="Choice your window manager" --radiolist --column "" --column "Linux Distribution Version" FALSE "Gnome" FALSE "KDE"`
 else
     case ${DESKTOP_SESSION} in
-        "gnome")
-        WIN_MGR="Gnome"
-        ;;
-        "kde")
-        WIN_MGR="KDE"
-        ;;
-    esac
+	    'default')
+	    export WIN_MGR='Gnome'
+	    echo "export WIN_MGR=\"Gnome\"" >> $ENV_EXPORT_SCRIPT
+	    ;;  
+	    'kde')
+	    export WIN_MGR='KDE'
+	    echo "export WIN_MGR=\"KDE\"" >> $ENV_EXPORT_SCRIPT
+	    ;;    
+	    *)  
+	    echo "Lazysciprs can't identified your window manager"
+	    export WIN_MGR=''
+	    echo "export WIN_MGR=\"\"" >> $ENV_EXPORT_SCRIPT
+	    ;;  
+	esac
 fi
 
-export WIN_MGR=${WIN_MGR}
-echo "export WIN_MGR=${WIN_MGR}" >> $ENV_EXPORT_SCRIPT
-
-echo "bin/${DISTRO_ID}/install_require_packages.sh" >> $ENV_EXPORT_SCRIPT
+echo "source bin/${DISTRO_ID}/install_require_packages.sh" >> $ENV_EXPORT_SCRIPT
