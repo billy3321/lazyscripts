@@ -2,6 +2,8 @@
 # -*- coding: UTF-8 -*-
 # This is a startup file for Mandriva
 
+echo "source ~/.bashrc" >> $ENV_EXPORT_SCRIPT
+
 if [ -z "$DISTRO_VERSION" ];then
     DISTRO_VERSION=`zenity --list --title="Choice your linux distribution version" --radiolist --column "" --column "Linux Distribution Version" FALSE "Mandriva 2009.1"`
     case $DISTRO_VERSION in

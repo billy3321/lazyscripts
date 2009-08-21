@@ -20,7 +20,7 @@ def get_distro():
     
         if name == 'SUSE LINUX' and code in ('11.0','11.1','11.2') :
             name = 'openSUSE'
-        elif name == 'MandrivaLinux'
+        elif name == 'MandrivaLinux' :
             name = 'Mandriva'
     else:
         name = os.getenv('DISTRO_ID')
