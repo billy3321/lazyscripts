@@ -7,7 +7,8 @@ pushd /tmp
 
 DISTRO_VERSION=$(lsb_release -rs)
 
-if [ $USER == "root" ]; then
+UID=$(id -u)
+if [ $UID == "0" ]; then
     if [ $DISTRO_VERSION == "2009.1" ];then
 		case $(getconf LONG_BIT) in
 			"32")
