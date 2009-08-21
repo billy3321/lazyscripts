@@ -1,4 +1,5 @@
 #!/bin/bash 
+# -*- coding: UTF-8 -*-
 
 PLAT_NAME=`uname -i`
 TOP_DIR=`pwd`
@@ -10,7 +11,7 @@ DISTRO_VERSION=$(cat /etc/fedora-release | cut -d " " -f 3)
 if [ $USER = "root" ]; then
 case $(getconf LONG_BIT) in
 	"32")
-	sudo yum -y install wget
+	yum -y install wget
     if [ -f rpmforge-release-0.3.6-1.el5.rf.i386.rpm ];then
         rm -rf rpmforge-release-0.3.6-1.el5.rf.i386.rpm
     fi
@@ -21,7 +22,7 @@ case $(getconf LONG_BIT) in
     rpm -e rpmforge-release
 	;;  
 	"64")
-	sudo yum -y install wget
+	yum -y install wget
     if [ -f rpmforge-release-0.3.6-1.el5.rf.x86_64.rpm ] ; then
         rm -rf rpmforge-release-0.3.6-1.el5.rf.x86_64.rpm
     fi

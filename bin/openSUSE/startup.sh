@@ -22,7 +22,7 @@ case $WINDOWMANAGER in
     ;;
 esac
 
-echo "bin/${DISTRO_ID}/install_require_packages.sh" >> $ENV_EXPORT_SCRIPT
+echo "source bin/${DISTRO_ID}/install_require_packages.sh" >> $ENV_EXPORT_SCRIPT
 
 
 

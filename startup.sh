@@ -12,8 +12,12 @@ if which lsb_release &> /dev/null ; then
         case "$DISTRO_VERSION" in
             "11.1"|"11.0")
                 export DISTRO_ID="openSUSE"
+                echo "export DISTRO_ID=\"openSUSE\"" >> "$ENV_EXPORT_SCRIPT"
             ;;
         esac
+    elif [ "DISTRO_ID" == "MandrivaLinux" ] ; then
+        export DISTRO_ID="Mandriva"
+        echo "export DISTRO_ID=\"Mandriva\"" >> "$ENV_EXPORT_SCRIPT"
     fi
     echo "export DISTRO_CODENAME=`lsb_release -cs`" >> "$ENV_EXPORT_SCRIPT"
     echo "export DISTRO_VERSION=`lsb_release -rs`" >> "$ENV_EXPORT_SCRIPT"
@@ -38,11 +42,11 @@ elif test -f /etc/redhat-release && grep -q "Red Hat" /etc/redhat-release ; then
     export DISTRO_VERSION=$(cat /etc/redhat-release | cut -d " " -f 3)
     echo "export DISTRO_VERSION=$(cat /etc/redhat-release | cut -d " " -f 3)" >> $ENV_EXPORT_SCRIPT
 elif [ -f /etc/mandrake-release ] ; then
-    export DISTRO_ID="Mandrake"
-    echo "export DISTRO_ID=\"Mandrake\"" >> "$ENV_EXPORT_SCRIPT"
+    export DISTRO_ID="Mandriva"
+    echo "export DISTRO_ID=\"Mandriva\"" >> "$ENV_EXPORT_SCRIPT"
     export DISTRO_CODENAME=""
-    export DISTRO_VERSION=$(cat /etc/mandake-release | grep release | cut -d " " -f 5)
-    echo "export DISTRO_VERSION=$(cat /etc/mandrake-release | grep release | cut -d " " -f 5)" >> $ENV_EXPORT_SCRIPT
+    export DISTRO_VERSION=$(cat /etc/mandriva-release | grep release | cut -d " " -f 4)
+    echo "export DISTRO_VERSION=$(cat /etc/mandriva-release | grep release | cut -d " " -f 4)" >> $ENV_EXPORT_SCRIPT
 elif [ -f /usr/bin/pkg ] && grep -q "OpenSolaris" /etc/release ; then
     export DISTRO_ID="OpenSolaris"
     echo "export DISTRO_ID=\"OpenSolaris\"" >> $ENV_EXPORT_SCRIPT

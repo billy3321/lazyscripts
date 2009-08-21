@@ -1,22 +1,14 @@
 #!/bin/bash
 # -*- coding: UTF-8 -*-
+#
 
-UNINST_PKG=""
-for EACH_PKG in SUNWwget SUNWgit SUNWpython-setuptools
-do
-    if ! pkg search -l ${EACH_PKG} &> /dev/null ; then
-        UNINST_PKG="${UNINST_PKG} ${EACH_PKG}"
-    fi
-done
-
-
-if  [ -z $UNINST_PKG ] ; then
+if rpm -q python2.4-setuptools git &> /dev/null ; then
     echo "Require packages installed."
 else
     echo "Require packages not installed."
 
-    pkg refresh
-    pkg install ${UNINST_PKG}
+    urpmi.update --update
+    urpmi --auto git python2.4-setuptools
 
 fi
 
@@ -24,7 +16,7 @@ if python -c "import imp;imp.find_module('git')" &> /dev/null ; then
     echo "Require module found."
 else
     echo "Require module not found."
-    easy_install-2.4 GitPython
+    easy_install GitPython
 fi
 
 echo "執行完畢！即將啟動Lazyscripts..."

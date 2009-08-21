@@ -1,4 +1,5 @@
 #!/bin/bash 
+# -*- coding: UTF-8 -*-
 
 PLAT_NAME=`uname -i`
 TOP_DIR=`pwd`

@@ -1,4 +1,5 @@
 #!/bin/bash
+# -*- coding: UTF-8 -*-
 #
 # YUMBACK_PID=`pgrep -fl PackageKit | cut -d " " -f 1`
 # if [ -z $YUMBACK_PID ]; then
