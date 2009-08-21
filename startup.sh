@@ -20,33 +20,35 @@ if which lsb_release &> /dev/null ; then
     echo "export DISTRO_ID=`lsb_release -is`" >> "$ENV_EXPORT_SCRIPT"
 
 elif [ -f /etc/fedora-release ] ; then
-    # Fedora does not install lsb (redhat-lsb) in default setting so detect /etc/issue or let user choice...
     export DISTRO_ID="Fedora"
     echo "export DISTRO_ID=\"Fedora\"" >> "$ENV_EXPORT_SCRIPT"
     export DISTRO_CODENAME=""
     export DISTRO_VERSION=$(cat /etc/fedora-release | cut -d " " -f 3)
     echo "export DISTRO_VERSION=$(cat /etc/fedora-release | cut -d " " -f 3)" >> $ENV_EXPORT_SCRIPT
 elif test -f /etc/redhat-release && grep -q "CentOS" /etc/redhat-release ; then
-    # Fedora does not install lsb (redhat-lsb) in default setting so detect /etc/issue or let user choice...
     export DISTRO_ID="CentOS"
     echo "export DISTRO_ID=\"CentOS\"" >> "$ENV_EXPORT_SCRIPT"
     export DISTRO_CODENAME=""
     export DISTRO_VERSION=$(cat /etc/redhat-release | cut -d " " -f 3)
     echo "export DISTRO_VERSION=$(cat /etc/redhat-release | cut -d " " -f 3)" >> $ENV_EXPORT_SCRIPT
 elif test -f /etc/redhat-release && grep -q "Red Hat" /etc/redhat-release ; then
-    # Fedora does not install lsb (redhat-lsb) in default setting so detect /etc/issue or let user choice...
     export DISTRO_ID="RedHat"
     echo "export DISTRO_ID=\"RedHat\"" >> "$ENV_EXPORT_SCRIPT"
     export DISTRO_CODENAME=""
     export DISTRO_VERSION=$(cat /etc/redhat-release | cut -d " " -f 3)
     echo "export DISTRO_VERSION=$(cat /etc/redhat-release | cut -d " " -f 3)" >> $ENV_EXPORT_SCRIPT
 elif [ -f /etc/mandrake-release ] ; then
-    # Fedora does not install lsb (redhat-lsb) in default setting so detect /etc/issue or let user choice...
     export DISTRO_ID="Mandrake"
     echo "export DISTRO_ID=\"Mandrake\"" >> "$ENV_EXPORT_SCRIPT"
     export DISTRO_CODENAME=""
     export DISTRO_VERSION=$(cat /etc/mandake-release | grep release | cut -d " " -f 5)
     echo "export DISTRO_VERSION=$(cat /etc/mandrake-release | grep release | cut -d " " -f 5)" >> $ENV_EXPORT_SCRIPT
+elif [ -f /usr/bin/pkg ] && grep -q "OpenSolaris" /etc/release ; then
+    export DISTRO_ID="OpenSolaris"
+    echo "export DISTRO_ID=\"OpenSolaris\"" >> $ENV_EXPORT_SCRIPT
+    export DISTRO_CODENAME=""
+    export DISTRO_VERSION=$(cat /etc/release | grep "OpenSolaris" | cut -d " " -f 27)
+    echo "export DISTRO_VERSION=$(cat /etc/release | grep "OpenSolaris" | cut -d " " -f 27)" >> $ENV_EXPORT_SCRIPT
 else
 # Let user choice by them self.
     echo "Sorry, Lazyscripts can't distinguish your Linux distribution."

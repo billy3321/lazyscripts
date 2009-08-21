@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 """
-Here store the command which only in CentOS
+Here store the command which only in OpenSolaris
 """
 
-detect_pack = "rpm -q "
-install_cmd = "yum -y install "
-remove_cmd = "yum -y remove "
-refresh_cmd = "yum check-update"
+detect_pack = "pkg search -l "
+install_cmd = "pkg install "
+remove_cmd = "pkg uninstall "
+refresh_cmd = "pkg refresh"
 network_config = ""
 repo_config = ""
 
