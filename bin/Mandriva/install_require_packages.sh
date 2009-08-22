@@ -2,13 +2,13 @@
 # -*- coding: UTF-8 -*-
 #
 
-if rpm -q pygtk2.0 python-vte zenity python-setuptools git &> /dev/null ; then
+if rpm -q python-vte zenity python-setuptools git-core &> /dev/null ; then
     echo "Require packages installed."
 else
     echo "Require packages not installed."
 
     urpmi.update --update
-    urpmi --auto pygtk2.0 python-vte zenity git python-setuptools
+    urpmi --auto python-vte zenity git-core python-setuptools
 
 fi
 
