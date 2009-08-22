@@ -10,7 +10,7 @@ if which lsb_release &> /dev/null ; then
     export DISTRO_VERSION=`lsb_release -rs`
     if [ "$DISTRO_ID" == "SUSE LINUX" ] ; then
         case "$DISTRO_VERSION" in
-            "11.1"|"11.0")
+            "11.2"|"11.1"|"11.0")
                 export DISTRO_ID="openSUSE"
                 echo "export DISTRO_ID=\"openSUSE\"" >> "$ENV_EXPORT_SCRIPT"
             ;;
