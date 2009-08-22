@@ -7,6 +7,8 @@ if [ -z "$LC_ALL" ] ; then
     echo "export LC_ALL=\"$LANG\"" >> $ENV_EXPORT_SCRIPT
 fi
 
+echo "export DISPLAY=\"$DISPLAY\" >> $ENV_EXPORT_SCRIPT
+
 
 if [ -z "$WINDOWMANAGER" ];then
 	if which zenity &> /dev/null ; then
