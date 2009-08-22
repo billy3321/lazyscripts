@@ -33,15 +33,16 @@ else
 	    ;;  
 	esac
 fi
-
-case $WIN_MGR in 
-    "Gnome")
-        if ! zenity --question "Lazyscripts will install some required packages. Press OK to continue and install, or Press Cancel to exit."
-            exit
-        fi
-    "KDE")
-        if ! kdialog --warningcontinuecancel "Lazyscripts will install some required packages. Press OK to continue and install, or Press Cancel to exit."
-            exit
-        fi
+if which zenity &> /dev/null ; then
+    if ! zenity --question "Lazyscripts will install some required packages. Press OK to continue and install, or Press Cancel to exit."
+        exit
+    fi
+elif which kdialog &> /dev/null ; then
+    if ! kdialog --warningcontinuecancel "Lazyscripts will install some required packages. Press OK to continue and install, or Press Cancel to exit."
+        exit
+    fi 
+else
+    echo  "Lazyscripts will install some required packages."
+fi
 
 echo "source bin/${DISTRO_ID}/install_require_packages.sh" >> $ENV_EXPORT_SCRIPT
