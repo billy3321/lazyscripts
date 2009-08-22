@@ -34,11 +34,11 @@ else
 	esac
 fi
 if which zenity &> /dev/null ; then
-    if ! zenity --question "Lazyscripts will install some required packages. Press OK to continue and install, or Press Cancel to exit."
+    if ! zenity --question "Lazyscripts will install some required packages. Press OK to continue and install, or Press Cancel to exit." ; then
         exit
     fi
 elif which kdialog &> /dev/null ; then
-    if ! kdialog --warningcontinuecancel "Lazyscripts will install some required packages. Press OK to continue and install, or Press Cancel to exit."
+    if ! kdialog --warningcontinuecancel "Lazyscripts will install some required packages. Press OK to continue and install, or Press Cancel to exit." ; then
         exit
     fi 
 else
