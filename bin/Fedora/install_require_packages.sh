@@ -13,13 +13,13 @@ if [ -f "/var/run/yum.pid" ]; then
     rm -f /var/run/yum.pid
 fi  
 
-if rpm -q wget python-nose python-setuptools-devel git redhat-lsb &> /dev/null ; then
+if rpm -q wget python-nose python-setuptools-devel vte git redhat-lsb &> /dev/null ; then
     echo "Require packages installed."
 else
     echo "Require packages not installed."
 
     yum check-update
-    yum -y install wget git python-nose python-setuptools-devel redhat-lsb
+    yum -y install wget git python-nose python-setuptools-devel vte redhat-lsb
 
 fi
 
