@@ -1,5 +1,6 @@
 #!/bin/bash 
 # -*- coding: UTF-8 -*-
+set -o xtrace
 
 PLAT_NAME=`uname -i`
 TOP_DIR=`pwd`

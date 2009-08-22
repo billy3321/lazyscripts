@@ -1,5 +1,6 @@
 #!/bin/bash 
 # -*- coding: UTF-8 -*-
+set -o xtrace
 
 PLAT_NAME=`uname -i`
 TOP_DIR=`pwd`
@@ -19,7 +20,7 @@ case $(getconf LONG_BIT) in
 	wget ${PKG_URL}rpmforge-release-0.3.6-1.el5.rf.i386.rpm
 	rpm -Uvh --nosignature rpmforge-release-0.3.6-1.el5.rf.i386.rpm
     yum check-update
-	yum -y install git gksu
+	yum -y install gksu
 	;;  
 	"64")
 	sudo yum -y install wget
@@ -29,7 +30,7 @@ case $(getconf LONG_BIT) in
 	wget ${PKG_URL}rpmforge-release-0.3.6-1.el5.rf.x86_64.rpm
 	rpm -Uvh --nosignature rpmforge-release-0.3.6-1.el5.rf.x86_64.rpm
     yum check-update
-	yum -y install git gksu
+	yum -y install gksu
 	;;  
 esac
 else
