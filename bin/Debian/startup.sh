@@ -32,7 +32,7 @@ if [ -z "$DESKTOP_SESSION" ];then
 	fi
 else
     case ${DESKTOP_SESSION} in
-	    'gnome')
+	    'default'|'gnome')
 	    export WIN_MGR='Gnome'
 	    echo "export WIN_MGR=\"Gnome\"" >> $ENV_EXPORT_SCRIPT
 	    ;;  
