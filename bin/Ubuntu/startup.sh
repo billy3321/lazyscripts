@@ -19,5 +19,17 @@ case $DESKTOP_SESSION in
     ;;  
 esac
 
+if which zenity &> /dev/null ; then
+    if ! zenity --question "Lazyscripts will install some required packages. Press OK to continue and install, or Press Cancel to exit." ; then
+        exit
+    fi
+elif which kdialog &> /dev/null ; then
+    if ! kdialog --warningcontinuecancel "Lazyscripts will install some required packages. Press OK to continue and install, or Press Cancel to exit." ; then
+        exit
+    fi 
+else
+    echo  "Lazyscripts will install some required packages."
+fi
+
 echo "source bin/${DISTRO_ID}/install_require_packages.sh " >> $ENV_EXPORT_SCRIPT
 
