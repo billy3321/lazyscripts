@@ -19,7 +19,7 @@ function select_repo () {
                     ;;
             "KDE")
                 SHOW_REPO=$(for uri in ${AVAILABLE_REPO[*]} ; do echo -n "${uri} ${uri} off " ; done)
-                USE_REPO=$(kdialog --list --title="Choice Scripts Repository You Want to Use" --radiolist "Choice a Repository URL" ${SHOW_REPO})
+                USE_REPO=$(kdialog --title="Choice Scripts Repository You Want to Use" --radiolist "Choice a Repository URL" ${SHOW_REPO})
                     ;;
             *)
                 SHOW_REPO=$(for uri in ${AVAILABLE_REPO[*]} ; do echo -n "FALSE $uri " ; done)
