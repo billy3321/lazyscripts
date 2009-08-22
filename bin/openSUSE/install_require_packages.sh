@@ -13,12 +13,12 @@ if pgrep packagekitd ; then
     killall packagekitd 
 fi
 
-if rpm -q zenity python-vte python-setuptools git-core &> /dev/null ; then 
+if rpm -q zenity vte python-setuptools git-core &> /dev/null ; then 
     echo "Require packages installed."
 else
     echo "Require packages not installed."
 	zypper ref
-	zypper -n install zenity python-vte git-core python-setuptools 
+	zypper -n install zenity vte git-core python-setuptools 
 fi
 # if rpm -q python-nose &> /dev/null ; then 
 #	if zypper se python-nose | grep "python-nose" &> /dev/null ; then
