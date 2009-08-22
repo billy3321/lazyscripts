@@ -8,8 +8,26 @@ function select_repo () {
         USE_REPO=(${AVAILABLE_REPO})
         REPO_URL=(${AVAILABLE_REPO})
     else
-        SHOW_REPO=$(for uri in ${AVAILABLE_REPO[*]} ; do echo -n "FALSE $uri " ; done)
-        USE_REPO=`zenity --list --title="Choice Scripts Repository You Want to Use" --radiolist --column "" --column "Repository URL" ${SHOW_REPO}`
+        if [ -z $WIN_MGR ] ; then
+            SHOW_REPO=$(for uri in ${AVAILABLE_REPO[*]} ; do echo -n "FALSE $uri " ; done)
+            USE_REPO=`zenity --list --title="Choice Scripts Repository You Want to Use" --radiolist --column "" --column "Repository URL" ${SHOW_REPO}`
+        else
+            case $WIN_MGR in
+            "Gnome")
+                SHOW_REPO=$(for uri in ${AVAILABLE_REPO[*]} ; do echo -n "FALSE $uri " ; done)
+                USE_REPO=`zenity --list --title="Choice Scripts Repository You Want to Use" --radiolist --column "" --column "Repository URL" ${SHOW_REPO}`
+                    ;;
+            "KDE")
+                SHOW_REPO=$(for uri in ${AVAILABLE_REPO[*]} ; do echo -n "${uri} ${uri} off " ; done)
+                USE_REPO=`kdialog --list --title="Choice Scripts Repository You Want to Use" --radiolist "Choice a Repository URL" ${SHOW_REPO}`
+                    ;;
+            *)
+                SHOW_REPO=$(for uri in ${AVAILABLE_REPO[*]} ; do echo -n "FALSE $uri " ; done)
+                USE_REPO=`zenity --list --title="Choice Scripts Repository You Want to Use" --radiolist --column "" --column "Repository URL" ${SHOW_REPO}`
+                    ;;
+            esac
+        fi
+                    
         REPO_URL=(${USE_REPO/|/ })
     fi
     export REPO_URL
