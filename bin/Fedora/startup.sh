@@ -47,7 +47,7 @@ else
 	    export WIN_MGR='Gnome'
 	    echo "export WIN_MGR=\"Gnome\"" >> $ENV_EXPORT_SCRIPT
 	    ;;  
-	    'kde')
+	    'default'|'kde')
 	    export WIN_MGR='KDE'
 	    echo "export WIN_MGR=\"KDE\"" >> $ENV_EXPORT_SCRIPT
 	    ;;    
