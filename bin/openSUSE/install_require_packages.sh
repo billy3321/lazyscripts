@@ -13,29 +13,31 @@ if pgrep packagekitd ; then
     killall packagekitd 
 fi
 
-if rpm -q python-nose python-setuptools git-core &> /dev/null ; then 
+if rpm -q zenity python-vte python-setuptools git-core &> /dev/null ; then 
     echo "Require packages installed."
 else
     echo "Require packages not installed."
-	zypper -n install git-core python-setuptools 
 	zypper ref
-	if zypper se python-nose | grep "python-nose" &> /dev/null ; then
-	    zypper -n install python-nose
-	else
-	    case $PLAT_NAME in
-	        "i386")
-	            zypper -n install http://lazyscripts.googlecode.com/files/python-nose-lastest.i586.rpm
-	        ;;
-	        "x86_64")
-	            zypper -n install http://lazyscripts.googlecode.com/files/python-nose-lastest.x86_64.rpm
-	        ;;
-	        *)
-	            echo "抱歉，Lazyscripts並不支援 ${ARCH_NAME} 作業系統平台。"
-	        ;;
-	    esac
-	fi
-
+	zypper -n install zenity python-vte git-core python-setuptools 
 fi
+# if rpm -q python-nose &> /dev/null ; then 
+#	if zypper se python-nose | grep "python-nose" &> /dev/null ; then
+#	    zypper -n install python-nose
+#	else
+#	    case $PLAT_NAME in
+#	        "i386")
+#	            zypper -n install http://lazyscripts.googlecode.com/files/python-nose-lastest.i586.rpm
+#	        ;;
+#	        "x86_64")
+#	            zypper -n install http://lazyscripts.googlecode.com/files/python-nose-lastest.x86_64.rpm
+#	        ;;
+#	        *)
+#	            echo "抱歉，Lazyscripts並不支援 ${PLAT_NAME} 作業系統平台。"
+#	        ;;
+#	    esac
+#	fi
+#
+# fi
 
 if python -c "import imp;imp.find_module('git')" &> /dev/null ; then
     echo "Require module found."
