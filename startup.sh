@@ -68,11 +68,11 @@ function get_platname() {
 	case $(getconf LONG_BIT) in
 	    "32")
 	    export PLAT_NAME="i386"
-	    echo "export PLATNAME=\"i386\"" >> $ENV_EXPORT_SCRIPT
+	    echo "export PLAT_NAME=\"i386\"" >> $ENV_EXPORT_SCRIPT
 	    ;;
 	    "64")
 	    export PLAT_NAME="x86_64"
-	    echo "export PLATNAME=\"x86_64\"" >> $ENV_EXPORT_SCRIPT
+	    echo "export PLAT_NAME=\"x86_64\"" >> $ENV_EXPORT_SCRIPT
 	    ;;
 	esac
 }
