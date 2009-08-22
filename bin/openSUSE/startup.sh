@@ -2,6 +2,12 @@
 # -*- coding: UTF-8 -*-
 # This is startup file for openSUSE
 
+if [ -z "$LC_ALL" ] ; then
+    export LC_ALL=${LANG}
+    echo "export LC_ALL=\"$LANG\"" >> $ENV_EXPORT_SCRIPT
+fi
+
+
 if [ -z "$WINDOWMANAGER" ];then
 	if which zenity &> /dev/null ; then
         WIN_MGR=$(zenity --list --title="Choice your window manager" --radiolist --column "" --column "Linux Distribution Version" FALSE "Gnome" FALSE "KDE")
