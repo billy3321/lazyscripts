@@ -29,6 +29,10 @@ case $DISTRO_ID in
         PWD=$(pwd)
         kdesu -c "cd $PWD ; tmp/env-export.sh $@"
         ;;
+        *)
+        PWD=$(pwd)
+        xdg-su -c "cd $PWD ; tmp/env-export.sh $@"
+        ;;
     esac
     ;;
     "Fedora"|"CentOS")
