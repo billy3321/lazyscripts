@@ -26,7 +26,8 @@ case $DISTRO_ID in
         gnomesu --command="tmp/env-export.sh $@"
         ;;
         'KDE')
-        kdesu -c "tmp/env-export.sh $@"
+        PWD=$(pwd)
+        kdesu -c "cd $PWD ; tmp/env-export.sh $@"
         ;;
     esac
     ;;
