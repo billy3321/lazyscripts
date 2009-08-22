@@ -22,7 +22,7 @@ else
 	    export WIN_MGR='Gnome'
 	    echo "export WIN_MGR=\"Gnome\"" >> $ENV_EXPORT_SCRIPT
 	    ;;  
-	    'kde')
+	    '01KDE4')
 	    export WIN_MGR='KDE'
 	    echo "export WIN_MGR=\"KDE\"" >> $ENV_EXPORT_SCRIPT
 	    ;;    
@@ -33,5 +33,15 @@ else
 	    ;;  
 	esac
 fi
+
+case $WIN_MGR in 
+    "Gnome")
+        if ! zenity --question "Lazyscripts will install some required packages. Press OK to continue and install, or Press Cancel to exit."
+            exit
+        fi
+    "KDE")
+        if ! kdialog --warningcontinuecancel "Lazyscripts will install some required packages. Press OK to continue and install, or Press Cancel to exit."
+            exit
+        fi
 
 echo "source bin/${DISTRO_ID}/install_require_packages.sh" >> $ENV_EXPORT_SCRIPT
