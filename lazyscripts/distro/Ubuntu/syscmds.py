@@ -12,7 +12,7 @@ network_config = "/usr/bin/nm-connection-editor"
 win_mgr = os.getenv('WIN_MGR')
 if win_mgr == 'Gnome':
     repo_config = "software-properties-gtk"
-elif win_mgr = 'KDE':
+elif win_mgr == 'KDE':
     repo_config = "software-properties-kde"
 else
     repo_config = "software-properties-gtk"
