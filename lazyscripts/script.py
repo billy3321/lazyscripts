@@ -236,9 +236,9 @@ class ScriptSet(object):
             if not set._repos.has_key(item.get('repo')):
                 # clone the repostiry if the repositry is not exists.
                 if testmode:
-                    local_dir = 't/datas/scriptspoll'
+                    local_dir = 't/datas/scriptspool'
                 else:
-                    local_dir = 'scriptspoll'
+                    local_dir = 'scriptspool'
                 set._repos[item.get('repo')] = create_scriptrepo(item.get('repo'), local_dir)
 
             if not set._repo_table.get(item.get('repo')):
