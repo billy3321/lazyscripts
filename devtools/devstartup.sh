@@ -43,7 +43,7 @@ function select_repo () {
     echo "export REPO_URL" >> $ENV_EXPORT_SCRIPT
     echo "export REPO_NUM=${#REPO_URL[@]}" >> $ENV_EXPORT_SCRIPT
     echo 'for ((num=0;num<${REPO_NUM};num=$num+1)); do 
-        REPO_DIR[$num]="./scriptspoll/`./lzs repo sign ${REPO_URL[${num}]}`"
+        REPO_DIR[$num]="./scriptspool/`./lzs repo sign ${REPO_URL[${num}]}`"
         if [ -d ${REPO_DIR[$num]} ];then
             rm -rf ${REPO_DIR[$num]}
         fi
