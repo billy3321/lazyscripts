@@ -10,6 +10,7 @@ DISTRO_VERSION=$(lsb_release -rs)
 
 USER_ID=$(id -u)
 if [ $USER_ID == "0" ]; then
+    urpmi git-core
     if [ $DISTRO_VERSION == "2009.1" ];then
 		case $(getconf LONG_BIT) in
 			"32")
