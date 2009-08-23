@@ -71,15 +71,18 @@ esac
 if [ -z "$DISTRO_VERSION" ];then
 	case $WIN_MGR in
 		'Gnome')
-            DISTRO_VERSION=$(zenity --list --title="Choice your linux distribution version" --radiolist --column "" --column "Linux Distribution Version" FALSE "CentOS 5.3")
+            DISTRO_VERSION=$(zenity --list --title="Choice your linux distribution version" --radiolist --column "" --column "Linux Distribution Version" FALSE "CentOS 5.2" FLASE "CentOS 5.3")
             case $DISTRO_VERSION in
+            "CentOS 5.2")
+                export DISTRO_VERSION="5.2"
+            ;;
             "CentOS 5.3")
                 export DISTRO_VERSION="5.3"
             ;;
             esac
          ;;
          'KDE')
-            DISTRO_VERSION=$(kdialog --title="Choice your linux distribution version" --radiolist "Choice your linux distribution version" 5.3 "CentOS 5.3" off )
+            DISTRO_VERSION=$(kdialog --title="Choice your linux distribution version" --radiolist "Choice your linux distribution version" 5.2 "CentOS 5.2" off 5.3 "CentOS 5.3" off )
             export DISTRO_VERSION
          ;;
          esac
