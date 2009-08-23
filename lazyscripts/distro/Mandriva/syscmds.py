@@ -7,8 +7,8 @@ detect_pack = "rpm -q "
 install_cmd = "urpmi --auto "
 remove_cmd = "urpme --auto "
 refresh_cmd = "urpmi.update --update"
-network_config = ""
-repo_config = ""
+network_config = "draknetcenter"
+repo_config = "drakrpm-edit-media"
 
 
 if __name__ == "__main__" :
