@@ -1,16 +1,6 @@
 #!/bin/bash
 # -*- coding: UTF-8 -*-
-# This is a startup file for Fedora
-
-if [ -z "$DISTRO_VERSION" ];then
-    DISTRO_VERSION=`zenity --list --title="Choice your linux distribution version" --radiolist --column "" --column "Linux Distribution Version" FALSE "CentOS 5.3"`
-    case $DISTRO_VERSION in
-        "CentOS 5.3")
-        export DISTRO_VERSION="5.3"
-        ;;
-    esac
-    echo "export DISTRO_VERSION=${DISTRO_VERSION}" >> $ENV_EXPORT_SCRIPT
-fi
+# This is a startup file for CentOS
 
 if [ -n "$DESKTOP_SESSION" ];then
     case ${DESKTOP_SESSION} in
@@ -42,7 +32,7 @@ if [ -z "$WIN_MGR" ];then
 	if which zenity &> /dev/null ; then
         WIN_MGR=$(zenity --list --title="Choice your window manager" --radiolist --column "" --column "Linux Distribution Version" FALSE "Gnome" FALSE "KDE")
     elif which kdialog &> /dev/null ; then
-		WIN_MGR=$(kdialog --list --title="Choice your window manager" --radiolist "Choice your window manager" Gnome Gnome off KDE KDE off )
+		WIN_MGR=$(kdialog --title="Choice your window manager" --radiolist "Choice your window manager" Gnome Gnome off KDE KDE off )
 	else
 		read -p "Please input your window manager(Gnome/KDE)" WIN_MGR
 		case $WIN_MGR in
@@ -77,5 +67,24 @@ case $WIN_MGR in
     echo  "Lazyscripts will install some required packages. "
 ;;
 esac
+
+if [ -z "$DISTRO_VERSION" ];then
+	case $WIN_MGR in
+		'Gnome')
+            DISTRO_VERSION=$(zenity --list --title="Choice your linux distribution version" --radiolist --column "" --column "Linux Distribution Version" FALSE "CentOS 5.3")
+            case $DISTRO_VERSION in
+            "CentOS 5.3")
+                export DISTRO_VERSION="5.3"
+            ;;
+            esac
+         ;;
+         'KDE')
+            DISTRO_VERSION=$(kdialog --title="Choice your linux distribution version" --radiolist "Choice your linux distribution version" 5.3 "CentOS 5.3" off )
+            export DISTRO_VERSION
+         ;;
+         esac
+
+    echo "export DISTRO_VERSION=${DISTRO_VERSION}" >> $ENV_EXPORT_SCRIPT
+fi
 
 echo "source bin/${DISTRO_ID}/install_require_packages.sh" >> $ENV_EXPORT_SCRIPT

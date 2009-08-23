@@ -4,16 +4,6 @@
 
 echo "source ~/.bashrc" >> $ENV_EXPORT_SCRIPT
 
-if [ -z "$DISTRO_VERSION" ];then
-    DISTRO_VERSION=`zenity --list --title="Choice your linux distribution version" --radiolist --column "" --column "Linux Distribution Version" FALSE "Mandriva 2009.1"`
-    case $DISTRO_VERSION in
-        "Mandriva 2009.1")
-        export DISTRO_VERSION="2009.1"
-        ;;
-    esac
-    echo "export DISTRO_VERSION=${DISTRO_VERSION}" >> $ENV_EXPORT_SCRIPT
-fi
-
 if [ -n "$DESKTOP_SESSION" ];then
     case ${DESKTOP_SESSION} in
 	    '02GNOME')
@@ -80,5 +70,23 @@ case $WIN_MGR in
 ;;
 esac
 
+if [ -z "$DISTRO_VERSION" ];then
+	case $WIN_MGR in
+		'Gnome')
+            DISTRO_VERSION=$(zenity --list --title="Choice your linux distribution version" --radiolist --column "" --column "Linux Distribution Version" FALSE "Mandriva 2009.1" )
+            case $DISTRO_VERSION in
+		        "Mandriva 2009.1")
+		        export DISTRO_VERSION="2009.1"
+		        ;;
+		    esac
+         ;;
+         'KDE')
+            DISTRO_VERSION=$(kdialog --title="Choice your linux distribution version" --radiolist "Choice your linux distribution version" 2009.1 "Mandriva 2009.1" off )
+            export DISTRO_VERSION
+         ;;
+    esac
+
+    echo "export DISTRO_VERSION=${DISTRO_VERSION}" >> $ENV_EXPORT_SCRIPT
+fi
 
 echo "source bin/${DISTRO_ID}/install_require_packages.sh" >> $ENV_EXPORT_SCRIPT
