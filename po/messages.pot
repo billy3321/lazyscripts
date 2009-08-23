@@ -57,7 +57,7 @@ msgid "comment: Please enable main, universe, "
 msgstr ""
 
 #: ui/__init__.py:94
-msgid "multiverse and restricted section"
+msgid "multiverse and restricted section."
 msgstr ""
 
 #: ui/__init__.py:130
