@@ -48,8 +48,8 @@ def create_network_dialog ():
     dlg.vbox.pack_start (other_btn, False, True, 2)
 
     no_btn = gtk.RadioButton (other_btn, 
-        _('I already connect to internet') +
-        _(', i don\'t need any other configuration \n'))
+        _('Lazyscripts already connect to internet') +
+        _(', Lazyscripts don\'t need any other configuration \n'))
 
     no_btn.set_active (True)
     dlg.vbox.pack_start (no_btn, False, True, 2)
@@ -287,7 +287,7 @@ class MainWin:
         self.tool_list=tool_list=ToolListWidget('scripts.list')
         tool_list.list.insert( 0, ('lazyscripts', _('Welcome'), WelcomePage()) )
         self.final_page=FinalPage()
-        tool_list.list.append( ('gnome-app-install', _('fininsh'), self.final_page) )
+        tool_list.list.append( ('gnome-app-install', _('Fininsh'), self.final_page) )
         sel=tool_list.left_pane.get_selection()
         sel.select_path('0')
 
@@ -324,7 +324,7 @@ class MainWin:
         self.complete=False
 
     def confirm_close(self):
-        if self.complete or query_yes_no(_('Do you want to quit lazyscripts?'), self.win):
+        if self.complete or query_yes_no(_('Do you want to quit Lazyscripts?'), self.win):
             gtk.main_quit()
             return True
         return False
@@ -369,7 +369,7 @@ class MainWin:
         self.final_page.term.connect('child-exited', self.on_complete)
 
     def on_complete(self, data):
-        self.final_page.term.feed(_('\n\x1b[1;36mLazyscripts - linux lazy pack run finish!\x1b[1;32m   have fun for linux!\x1b[m\n'))
+        self.final_page.term.feed(_('\n\x1b[1;36mLazyscripts - Linux lazy pack run finish!\x1b[1;32m   Have fun for Linux!\x1b[m\n'))
 
         self.cancel_btn.set_label(gtk.STOCK_CLOSE)
         self.complete=True
@@ -394,7 +394,7 @@ class GUI:
 		launchs the application.
 		"""
         if not ensure_network ():
-            show_error (_("no avalible internet connection, lazyscripts cannot execute."), _("error"))
+            show_error (_("No avalible internet connection, Lazyscripts cannot execute."), _("Error"))
             exit(1)
 
         ensure_package_sources ()
