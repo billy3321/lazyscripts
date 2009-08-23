@@ -17,43 +17,43 @@ msgstr ""
 "X-Poedit-Country: TAIWAN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ui/__init__.py:40
+#: ui/__init__.py:42
 msgid "<b>Lazyscripts need internet connection to execute,"
 msgstr "<b>Lazyscripts 需要網路才能執行，"
 
-#: ui/__init__.py:41
+#: ui/__init__.py:43
 msgid "please select type of internet connection: </b>"
 msgstr "請選擇你使用的網路種類：</b>"
 
-#: ui/__init__.py:50
+#: ui/__init__.py:47
 msgid "Open netowrk manager to connect to internet"
 msgstr "開啟網路管理員以連接網路"
 
-#: ui/__init__.py:62
-msgid "I already connect to internet"
-msgstr "我已連接到網際網路，"
+#: ui/__init__.py:51
+msgid "Lazyscripts already connect to internet"
+msgstr "Lazyscripts 已連接到網際網路，"
 
-#: ui/__init__.py:63
-msgid ", i don't need any other configuration \n"
+#: ui/__init__.py:52
+msgid ", Lazyscripts don't need any other configuration \n"
 msgstr "不需要額外設定\n (使用無線網路，請點選螢幕右上角工作列中的無線網路圖示，即可連線)\n"
 
-#: ui/__init__.py:101
+#: ui/__init__.py:84
 msgid ""
 "\n"
 "we need to modify your software sources,\n"
 "do you want to let lazyscripts modify your software sources?\n"
 msgstr ""
 "\n"
-"使用 Lazyscripts，需要正確設定系統上的 APT 軟體套件來源，\n"
+"使用 Lazyscripts，需要正確設定系統上的軟體套件來源，\n"
 "才有辦法正確從網路上安裝各種軟體。\n"
 "Lazyscripts 將會嘗試加入你的國家/地區的區域性伺服器。\n"
 "你是否願意讓 Lazyscripts 修改你的套件庫設定？\n"
 
-#: ui/__init__.py:115
+#: ui/__init__.py:91
 msgid "Lazyscripts will not change your settings"
 msgstr "Lazyscripts 不會變更你的設定，"
 
-#: ui/__init__.py:116
+#: ui/__init__.py:92
 msgid ""
 "please ensure your software sources right\n"
 "\n"
@@ -61,23 +61,23 @@ msgstr ""
 "請自行妥善設定你的套件庫。\n"
 "\n"
 
-#: ui/__init__.py:117
+#: ui/__init__.py:93
 msgid "comment: please enable main, universe, "
 msgstr "提示：請開啟 main, universe, "
 
-#: ui/__init__.py:118
+#: ui/__init__.py:94
 msgid "multiverse and restricted section"
 msgstr "multiverse, 及 restricted"
 
-#: ui/__init__.py:157
+#: ui/__init__.py:130
 msgid "items"
 msgstr "可選用的項目"
 
-#: ui/__init__.py:201
+#: ui/__init__.py:162
 msgid "<b><big>Lazyscripts - Linux lazy pack"
 msgstr "<b><big>Lazyscripts - Linux 懶人包"
 
-#: ui/__init__.py:202
+#: ui/__init__.py:163
 msgid ""
 ", Linux end user's good friend</big></b>\n"
 "\n"
@@ -87,7 +87,7 @@ msgstr ""
 "幫你解決安裝後煩人的小設定，安裝一些好用軟體，\n省去在茫茫網海中搜尋的時間。\n\n請從左邊的清單中，點選各個分類，選擇你要套用的項目。\n"
 "\n"
 
-#: ui/__init__.py:203
+#: ui/__init__.py:164
 msgid ""
 "Copyright (C) 2007, Design and developed by PCMan, Yuren Ju, hychen and billy3321\n"
 "\n"
@@ -96,51 +96,51 @@ msgstr ""
 "\n"
 
 
-#: ui/__init__.py:204
+#: ui/__init__.py:165
 msgid "Project Lazyscripts - "
-msgstr "Lazyscripts 專案"
+msgstr "Lazyscripts 專案 - "
 
-#: ui/__init__.py:205
+#: ui/__init__.py:166
 msgid "<span color=\"blue\">http://sites.google.com/site/lazyscripts/</span>"
 msgstr ""
 
-#: ui/__init__.py:218
+#: ui/__init__.py:178
 msgid "execute action: \n"
 msgstr "要執行的動作：\n"
 
-#: ui/__init__.py:354
+#: ui/__init__.py:273
 msgid "Lazyscripts - Linux lazy pack"
 msgstr "Lazyscripts - Linux 懶人包"
 
-#: ui/__init__.py:370
+#: ui/__init__.py:288
 msgid "Welcome"
 msgstr "歡迎使用"
 
-#: ui/__init__.py:375
-msgid "fininsh"
+#: ui/__init__.py:290
+msgid "Fininsh"
 msgstr "結束"
 
-#: ui/__init__.py:413
-msgid "Do you want to quit lazyscripts?"
+#: ui/__init__.py:327
+msgid "Do you want to quit Lazyscripts?"
 msgstr "你是否要離開 Lazyscripts 懶人包？"
 
-#: ui/__init__.py:435
+#: ui/__init__.py:348
 msgid "Linux Lazy pack"
 msgstr "Linux 懶人包"
 
-#: ui/__init__.py:460
+#: ui/__init__.py:372
 msgid ""
 "\n"
-"\033[1;36mLazyscripts - linux lazy pack run finish!\033[1;32m   have fun for linux!\033[m\n"
+"\033[1;36mLazyscripts - Linux lazy pack run finish!\033[1;32m   Have fun for Linux!\033[m\n"
 msgstr ""
 "\n"
 "\033[1;36mLazyscripts - Linux 懶人包執行完成！\033[1;32m   祝你使用 Linux 愉快！\033[m\n"
 
-#: ui/__init__.py:486
-msgid "error"
+#: ui/__init__.py:397
+msgid "Error"
 msgstr "錯誤"
 
-#: ui/__init__.py:486
-msgid "no avalible internet connection, lazyscripts cannot execute."
+#: ui/__init__.py:397
+msgid "No avalible internet connection, Lazyscripts cannot execute."
 msgstr "沒有可用的網路連線，Lazyscripts 無法執行。"
 
