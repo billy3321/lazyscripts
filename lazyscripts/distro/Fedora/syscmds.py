@@ -12,11 +12,13 @@ network_config = "nm-connection-editor"
 win_mgr = ""
 win_mgr = os.getenv('WIN_MGR')
 if win_mgr == 'Gnome':
-    repo_config = "sudo -u %s 'gpk-repo'" % (os.getenv('REAL_USER')) 
+#    repo_config = "sudo -u %s 'gpk-repo'" % (os.getenv('REAL_USER')) 
+    repo_config = "gpk-repo"
 elif win_mgr == 'KDE':
     repo_config = "kpackagekit --settings"
 else:
-    repo_config = "sudo -u %s 'gpk-repo'" % (os.getenv('REAL_USER')) 
+#    repo_config = "sudo -u %s 'gpk-repo'" % (os.getenv('REAL_USER')) 
+    repo_config = "gpk-repo"
 
 # Fedora 8: repo_config = "python /usr/lib/python2.5/site-packages/pirut/RepoSelector.py"
 
