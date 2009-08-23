@@ -48,8 +48,8 @@ def create_network_dialog ():
     dlg.vbox.pack_start (other_btn, False, True, 2)
 
     no_btn = gtk.RadioButton (other_btn, 
-        _('Lazyscripts already connect to internet') +
-        _(', Lazyscripts don\'t need any other configuration \n'))
+        _('Lazyscripts already connect to internet,') +
+        _('Lazyscripts don\'t need any other configuration. \n'))
 
     no_btn.set_active (True)
     dlg.vbox.pack_start (no_btn, False, True, 2)
@@ -82,16 +82,16 @@ def ensure_network ():
 
 def ensure_package_sources():
     msg =_("""
-we need to modify your software sources,
-do you want to let lazyscripts modify your software sources?
+We need to modify your software sources,
+do you want to let Lazyscripts modify your software sources?
 """)
     if query_yes_no (msg):
         add_official_repos.main ()
     else:
-        show_error (_('Lazyscripts will not change your settings') +
-                    _('please ensure your software sources right\n\n') +
-                    _('comment: please enable main, universe, ') +
-                    _('multiverse and restricted section'))
+        show_error (_('Lazyscripts will not change your settings,') +
+                    _('please ensure your software sources right.\n\n') +
+                    _('comment: Please enable main, universe, ') +
+                    _('multiverse and restricted section.'))
 
         # update GUI
         while gtk.events_pending ():
@@ -127,7 +127,7 @@ class ToolPage:
         col.set_attributes (render, active=0)
         view.append_column (col)
 
-        col = gtk.TreeViewColumn (_("items"))
+        col = gtk.TreeViewColumn (_("Items"))
         render=gtk.CellRendererText ()
         col.pack_start (render)
         col.set_attributes (render, markup=1)
@@ -159,9 +159,9 @@ class WelcomePage:
         view=gtk.Viewport()
         label=gtk.Label()
         label.set_markup(
-            _('<b><big>Lazyscripts - Linux lazy pack') +
-            _('，Linux end user\'s good friend</big></b>\n\n\n') +
-            _('Copyright (C) 2007, Design and developed by PCMan, Yuren Ju, hychen and billy3321\n\n') +
+            _('<b><big>Lazyscripts - Linux lazy pack,') +
+            _('，Linux end user\'s good friend.</big></b>\n\n\n') +
+            _('Copyright (C) 2009, Design and developed by PCMan, Yuren Ju, hychen and billy3321\n\n') +
             _('Project Lazyscripts - ') +
             _('<span color="blue">http://sites.google.com/site/lazyscripts/</span>'))
 
@@ -175,7 +175,7 @@ class FinalPage:
         hbox=gtk.HBox(False, 0)
         term=vte.Terminal()
         term.set_scrollback_lines(65535)    # Will this value be too big?
-        term.feed(_('execute action: \n'))
+        term.feed(_('Execute action: \n'))
         term.set_cursor_blinks(True)
         self.term=term
         scroll=gtk.VScrollbar( term.get_adjustment() )
@@ -343,7 +343,7 @@ class MainWin:
         if self.icon:
             dlg.set_logo(self.icon)
         dlg.set_authors(['洪任諭 (PCMan) <pcman.tw@gmail.com>', '朱昱任 (Yuren Ju) <yurenju@gmail.com>', '林哲瑋 (billy3321,雨蒼) <billy3321@gmail.com>', '陳信屹 (Hychen) <ossug.hychen@gmail.com>'])
-        dlg.set_copyright('Copyright (C) 2007 by Lazyscripts project')
+        dlg.set_copyright('Copyright (C) 2009 by Lazyscripts project')
         dlg.set_license('GNU General Public License')
         dlg.set_comments(_('Linux Lazy pack'))
         dlg.run()
