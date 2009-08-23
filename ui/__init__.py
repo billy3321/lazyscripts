@@ -160,7 +160,7 @@ class WelcomePage:
         label=gtk.Label()
         label.set_markup(
             _('<b><big>Lazyscripts - Linux lazy pack,') +
-            _('，Linux end user\'s good friend.</big></b>\n\n\n') +
+            _('Linux end user\'s good friend.</big></b>\n\n\n') +
             _('Copyright (C) 2009, Design and developed by PCMan, Yuren Ju, hychen and billy3321\n\n') +
             _('Project Lazyscripts - ') +
             _('<span color="blue">http://sites.google.com/site/lazyscripts/</span>'))
