@@ -7,8 +7,8 @@ detect_pack = "pkg search -l "
 install_cmd = "pkg install "
 remove_cmd = "pkg uninstall "
 refresh_cmd = "pkg refresh"
-network_config = ""
-repo_config = ""
+network_config = "network-admin"
+repo_config = "packagemanager"
 
 
 if __name__ == "__main__" :
