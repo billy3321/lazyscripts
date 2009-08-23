@@ -9,8 +9,15 @@ function select_repo () {
         REPO_URL=(${AVAILABLE_REPO})
     else
         if [ -z $WIN_MGR ] ; then
-            SHOW_REPO=$(for uri in ${AVAILABLE_REPO[*]} ; do echo -n "FALSE $uri " ; done)
-            USE_REPO=$(zenity --list --title="Choice Scripts Repository You Want to Use" --radiolist --column "" --column "Repository URL" ${SHOW_REPO})
+            if which zenity &> /dev/null ; then
+                SHOW_REPO=$(for uri in ${AVAILABLE_REPO[*]} ; do echo -n "FALSE $uri " ; done)
+                USE_REPO=$(zenity --list --title="Choice Scripts Repository You Want to Use" --radiolist --column "" --column "Repository URL" ${SHOW_REPO})
+            elif which kdialog &> /dev/null ; then
+                SHOW_REPO=$(for uri in ${AVAILABLE_REPO[*]} ; do echo -n "${uri} ${uri} off " ; done)
+                USE_REPO=$(kdialog --title="Choice Scripts Repository You Want to Use" --radiolist "Choice a Repository URL" ${SHOW_REPO})
+            else
+                echo "Some error happend."
+            fi
         else
             case $WIN_MGR in
             "Gnome")
