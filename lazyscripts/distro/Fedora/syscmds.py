@@ -9,12 +9,13 @@ remove_cmd = "yum -y remove "
 refresh_cmd = "yum check-update"
 network_config = "nm-connection-editor"
 if win_mgr == 'Gnome':
-    repo_config = ""
+    repo_config = "gpk-repo"
 elif win_mgr == 'KDE':
     repo_config = "kpackagekit --settings"
 else:
-    repo_config = ""
+    repo_config = "gpk-repo"
 
+# Fedora 8: repo_config = "python /usr/lib/python2.5/site-packages/pirut/RepoSelector.py"
 
 
 if __name__ == "__main__" :

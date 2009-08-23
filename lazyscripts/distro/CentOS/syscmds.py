@@ -7,7 +7,7 @@ detect_pack = "rpm -q "
 install_cmd = "yum -y install "
 remove_cmd = "yum -y remove "
 refresh_cmd = "yum check-update"
-network_config = "system-config-network"
+network_config = "system-control-network"
 repo_config = "python /usr/lib/python2.4/site-packages/pirut/RepoSelector.py"
 
 
