@@ -339,7 +339,7 @@ class MainWin:
         dlg = gtk.AboutDialog()
         dlg.set_name('Lazyscripts')
         dlg.set_version(get_version())
-        dlg.set_website('http://TBD/')
+        dlg.set_website('http://sites.google.com/site/lazyscripts/')
         if self.icon:
             dlg.set_logo(self.icon)
         dlg.set_authors(['洪任諭 (PCMan) <pcman.tw@gmail.com>', '朱昱任 (Yuren Ju) <yurenju@gmail.com>', '林哲瑋 (billy3321,雨蒼) <billy3321@gmail.com>', '陳信屹 (Hychen) <ossug.hychen@gmail.com>'])
