@@ -7,6 +7,12 @@
 # update lazyscripts.
 set -o xtrace
 
+USER_ID=$(id -u)
+if [ $USER_ID == 0 ]; then
+    echo "Don't run this file as root."
+    exit
+fi
+
 source startup.sh
 
 # run Lazyscripts with root access
