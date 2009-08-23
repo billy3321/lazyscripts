@@ -7,6 +7,10 @@
 # update lazyscripts.
 set -o xtrace
 
+DIR=`dirname $0`
+cd "$DIR"
+DIR=$(pwd)
+
 USER_ID=$(id -u)
 if [ $USER_ID == 0 ]; then
     echo "Don't run this file as root."
