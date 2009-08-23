@@ -2,12 +2,14 @@
 """
 Here store the command which only in Fedora
 """
+import os
 
 detect_pack = "rpm -q "
 install_cmd = "yum -y install "
 remove_cmd = "yum -y remove "
 refresh_cmd = "yum check-update"
 network_config = "nm-connection-editor"
+win_mgr = os.getenv('WIN_MGR')
 if win_mgr == 'Gnome':
     repo_config = "gpk-repo"
 elif win_mgr == 'KDE':
