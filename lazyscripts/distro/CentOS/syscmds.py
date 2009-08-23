@@ -7,8 +7,8 @@ detect_pack = "rpm -q "
 install_cmd = "yum -y install "
 remove_cmd = "yum -y remove "
 refresh_cmd = "yum check-update"
-network_config = ""
-repo_config = ""
+network_config = "system-config-network"
+repo_config = "python /usr/lib/python2.4/site-packages/pirut/RepoSelector.py"
 
 
 if __name__ == "__main__" :
