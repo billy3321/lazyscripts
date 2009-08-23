@@ -17,12 +17,12 @@ cd $TMPDIR
 echo "正在下載並安裝Lazyscripts執行所需的套件...."
 
 echo "Check for required packsges..."
-if dpkg -l python-nose python-setuptools git-core python-vte &> /dev/null ; then
+if dpkg -l python-nose python-setuptools git-core python-vte python-gtk2 &> /dev/null ; then
     echo "Require packages installed."
 else
     echo "Require packages not installed."
     apt-get update
-    apt-get -y --force-yes install git-core python-setuptools python-nose python-vte
+    apt-get -y --force-yes install git-core python-setuptools python-nose python-vte python-gtk2
 fi
 
 if python -c "import imp;imp.find_module('git')" &> /dev/null ; then
