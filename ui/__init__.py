@@ -272,7 +272,7 @@ class MainWin:
         win=gtk.Window(gtk.WINDOW_TOPLEVEL)
         win.set_title(_('Lazyscripts - Linux lazy pack'))
         try:
-            self.icon=gtk.icon_theme_get_default().load_icon('gnome-app-install', 48,0)
+            self.icon=gtk.icon_theme_get_default().load_icon('system-software-installer', 48,0)
         except:
             # print "No gnome-app-install icon"
             self.icon = None
@@ -287,7 +287,7 @@ class MainWin:
         self.tool_list=tool_list=ToolListWidget('scripts.list')
         tool_list.list.insert( 0, ('lazyscripts', _('Welcome'), WelcomePage()) )
         self.final_page=FinalPage()
-        tool_list.list.append( ('gnome-app-install', _('Fininsh'), self.final_page) )
+        tool_list.list.append( ('system-run', _('Fininsh'), self.final_page) )
         sel=tool_list.left_pane.get_selection()
         sel.select_path('0')
 
