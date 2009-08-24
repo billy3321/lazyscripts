@@ -15,7 +15,7 @@ if win_mgr == 'Gnome':
     network_config = "/usr/bin/nm-connection-editor"
     repo_config = "software-properties-gtk"
 elif win_mgr == 'KDE':
-	network_config = "kcmshell kcm_knetworkconfmodule"
+    network_config = "kcmshell kcm_knetworkconfmodule"
     repo_config = "kpackage"
 else:
 	network_config = "/usr/bin/nm-connection-editor"
