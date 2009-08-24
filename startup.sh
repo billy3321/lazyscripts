@@ -22,6 +22,28 @@ if which lsb_release &> /dev/null ; then
     echo "export DISTRO_VERSION=${DISTRO_VERSION}" >> "$ENV_EXPORT_SCRIPT"
     echo "export DISTRO_ID=${DISTRO_ID}" >> "$ENV_EXPORT_SCRIPT"
 
+elif [ -f /etc/debian_version ] ; then
+    if $(grep -q ubuntu /etc/apt/sources.list) ;then
+        DISTRO_ID="Ubuntu"
+    else
+        DISTRO_ID="Debian"
+        DISTRO_VERSION=$(cat /etc/debian_version)
+        case $DISTRO_VERSION in
+            4.*)
+                DISTRO_CODENAME='etch'
+                ;;
+            5.*)
+                DISTRO_CODENAME='lenny'
+                ;;
+            6.*)
+                DISTRO_CODENAME='squeeze'
+                ;;
+            *)
+                DISTRO_CODENAME=''
+                ;;
+        esac
+    fi    
+ 
 elif [ -f /etc/fedora-release ] ; then
     export DISTRO_ID="Fedora"
     echo "export DISTRO_ID=\"Fedora\"" >> "$ENV_EXPORT_SCRIPT"
