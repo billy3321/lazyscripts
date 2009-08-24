@@ -20,7 +20,7 @@ _i18n_name['zhTW'] = {
 
 icon_path_name = {
     'Common':'applications-other',
-    "Development": "applications-development"
+    "Development": "applications-development",
     "Productivity": "applications-office",
     "Multimedia": "applications-multimedia",
     "Game": "applications-games",
