@@ -14,7 +14,8 @@ _i18n_name['zhTW'] = {
     'Graphic':'圖像處理',
     'Entertain':'娛樂', 
     'Localization':'本地化',
-    'Customize':'客制化'
+    'Customize':'客制化',
+    'System':'系統工具'
     }
 
 icon_path_name = {
@@ -26,7 +27,8 @@ icon_path_name = {
     "Graphic": "applications-graphics",
     "Entertain": "applications-multimedia",
     "Localization": "config-language",
-    "Customize": "applications-utilities"
+    "Customize": "applications-utilities",
+    "System": "applications-system"
     }
 
 
