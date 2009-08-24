@@ -25,7 +25,7 @@ try:
 except:
     locale.setlocale (locale.LC_ALL, "en_US.UTF-8")
 
-APP_NAME = "lazyscripts"
+APP_NAME = "Lazyscripts"
 APP_PATH = os.path.abspath (os.getcwd())
 LOCALE_DIR = os.path.join (APP_PATH, 'locale')
 
