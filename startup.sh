@@ -93,8 +93,8 @@ function init_export_script () {
 # store in $REPO_URL as array and $REPO_NUM as number.
 
 # some workaround
-DIR=`dirname $0`
-cd "$DIR"
+# DIR=`dirname $0`
+# cd "$DIR"
 
 init_export_script
 

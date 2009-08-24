@@ -7,6 +7,7 @@
 # update lazyscripts.
 set -o xtrace
 
+# some workaround
 DIR=`dirname $0`
 cd "$DIR"
 DIR=$(pwd)
