@@ -42,7 +42,11 @@ case $DISTRO_ID in
         gksu --message "執行 'Lazyscripts 懶人包' 會修改系統設定，並會安裝新軟體，所以需要系統管理員權限。 請輸入系統管理密碼，才能繼續執行。 (在 Lazyscripts 下，預設這就是你登入系統時所用的密碼。)" tmp/env-export.sh $@
         ;;
         'KDE')
-        kdesu -c "tmp/env-export.sh $@"
+        if dpkg -l kdesudo &> /dev/null ; then
+            kdesu -c "tmp/env-export.sh $@"
+        else
+            gksu --message "執行 'Lazyscripts 懶人包' 會修改系統設定，並會安裝新軟體，所以需要系統管理員權限。 請輸入系統管理密碼，才能繼續執行。 (在 Lazyscripts 下，預設這就是你登入系統時所用的密碼。)" tmp/env-export.sh $@
+        fi
         ;;
         *)
 # Try to use gksu
@@ -57,12 +61,12 @@ case $DISTRO_ID in
         gnomesu --command="tmp/env-export.sh $@"
         ;;
         'KDE')
-        PWD=$(pwd)
-        kdesu -c "cd $PWD ; tmp/env-export.sh $@"
+        PWD_DIR=$(pwd)
+        kdesu -c "cd $PWD_DIR ; tmp/env-export.sh $@"
         ;;
         *)
-        PWD=$(pwd)
-        xdg-su -c "cd $PWD ; tmp/env-export.sh $@"
+        PWD_DIR=$(pwd)
+        xdg-su -c "cd $PWD_DIR ; tmp/env-export.sh $@"
         ;;
     esac
     ;;
