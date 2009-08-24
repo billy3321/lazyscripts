@@ -45,9 +45,13 @@ function select_repo () {
     echo 'for ((num=0;num<${REPO_NUM};num=$num+1)); do 
         REPO_DIR[$num]="./scriptspool/`./lzs repo sign ${REPO_URL[${num}]}`"
         if [ -d ${REPO_DIR[$num]} ];then
-            rm -rf ${REPO_DIR[$num]}
+            pushd ${REPO_DIR[$num]}
+            git pull
+            popd
+        #     rm -rf ${REPO_DIR[$num]}
+        else
+            git clone ${REPO_URL[$num]} ${REPO_DIR[$num]}
         fi
-        git clone ${REPO_URL[$num]} ${REPO_DIR[$num]}
         ./lzs list build ${REPO_URL[$num]}
     done' >> $ENV_EXPORT_SCRIPT
     echo "export REPO_DIR" >> $ENV_EXPORT_SCRIPT
