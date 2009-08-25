@@ -5,9 +5,9 @@
 # the function use to get distribution name and version or codename.
 function get_distro_info () {
 if which lsb_release &> /dev/null ; then
-    DISTRO_ID=`lsb_release -is`
-    DISTRO_CODENAME=`lsb_release -cs`
-    DISTRO_VERSION=`lsb_release -rs`
+    DISTRO_ID=$(lsb_release -is)
+    DISTRO_CODENAME=$(lsb_release -cs)
+    DISTRO_VERSION=$(lsb_release -rs)
     if [ "$DISTRO_ID" == "SUSE LINUX" ] ; then
         case "$DISTRO_VERSION" in
             "11.2"|"11.1"|"11.0")
@@ -17,10 +17,7 @@ if which lsb_release &> /dev/null ; then
     elif [ "$DISTRO_ID" == "MandrivaLinux" ] ; then
         DISTRO_ID="Mandriva"
     fi
-    export DISTRO_ID DISTRO_VERSION DISTRO_CODENAME
-    echo "export DISTRO_CODENAME=${DISTRO_CODENAME}" >> "$ENV_EXPORT_SCRIPT"
-    echo "export DISTRO_VERSION=${DISTRO_VERSION}" >> "$ENV_EXPORT_SCRIPT"
-    echo "export DISTRO_ID=${DISTRO_ID}" >> "$ENV_EXPORT_SCRIPT"
+
 
 elif [ -f /etc/debian_version ] ; then
     if $(grep -q ubuntu /etc/apt/sources.list) ;then
@@ -45,44 +42,37 @@ elif [ -f /etc/debian_version ] ; then
     fi    
  
 elif [ -f /etc/fedora-release ] ; then
-    export DISTRO_ID="Fedora"
-    echo "export DISTRO_ID=\"Fedora\"" >> "$ENV_EXPORT_SCRIPT"
-    export DISTRO_CODENAME=""
-    export DISTRO_VERSION=$(cat /etc/fedora-release | cut -d " " -f 3)
-    echo "export DISTRO_VERSION=$(cat /etc/fedora-release | cut -d " " -f 3)" >> $ENV_EXPORT_SCRIPT
+    DISTRO_ID="Fedora"
+    DISTRO_CODENAME=""
+    DISTRO_VERSION=$(cat /etc/fedora-release | cut -d " " -f 3)
 elif test -f /etc/redhat-release && grep -q "CentOS" /etc/redhat-release ; then
-    export DISTRO_ID="CentOS"
-    echo "export DISTRO_ID=\"CentOS\"" >> "$ENV_EXPORT_SCRIPT"
-    export DISTRO_CODENAME=""
-    export DISTRO_VERSION=$(cat /etc/redhat-release | cut -d " " -f 3)
-    echo "export DISTRO_VERSION=$(cat /etc/redhat-release | cut -d " " -f 3)" >> $ENV_EXPORT_SCRIPT
+    DISTRO_ID="CentOS"
+    DISTRO_CODENAME=""
+    DISTRO_VERSION=$(cat /etc/redhat-release | cut -d " " -f 3)
 elif test -f /etc/redhat-release && grep -q "Red Hat" /etc/redhat-release ; then
-    export DISTRO_ID="RedHat"
-    echo "export DISTRO_ID=\"RedHat\"" >> "$ENV_EXPORT_SCRIPT"
-    export DISTRO_CODENAME=""
-    export DISTRO_VERSION=$(cat /etc/redhat-release | cut -d " " -f 3)
-    echo "export DISTRO_VERSION=$(cat /etc/redhat-release | cut -d " " -f 3)" >> $ENV_EXPORT_SCRIPT
+    DISTRO_ID="RedHat"
+    DISTRO_CODENAME=""
+    DISTRO_VERSION=$(cat /etc/redhat-release | cut -d " " -f 3)
 elif [ -f /etc/mandrake-release ] ; then
-    export DISTRO_ID="Mandriva"
-    echo "export DISTRO_ID=\"Mandriva\"" >> "$ENV_EXPORT_SCRIPT"
-    export DISTRO_CODENAME=""
-    export DISTRO_VERSION=$(cat /etc/mandriva-release | grep release | cut -d " " -f 4)
-    echo "export DISTRO_VERSION=$(cat /etc/mandriva-release | grep release | cut -d " " -f 4)" >> $ENV_EXPORT_SCRIPT
+    DISTRO_ID="Mandriva"
+    DISTRO_CODENAME=""
+    DISTRO_VERSION=$(cat /etc/mandriva-release | grep release | cut -d " " -f 4)
 elif [ -f /usr/bin/pkg ] && grep -q "OpenSolaris" /etc/release ; then
-    export DISTRO_ID="OpenSolaris"
-    echo "export DISTRO_ID=\"OpenSolaris\"" >> $ENV_EXPORT_SCRIPT
-    export DISTRO_CODENAME=""
-    export DISTRO_VERSION=$(cat /etc/release | grep "OpenSolaris" | cut -d " " -f 27)
-    echo "export DISTRO_VERSION=$(cat /etc/release | grep "OpenSolaris" | cut -d " " -f 27)" >> $ENV_EXPORT_SCRIPT
+    DISTRO_ID="OpenSolaris"
+    DISTRO_CODENAME=""
+    DISTRO_VERSION=$(cat /etc/release | grep "OpenSolaris" | cut -d " " -f 27)
 else
 # Let user choice by them self.
     echo "Sorry, Lazyscripts can't distinguish your Linux distribution."
     echo "Please choice your distribution in the list."
     zenity --info --text "Sorry, Lazyscripts can't distinguish your Linux distribution. Please choice your distribution in the list by your self.\n      \nNote: If you can't find your Linux distribution in the list, It means Lazyscripts not support your distribution. Please contact develpers. http://code.google.com/p/lazyscripts/"
     DISTRO_ID=`zenity --list --title="Choice your linux distribution" --radiolist --column "" --column "Linux Distribution" FALSE Fedora FALSE others`
-    export DISTRO_ID=${DISTRO_ID}
-    echo "export DISTRO_ID=${DISTRO_ID}" >> "$ENV_EXPORT_SCRIPT"
+    DISTRO_ID=${DISTRO_ID}
 fi
+export DISTRO_ID DISTRO_VERSION DISTRO_CODENAME
+echo "export DISTRO_CODENAME=${DISTRO_CODENAME}" >> "$ENV_EXPORT_SCRIPT"
+echo "export DISTRO_VERSION=${DISTRO_VERSION}" >> "$ENV_EXPORT_SCRIPT"
+echo "export DISTRO_ID=${DISTRO_ID}" >> "$ENV_EXPORT_SCRIPT"
 }
 
 function get_platname() {
