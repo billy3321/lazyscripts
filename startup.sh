@@ -57,6 +57,10 @@ elif [ -f /etc/mandrake-release ] ; then
     DISTRO_ID="Mandriva"
     DISTRO_CODENAME=""
     DISTRO_VERSION=$(cat /etc/mandriva-release | grep release | cut -d " " -f 4)
+elif [ -f /etc/arch-release ] ; then
+    DISTRO_ID="Arch"
+    DISTRO_CODENAME=""
+    DISTRO_VERSION=$(cat /etc/mandriva-release | grep release | cut -d " " -f 4)
 elif [ -f /usr/bin/pkg ] && grep -q "OpenSolaris" /etc/release ; then
     DISTRO_ID="OpenSolaris"
     DISTRO_CODENAME=""
@@ -115,7 +119,7 @@ get_distro_info
 get_platname
 
 case "$DISTRO_ID" in
-    "Ubuntu"|"Debian"|"openSUSE"|"Fedora"|"CentOS"|"OpenSolaris"|"Mandriva")
+    "Ubuntu"|"Debian"|"openSUSE"|"Fedora"|"CentOS"|"OpenSolaris"|"Mandriva"|"Arch")
     source bin/${DISTRO_ID}/startup.sh
     ;;
     *)
