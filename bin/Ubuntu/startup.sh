@@ -16,6 +16,11 @@ if [ -n "$DESKTOP_SESSION" ];then
             WIN_MGR='Gnome'
         elif [ -n "$KDE_FULL_SESSION" ] ; then
 	        WIN_MGR='KDE'
+		elif [ -n "$_LXSESSION_PID" ] ; then
+            WIN_MGR='LXDE'
+        elif pstree | grep -q xfwm4 ; then
+            # Maybe it's Xfce, dirty way
+            WIN_MGR='Xfce'
         else
 	        echo "Lazysciprs can't identified your window manager"
 	        WIN_MGR=''
@@ -31,11 +36,11 @@ else
 fi
 if [ -z "$WIN_MGR" ];then
 	if which zenity &> /dev/null ; then
-        WIN_MGR=$(zenity --list --title="Choice your window manager" --radiolist --column "" --column "Linux Distribution Version" FALSE "Gnome" FALSE "KDE")
+        WIN_MGR=$(zenity --list --title="Choice your window manager" --radiolist --column "" --column "Linux Distribution Version" FALSE "Gnome" FALSE "KDE" FALSE "LXDE" FALSE "Xfce")
     elif which kdialog &> /dev/null ; then
-		WIN_MGR=$(kdialog --list --title="Choice your window manager" --radiolist "Choice your window manager" Gnome Gnome off KDE KDE off )
+		WIN_MGR=$(kdialog --list --title="Choice your window manager" --radiolist "Choice your window manager" Gnome Gnome off KDE KDE off LXDE LXDE off Xfce Xfce off)
 	else
-		read -p "Please input your window manager(Gnome/KDE)" WIN_MGR
+		read -p "Please input your window manager(Gnome/KDE/LXDE/Xfce)" WIN_MGR
 		case $WIN_MGR in
 			'Gnome'|'gnome'|'GNOME')
 			WIN_MGR='Gnome'
@@ -43,6 +48,12 @@ if [ -z "$WIN_MGR" ];then
 			'KDE'|'kde')
 			WIN_MGR='KDE'
 		    ;;
+			'LXDE'|'Lxde'|'lxde')
+			WIN_MGR='LXDE'
+			;;
+			'XFCE'|'Xfce'|'xfce')
+			WIN_MGR='Xfce'
+			;;
 			*)
 			echo "can't distinguish your input. Lazyscripts will exit."
 			exit
