@@ -127,8 +127,7 @@ case "$DISTRO_ID" in
 esac
 
 # This is a developer function use to select testing repo.
-source devtools/devstartup.sh
-select_repo
+echo "source devtools/devstartup.sh" >> $ENV_EXPORT_SCRIPT
 
 # get scripts from github
 # REPO_URL=`cat conf/repository.conf`
