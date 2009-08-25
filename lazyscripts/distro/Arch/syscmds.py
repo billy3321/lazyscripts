@@ -5,7 +5,7 @@ Here store the command which only in Debian
 import os
 
 detect_pack = "pacman --noconfirm -Qs "
-install_cmd = "pacman --noconfirm -S "
+install_cmd = "pacman --noconfirm -S --needed"
 remove_cmd = "pacman --noconfirm -R "
 refresh_cmd = "pacman --noconfirm -Syy"
 

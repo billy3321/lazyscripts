@@ -8,7 +8,7 @@ else
     echo "Require packages not installed."
 
     pacman -Syy
-    pacman --noconfirm -S pygtk wget git-core python-nose setuptools vte zenity
+    pacman --noconfirm -S --needed pygtk wget git-core python-nose setuptools vte zenity
 
 fi
 
