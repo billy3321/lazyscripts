@@ -8,7 +8,7 @@ else
     echo "Require packages not installed."
 
     pacman -Syy
-    yum -y install pygtk wget git-core python-nose setuptools vte lsb-release
+    pacman --noconfirm -S pygtk wget git-core python-nose setuptools vte lsb-release
 
 fi
 

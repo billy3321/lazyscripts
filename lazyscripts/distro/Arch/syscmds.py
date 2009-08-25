@@ -4,10 +4,10 @@ Here store the command which only in Debian
 """
 import os
 
-detect_pack = "pacman -Qs "
-install_cmd = "pacman -S "
-remove_cmd = "pacman -R "
-refresh_cmd = "pacman -Syy"
+detect_pack = "pacman --noconfirm -Qs "
+install_cmd = "pacman --noconfirm -S "
+remove_cmd = "pacman --noconfirm -R "
+refresh_cmd = "pacman --noconfirm -Syy"
 
 win_mgr = ""
 win_mgr = os.getenv('WIN_MGR')
