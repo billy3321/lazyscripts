@@ -12,14 +12,14 @@ refresh_cmd = "pacman --noconfirm -Syy"
 win_mgr = ""
 win_mgr = os.getenv('WIN_MGR')
 if win_mgr == 'Gnome':
-    network_config = "/usr/bin/nm-connection-editor"
-    repo_config = "software-properties-gtk"
+    network_config = ""
+    repo_config = ""
 elif win_mgr == 'KDE':
-    network_config = "kcmshell kcm_knetworkconfmodule"
-    repo_config = "kpackage"
+    network_config = "systemsetting"
+    repo_config = ""
 else:
-    network_config = "/usr/bin/nm-connection-editor"
-    repo_config = "software-properties-gtk"
+    network_config = ""
+    repo_config = ""
 
 
 
