@@ -15,6 +15,8 @@ if win_mgr == 'Gnome':
     repo_config = "software-properties-gtk"
 elif win_mgr == 'KDE':
     repo_config = "software-properties-kde"
+if win_mgr == 'Xfce':
+    repo_config = "software-properties-gtk"
 else:
     repo_config = "software-properties-gtk"
 
