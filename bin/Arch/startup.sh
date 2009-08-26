@@ -4,6 +4,8 @@
 
 echo "source /etc/profile" >> $ENV_EXPORT_SCRIPT
 
+
+
 if [ -n "$DESKTOP_SESSION" ];then
     case ${DESKTOP_SESSION} in
 	    'gnome')
