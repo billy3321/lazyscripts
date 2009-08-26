@@ -71,6 +71,7 @@ case $WIN_MGR in
     fi
 ;;
 'KDE')
+    echo "export DISPLAY=\"$DISPLAY\"" >> $ENV_EXPORT_SCRIPT
     if ! kdialog --warningcontinuecancel "Lazyscripts will install some required packages. Press OK to continue and install, or Press Cancel to exit." ; then
         exit
     fi 

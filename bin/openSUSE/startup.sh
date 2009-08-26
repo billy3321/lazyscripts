@@ -7,7 +7,6 @@ if [ -z "$LC_ALL" ] ; then
     echo "export LC_ALL=\"$LANG\"" >> $ENV_EXPORT_SCRIPT
 fi
 
-echo "export DISPLAY=\"$DISPLAY\"" >> $ENV_EXPORT_SCRIPT
 
 
 if [ -n "$WINDOWMANAGER" ];then
@@ -62,6 +61,7 @@ case $WIN_MGR in
     fi
 ;;
 'KDE')
+    echo "export DISPLAY=\"$DISPLAY\"" >> $ENV_EXPORT_SCRIPT
     if ! kdialog --warningcontinuecancel "Lazyscripts will install some required packages. Press OK to continue and install, or Press Cancel to exit." ; then
         exit
     fi 
