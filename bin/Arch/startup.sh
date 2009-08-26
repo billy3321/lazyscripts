@@ -14,7 +14,7 @@ if [ -n "$DESKTOP_SESSION" ];then
 	    'kde')
 	    WIN_MGR='KDE'
 	    ;;
-        'lxde')
+        'LXDE'|'lxde')
         WIN_MGR='LXDE'
         ;;
         'xfce')
