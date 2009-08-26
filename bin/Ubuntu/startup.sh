@@ -11,6 +11,9 @@ if [ -n "$DESKTOP_SESSION" ];then
 	    'kde')
 	    WIN_MGR='KDE'
 	    ;;
+        'xfce.desktop')
+        WIN_MGR='Xfce'
+        ;;
 	    'default')
 	    if [ -n "$GNOME_DESKTOP_SESSION_ID" ];then
             WIN_MGR='Gnome'
