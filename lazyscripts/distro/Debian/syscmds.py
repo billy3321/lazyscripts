@@ -9,10 +9,7 @@ install_cmd = "apt-get -y --force-yes install "
 remove_cmd = "apt-get -y --force-yes --purge remove "
 refresh_cmd = "apt-get update"
 
-if os.getenvp['WIN_MGR']:
-    win_mgr = os.getenv('WIN_MGR')
-else:
-    win_mgr = ""
+win_mgr = os.getenv('WIN_MGR')
 
 if win_mgr == 'Gnome':
     network_config = "/usr/bin/nm-connection-editor"

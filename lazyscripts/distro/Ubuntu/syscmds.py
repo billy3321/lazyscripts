@@ -10,10 +10,7 @@ remove_cmd = "apt-get -y --force-yes --purge remove "
 refresh_cmd = "apt-get update"
 network_config = "/usr/bin/nm-connection-editor"
 
-if os.getenvp['WIN_MGR']:
-    win_mgr = os.getenv('WIN_MGR')
-else:
-    win_mgr = ""
+win_mgr = os.getenv('WIN_MGR')
 
 if win_mgr == 'Gnome':
     repo_config = "software-properties-gtk"

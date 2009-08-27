@@ -9,10 +9,7 @@ install_cmd = "zypper -n install "
 remove_cmd = "zypper -n remove "
 refresh_cmd = "zypper refresh"
 
-if os.environ['WIN_MGR']:
-    win_mgr = os.environ['WIN_MGR']
-else:
-    win_mgr = ""
+win_mgr = os.environ['WIN_MGR']
 
 if win_mgr == 'Gnome':
     network_config = "/usr/bin/nm-connection-editor"

@@ -9,10 +9,7 @@ install_cmd = "pacman --noconfirm -S --needed"
 remove_cmd = "pacman --noconfirm -R "
 refresh_cmd = "pacman --noconfirm -Syy"
 
-if os.getenvp['WIN_MGR']:
-    win_mgr = os.getenv('WIN_MGR')
-else:
-    win_mgr = ""
+win_mgr = os.getenv('WIN_MGR')
 
 if win_mgr == 'Gnome':
     network_config = ""
