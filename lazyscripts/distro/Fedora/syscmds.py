@@ -9,8 +9,12 @@ install_cmd = "yum -y install "
 remove_cmd = "yum -y remove "
 refresh_cmd = "yum check-update"
 network_config = "nm-connection-editor"
-win_mgr = ""
-win_mgr = os.getenv('WIN_MGR')
+
+if os.getenvp['WIN_MGR']:
+    win_mgr = os.getenv('WIN_MGR')
+else:
+    win_mgr = ""
+
 if win_mgr == 'Gnome':
 #    repo_config = "sudo -u %s 'gpk-repo'" % (os.getenv('REAL_USER')) 
     repo_config = "gpk-repo"
