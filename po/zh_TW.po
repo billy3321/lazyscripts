@@ -70,7 +70,7 @@ msgstr "multiverse, 及 restricted"
 
 #: ui/__init__.py:130
 msgid "Items"
-msgstr "可選用的項"
+msgstr "可選用的項目"
 
 #: ui/__init__.py:162
 msgid "<b><big>Lazyscripts - Linux lazy pack,"
