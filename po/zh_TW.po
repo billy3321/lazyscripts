@@ -57,8 +57,7 @@ msgstr "Lazyscripts 不會變更你的設定，"
 msgid ""
 "please ensure your software sources right.\n"
 "\n"
-msgstr ""
-"請自行妥善設定你的套件庫。\n"
+msgstr "請自行妥善設定你的套件庫。\n"
 "\n"
 
 #: ui/__init__.py:93
@@ -71,7 +70,7 @@ msgstr "multiverse, 及 restricted"
 
 #: ui/__init__.py:130
 msgid "Items"
-msgstr "可選用的項目"
+msgstr "可選用的項"
 
 #: ui/__init__.py:162
 msgid "<b><big>Lazyscripts - Linux lazy pack,"
@@ -89,12 +88,12 @@ msgstr ""
 
 #: ui/__init__.py:164
 msgid ""
-"Copyright (C) 2009, Design and developed by PCMan, Yuren Ju, hychen and billy3321\n"
+"Copyright (C) 2009, Design and developed by PCMan, Yuren Ju, hychen and "
+"billy3321\n"
 "\n"
 msgstr ""
 "Copyright (C) 2009, 由 Lazyscripts 開發者共同設計、開發\n"
 "\n"
-
 
 #: ui/__init__.py:165
 msgid "Project Lazyscripts - "
@@ -131,16 +130,17 @@ msgstr "Linux 懶人包"
 #: ui/__init__.py:372
 msgid ""
 "\n"
-"\033[1;36mLazyscripts - Linux lazy pack run finish!\033[1;32m   Have fun for Linux!\033[m\n"
+"[1;36mLazyscripts - Linux lazy pack run finish![1;32m   Have fun for Linux!"
+"[m\n"
 msgstr ""
 "\n"
-"\033[1;36mLazyscripts - Linux 懶人包執行完成！\033[1;32m   祝你使用 Linux 愉快！\033[m\n"
-
-#: ui/__init__.py:397
-msgid "Error"
-msgstr "錯誤"
+"[1;36mLazyscripts - Linux 懶人包執行完成！[1;32m   祝你使用 Linux 愉快！"
+"[m\n"
 
 #: ui/__init__.py:397
 msgid "No avalible internet connection, Lazyscripts cannot execute."
 msgstr "沒有可用的網路連線，Lazyscripts 無法執行。"
 
+#: ui/__init__.py:397
+msgid "Error"
+msgstr "錯誤"
