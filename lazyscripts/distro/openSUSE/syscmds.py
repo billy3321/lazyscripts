@@ -13,7 +13,7 @@ if os.environ['WIN_MGR'] == 'Gnome':
     network_config = "/usr/bin/nm-connection-editor"
 elif  os.environ['WIN_MGR'] == 'KDE':
     network_config = "/usr/sbin/NetworkManager"
-else
+else:
     network_config = "/usr/bin/nm-connection-editor"
 
 repo_config = "/sbin/yast2 repositories"
