@@ -32,6 +32,10 @@ if [ -z $BRANCH ];then
 fi
 }
 
+DIR=`dirname $0`
+cd $DIR
+pushd ..
+
 echo "Whos repo you want to sync?"
 echo "1. hychen"
 echo "2. yurenju"
@@ -71,5 +75,5 @@ read -p "What do you want to do now? Please enter the number:" ACT
    ;;
    esac
 
-
+popd
 #END

@@ -338,7 +338,7 @@ class ScriptsRunner:
         """
         self._init_tmpdir()
         excute_entries = [ 
-            '#!/bin/bash\n'
+            '#!/bin/bash\nset -o xtrace\n'
             'cd '+self.tmp_dirname+'\n'
             + syscmds.refresh_cmd + '\n' ]
 
