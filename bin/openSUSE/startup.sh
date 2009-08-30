@@ -41,18 +41,18 @@ if [ -z "$WIN_MGR" ];then
 	else
 		read -p "Please input your window manager(Gnome/KDE/LXDE/Xfce)" WIN_MGR
 		case $WIN_MGR in
-			'Gnome'|'gnome'|'GNOME')
+			'[Gg][Nn][Oo][Mm][Ee]')
 			WIN_MGR='Gnome'
 		    ;;
-			'KDE'|'kde')
+			'[Kk][Dd][Ee]')
 			WIN_MGR='KDE'
 		    ;;
-            "LXDE"|"lxde")
-            WIN_MGR="LXDE"
-            ;;
-            "XFCE"|"Xfce"|"xfce")
-            WIN_MGR="Xfce"
-            ;;
+			'[Ll][Xx][Dd][Ee]')
+			WIN_MGR='LXDE'
+			;;
+			'[Xx][Ff][Cc][Ee]')
+			WIN_MGR='Xfce'
+			;;
 			*)
 			echo "can't distinguish your input. Lazyscripts will exit."
 			exit
