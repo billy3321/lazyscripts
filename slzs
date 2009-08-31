@@ -67,7 +67,7 @@ case $DISTRO_ID in
         ;;
         *)
         PWD_DIR=$(pwd)
-        xdg-su -c "cd $PWD_DIR ; tmp/env-export.sh $@"
+        xdg-su -c "tmp/env-export.sh $@"
         ;;
     esac
     ;;
