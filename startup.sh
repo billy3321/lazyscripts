@@ -131,7 +131,9 @@ case "$DISTRO_ID" in
 esac
 
 # This is a developer function use to select testing repo.
-echo "source devtools/devstartup.sh" >> $ENV_EXPORT_SCRIPT
+if [ ! $@ == "test-env" ];then
+    echo "source devtools/devstartup.sh" >> $ENV_EXPORT_SCRIPT
+fi
 
 # get scripts from github
 # REPO_URL=`cat conf/repository.conf`
@@ -178,6 +180,7 @@ echo >> $ENV_EXPORT_SCRIPT
 
 if [ $@ == "test-env" ];then
     echo "export PS1=\"lzs-test-env-\h:\W \u\$\"" >> $ENV_EXPORT_SCRIPT
+    echo "bash" >> $ENV_EXPORT_SCRIPT
 else
 
     echo './lzs $@'  >> $ENV_EXPORT_SCRIPT
