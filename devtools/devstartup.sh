@@ -16,7 +16,18 @@ function select_repo () {
                 SHOW_REPO=$(for uri in ${AVAILABLE_REPO[*]} ; do echo -n "${uri} ${uri} off " ; done)
                 USE_REPO=$(kdialog --title="Choice Scripts Repository You Want to Use" --radiolist "Choice a Repository URL" ${SHOW_REPO})
             else
-                echo "Some error happend."
+#                echo "Some error happend."
+                PS3_BAK=$PS3
+                PS3="Choice Scripts Repository You Want to Use : "
+                select USE_REPO in ${AVAILABLE_REPO[*]}
+                do
+                    if [ ! -z $USE_REPO ] ; then
+                        break
+                    else
+                        echo "Please select again."
+                    fi
+                done
+                PS3=$PS3_BAK
             fi
         else
             case $WIN_MGR in
