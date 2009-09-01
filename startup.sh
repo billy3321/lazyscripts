@@ -180,7 +180,7 @@ echo >> $ENV_EXPORT_SCRIPT
 
 if [ $@ == "test-env" ];then
     echo "export PS1=\"lzs-test-env-\h:\W \u\$\"" >> $ENV_EXPORT_SCRIPT
-    echo "bash" >> $ENV_EXPORT_SCRIPT
+    echo "/bin/bash" >> $ENV_EXPORT_SCRIPT
 else
 
     echo './lzs $@'  >> $ENV_EXPORT_SCRIPT
