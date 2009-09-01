@@ -21,6 +21,8 @@ fi
 source startup.sh
 
 # run Lazyscripts with root access
+
+if [ ! $@ == "test-env" ];then
 case $DISTRO_ID in
     "Ubuntu")
     case $WIN_MGR in
@@ -103,3 +105,6 @@ case $DISTRO_ID in
     echo "Lazyscripts not support $DISTRO_ID ."
     ;;
 esac
+else
+    su -c "tmp/env-export.sh"
+fi
