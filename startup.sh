@@ -177,7 +177,7 @@ echo >> $ENV_EXPORT_SCRIPT
 # FIXME: export-env just using to pass envirnoment variables, please don't use any command in it.
 
 if [ $@ == "test-env" ];then
-    echo "export PS1=\"lzs_test_env_\h:\W \u\$\"" >> $ENV_EXPORT_SCRIPT
+    echo "export PS1=\"lzs-test-env-\h:\W \u\$\"" >> $ENV_EXPORT_SCRIPT
 else
 
     echo './lzs $@'  >> $ENV_EXPORT_SCRIPT
