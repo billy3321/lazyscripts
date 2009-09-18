@@ -14,7 +14,10 @@ if [ -n "$DESKTOP_SESSION" ];then
         'xfce.desktop')
         WIN_MGR='Xfce'
         ;;
-	    'default')
+        'LXDE')
+        WIN_MGR='LXDE'
+        ;;
+	    'default'|*)
 	    if [ -n "$GNOME_DESKTOP_SESSION_ID" ];then
             WIN_MGR='Gnome'
         elif [ -n "$KDE_FULL_SESSION" ] ; then
@@ -29,10 +32,6 @@ if [ -n "$DESKTOP_SESSION" ];then
 	        WIN_MGR=''
         fi
 	    ;;    
-	    *)  
-	    echo "Lazysciprs can't identified your window manager"
-	    WIN_MGR=''
-	    ;;  
 	esac
 else
 	WIN_MGR=''
