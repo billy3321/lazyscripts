@@ -112,7 +112,7 @@ def get_pkgmgr(distro):
     """
     if distro in ('Debian','Ubuntu'):
         return DebManager()
-    if distro in ('SUSE LINUX'):
+    if distro in ('SUSE LINUX','SuSE'):
         return ZypperManager()
     raise PackageSystemNotFound()
 #}}}
