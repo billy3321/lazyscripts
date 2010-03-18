@@ -67,6 +67,42 @@ class DebManager(object):
     #}}}
 pass
 
+class ZypperManager(object):
+    """Zypper Package System Manager
+    """
+    #{{{attrs
+    CMDPREFIX_DETECT = 'rpm -q'
+    CMDPREFIX_UPDATE = 'zypper refresh'
+    CMDPREFIX_INSTALL = 'zypper -n install'
+    CMDPREFIX_REMOVE = 'zypper -n refresh'
+    #}}}
+
+    #{{{def make_cmd(self, act, argv=None):
+    def make_cmd(self, act, argv=None):
+        """make a command of package by action.
+
+        @param str act action name, ex. install, remove
+        @param str pkgs packages name.
+        @return str package system command.
+        """
+        attr = "CMDPREFIX_%s" % act.upper()
+        if not hasattr(self, attr):    return None
+        cmdprefix = getattr(self, attr)
+        if not cmdprefix:    return None
+        if not argv:    return cmdprefix
+        return "%s %s" % (cmdprefix, argv)
+    #}}}
+
+    #{{{def update_sources_by(self, pool):
+    def update_sources_by(self, pool):
+        from distutils.dep_util import newer
+        src = pool.current_pkgsourcelist
+        if not src: return False
+        dest = "/etc/zypp/repos.d/%s" % os.path.basename(src)
+        if not os.path.exists(src) or newer(src, dest):
+            shutil.copy(src, dest)
+    #}}}
+pass
 #{{{def get_pkgmgr(distro):
 def get_pkgmgr(distro):
     """get package system manager.
@@ -76,5 +112,7 @@ def get_pkgmgr(distro):
     """
     if distro in ('Debian','Ubuntu'):
         return DebManager()
+    if distro in ('SUSE LINUX'):
+        return ZypperManager()
     raise PackageSystemNotFound()
 #}}}

@@ -40,7 +40,7 @@ def install_desktop_file():
 try:
     from setuptools import *
 except ImportError:
-    print "please install setuptools first"
+    print "please install python-setuptools first"
 
 setup(
     name = 'Lazyscripts',
