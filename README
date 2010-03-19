@@ -3,10 +3,11 @@
 Core Program: GPLv2
 Scripts:      decalar by each scripts
 
-== Needed packages
+== Required Packages
     python-setuptools
     python-vte
     gettext
+    zenity
 
 == Install & Usage
 
