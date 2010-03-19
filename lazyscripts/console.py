@@ -99,12 +99,12 @@ def gui_run():
     if not distro:
         print "distribution no supported."
         sys.exit()
-    win_mgr = wm.get_wminfo(distro)
+    win_mgr = wm.get_wminfo(distro[0])
 
     # argument process.
     message_sudo="\"執行'Lazyscripts 懶人包' 會修改系統設定，並會安裝新軟體，所以需要系統管理員權限。 請輸入系統管理密碼，才能繼續執行。(在 Lazyscripts 下，預設這就是你登入系統時所用的密碼。)\""
 
-    prefix = 'gksu --message %s' % message_sudo
+#    prefix = 'gksu --message %s' % message_sudo
 
     parser = optparse.OptionParser()
     parser.add_option("-a", "--autosync",
@@ -134,11 +134,11 @@ def gui_run():
 
     if options.selection_list:
         cmd = 'lzs gui run %s' % (options.selection_list)
-        guisudocmd = wm.make_guisudocmd(distro,win_mgr,cmd,message_sudo)
+        guisudocmd = wm.make_guisudocmd(distro[0],win_mgr,cmd,message_sudo)
 #        cmd = "%s lzs gui run %s" % (prefix, options.selection_list)
     else:
         cmd = 'lzs gui run'
-        guisudocmd = wm.make_guisudocmd(distro,win_mgr,cmd,message_sudo)
+        guisudocmd = wm.make_guisudocmd(distro[0],win_mgr,cmd,message_sudo)
 #        cmd = "%s lzs gui run" % prefix
     os.system(guisudocmd)
 #}}}
