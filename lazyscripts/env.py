@@ -174,12 +174,17 @@ def storageenv(path=None):
     "Save Bash Shell enviroment variabe."
     mkexport = lambda val: "export REAL_%s=%s" % \
                     (val.upper(),os.getenv(val.upper()))
+    distro = platform.dist()[0]
+    if not distro:
+        if os.path.exists('/etc/arch-release'):
+            distro = 'arch'
+
     contents = [
     '#!/bin/bash',
     mkexport('USER'),
     mkexport('HOME'),
     mkexport('LANG'),
-    'export DISTRO_ID=%s' % platform.dist()[0]
+    'export DISTRO_ID=%s' % distro
     ]
     if not path:
         path = DEFAULT_RUNTIME_ROOT_DIR

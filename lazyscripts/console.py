@@ -96,9 +96,12 @@ def gui_run():
     env.prepare_runtimeenv()
     env.storageenv()
     distro = platform.dist()
-    if not distro:
-        print "distribution no supported."
-        sys.exit()
+    if not distro[0]:
+        if os.path.exists('/etc/arch-release')
+            distro[0]='arch'
+        else:
+            print "distribution no supported."
+            sys.exit()
     win_mgr = wm.get_wminfo(distro[0])
 
     # argument process.
