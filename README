@@ -5,10 +5,9 @@ Scripts:      decalar by each scripts
 
 == Required Packages
     python-setuptools
-    python-vte
+    python-vte or vte
     gettext
     zenity
-    vte
 
 == Install & Usage
 
