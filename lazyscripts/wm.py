@@ -20,8 +20,14 @@
 from os import getenv
 from commands import getoutput
 
-UnknowWindowManager = 'Lazyscripts can\'t distinguish your window manager.'
-UnknowDistribution = 'Lazyscripts can\'t dustinguish your Linux distribution.'
+class UnknownWindowManager(Exception): 
+    def __repr__(self):
+        return 'Lazyscripts can\'t distinguish your window manager.'
+
+class UnknownDistribution(Exception):
+    def __repr__(self):
+        return 'Lazyscripts can\'t distinguish your Linux distribution.'
+
 
 def wm_desktop_session():
     """
@@ -74,7 +80,7 @@ def user_choice():
 #   Use kdialog
 #   wm_value = getoutput('kdialog --list --title="Choice your window manager" --radiolist "Choice your window manager" Gnome Gnome off KDE KDE off LXDE LXDE off Xfce Xfce off')
     if not wm_value:
-        raise UnknowWindowManager
+        raise UnknownWindowManager
     else:
         return wm_value.lower()
 
@@ -89,7 +95,7 @@ def get_wminfo(distro):
     elif distro == 'Opensolaris':
         return wm_var_check()
     else:
-        raise UnknowWindowManager
+        raise UnknownWindowManager
 
 def make_guisudocmd(distro,wm,cmd,msg=None):
     """
@@ -108,7 +114,7 @@ def make_guisudocmd(distro,wm,cmd,msg=None):
         elif wm in ('xfce','lxde'):
             return 'xdg-su -c "%s"' % (cmd)
     else:
-        raise UnknowDistribution
+        raise UnknownDistribution
 
 
 
