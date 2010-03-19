@@ -264,7 +264,7 @@ def get_pkgmgr(distro):
         return DebManager()
     if distro in ('SUSE LINUX','SuSE'):
         return ZypperManager()
-    if distro in ('Fedora','CentOS','redhat'):
+    if distro in ('fedora','CentOS','redhat'):
         return YumManager()
     raise PackageSystemNotFound()
 #}}}
