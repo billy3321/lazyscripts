@@ -146,7 +146,13 @@ class ScriptsRunner(object):
         self.ui = ui
         self.cmd_queue = []
         self._scripts = []
-        self.distro = platform.dist()
+        self.distro = platform.dist()[0]
+        if not self.distro:
+            if os.path.exists('/etc/arch-release'):
+                self.distro = 'arch'
+            elif os.path.exists('/usr/bin/pkg') and commands.getoutput('cat /etc/release | grep "OpenSolaris"'):
+                self.distro = 'opensolaris'
+        
         self.pkgmgr = env.Register().pkgmgr
     #}}}
 
@@ -215,7 +221,7 @@ class ScriptsRunner(object):
     def prepare_pkgscmds(self):
         "prepare commands."
         (self.install_pkgs, self.remove_pkgs) = \
-                    find_pkginfo(self._scripts,self.distro[0])
+                    find_pkginfo(self._scripts,self.distro)
 
         self.cmd_queue.append(self.pkgmgr.make_cmd('update'))
 

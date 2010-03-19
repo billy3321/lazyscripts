@@ -268,6 +268,8 @@ def get_pkgmgr(distro):
         return YumManager()
     elif distro == 'arch':
         return PacmanManager()
+    elif distro == 'opensolaris':
+        return PkgManager()
     else:
         raise PackageSystemNotFound()
 #}}}

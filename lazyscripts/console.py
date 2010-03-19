@@ -99,6 +99,8 @@ def gui_run():
     if not distro:
         if os.path.exists('/etc/arch-release'):
             distro = 'arch'
+        elif os.path.exists('/usr/bin/pkg') and commands.getoutput('cat /etc/release | grep "OpenSolaris"'):
+            distro = 'opensolaris'
         else:
             print "distribution no supported."
             sys.exit()

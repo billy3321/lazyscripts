@@ -106,6 +106,8 @@ class Register:
         if not distro:
             if os.path.exists('/etc/arch-release'):
                 distro = 'arch'
+            elif os.path.exists('/usr/bin/pkg') and commands.getoutput('cat /etc/release | grep "OpenSolaris"'):
+                distro = 'opensolaris'
 
         pkgmgr = lzspkgmgr.get_pkgmgr(distro)
 
@@ -183,6 +185,8 @@ def storageenv(path=None):
     if not distro:
         if os.path.exists('/etc/arch-release'):
             distro = 'arch'
+        elif os.path.exists('/usr/bin/pkg') and commands.getoutput('cat /etc/release | grep "OpenSolaris"'):
+            distro = 'opensolaris'
 
     contents = [
     '#!/bin/bash',

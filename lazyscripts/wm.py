@@ -92,7 +92,7 @@ def get_wminfo(distro):
         return wm_desktop_session()
     elif distro == 'SuSE':
         return suse_windowmanager()
-    elif distro == 'Opensolaris':
+    elif distro == 'opensolaris':
         return wm_var_check()
     else:
         raise UnknownWindowManager()
@@ -116,7 +116,7 @@ def make_guisudocmd(distro,wm,cmd,msg=None):
             return 'kdesu -c "%s"' % (cmd)
         elif wm in ('xfce','lxde'):
             return 'xdg-su -c "%s"' % (cmd)
-    elif distro in ('Mandriva'):
+    elif distro in ('Mandriva','opensolaris'):
         return 'gksu --message %s "%s"' % (msg, cmd)
     else:
         raise UnknownDistribution()
