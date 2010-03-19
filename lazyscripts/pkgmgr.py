@@ -269,5 +269,5 @@ def get_pkgmgr(distro):
     elif distro == 'arch':
         return PacmanManager()
     else:
-    raise PackageSystemNotFound()
+        raise PackageSystemNotFound()
 #}}}
