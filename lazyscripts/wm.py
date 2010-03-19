@@ -88,7 +88,7 @@ def get_wminfo(distro):
     """
     return gnome|kde|lxde|xfce
     """
-    if distro in ('debian','Ubuntu','fedora','CentOS','Mandriva','redhat','arch'):
+    if distro in ('debian','Ubuntu','fedora','centos','Mandriva','redhat','arch','LinuxMint'):
         return wm_desktop_session()
     elif distro == 'SuSE':
         return suse_windowmanager()
@@ -101,7 +101,7 @@ def make_guisudocmd(distro,wm,cmd,msg=None):
     """
     return full guisudo command for running.
     """
-    if distro in ('debian','Ubuntu','arch','LinuxMint','fedora','redhat','CentOS'):
+    if distro in ('debian','Ubuntu','arch','LinuxMint','fedora'):
         if wm in ('gnome','xfce','lxde'):
             return 'gksu --message %s "%s"' % (msg, cmd)
         elif wm == 'kde':
@@ -116,7 +116,7 @@ def make_guisudocmd(distro,wm,cmd,msg=None):
             return 'kdesu -c "%s"' % (cmd)
         elif wm in ('xfce','lxde'):
             return 'xdg-su -c "%s"' % (cmd)
-    elif distro in ('Mandriva','opensolaris'):
+    elif distro in ('Mandriva','opensolaris','redhat','centos'):
         return 'gksu --message %s "%s"' % (msg, cmd)
     else:
         raise UnknownDistribution()

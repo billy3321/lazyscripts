@@ -260,7 +260,7 @@ def get_pkgmgr(distro):
     @param str distro distrobution name.
     @return PackageManager
     """
-    if distro in ('debian','Ubuntu'):
+    if distro in ('debian','Ubuntu','LinuxMint'):
         return DebManager()
     elif distro in ('SUSE LINUX','SuSE'):
         return ZypperManager()
