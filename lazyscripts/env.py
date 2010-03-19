@@ -102,7 +102,12 @@ class Register:
 
         workspace = os.path.join(get_realhome(),'.lazyscripts')
 
-        pkgmgr = lzspkgmgr.get_pkgmgr(platform.dist()[0])
+        distro = platform.dist()[0]
+        if not distro:
+            if os.path.exists('/etc/arch-release'):
+                distro = 'arch'
+
+        pkgmgr = lzspkgmgr.get_pkgmgr(distro)
 
     # storage for the instance reference
     __instance = None
