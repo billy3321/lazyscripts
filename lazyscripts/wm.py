@@ -88,7 +88,7 @@ def get_wminfo(distro):
     """
     return gnome|kde|lxde|xfce
     """
-    if distro in ('debian','Ubuntu','fedora','CentOS','Mandriva','redhat'):
+    if distro in ('debian','Ubuntu','fedora','CentOS','Mandriva','redhat','arch'):
         return wm_desktop_session()
     elif distro == 'SuSE':
         return suse_windowmanager()
