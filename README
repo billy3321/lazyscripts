@@ -3,6 +3,11 @@
 Core Program: GPLv2
 Scripts:      decalar by each scripts
 
+== Needed packages
+    python-setuptools
+    python-vte
+    gettext
+
 == Install & Usage
 
 currently, please useing python setuptools to install.
