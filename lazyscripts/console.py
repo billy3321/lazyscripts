@@ -21,6 +21,7 @@ import os
 import optparse
 import platform
 import sys
+import commands
 
 from lazyscripts import command as lzscmd
 from lazyscripts import pool as lzspool
