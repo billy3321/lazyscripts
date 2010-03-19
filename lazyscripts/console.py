@@ -97,7 +97,7 @@ def gui_run():
     env.storageenv()
     distro = platform.dist()
     if not distro[0]:
-        if os.path.exists('/etc/arch-release')
+        if os.path.exists('/etc/arch-release'):
             distro[0]='arch'
         else:
             print "distribution no supported."
