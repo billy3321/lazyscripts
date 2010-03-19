@@ -88,7 +88,7 @@ def get_wminfo(distro):
     """
     return gnome|kde|lxde|xfce
     """
-    if distro in ('Debian','Ubuntu','Fedora','CentOS','Mandriva'):
+    if distro in ('debian','Ubuntu','Fedora','CentOS','Mandriva'):
         return wm_desktop_session()
     elif distro == 'SuSE':
         return suse_windowmanager()
@@ -101,7 +101,7 @@ def make_guisudocmd(distro,wm,cmd,msg=None):
     """
     return full guisudo command for running.
     """
-    if distro in ('Debian','Ubuntu','Arch','LinuxMint'):
+    if distro in ('debian','Ubuntu','Arch','LinuxMint'):
         if wm in ('gnome','xfce','lxde'):
             return 'gksu --message %s "%s"' % (msg, cmd)
         elif wm == 'kde':
