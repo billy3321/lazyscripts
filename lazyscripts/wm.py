@@ -105,7 +105,7 @@ def make_guisudocmd(distro,wm,cmd,msg=None):
         if wm in ('gnome','xfce','lxde'):
             return 'gksu --message "%s" "%s"' % (msg, cmd)
         elif wm == 'kde':
-            if path.exist('/usr/bin/kdesudo'):
+            if path.exists('/usr/bin/kdesudo'):
                 return 'kdesudo -c "%s"' % (cmd)
             else:
                 return 'kdesu -c "%s"' % (cmd)
