@@ -262,9 +262,12 @@ def get_pkgmgr(distro):
     """
     if distro in ('debian','Ubuntu'):
         return DebManager()
-    if distro in ('SUSE LINUX','SuSE'):
+    elif distro in ('SUSE LINUX','SuSE'):
         return ZypperManager()
-    if distro in ('fedora','CentOS','redhat'):
+    elif distro in ('fedora','CentOS','redhat'):
         return YumManager()
+    elif distro == 'arch':
+        return PacmanManager()
+    else:
     raise PackageSystemNotFound()
 #}}}
