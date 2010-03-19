@@ -32,9 +32,10 @@ class APTSourceListIsEmptyFile(Exception):    pass
 class PackageSystemNotFound(Exception):    pass
 
 class DebManager(object):
-    """Deb Package System Manager
+    """Deb Package System Manager(Debian, Ubuntu, LinuxMint)
     """
     #{{{attrs
+    CMDPREFIX_DETECT = 'dpkg -l'
     CMDPREFIX_UPDATE = 'apt-get update'
     CMDPREFIX_INSTALL = 'apt-get -y --force-yes install'
     CMDPREFIX_REMOVE = 'apt-get -y --force-yes --purge remove'
@@ -68,7 +69,7 @@ class DebManager(object):
 pass
 
 class ZypperManager(object):
-    """Zypper Package System Manager
+    """Zypper Package System Manager(openSUSE)
     """
     #{{{attrs
     CMDPREFIX_DETECT = 'rpm -q'
@@ -103,6 +104,155 @@ class ZypperManager(object):
             shutil.copy(src, dest)
     #}}}
 pass
+
+class YumManager(object):
+    """Yum Package System Manager(Fedora, CentOS)
+    """
+    #{{{attrs
+    CMDPREFIX_DETECT = 'rpm -q'
+    CMDPREFIX_UPDATE = 'yum check-update'
+    CMDPREFIX_INSTALL = 'yum -y install'
+    CMDPREFIX_REMOVE = 'yum -y remove'
+    #}}}
+
+    #{{{def make_cmd(self, act, argv=None):
+    def make_cmd(self, act, argv=None):
+        """make a command of package by action.
+
+        @param str act action name, ex. install, remove
+        @param str pkgs packages name.
+        @return str package system command.
+        """
+        attr = "CMDPREFIX_%s" % act.upper()
+        if not hasattr(self, attr):    return None
+        cmdprefix = getattr(self, attr)
+        if not cmdprefix:    return None
+        if not argv:    return cmdprefix
+        return "%s %s" % (cmdprefix, argv)
+    #}}}
+
+    #{{{def update_sources_by(self, pool):
+    def update_sources_by(self, pool):
+        from distutils.dep_util import newer
+        src = pool.current_pkgsourcelist
+        if not src: return False
+        dest = "/etc/yum/repo.d/%s" % os.path.basename(src)
+        if not os.path.exists(src) or newer(src, dest):
+            shutil.copy(src, dest)
+    #}}}
+pass
+
+class UrpmiManager(object):
+    """Urpmi Package System Manager(Mandriva)
+    """
+    #{{{attrs
+    CMDPREFIX_DETECT = 'rpm -q'
+    CMDPREFIX_UPDATE = 'urpmi.update --update'
+    CMDPREFIX_INSTALL = 'urpmi --auto'
+    CMDPREFIX_REMOVE = 'urpme --auto'
+    #}}}
+
+    #{{{def make_cmd(self, act, argv=None):
+    def make_cmd(self, act, argv=None):
+        """make a command of package by action.
+
+        @param str act action name, ex. install, remove
+        @param str pkgs packages name.
+        @return str package system command.
+        """
+        attr = "CMDPREFIX_%s" % act.upper()
+        if not hasattr(self, attr):    return None
+        cmdprefix = getattr(self, attr)
+        if not cmdprefix:    return None
+        if not argv:    return cmdprefix
+        return "%s %s" % (cmdprefix, argv)
+    #}}}
+
+    #{{{def update_sources_by(self, pool):
+    def update_sources_by(self, pool):
+        from distutils.dep_util import newer
+        src = pool.current_pkgsourcelist
+        if not src: return False
+        dest = "/etc/yum/repo.d/%s" % os.path.basename(src)
+        if not os.path.exists(src) or newer(src, dest):
+            shutil.copy(src, dest)
+    #}}}
+pass
+
+class PkgManager(object):
+    """Image Packaging System Manager(OpenSolaris)
+    """
+    #{{{attrs
+    CMDPREFIX_DETECT = 'pkg search -l'
+    CMDPREFIX_UPDATE = 'pkg refresh'
+    CMDPREFIX_INSTALL = 'pkg install'
+    CMDPREFIX_REMOVE = 'pkg uninstall'
+    #}}}
+
+    #{{{def make_cmd(self, act, argv=None):
+    def make_cmd(self, act, argv=None):
+        """make a command of package by action.
+
+        @param str act action name, ex. install, remove
+        @param str pkgs packages name.
+        @return str package system command.
+        """
+        attr = "CMDPREFIX_%s" % act.upper()
+        if not hasattr(self, attr):    return None
+        cmdprefix = getattr(self, attr)
+        if not cmdprefix:    return None
+        if not argv:    return cmdprefix
+        return "%s %s" % (cmdprefix, argv)
+    #}}}
+
+    #{{{def update_sources_by(self, pool):
+    def update_sources_by(self, pool):
+        from distutils.dep_util import newer
+        src = pool.current_pkgsourcelist
+        if not src: return False
+        dest = "/etc/yum/repo.d/%s" % os.path.basename(src)
+        if not os.path.exists(src) or newer(src, dest):
+            shutil.copy(src, dest)
+    #}}}
+pass
+
+class PacmanManager(object):
+    """Pacman Package System Manager(Arch)
+    """
+    #{{{attrs
+    CMDPREFIX_DETECT = 'pacman --noconfirm -Qs'
+    CMDPREFIX_UPDATE = 'pacman --noconfirm -Syy'
+    CMDPREFIX_INSTALL = 'pacman --noconfirm -S --needed'
+    CMDPREFIX_REMOVE = 'pacman --noconfirm -R'
+    #}}}
+
+    #{{{def make_cmd(self, act, argv=None):
+    def make_cmd(self, act, argv=None):
+        """make a command of package by action.
+
+        @param str act action name, ex. install, remove
+        @param str pkgs packages name.
+        @return str package system command.
+        """
+        attr = "CMDPREFIX_%s" % act.upper()
+        if not hasattr(self, attr):    return None
+        cmdprefix = getattr(self, attr)
+        if not cmdprefix:    return None
+        if not argv:    return cmdprefix
+        return "%s %s" % (cmdprefix, argv)
+    #}}}
+
+    #{{{def update_sources_by(self, pool):
+    def update_sources_by(self, pool):
+        from distutils.dep_util import newer
+        src = pool.current_pkgsourcelist
+        if not src: return False
+        dest = "/etc/yum/repo.d/%s" % os.path.basename(src)
+        if not os.path.exists(src) or newer(src, dest):
+            shutil.copy(src, dest)
+    #}}}
+pass
+
 #{{{def get_pkgmgr(distro):
 def get_pkgmgr(distro):
     """get package system manager.
@@ -114,5 +264,7 @@ def get_pkgmgr(distro):
         return DebManager()
     if distro in ('SUSE LINUX','SuSE'):
         return ZypperManager()
+    if distro in ('Fedora','CentOS','redhat')
+        return YumManager()
     raise PackageSystemNotFound()
 #}}}
