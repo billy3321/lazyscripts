@@ -80,7 +80,7 @@ def user_choice():
 #   Use kdialog
 #   wm_value = getoutput('kdialog --list --title="Choice your window manager" --radiolist "Choice your window manager" Gnome Gnome off KDE KDE off LXDE LXDE off Xfce Xfce off')
     if not wm_value:
-        raise UnknownWindowManager
+        raise UnknownWindowManager()
     else:
         return wm_value.lower()
 
@@ -95,7 +95,7 @@ def get_wminfo(distro):
     elif distro == 'Opensolaris':
         return wm_var_check()
     else:
-        raise UnknownWindowManager
+        raise UnknownWindowManager()
 
 def make_guisudocmd(distro,wm,cmd,msg=None):
     """
@@ -114,7 +114,7 @@ def make_guisudocmd(distro,wm,cmd,msg=None):
         elif wm in ('xfce','lxde'):
             return 'xdg-su -c "%s"' % (cmd)
     else:
-        raise UnknownDistribution
+        raise UnknownDistribution()
 
 
 
