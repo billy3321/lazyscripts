@@ -17,7 +17,7 @@
 # this software; if not, write to the Free Software Foundation, Inc., 59 Temple
 # Place, Suite 330, Boston, MA 02111-1307 USA
 
-from os import getenv
+from os import getenv, path
 from commands import getoutput
 
 class UnknownWindowManager(Exception): 
@@ -105,7 +105,10 @@ def make_guisudocmd(distro,wm,cmd,msg=None):
         if wm in ('gnome','xfce','lxde'):
             return 'gksu --message "%s" "%s"' % (msg, cmd)
         elif wm == 'kde':
-            return 'kdesu -c "%s"' % (cmd)
+            if path.exist('/usr/bin/kdesudo'):
+                return 'kdesudo -c "%s"' % (cmd)
+            else:
+                return 'kdesu -c "%s"' % (cmd)
     elif distro == 'SuSE':
         if wm == 'gnome':
             return 'gnomesu --command="%s"' % (cmd)
