@@ -101,7 +101,7 @@ def make_guisudocmd(distro,wm,cmd,msg=None):
     """
     return full guisudo command for running.
     """
-    if distro in ('debian','Ubuntu','Arch','LinuxMint'):
+    if distro in ('debian','Ubuntu','Arch','LinuxMint','fedora','redhat','CentOS'):
         if wm in ('gnome','xfce','lxde'):
             return 'gksu --message %s "%s"' % (msg, cmd)
         elif wm == 'kde':
@@ -116,7 +116,7 @@ def make_guisudocmd(distro,wm,cmd,msg=None):
             return 'kdesu -c "%s"' % (cmd)
         elif wm in ('xfce','lxde'):
             return 'xdg-su -c "%s"' % (cmd)
-    elif distro in ('fedora','CentOS','redhat','Mandriva'):
+    elif distro in ('Mandriva'):
         return 'gksu --message %s "%s"' % (msg, cmd)
     else:
         raise UnknownDistribution()
