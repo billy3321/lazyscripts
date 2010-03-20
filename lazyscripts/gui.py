@@ -393,8 +393,8 @@ class MainWin:
                         '朱昱任 (Yuren Ju) <yurenju@gmail.com>',
                         '林哲瑋 (billy3321,雨蒼) <billy3321@gmail.com>',
                         '陳信屹 (Hychen) <ossug.hychen@gmail.com>',
-                        '王綱民(Aminzai) <lagunawang@gmail.com>',
-                        'Jeremy Chan (mrmoneyc) <moneyc.net@gmail.com>'])
+                        '王綱民 (Aminzai) <lagunawang@gmail.com>',
+                        '張君平 (mrmoneyc) <moneyc.net@gmail.com>'])
         dlg.set_copyright('Copyright (C) 2010 by Lazyscripts project')
         dlg.set_license('GNU General Public License V2')
         dlg.set_comments(_('Linux Lazy pack'))
