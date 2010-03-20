@@ -20,6 +20,7 @@ import commands
 import os
 import platform
 import locale
+import sys
 
 from lazyscripts import config
 from lazyscripts import pool
@@ -55,6 +56,46 @@ def get_local():
       if local:
           local = local[0]
     return local
+#}}}
+
+#{{{get_distro_name()
+def get_distro_name()
+    name = platform.dist()[0]
+    if not name:
+        if os.path.exists('/etc/arch-release'):
+            name = 'arch'
+        elif os.path.exists('/usr/bin/pkg') and commands.getoutput('cat /etc/release | grep "OpenSolaris"'):
+            name = 'opensolaris'
+        else:
+            print "Lazyscripts not support your Linux distribution."
+            sys.exit()
+    elif name == 'redhat':
+        if commands.getoutput('cat /etc/red-hatrelease | grep "Red Hat"'):
+            name = 'redhat'
+        elif commands.getoutput('cat /etc/redhat-release | grep "CentOS"'):
+            name = 'centos'
+
+    return name
+#}}}
+
+#{{{get_distro_version(name)
+def get_distro_version(name):
+    version = platform.dist()[1]
+    if not version:
+        if name == 'opensolaris':
+            version = commands.getoutput('cat /etc/release | grep "OpenSolaris" | cut -d " " -f 27')
+    return version
+#}}}
+    
+#{{{get_distro_codename(name)
+def get_distro_codename(name):
+    codename = platform.dist()[2]
+    return codename
+#}}}
+
+#{{{get_architecture()
+def get_architecture()
+    return platform.architecture()[1]
 #}}}
 
 #{{{get_laptop_info():
