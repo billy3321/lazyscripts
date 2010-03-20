@@ -55,6 +55,7 @@ def wm_var_check():
     elif getoutput('pstree | grep -q xfwm4'):
         return 'xfce'
     else:
+        from lazyscripts.gui import user_choice
         return user_choice()
 
 def suse_windowmanager():
@@ -72,17 +73,17 @@ def suse_windowmanager():
     else:
         return wm_desktop_session()
 
-def user_choice():
-    """
-    Use zenity and radio dialog to make user choice.
-    """
-    wm_value = getoutput('zenity --list --title="Choice your window manager" --radiolist --column "" --column "Linux Distribution Version" FALSE "Gnome" FALSE "KDE" False "LXDE" False "Xfce"')
-#   Use kdialog
-#   wm_value = getoutput('kdialog --list --title="Choice your window manager" --radiolist "Choice your window manager" Gnome Gnome off KDE KDE off LXDE LXDE off Xfce Xfce off')
-    if not wm_value:
-        raise UnknownWindowManager()
-    else:
-        return wm_value.lower()
+#def user_choice():
+#    """
+#    Use zenity and radio dialog to make user choice.
+#    """
+#    wm_value = getoutput('zenity --list --title="Choice your window manager" --radiolist --column "" --column "Linux Distribution Version" FALSE "Gnome" FALSE "KDE" False "LXDE" False "Xfce"')
+##   Use kdialog
+##   wm_value = getoutput('kdialog --list --title="Choice your window manager" --radiolist "Choice your window manager" Gnome Gnome off KDE KDE off LXDE LXDE off Xfce Xfce off')
+#    if not wm_value:
+#        raise UnknownWindowManager()
+#    else:
+#        return wm_value.lower()
 
 def get_wminfo(distro):
     """
