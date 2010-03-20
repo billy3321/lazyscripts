@@ -136,7 +136,7 @@ class YumManager(object):
         from distutils.dep_util import newer
         src = pool.current_pkgsourcelist
         if not src: return False
-        dest = "/etc/yum/repo.d/%s" % os.path.basename(src)
+        dest = "/etc/yum.repo.d/%s" % os.path.basename(src)
         if not os.path.exists(src) or newer(src, dest):
             shutil.copy(src, dest)
     #}}}
@@ -173,7 +173,7 @@ class UrpmiManager(object):
         from distutils.dep_util import newer
         src = pool.current_pkgsourcelist
         if not src: return False
-        dest = "/etc/yum/repo.d/%s" % os.path.basename(src)
+        dest = "/etc/urpmi/%s" % os.path.basename(src)
         if not os.path.exists(src) or newer(src, dest):
             shutil.copy(src, dest)
     #}}}
@@ -210,7 +210,7 @@ class PkgManager(object):
         from distutils.dep_util import newer
         src = pool.current_pkgsourcelist
         if not src: return False
-        dest = "/etc/yum/repo.d/%s" % os.path.basename(src)
+        dest = "/var/pkg/catalog/%s" % os.path.basename(src)
         if not os.path.exists(src) or newer(src, dest):
             shutil.copy(src, dest)
     #}}}
@@ -247,7 +247,7 @@ class PacmanManager(object):
         from distutils.dep_util import newer
         src = pool.current_pkgsourcelist
         if not src: return False
-        dest = "/etc/yum/repo.d/%s" % os.path.basename(src)
+        dest = "/etc/pacman.d/%s" % os.path.basename(src)
         if not os.path.exists(src) or newer(src, dest):
             shutil.copy(src, dest)
     #}}}
@@ -266,6 +266,8 @@ def get_pkgmgr(distro):
         return ZypperManager()
     elif distro in ('fedora','CentOS','redhat'):
         return YumManager()
+    elif distro in ('mandrake','mandriva'):
+        return UrpmiManager()
     elif distro == 'arch':
         return PacmanManager()
     elif distro == 'opensolaris':
