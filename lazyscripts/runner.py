@@ -124,8 +124,9 @@ class SelectionList(object):
     #{{{def save(self):
     def save(self):
         self._convert()
-        with open(self.path, 'w') as fp:
-            self.parser.write(fp)
+        #with open(self.path, 'w') as fp:
+        #    self.parser.write(fp)
+        self.parser.write(open(self.path, 'w'))
     #}}}
 
     #{{{def _convert(self):
@@ -189,8 +190,9 @@ class ScriptsRunner(object):
         self.prepare_scriptcmds()
 
         # create a taskscript.
-        with TaskScript(self.cmd_queue) as t:
-            t.save()
+        #with TaskScript(self.cmd_queue) as t:
+        #    t.save()
+        TaskScript(self.cmd_queue).save()
 
         # create a recommand.ini.
         self.save_selection()

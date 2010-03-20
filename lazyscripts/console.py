@@ -53,8 +53,9 @@ class LzsAdmin(cmd.Cmd):
                     contents.append("%s/%s/%s - %s " % (poolname, cat, script.id, script.name))
 
         index_path = os.path.join(env.resource_name('caches'), 'SCRIPTS_INDEX')
-        with open(index_path, 'w') as f:
-            f.write("\n".join(contents+['']))
+        #with open(index_path, 'w') as f:
+        #    f.write("\n".join(contents+['']))
+        open(index_path, 'w').write("\n".join(contents+['']))
     #}}}
 
     def do_search(self, lines):

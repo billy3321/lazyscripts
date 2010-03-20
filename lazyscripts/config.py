@@ -143,7 +143,8 @@ class Configuration(object):
          if not self._is_dirty:
              return False
          os.rename(self.filename, self.filename+'.bak')
-         with open(self.filename,'wb') as fp:
-             self.parser.write(fp)
+         #with open(self.filename,'wb') as fp:
+         #    self.parser.write(fp)
+         self.parser.write(open(self.filename,'wb'))
     #}}}
 pass
