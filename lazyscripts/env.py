@@ -44,7 +44,10 @@ def get_realhome():
 
 #{{{def get_local():
 def get_local():
-    lang = os.getenv('LANG')
+    if os.getenv('LANGUAGE'):
+        lang = os.getenv('LANGUAGE')
+    else:
+        lang = os.getenv('LANG')
     try:
       local = lang.split('.')[0]
     except IndexError:

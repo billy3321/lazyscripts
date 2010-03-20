@@ -139,7 +139,7 @@ def gui_run():
       os.system("%s | %s" % (cmd, ' '.join(progress_dialog_cmd)))
 
     if options.selection_list:
-        cmd = 'lzs gui run %s' % (options.selection_list)
+        cmd = 'lzs gui run %s' % options.selection_list
         guisudocmd = wm.make_guisudocmd(distro,win_mgr,cmd,message_sudo)
 #        cmd = "%s lzs gui run %s" % (prefix, options.selection_list)
     else:
