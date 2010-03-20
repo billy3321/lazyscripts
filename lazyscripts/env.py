@@ -59,7 +59,7 @@ def get_local():
 #}}}
 
 #{{{get_distro_name()
-def get_distro_name()
+def get_distro_name():
     name = platform.dist()[0]
     if not name:
         if os.path.exists('/etc/arch-release'):
@@ -94,7 +94,7 @@ def get_distro_codename(name):
 #}}}
 
 #{{{get_architecture()
-def get_architecture()
+def get_architecture():
     return platform.architecture()[1]
 #}}}
 
