@@ -146,12 +146,7 @@ class ScriptsRunner(object):
         self.ui = ui
         self.cmd_queue = []
         self._scripts = []
-        self.distro = platform.dist()[0]
-        if not self.distro:
-            if os.path.exists('/etc/arch-release'):
-                self.distro = 'arch'
-            elif os.path.exists('/usr/bin/pkg') and commands.getoutput('cat /etc/release | grep "OpenSolaris"'):
-                self.distro = 'opensolaris'
+        self.distro = env.get_distro_name()
         
         self.pkgmgr = env.Register().pkgmgr
     #}}}

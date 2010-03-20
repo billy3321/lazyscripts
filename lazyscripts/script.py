@@ -24,6 +24,7 @@ import os
 import platform
 
 from lazyscripts import utils
+from lazyscripts import env
 
 class DirectoryIsScriptDirError(Exception):
     "Raise exception when target direcoty is script dir already."
@@ -87,14 +88,14 @@ class Script(object):
     Every script is a directory, here is a sample and file disription.
 
     script_dir/            - directory name is script id.
-        |- debian/         - the settings of spefic distrobution, here
+        |- debian/         - the settings of spefic distribution, here
         |   |                is Debian, you can add another directory as
-        |   |                new distrobution.
+        |   |                new distribution.
         |   |- source.txt  - unofficail source definitions.
         |   |- install.txt - install these packages before excuting
-        |   |                       script if distrobution is Debian.
+        |   |                       script if distribution is Debian.
         |   |- remove.txt  - remove these packages before excuting
-        |                           script if distrobution is Debian.
+        |                           script if distribution is Debian.
         |
         |- desc.ini        - defines information, attributes of script.
         |- options.ini     - the options be supported by this script.
@@ -192,10 +193,10 @@ class Script(object):
     #{{{def get_pkginfo(self):
     def get_pkginfo(self):
         def _read(query):
-            distro = platform.dist()
-            if not distro:    return []
+            distro = env.get_distro_name()
+            if not distro:    return ''
 
-            query = utils.ext_ospath_join(self.path, distro[0].lower(), query)
+            query = utils.ext_ospath_join(self.path, distro.lower(), query)
             if not os.path.isfile(query):   return []
             return [ e for e in open(query, 'r').read().split('\n') if not e.startswith('#') and e]
 

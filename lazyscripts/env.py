@@ -146,12 +146,7 @@ class Register:
 
         workspace = os.path.join(get_realhome(),'.lazyscripts')
 
-        distro = platform.dist()[0]
-        if not distro:
-            if os.path.exists('/etc/arch-release'):
-                distro = 'arch'
-            elif os.path.exists('/usr/bin/pkg') and commands.getoutput('cat /etc/release | grep "OpenSolaris"'):
-                distro = 'opensolaris'
+        distro = get_distro_name()
 
         pkgmgr = lzspkgmgr.get_pkgmgr(distro)
 

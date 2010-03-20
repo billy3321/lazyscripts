@@ -96,15 +96,7 @@ def gui_run():
     env.register_workspace()
     env.prepare_runtimeenv()
     env.storageenv()
-    distro = platform.dist()[0]
-    if not distro:
-        if os.path.exists('/etc/arch-release'):
-            distro = 'arch'
-        elif os.path.exists('/usr/bin/pkg') and commands.getoutput('cat /etc/release | grep "OpenSolaris"'):
-            distro = 'opensolaris'
-        else:
-            print "distribution no supported."
-            sys.exit()
+    distro = env.get_distro_name()
     win_mgr = wm.get_wminfo(distro)
 
     # argument process.
