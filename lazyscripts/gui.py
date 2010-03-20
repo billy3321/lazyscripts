@@ -14,7 +14,7 @@ from lazyscripts import __VERSION__, __WEBURL__
 from lazyscripts import env
 from lazyscripts import pool as lzspool
 from lazyscripts import runner as lzsrunner
-
+from commands import getoutput
 from os import path as os_path
 
 try:
