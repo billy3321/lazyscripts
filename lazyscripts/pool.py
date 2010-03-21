@@ -109,7 +109,7 @@ class ScriptsPool(object):
         self.path = path
         self.recommands_list = recommands_list
         from lazyscripts.env import get_distro_name
-        self.dist = get_disto_name()
+        self.dist = get_distro_name()
         self.load()
     #}}}
 
