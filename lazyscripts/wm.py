@@ -98,7 +98,7 @@ def get_wminfo(distro):
     else:
         raise UnknownWindowManager()
 
-def make_guisudocmd(distro,wm,cmd,msg=None):
+def make_guisudocmd(distro,wm,cmd,msg='""'):
     """
     return full guisudo command for running.
     """
