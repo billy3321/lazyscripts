@@ -94,9 +94,10 @@ class ScriptsPool(object):
     #{{{def current_pkgsourcelist(self):
     @property
     def current_pkgsourcelist(self):
+        from lazyscripts.env import get_distro_name, get_distro_version
         filename = "lzs_%s_%s_%s.list" % (platform.machine(),
-                                          self.dist[0].lower(),
-                                          self.dist[1])
+                                          get_distro_name().lower(),
+                                          get_distro_version())
         filename = utils.ext_ospath_join(self.path, 'sources.d', filename)
         if not os.path.exists(filename):    return None
         return filename
@@ -106,7 +107,8 @@ class ScriptsPool(object):
     def __init__(self, path, recommands_list=None):
         self.path = path
         self.recommands_list = recommands_list
-        self.dist = platform.dist()
+        from lazyscripts.env import get_distro_name
+        self.dist = get_disto_name()
         self.load()
     #}}}
 
@@ -118,7 +120,7 @@ class ScriptsPool(object):
                                e.istitle()]
         self._scripts = {}
         self.script_filters = {}
-        self.script_filters[platform.dist()[0]] = True
+        self.script_filters[self.dist] = True
         self.parser = ConfigParser.ConfigParser()
         self.parser.read(os.path.join(self.path, 'desc.ini'))
         self.parser.read(os.path.join(self.path, 'recommands.ini'))
