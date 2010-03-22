@@ -10,6 +10,7 @@ Scripts:      decalar by each scripts
     gettext
     zenity
     python-dev or python-devel
+    python-distutils-extra
 
 == Install & Usage
 
