@@ -51,6 +51,8 @@ def get_local():
         lang = os.getenv('LANG')
     try:
       local = lang.split('.')[0]
+      if len(local) > 5:
+          local = local[0:5]
     except IndexError:
       local = locale.getlocal(locale.LC_ALL)
       if local:
