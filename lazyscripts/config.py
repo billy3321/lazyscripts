@@ -145,6 +145,8 @@ class Configuration(object):
          os.rename(self.filename, self.filename+'.bak')
          #with open(self.filename,'wb') as fp:
          #    self.parser.write(fp)
-         self.parser.write(open(self.filename,'wb'))
+         fp = open(self.filename,'wb')
+         self.parser.write(fp)
+         fp.close()
     #}}}
 pass

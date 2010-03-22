@@ -130,6 +130,7 @@ def get_all_users():
             if uid < 1000 or uid > 65533:
                 continue
             yield userinfos
+        f.close()
 #}}}
 
 class Register:

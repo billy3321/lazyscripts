@@ -30,7 +30,9 @@ def create_executablefile(path, lines):
     """
     #with open(path, 'w') as f:
     #    f.write("\n".join(lines+['']))
-    open(path, 'w').write("\n".join(lines+['']))
+    f = open(path, 'w')
+    f.write("\n".join(lines+['']))
+    f.close()
     os.chmod(path, 0755)
 #}}}
 
