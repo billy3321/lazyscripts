@@ -36,7 +36,7 @@ def wm_desktop_session():
     wm_value = getenv('DESKTOP_SESSION') 
     if wm_value in ('gnome','kde','lxde','LXDE'):
         return wm_value.lower()
-    elif wm_value == 'xfce.desktop':
+    elif wm_value in ('xfce.desktop','xfce'):
         return 'xfce'
     else:
         return wm_var_check()
@@ -52,7 +52,7 @@ def wm_var_check():
         return 'kde'
     elif getenv('_LXSESSION_PID'):
         return 'lxde'
-    elif getoutput('pstree | grep -q xfwm4'):
+    elif getoutput('pstree | grep xfwm4'):
         return 'xfce'
     else:
         from lazyscripts.gui import user_choice
