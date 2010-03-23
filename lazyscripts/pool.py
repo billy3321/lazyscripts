@@ -98,7 +98,7 @@ class ScriptsPool(object):
         from lazyscripts.env import get_distro_name, get_distro_version
         filename = "lzs_%s_%s_%s.list" % (platform.machine(),
                                           get_distro_name().lower(),
-                                          get_distro_version())
+                                          get_distro_version(get_distro_name()))
         filename = utils.ext_ospath_join(self.path, 'sources.d', filename)
         if not os.path.exists(filename):    return None
         return filename
