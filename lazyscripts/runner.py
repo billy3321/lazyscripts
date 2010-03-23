@@ -72,11 +72,13 @@ class TaskScript(file):
 
     #{{{attrs
     header = ["#!/bin/bash",
+              "set -o xtrace",
               "export LIB_ROOT=/tmp/lzs_root/shlib",
               "cd /tmp/lzs_root",
               "source %s" % env.DEFAULT_STORAGED_ENV_FILE]
 
     footer = ['chown -R $REAL_USER:$REAL_HOME &> /dev/null',
+              'rm -rf /tmp/lzs_root/',
               'echo DONE!']
     #}}}
 
