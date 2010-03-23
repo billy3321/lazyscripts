@@ -78,7 +78,6 @@ class TaskScript(file):
               "source %s" % env.DEFAULT_STORAGED_ENV_FILE]
 
     footer = ['chown -R $REAL_USER:$REAL_HOME &> /dev/null',
-              'rm -rf /tmp/lzs_root/',
               'echo DONE!']
     #}}}
 
