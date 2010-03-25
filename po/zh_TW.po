@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: lazyscripts 0.2rc3\n"
+"Project-Id-Version: Lazyscripts 0.2rc3\n"
 "POT-Creation-Date: 2010-03-13 21:59+CST\n"
 "PO-Revision-Date: 2010-03-13 21:59+CST\n"
 "Last-Translator: Hsin-Yi Chen <ossug.hychen@gmail.com>\n"
@@ -17,19 +17,19 @@ msgstr ""
 "X-Poedit-Country: TAIWAN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: lazyscripts/gui.py:128
+#: lazyscripts/gui.py:142
 msgid "Items"
 msgstr "項目"
 
-#: lazyscripts/gui.py:168
-msgid "<b><big>Lazyscripts - Linux lazy pack"
+#: lazyscripts/gui.py:182
+msgid "<b><big>Lazyscripts - Linux Lazy Pack"
 msgstr "<b><big>Lazyscripts - Linux 懶人包"
 
-#: lazyscripts/gui.py:169
+#: lazyscripts/gui.py:183
 msgid ""
-", Linux end user's good friend</big></b>\n"
-"\n"
-"\n"
+", Linux end-user's good friend.</big></b>\n"
+"Please click on each categories and choice the items you want to apply\n"
+"from the list at left side.\n"
 msgstr ""
 "，Linux 新手的好朋友</big></b>\n"
 "幫你解決安裝後煩人的小設定，安裝一些好用軟體，\n"
@@ -37,47 +37,47 @@ msgstr ""
 "\n"
 "請從左邊的清單中，點選各個分類，選擇你要套用的項目。\n"
 
-#: lazyscripts/gui.py:170
+#: lazyscripts/gui.py:184
 msgid ""
-"Copyright (C) 2010, Design and developed by Lazyscripts Team\n"
+"Copyright (C) 2010, Design and Developed by Lazyscripts Team\n"
 "\n"
 msgstr ""
 "Copyright (C) 2010, 由 Lazyscripts 開發團隊共同設計、開發\n"
 "\n"
 
-#: lazyscripts/gui.py:171
+#: lazyscripts/gui.py:185
 msgid "Project Lazyscripts - "
 msgstr "Lazyscripts 專案"
 
-#: lazyscripts/gui.py:186
+#: lazyscripts/gui.py:200
 msgid ""
 "Execute action: \n"
-msgstr "開始執行\n"
+msgstr "開始執行: \n"
 
 #: lazyscripts/gui.py:299
 msgid "Lazyscripts - Simple is More."
-msgstr ""
+msgstr "Lazyscripts - 簡單做更多"
 
-#: lazyscripts/gui.py:314
+#: lazyscripts/gui.py:328
 msgid "Welcome"
 msgstr "歡迎使用"
 
-#: lazyscripts/gui.py:316
+#: lazyscripts/gui.py:330
 msgid "Result"
 msgstr "執行結果"
 
-#: lazyscripts/gui.py:355
-msgid "Do you want to quit lazyscripts?"
+#: lazyscripts/gui.py:369
+msgid "Do you want to quit Lazyscripts?"
 msgstr "你是否要離開 Lazyscripts 懶人包？"
 
-#: lazyscripts/gui.py:382
-msgid "Linux Lazy pack"
+#: lazyscripts/gui.py:402
+msgid "Linux Lazy Pack"
 msgstr "Linux 懶人包"
 
 #: lazyscripts/gui.py:412
 msgid ""
 "\n"
-"\033[1;36mLazyscripts - linux lazy pack run finish!\033[1;32m   have fun for linux!\033[m\n"
+"\033[1;36mLazyscripts - Linux Lazy Pack run finish!\033[1;32m   Have fun for Linux!\033[m\n"
 msgstr ""
 "\n"
 "[1;36mLazyscripts - Linux 懶人包執行完成！[1;32m   祝你使用 Linux 愉快！[m\n"

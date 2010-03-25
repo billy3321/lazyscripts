@@ -179,9 +179,9 @@ class WelcomePage:
         view=gtk.Viewport()
         label=gtk.Label()
         label.set_markup(
-            _('<b><big>Lazyscripts - Linux lazy pack') +
-            _(', Linux end user\'s good friend</big></b>\n\n\n') +
-            _('Copyright (C) 2010, Design and developed by Lazyscripts Team\n\n') +
+            _('<b><big>Lazyscripts - Linux Lazy Pack') +
+            _(', Linux end-user\'s good friend.</big></b>\nPlease click on each categories and choice the items you want to apply\nfrom the list at left side.\n') +
+            _('Copyright (C) 2010, Design and Developed by Lazyscripts Team\n\n') +
             _('Project Lazyscripts - ') +
             '<span color="blue">%s</span>' % __WEBURL__)
 
@@ -366,7 +366,7 @@ class MainWin:
 
     #{{{def confirm_close(self):
     def confirm_close(self):
-        if self.complete or query_yes_no(_('Do you want to quit lazyscripts?'), self.win):
+        if self.complete or query_yes_no(_('Do you want to quit Lazyscripts?'), self.win):
             rmtree('/tmp/lzs_root/')
             gtk.main_quit()
             return True
@@ -399,7 +399,7 @@ class MainWin:
                         '張君平 (mrmoneyc) <moneyc.net@gmail.com>'])
         dlg.set_copyright('Copyright (C) 2010 by Lazyscripts project')
         dlg.set_license('GNU General Public License V2')
-        dlg.set_comments(_('Linux Lazy pack'))
+        dlg.set_comments(_('Linux Lazy Pack'))
         dlg.run()
         dlg.destroy()
     #}}}
@@ -429,7 +429,7 @@ class MainWin:
 
     #{{{def on_complete(self, data):
     def on_complete(self, data):
-        self.final_page.term.feed(_('\n\x1b[1;36mLazyscripts - linux lazy pack run finish!\x1b[1;32m   have fun for linux!\x1b[m\n'))
+        self.final_page.term.feed(_('\n\x1b[1;36mLazyscripts - Linux Lazy Pack run finish!\x1b[1;32m   Have fun for Linux!\x1b[m\n'))
         rmtree('/tmp/lzs_root/')
 
         self.cancel_btn.set_label(gtk.STOCK_CLOSE)
@@ -456,7 +456,7 @@ pass
 #{{{def startgui(recommands_list=None):
 def startgui(recommands_list=None):
     """
-    launchs the application.
+    Launch the application.
     """
     MainWin(recommands_list)
     gtk.main()
