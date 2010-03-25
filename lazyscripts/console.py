@@ -128,7 +128,7 @@ def gui_run():
       progress_dialog_cmd = [
           "zenity --progress --title='Lazyscripts'",
           "--text='Downloading scripts...'",
-          "--percentage=80" ,
+          "--pulsate" ,
           "--auto-close --auto-kill",
           "--width=400"]
       os.system("%s | %s" % (cmd, ' '.join(progress_dialog_cmd)))
