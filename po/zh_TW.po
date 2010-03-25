@@ -27,7 +27,7 @@ msgstr "<b><big>Lazyscripts - Linux 懶人包"
 
 #: lazyscripts/gui.py:183
 msgid ""
-", Linux end-user's good friend.</big></b>\n"
+", Linux end-user's good friend.</big></b>\n\n"
 "Please click on each categories and choice the items you want to apply\n"
 "from the list at left side.\n"
 msgstr ""
