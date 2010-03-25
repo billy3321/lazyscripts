@@ -45,18 +45,16 @@ def get_realhome():
 
 #{{{def get_local():
 def get_local():
-    if os.getenv('LANGUAGE'):
-        lang = os.getenv('LANGUAGE')
-    else:
+    lang = os.getenv('LANGUAGE')
+    if not lang:
         lang = os.getenv('LANG')
     try:
-      local = lang.split('.')[0]
-      if len(local) > 5:
-          local = local[0:5]
-    except IndexError:
-      local = locale.getlocal(locale.LC_ALL)
-      if local:
-          local = local[0]
+        # zh_TW.UTF-8 or zh_TW:zh.UTF-8
+        local = lang[0:5]
+    except TypeError:
+        local = locale.getlocal(locale.LC_ALL)
+        if local:
+            local = local[0]
     return local
 #}}}
 
