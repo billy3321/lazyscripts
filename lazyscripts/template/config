@@ -6,3 +6,8 @@ pool = debianlize
 [pool "debianlize"]
 upstream = git://github.com/hychen/lzspool.git
 rev = master
+
+[pool "suselize"]
+upstream = http://github.com/mrmoneyc/suselize.git
+rev = master
+
