@@ -139,7 +139,7 @@ class ToolPage:
         col.set_attributes (render, active=0)
         view.append_column (col)
 
-        col = gtk.TreeViewColumn (_("items"))
+        col = gtk.TreeViewColumn (_("Items"))
         render=gtk.CellRendererText ()
         col.pack_start (render)
         col.set_attributes (render, markup=1)
@@ -197,7 +197,7 @@ class FinalPage:
         hbox=gtk.HBox(False, 0)
         term=vte.Terminal()
         term.set_scrollback_lines(65535)    # Will this value be too big?
-        term.feed(_('execute action: \n'))
+        term.feed(_('Execute action: \n'))
         term.set_cursor_blinks(True)
         self.term=term
         scroll=gtk.VScrollbar( term.get_adjustment() )
@@ -366,7 +366,7 @@ class MainWin:
 
     #{{{def confirm_close(self):
     def confirm_close(self):
-        if self.complete or query_yes_no(_('do you want to quit lazyscripts?'), self.win):
+        if self.complete or query_yes_no(_('Do you want to quit lazyscripts?'), self.win):
             rmtree('/tmp/lzs_root/')
             gtk.main_quit()
             return True
