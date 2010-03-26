@@ -221,13 +221,13 @@ class PoolCmd(Command):
 
     #{{{def sync(self):
     def sync(self):
+        print 10
         (opts, args) = self._getopts([optparse.make_option('-r', '--rev', dest='rev')])
         if len(args) <= 1:
             poolname = self.conf.get_default('pool')
         else:
             poolname = args[1]
         print "Syncing pool %s" % poolname
-        print 10
         poolobj = self._load_pool(poolname)
         print 90
         try:
