@@ -227,7 +227,9 @@ class PoolCmd(Command):
         else:
             poolname = args[1]
         print "Syncing pool %s" % poolname
+        print 10
         poolobj = self._load_pool(poolname)
+        print 90
         try:
             poolobj.gitapi.pull('upstream')
             if opts.rev:
