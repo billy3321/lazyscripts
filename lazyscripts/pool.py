@@ -295,17 +295,17 @@ class GitScriptsPool(ScriptsPool):
         pool = cls(dirpath)
         pool.gitapi.init()
 
-	# checkout local branch by each remote branch.
+        # checkout local branch by each remote branch.
         for k in kwds:
             print progress ; progress += 10
             if k in ('upstream', 'origin') and kwds.has_key(k):
                 pool.gitapi.remote('add', k, kwds[k])
                 print progress ; progress += 10
                 pool.gitapi.fetch(k)
-		# get remote branch name.
-		ret=pool.gitapi.branch('-r')
-		branchs = [ e.replace('upstream/','').strip() for e in ret.split('\n')]
-		for branch in branchs:
+      	# get remote branch name.
+       	ret=pool.gitapi.branch('-r')
+    	branchs = [ e.replace('upstream/','').strip() for e in ret.split('\n')]
+        for branch in branchs:
             print progress ; progress += 10
             pool.gitapi.checkout('upstream/%s' % branch, b=branch)
         print progress ; progress += 10
