@@ -34,7 +34,7 @@ def wm_desktop_session():
     Check the DESKTOP_SESSION variable to distinguish window manager.
     """
     wm_value = getenv('DESKTOP_SESSION') 
-    if wm_value in ('gnome','kde','lxde','LXDE'):
+    if wm_value in ('gnome','kde','lxde','LXDE','wmaker'):
         return wm_value.lower()
     elif wm_value in ('xfce.desktop','xfce'):
         return 'xfce'
@@ -54,6 +54,8 @@ def wm_var_check():
         return 'lxde'
     elif getoutput('pstree | grep xfwm4'):
         return 'xfce'
+    elif getoutput('pstree | grep WindowMaker'):
+        return 'wmaker'
     else:
         from lazyscripts.gui import user_choice
         return user_choice()
@@ -103,7 +105,7 @@ def make_guisudocmd(distro,wm,cmd,msg='""'):
     return full guisudo command for running.
     """
     if distro in ('debian','Ubuntu','arch','LinuxMint','fedora'):
-        if wm in ('gnome','xfce','lxde'):
+        if wm in ('gnome','xfce','lxde','wmaker'):
             return 'gksu --message %s "%s"' % (msg, cmd)
         elif wm == 'kde':
             if path.exists('/usr/bin/kdesudo'):
