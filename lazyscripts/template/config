@@ -3,11 +3,19 @@
 [defaults]
 pool = debianlize
 
-[pool "debianlize"]
+[pool "hychen-debianlize"]
 upstream = git://github.com/hychen/lzspool.git
 rev = master
 
+[pool "debianlize"]
+upstream = git://github.com/aminzai/lzs_pool_debianlize.git
+rev = master
+
 [pool "suselize"]
-upstream = http://github.com/mrmoneyc/suselize.git
+upstream = http://github.com/mrmoneyc/lzs_pool_suselize.git
+rev = master
+
+[pool "redhatlize"]
+upstream = git://github.com/chiehwen/lzs_pool_redhatlize.git
 rev = master
 
