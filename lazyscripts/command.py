@@ -242,7 +242,7 @@ class PoolCmd(Command):
             self.conf.save()
         print "Syncing pool %s" % poolname
         poolobj = self._load_pool(poolname)
-        print 90
+        print 100
         try:
             poolobj.gitapi.pull('upstream')
             if opts.rev:
