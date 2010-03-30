@@ -226,20 +226,20 @@ class PoolCmd(Command):
         distro = get_distro_name().lower()
         distro_ver = get_distro_version(distro)
         if len(args) <= 1:
-            pools = conf.get_support('pool')
-            if len(pools) = 1:
+            pools = self.conf.get_support(distro, distro_ver)
+            if len(pools) == 1:
                 poolname = pools[0]
             elif len(pools) > 1:
                 from lazyscripts.gui import select_pool
                 poolname = select_pool(pools)
             else:
-                rase Exception("NoSupportPool")
+                raise Exception("NoSupportPool")
              
         else:
             poolname = args[1]
-        if not conf.get_defaults = poolname:
-            conf.set_defaults(pool=poolname)
-            conf.save()
+        if not self.conf.get_default('pool') == poolname:
+            self.conf.set_default(pool=poolname)
+            self.conf.save()
         print "Syncing pool %s" % poolname
         poolobj = self._load_pool(poolname)
         print 90

@@ -208,7 +208,7 @@ def resource(query):
                             conf.get_default('pool'))
         return pool.GitScriptsPool(poolpath)
     else:
-    raise Exception("QuerryError")
+        raise Exception("QuerryError")
 #}}}
 
 #{{{def prepare_runtimeenv():

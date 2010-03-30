@@ -88,7 +88,7 @@ class Configuration(object):
         select_pool = []
         for section in self.parser.sections():
             if self.parser.has_option(section, distro) and distro_ver in self.parser.get(section, distro).split(','):
-                select_pool.append(section)
+                select_pool.append(section[6:-1])
         return select_pool
     #}}}
 
