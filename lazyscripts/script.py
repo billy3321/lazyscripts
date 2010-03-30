@@ -64,7 +64,7 @@ def create_scriptdesc(path, name, authors):
 #{{{def create_scriptpkgdesc(dir):
 def create_scriptpkgdesc(dir):
     from lazyscripts.env import get_distro_name
-    dir = os.path.join(dir, get_distro_name().lower()+'_def')
+    dir = os.path.join(dir, get_distro_name()+'_def')
     os.mkdir(dir)
     for e in ('install','remove'):
         filepath = os.path.join(dir, '%s.txt' % e)
@@ -203,7 +203,7 @@ class Script(object):
             distro = get_distro_name()
             if not distro:    return ''
 
-            query = utils.ext_ospath_join(self.path, distro.lower(), query)
+            query = utils.ext_ospath_join(self.path, distro, query)
             if not os.path.isfile(query):   return []
             return [ e for e in open(query, 'r').read().split('\n') if not e.startswith('#') and e]
 

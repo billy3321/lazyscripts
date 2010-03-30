@@ -152,7 +152,7 @@ def get_pkgmgr(distro):
     @param str distro distrobution name.
     @return PackageManager
     """
-    distro = distro.lower()
+    distro = distro
     if distro in ('debian','ubuntu','linuxmint'):
         return DebManager()
     elif distro in ('suse linux','suse'):

@@ -75,7 +75,7 @@ def get_distro_name():
         elif commands.getoutput('cat /etc/redhat-release | grep "CentOS"'):
             name = 'centos'
 
-    return name
+    return name.lower()
 #}}}
 
 #{{{get_distro_version(name)
