@@ -17,19 +17,15 @@ msgstr ""
 "X-Poedit-Country: TAIWAN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-<<<<<<< HEAD:po/zh_TW.po
-#: lazyscripts/gui.py:142
-=======
-#: lazyscripts/gui.py:128
->>>>>>> 02cfc2183345ffce9ed5dfbb3b2476b48d256197:po/zh_TW.po
+#: lazyscripts/gui.py:158
 msgid "Items"
 msgstr "項目"
 
-#: lazyscripts/gui.py:182
+#: lazyscripts/gui.py:198
 msgid "<b><big>Lazyscripts - Linux Lazy Pack"
 msgstr "<b><big>Lazyscripts - Linux 懶人包"
 
-#: lazyscripts/gui.py:183
+#: lazyscripts/gui.py:199
 msgid ""
 ", Linux end-user's good friend.</big></b>\n\n"
 "Please click on each categories and choice the items you want to apply\n"
@@ -41,7 +37,7 @@ msgstr ""
 "\n"
 "請從左邊的清單中，點選各個分類，選擇你要套用的項目。\n\n"
 
-#: lazyscripts/gui.py:184
+#: lazyscripts/gui.py:200
 msgid ""
 "Copyright (C) 2010, Design and Developed by Lazyscripts Team\n"
 "\n"
@@ -49,45 +45,35 @@ msgstr ""
 "Copyright (C) 2010, 由 Lazyscripts 開發團隊共同設計、開發\n"
 "\n"
 
-#: lazyscripts/gui.py:185
+#: lazyscripts/gui.py:201
 msgid "Project Lazyscripts - "
 msgstr "Lazyscripts 專案"
 
-#: lazyscripts/gui.py:200
-msgid ""
-"Execute action: \n"
-<<<<<<< HEAD:po/zh_TW.po
+#: lazyscripts/gui.py:216
+msgid "Execute action: \n"
 msgstr "開始執行: \n"
-=======
-msgstr "開始執行\n"
->>>>>>> 02cfc2183345ffce9ed5dfbb3b2476b48d256197:po/zh_TW.po
 
-#: lazyscripts/gui.py:299
+#: lazyscripts/gui.py:329
 msgid "Lazyscripts - Simple is More."
 msgstr "Lazyscripts - 簡單做更多"
 
-#: lazyscripts/gui.py:328
+#: lazyscripts/gui.py:344
 msgid "Welcome"
 msgstr "歡迎使用"
 
-#: lazyscripts/gui.py:330
+#: lazyscripts/gui.py:346
 msgid "Result"
 msgstr "執行結果"
 
-<<<<<<< HEAD:po/zh_TW.po
-#: lazyscripts/gui.py:369
+#: lazyscripts/gui.py:385
 msgid "Do you want to quit Lazyscripts?"
-=======
-#: lazyscripts/gui.py:355
-msgid "Do you want to quit lazyscripts?"
->>>>>>> 02cfc2183345ffce9ed5dfbb3b2476b48d256197:po/zh_TW.po
 msgstr "你是否要離開 Lazyscripts 懶人包？"
 
-#: lazyscripts/gui.py:402
+#: lazyscripts/gui.py:418
 msgid "Linux Lazy Pack"
 msgstr "Linux 懶人包"
 
-#: lazyscripts/gui.py:412
+#: lazyscripts/gui.py:448
 msgid ""
 "\n"
 "\033[1;36mLazyscripts - Linux Lazy Pack run finish!\033[1;32m   Have fun for Linux!\033[m\n"

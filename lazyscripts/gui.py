@@ -23,7 +23,7 @@ try:
 except:
     locale.setlocale (locale.LC_ALL, "en_US.UTF-8")
 
-APP_NAME='lazyscripts'
+APP_NAME='Lazyscripts'
 gettext.bindtextdomain(APP_NAME, '/usr/share/locale')
 gettext.textdomain(APP_NAME)
 _ = gettext.gettext
@@ -341,7 +341,7 @@ class MainWin:
 
         # upper parts: main GUI
         self.tool_list=tool_list=ToolListWidget(win)
-        tool_list.list.insert( 0, ('lazyscripts', _('Welcome'), WelcomePage()) )
+        tool_list.list.insert( 0, ('Lazyscripts', _('Welcome'), WelcomePage()) )
         self.final_page=FinalPage()
         tool_list.list.append( ('gnome-app-install', _('Result'), self.final_page) )
         sel=tool_list.left_pane.get_selection()
@@ -382,12 +382,8 @@ class MainWin:
 
     #{{{def confirm_close(self):
     def confirm_close(self):
-<<<<<<< HEAD:lazyscripts/gui.py
         if self.complete or query_yes_no(_('Do you want to quit Lazyscripts?'), self.win):
             rmtree('/tmp/lzs_root/')
-=======
-        if self.complete or query_yes_no(_('Do you want to quit lazyscripts?'), self.win):
->>>>>>> 02cfc2183345ffce9ed5dfbb3b2476b48d256197:lazyscripts/gui.py
             gtk.main_quit()
             return True
         return False
