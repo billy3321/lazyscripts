@@ -223,10 +223,23 @@ class PoolCmd(Command):
     def sync(self):
         print 10
         (opts, args) = self._getopts([optparse.make_option('-r', '--rev', dest='rev')])
+        distro = get_distro_name().lower()
+        distro_ver = get_distro_version(distro)
         if len(args) <= 1:
-            poolname = self.conf.get_default('pool')
+            pools = conf.get_support('pool')
+            if len(pools) = 1:
+                poolname = pools[0]
+            elif len(pools) > 1:
+                from lazyscripts.gui import select_pool
+                poolname = select_pool(pools)
+            else:
+                rase Exception("NoSupportPool")
+             
         else:
             poolname = args[1]
+        if not conf.get_defaults = poolname:
+            conf.set_defaults(pool=poolname)
+            conf.save()
         print "Syncing pool %s" % poolname
         poolobj = self._load_pool(poolname)
         print 90

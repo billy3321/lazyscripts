@@ -90,6 +90,7 @@ class Configuration(object):
             if self.parser.has_option(section, distro) and distro_ver in self.parser.get(section, distro).split(','):
                 select_pool.append(section)
         return select_pool
+    #}}}
 
     #{{{def set_pool(self, poolname, **kwds):
     def set_pool(self, poolname, **kwds):

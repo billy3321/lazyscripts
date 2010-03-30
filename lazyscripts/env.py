@@ -201,23 +201,13 @@ def resource_name(query=None):
 #{{{def resource(query):
 def resource(query):
     conf = config.Configuration(resource_name('config'))
-    distro = get_distro_name().lower()
-    distro_ver = get_distro_version(distro)
     if query == 'config':   return conf
 
-    if query == 'pool':
-        pools = conf.get_support('pool')
-        if len(pools) = 1:
-            used_pool = pools[0]
-        elif len(pools) > 1:
-            from lazyscripts.gui import select_pool
-            used_pool = select_pool(pools)
-        else:
-            rase Exception("NoSupportPool")
-        
+    elif query == 'pool':
         poolpath = os.path.join(resource_name('pools'),
                             conf.get_default('pool'))
         return pool.GitScriptsPool(poolpath)
+    else:
     raise Exception("QuerryError")
 #}}}
 

@@ -117,6 +117,7 @@ def select_pool(poollist):
     #select_cmd = "kdialog --title=\"Choice Scripts Pool You Want to Use\" --radiolist \"Choice a Pool Name\" %s" % show_pools
     select_pool = getoutput(select_cmd)
     return select_pool
+#}}}
                                              
 
 class Tool:
