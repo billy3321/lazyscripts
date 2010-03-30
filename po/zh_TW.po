@@ -17,7 +17,11 @@ msgstr ""
 "X-Poedit-Country: TAIWAN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+<<<<<<< HEAD:po/zh_TW.po
 #: lazyscripts/gui.py:142
+=======
+#: lazyscripts/gui.py:128
+>>>>>>> 02cfc2183345ffce9ed5dfbb3b2476b48d256197:po/zh_TW.po
 msgid "Items"
 msgstr "項目"
 
@@ -52,7 +56,11 @@ msgstr "Lazyscripts 專案"
 #: lazyscripts/gui.py:200
 msgid ""
 "Execute action: \n"
+<<<<<<< HEAD:po/zh_TW.po
 msgstr "開始執行: \n"
+=======
+msgstr "開始執行\n"
+>>>>>>> 02cfc2183345ffce9ed5dfbb3b2476b48d256197:po/zh_TW.po
 
 #: lazyscripts/gui.py:299
 msgid "Lazyscripts - Simple is More."
@@ -66,8 +74,13 @@ msgstr "歡迎使用"
 msgid "Result"
 msgstr "執行結果"
 
+<<<<<<< HEAD:po/zh_TW.po
 #: lazyscripts/gui.py:369
 msgid "Do you want to quit Lazyscripts?"
+=======
+#: lazyscripts/gui.py:355
+msgid "Do you want to quit lazyscripts?"
+>>>>>>> 02cfc2183345ffce9ed5dfbb3b2476b48d256197:po/zh_TW.po
 msgstr "你是否要離開 Lazyscripts 懶人包？"
 
 #: lazyscripts/gui.py:402

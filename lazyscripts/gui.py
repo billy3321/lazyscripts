@@ -382,8 +382,12 @@ class MainWin:
 
     #{{{def confirm_close(self):
     def confirm_close(self):
+<<<<<<< HEAD:lazyscripts/gui.py
         if self.complete or query_yes_no(_('Do you want to quit Lazyscripts?'), self.win):
             rmtree('/tmp/lzs_root/')
+=======
+        if self.complete or query_yes_no(_('Do you want to quit lazyscripts?'), self.win):
+>>>>>>> 02cfc2183345ffce9ed5dfbb3b2476b48d256197:lazyscripts/gui.py
             gtk.main_quit()
             return True
         return False
