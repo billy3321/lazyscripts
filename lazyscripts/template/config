@@ -6,16 +6,25 @@ pool = hychen-debianlize
 [pool "hychen-debianlize"]
 upstream = git://github.com/hychen/lzspool.git
 rev = master
+ubuntu = 9.10, 10.04
+debian = 5
+linuxmint = 8
 
 [pool "debianlize"]
 upstream = git://github.com/aminzai/lzs_pool_debianlize.git
 rev = master
+ubuntu = 9.10, 10.04
+debian = 5
+linuxmint = 8
 
 [pool "suselize"]
 upstream = git://github.com/mrmoneyc/lzs_pool_suselize.git
 rev = master
+suse = 11.1, 11.2, 11.3
 
 [pool "redhatlize"]
 upstream = git://github.com/chiehwen/lzs_pool_redhatlize.git
 rev = master
+fedora = 12
+centos = 5.3, 5.4
 

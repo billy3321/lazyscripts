@@ -83,6 +83,14 @@ class Configuration(object):
         return self.parser.get('defaults', key)
     #}}}
 
+    #{{{def get_support(self, distro, distro_ver):
+    def get_support(self, distro, distro_ver):
+        select_pool = []
+        for section in self.parser.sections():
+            if self.parser.has_option(section, distro) and distro_ver in self.parser.get(section, distro).split(','):
+                select_pool.append(section)
+        return select_pool
+
     #{{{def set_pool(self, poolname, **kwds):
     def set_pool(self, poolname, **kwds):
         """add pool setting.

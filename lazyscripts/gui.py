@@ -91,6 +91,7 @@ def show_error(msg, title=None, parent=None):
     dlg.destroy ()
 #}}}
 
+#{{{def user_choice():
 def user_choice():
     """
     Use zenity and radio dialog to make user choice.
@@ -102,6 +103,20 @@ def user_choice():
         raise UnknownWindowManager()
     else:
         return wm_value.lower()
+#}}}
+
+#{{{def select_pool(poollist):
+def select_pool(poollist):
+    show_pools = ""
+    for pool in poollist:
+        show_pools = show_pools + 'FALSE %s ' % pool
+        #This is for kdialog use
+        #show_pools = show_pools + '%s %s off ' % (pool, pool)
+    select_cmd = "zenity --list --title=\"Choice Scripts Pool You Want to Use\" --radiolist --column \"\" --column \"Scripts Pool Name\" %s" % show_pools
+    #kdialog cmd
+    #select_cmd = "kdialog --title=\"Choice Scripts Pool You Want to Use\" --radiolist \"Choice a Pool Name\" %s" % show_pools
+    select_pool = getoutput(select_cmd)
+    return select_pool
                                              
 
 class Tool:
