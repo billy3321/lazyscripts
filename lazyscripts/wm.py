@@ -93,7 +93,7 @@ def get_wminfo(distro):
     """
     if distro in ('debian','ubuntu','fedora','centos','mandriva','mandrake','redhat','arch','linuxmint'):
         return wm_desktop_session()
-    elif distro == 'suse':
+    elif distro in ('opensuse','suse'):
         return suse_windowmanager()
     elif distro == 'opensolaris':
         return wm_var_check()
@@ -112,7 +112,7 @@ def make_guisudocmd(distro,wm,cmd,msg='""'):
                 return 'kdesudo -c "%s"' % (cmd)
             else:
                 return 'kdesu -c "%s"' % (cmd)
-    elif distro == 'suse':
+    elif distro in ('opensuse','suse'):
         if wm == 'gnome':
             return 'gnomesu --command="%s"' % (cmd)
         elif wm == 'kde':

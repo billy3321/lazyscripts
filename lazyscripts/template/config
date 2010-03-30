@@ -20,7 +20,7 @@ linuxmint = 8
 [pool "suselize"]
 upstream = git://github.com/mrmoneyc/lzs_pool_suselize.git
 rev = master
-suse = 11.1, 11.2, 11.3
+opensuse = 11.1, 11.2, 11.3
 
 [pool "redhatlize"]
 upstream = git://github.com/chiehwen/lzs_pool_redhatlize.git
