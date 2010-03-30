@@ -131,6 +131,8 @@ def gui_run():
           "--auto-close",
           "--width=400"]
       os.system("%s | %s" % (cmd, ' '.join(progress_dialog_cmd)))
+      #This command is use for debug.
+      #os.system(cmd)
 
     if options.selection_list:
         cmd = 'lzs gui run %s' % options.selection_list
