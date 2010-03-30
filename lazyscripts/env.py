@@ -70,7 +70,7 @@ def get_distro_name():
             print "Lazyscripts not support your Linux distribution."
             sys.exit()
     elif name == 'redhat':
-        if commands.getoutput('cat /etc/red-hatrelease | grep "Red Hat"'):
+        if commands.getoutput('cat /etc/redhat-release | grep "Red Hat"'):
             name = 'redhat'
         elif commands.getoutput('cat /etc/redhat-release | grep "CentOS"'):
             name = 'centos'
