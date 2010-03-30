@@ -155,7 +155,7 @@ def get_pkgmgr(distro):
     distro = distro
     if distro in ('debian','ubuntu','linuxmint'):
         return DebManager()
-    elif distro in ('suse linux','suse'):
+    elif distro in ('opensuse','suse'):
         return ZypperManager()
     elif distro in ('fedora','centos','redhat'):
         return YumManager()

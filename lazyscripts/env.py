@@ -69,7 +69,7 @@ def get_distro_name():
         else:
             print "Lazyscripts not support your Linux distribution."
             sys.exit()
-    elif name == 'suse':
+    elif name == 'SuSE':
         if commands.getoutput('cat /etc/SuSE-release | grep "openSUSE"'):
             name = 'opensuse'
     elif name == 'redhat':
