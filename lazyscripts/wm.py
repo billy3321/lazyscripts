@@ -98,14 +98,14 @@ def get_wminfo(distro):
     elif distro == 'opensolaris':
         return wm_var_check()
     else:
-        raise UnknownWindowManager()
+        return 'unknown'
 
 def make_guisudocmd(distro,wm,cmd,msg='""'):
     """
     return full guisudo command for running.
     """
     if distro in ('debian','Ubuntu','arch','LinuxMint','fedora'):
-        if wm in ('gnome','xfce','lxde','wmaker'):
+        if wm in ('gnome','xfce','lxde','wmaker','unknown'):
             return 'gksu --message %s "%s"' % (msg, cmd)
         elif wm == 'kde':
             if path.exists('/usr/bin/kdesudo'):
