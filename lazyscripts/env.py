@@ -77,6 +77,9 @@ def get_distro_name():
             name = 'redhat'
         elif commands.getoutput('cat /etc/redhat-release | grep "CentOS"'):
             name = 'centos'
+    elif name == 'mandrake':
+        if os.path.exists('/etc/mandriva-release') and commands.getoutput('cat /etc/mandriva-release | grep "Mandriva"'):
+            name = 'mandriva'
 
     return name.lower()
 #}}}
