@@ -47,7 +47,7 @@ def create_scriptdesc(path, name, authors):
         "debian      = False",
         "ubuntu      = False",
         "linuxmint   = False",
-        "fedroa      = False",
+        "fedora      = False",
         "centos      = False",
         "redhat      = False",
         "arch        = False",
