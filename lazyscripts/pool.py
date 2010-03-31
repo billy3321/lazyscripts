@@ -290,7 +290,7 @@ class GitScriptsPool(ScriptsPool):
             raise DirectoryIsAScriptPoolError(
                 "the directory %s is a scriptspool already." % dirpath)
 
-        progress = 30
+        progress = 20
         print progress ; progress += 10
         pool = cls(dirpath)
         pool.gitapi.init()
