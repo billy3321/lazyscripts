@@ -54,10 +54,24 @@ def wm_var_check():
         return 'lxde'
     elif getoutput('pstree | grep xfwm4'):
         return 'xfce'
-    elif getenv('DESKTOP') == 'Enlightenment-0.17.0' and getoutput('pstree | grep enlightenment'):
+    elif getenv('DESKTOP') == 'Enlightenment-0.17.0' or getoutput('pstree | grep enlightenment'):
         return 'enlightenment'
-    elif getoutput('pstree | grep WindowMaker'):
+    elif getoutput('pstree | grep WindowMaker') or getoutput ('pstree | grep wmaker'):
         return 'wmaker'
+    elif getoutput('pstree | grep fluxbox'):
+        return 'fluxbox'
+    elif getoutput('pstree | grep blackbox'):
+        return 'blackbox'
+    elif getoutput('pstree | grep wmii'):
+        return 'wmii'
+    elif getoutput('pstree | grep fvwm2'):
+        return 'fvwm2'
+    elif getoutput('pstree | grep icewm'):
+        return 'icewm'
+    elif getoutput('pstree | grep twm'):
+        return 'twm'
+    elif getoutput('pstree | grep jwm'):
+        return 'jwm'
     else:
         from lazyscripts.gui import user_choice
         return user_choice()
@@ -93,7 +107,7 @@ def get_wminfo(distro):
     """
     return gnome|kde|lxde|xfce
     """
-    if distro in ('debian','ubuntu','fedora','centos','mandriva','mandrake','redhat','arch','linuxmint','pclinuxos','gos'):
+    if distro in ('debian','ubuntu','fedora','centos','mandriva','mandrake','redhat','arch','linuxmint','pclinuxos','gos','gentoo','sabayon','redflag','turbolinux'):
         return wm_desktop_session()
     elif distro in ('opensuse','suse'):
         return suse_windowmanager()
@@ -106,7 +120,7 @@ def make_guisudocmd(distro,wm,cmd,msg='""'):
     """
     return full guisudo command for running.
     """
-    if distro in ('debian','ubuntu','arch','linuxmint','fedora','pclinuxos','gos'):
+    if distro in ('debian','ubuntu','arch','linuxmint','fedora','pclinuxos','gos','gentoo','sabayon','redflag','turbolinux'):
         if wm in ('gnome','xfce','lxde','wmaker','enlightenment','unknown'):
             return 'gksu --message %s "%s"' % (msg, cmd)
         elif wm == 'kde':
@@ -123,6 +137,9 @@ def make_guisudocmd(distro,wm,cmd,msg='""'):
             return 'xdg-su -c "%s"' % (cmd)
     elif distro in ('mandrake','mandriva','opensolaris','redhat','centos'):
         return 'gksu --message %s "%s"' % (msg, cmd)
+    elif distro in ('slackware'):
+        return 'kdesu -c "%s"' % (cmd)
+        
     else:
         raise UnknownDistribution()
 

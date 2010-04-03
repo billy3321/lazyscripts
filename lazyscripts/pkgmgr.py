@@ -145,7 +145,34 @@ class PacmanManager(AbstractPkgManager):
     #}}}
 pass
 
-#{{{def get_pkgmgr(distro):
+class EmergeManager(AbstractPkgManager):
+    """Emerge Package System Manager
+    """
+    #{{{attrs
+    CMDPREFIX_DETECT = 'qpkg'
+    CMDPREFIX_UPDATE = 'emerge sync'
+    CMDPREFIX_INSTALL = 'emerge'
+    CMDPREFIX_REMOVE = 'emerge unmerge'
+    CMDPREFIX_ADDREPO = ''
+    SOURCELISTS_DIR = ''
+    SOURCELISTS_CFG = '/var/cache/edb/world'
+    #}}}
+pass
+
+class SlackpkgManager(AbstractPkgManager):
+    """Slackpkg Package System Manager
+    """
+    #{{{attrs
+    CMDPREFIX_DETECT = 'slackpkg search'
+    CMDPREFIX_UPDATE = 'slackpkg update'
+    CMDPREFIX_INSTALL = 'slackpkg install'
+    CMDPREFIX_REMOVE = 'slackpkg remove'
+    CMDPREFIX_ADDREPO = ''
+    SOURCELISTS_DIR = ''
+    SOURCELISTS_CFG = '/etc/slackpkg/mirrors'
+    #}}}
+pass
+
 def get_pkgmgr(distro):
     """get package system manager.
 
@@ -157,7 +184,7 @@ def get_pkgmgr(distro):
         return DebManager()
     elif distro in ('opensuse','suse'):
         return ZypperManager()
-    elif distro in ('fedora','centos','redhat'):
+    elif distro in ('fedora','centos','redhat','redflag'):
         return YumManager()
     elif distro in ('mandrake','mandriva'):
         return UrpmiManager()
@@ -165,5 +192,9 @@ def get_pkgmgr(distro):
         return PacmanManager()
     elif distro == 'opensolaris':
         return PkgManager()
+    elif distro in ('gentoo','sabayon'):
+        return EmergeManager()
+    elif distro == 'slackware':
+        return SlackpkgManager()
     raise PackageSystemNotFound()
 #}}}

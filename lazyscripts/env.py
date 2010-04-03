@@ -66,6 +66,10 @@ def get_distro_name():
             name = 'arch'
         elif os.path.exists('/usr/bin/pkg') and commands.getoutput('cat /etc/release | grep "OpenSolaris"'):
             name = 'opensolaris'
+        elif os.path.exists('/etc/redflag-release')
+            name = 'redflag'
+        elif os.path.exists('/etc/slackware-version')
+            name = 'slackware'
         else:
             print "Lazyscripts not support your Linux distribution."
             sys.exit()
@@ -85,6 +89,9 @@ def get_distro_name():
             name = 'mandriva'
         elif os.path.exists('/etc/pclinuxos-release') and commands.getoutput('cat /etc/pclinuxos-release | grep "PCLinuxOS"'):
             name = 'pclinuxos'
+    elif name == 'gentoo':
+        if os.path.exists('/etc/sabayon-release'):
+            name = 'sabayon'
 
     return name.lower()
 #}}}
@@ -95,6 +102,10 @@ def get_distro_version(name):
     if not version:
         if name == 'opensolaris':
             version = commands.getoutput('cat /etc/release | grep "OpenSolaris" | cut -d " " -f 27')
+        elif name == 'sabayon' :
+            version = commands.getoutput('cat /etc/sabayon-edition | cut -d " " -f 3')
+        elif name == 'redflag':
+            version = commands.getoutput('cat /etc/redflag-release | cut -d " " -f 4')
     return version
 #}}}
     
