@@ -33,9 +33,9 @@ def wm_desktop_session():
     """
     Check the DESKTOP_SESSION variable to distinguish window manager.
     """
-    wm_value = getenv('DESKTOP_SESSION').lower() 
-    if wm_value in ('gnome','kde','lxde','wmaker'):
-        return wm_value
+    wm_value = getenv('DESKTOP_SESSION') 
+    if wm_value in ('gnome','kde','lxde','LXDE','wmaker'):
+        return wm_value.lower()
     elif wm_value in ('xfce.desktop','xfce'):
         return 'xfce'
     else:
@@ -54,8 +54,6 @@ def wm_var_check():
         return 'lxde'
     elif getoutput('pstree | grep xfwm4'):
         return 'xfce'
-    elif getenv('DESKTOP') == 'Enlightenment-0.17.0' and getoutput('pstree | grep enlightenment'):
-        return 'enlightenment'
     elif getoutput('pstree | grep WindowMaker'):
         return 'wmaker'
     else:
@@ -93,7 +91,7 @@ def get_wminfo(distro):
     """
     return gnome|kde|lxde|xfce
     """
-    if distro in ('debian','ubuntu','fedora','centos','mandriva','mandrake','redhat','arch','linuxmint','pclinuxos','gos'):
+    if distro in ('debian','ubuntu','fedora','centos','mandriva','mandrake','redhat','arch','linuxmint'):
         return wm_desktop_session()
     elif distro in ('opensuse','suse'):
         return suse_windowmanager()
@@ -106,8 +104,8 @@ def make_guisudocmd(distro,wm,cmd,msg='""'):
     """
     return full guisudo command for running.
     """
-    if distro in ('debian','ubuntu','arch','linuxmint','fedora','pclinuxos','gos'):
-        if wm in ('gnome','xfce','lxde','wmaker','enlightenment','unknown'):
+    if distro in ('debian','ubuntu','arch','linuxmint','fedora'):
+        if wm in ('gnome','xfce','lxde','wmaker','unknown'):
             return 'gksu --message %s "%s"' % (msg, cmd)
         elif wm == 'kde':
             if path.exists('/usr/bin/kdesudo'):

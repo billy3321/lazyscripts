@@ -69,9 +69,6 @@ def get_distro_name():
         else:
             print "Lazyscripts not support your Linux distribution."
             sys.exit()
-    elif name == 'debian'
-        if commands.getoutput('uname -a | grep "Linux gos"'):
-            name = 'gos'
     elif name == 'SuSE':
         if commands.getoutput('cat /etc/SuSE-release | grep "openSUSE"'):
             name = 'opensuse'
@@ -83,8 +80,6 @@ def get_distro_name():
     elif name == 'mandrake':
         if os.path.exists('/etc/mandriva-release') and commands.getoutput('cat /etc/mandriva-release | grep "Mandriva"'):
             name = 'mandriva'
-        elif os.path.exists('/etc/pclinuxos-release') and commands.getoutput('cat /etc/pclinuxos-release | grep "PCLinuxOS"'):
-            name = 'pclinuxos'
 
     return name.lower()
 #}}}
