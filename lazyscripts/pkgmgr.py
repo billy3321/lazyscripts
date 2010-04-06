@@ -70,6 +70,7 @@ class AbstractPkgManager(object):
 
     #{{{def update_sources_by_file(self, pool):
     def update_sources_by_cmd(self, pool):
+        (src,keylist) = pool.current_pkgsourcelist()
         if not src: return False
         os.system('bash %s' % src)
     #}}}
