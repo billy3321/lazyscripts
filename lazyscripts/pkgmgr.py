@@ -50,14 +50,28 @@ class AbstractPkgManager(object):
         return "%s %s" % (cmdprefix, argv)
     #}}}
 
-    #{{{def update_sources_by(self, pool):
-    def update_sources_by(self, pool):
+    #{{{def update_sources_by_file(self, pool):
+    def update_sources_by_file(self, pool):
         from distutils.dep_util import newer
-        src = pool.current_pkgsourcelist
-        if not src: return False
+        (src,keylist) = pool.current_pkgsourcelist()
+        if not src or not keylist : return False
+
+        key_urls = map(str.strip, open('keylist')
+        key_urls = [x.split('#')[0] for x in key_urls]
+        for url in key_urls:
+            if url:
+                os.system('wget %s' % url)
+        os.system(self.make_cmd('addkey', '*')
+
         dest = "%s/%s" % (self.SOURCELISTS_DIR, os.path.basename(src))
         if not os.path.exists(src) or newer(src, dest):
             shutil.copy(src, dest)
+    #}}}
+
+    #{{{def update_sources_by_file(self, pool):
+    def update_sources_by_cmd(self, pool):
+        if not src: return False
+        os.system('bash %s' % src)
     #}}}
 pass
 
@@ -70,8 +84,10 @@ class DebManager(AbstractPkgManager):
     CMDPREFIX_INSTALL = 'apt-get -y --force-yes install'
     CMDPREFIX_REMOVE = 'apt-get -y --force-yes --purge remove'
     CMDPREFIX_ADDREPO = ''
+    CMDPREFIX_ADDKEY = 'apt-key add'
     SOURCELISTS_DIR = '/etc/apt/sources.list.d'
     SOURCELISTS_CFG = '/etc/apt/sources.list'
+    update_sources = update_sources_by_file
     #}}}
 pass
 
@@ -84,8 +100,10 @@ class ZypperManager(AbstractPkgManager):
     CMDPREFIX_INSTALL = 'zypper -n install'
     CMDPREFIX_REMOVE = 'zypper -n refresh'
     CMDPREFIX_ADDREPO = 'zypper -n ar'
+    CMDPREFIX_ADDKEY = ''
     SOURCELISTS_DIR = '/ect/zypp/repos.d'
     SOURCELISTS_CFG = '/etc/zypp/zypper.conf'
+    update_sources = update_sources_by_cmd
     #}}}
 pass
 
@@ -98,8 +116,10 @@ class YumManager(AbstractPkgManager):
     CMDPREFIX_INSTALL = 'yum -y install'
     CMDPREFIX_REMOVE = 'yum -y remove'
     CMDPREFIX_ADDREPO = ''
+    CMDPREFIX_ADDKEY = 'rpm --import'
     SOURCELISTS_DIR = '/etc/yum.repo.d'
     SOURCELISTS_CFG = '/etc/yum.conf'
+    update_sources = update_sources_by_file
     #}}}
 pass
 
@@ -112,8 +132,10 @@ class UrpmiManager(AbstractPkgManager):
     CMDPREFIX_INSTALL = 'urpmi --auto'
     CMDPREFIX_REMOVE = 'urpme --auto'
     CMDPREFIX_ADDREPO = 'urpmi.addmedia '
+    CMDPREFIX_ADDKEY = ''
     SOURCELISTS_DIR = ''
     SOURCELISTS_CFG = '/etc/urpmi/urpmi.cfg'
+    update_sources = update_sources_by_cmd
     #}}}
 pass
 
@@ -126,8 +148,10 @@ class PkgManager(AbstractPkgManager):
     CMDPREFIX_INSTALL = 'pkg install'
     CMDPREFIX_REMOVE = 'pkg uninstall'
     CMDPREFIX_ADDREPO = 'pkg set-publisher -O'
+    CMDPREFIX_ADDKEY = ''
     SOURCELISTS_DIR = ''
     SOURCELISTS_CFG = '/var/pkg/cfg_cache'
+    update_sources = update_sources_by_cmd
     #}}}
 pass
 
@@ -140,8 +164,10 @@ class PacmanManager(AbstractPkgManager):
     CMDPREFIX_INSTALL = 'pacman --noconfirm -S --needed'
     CMDPREFIX_REMOVE = 'pacman --noconfirm -R'
     CMDPREFIX_ADDREPO = ''
+    CMDPREFIX_ADDKEY = ''
     SOURCELISTS_DIR = '/etc/pacman.d'
     SOURCELISTS_CFG = '/etc/pacman.conf'
+    update_sources = update_sources_by_cmd
     #}}}
 pass
 
