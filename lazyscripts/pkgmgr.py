@@ -56,12 +56,12 @@ class AbstractPkgManager(object):
         (src,keylist) = pool.current_pkgsourcelist()
         if not src or not keylist : return False
 
-        key_urls = map(str.strip, open('keylist')
-        key_urls = [x.split('#')[0] for x in key_urls]
+        key_urls = map(str.strip, open('keylist'))
+        key_urls = [ x.split('#')[0] for x in key_urls ]
         for url in key_urls:
             if url:
                 os.system('wget %s' % url)
-        os.system(self.make_cmd('addkey', '*')
+        os.system(self.make_cmd('addkey', '*'))
 
         dest = "%s/%s" % (self.SOURCELISTS_DIR, os.path.basename(src))
         if not os.path.exists(src) or newer(src, dest):
