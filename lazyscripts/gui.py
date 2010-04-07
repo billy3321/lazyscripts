@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+import commands
 import gettext
 import locale
 import time
@@ -14,7 +14,6 @@ from lazyscripts import __VERSION__, __WEBURL__
 from lazyscripts import env
 from lazyscripts import pool as lzspool
 from lazyscripts import runner as lzsrunner
-from commands import getoutput
 from os import path as os_path
 from shutil import rmtree
 
@@ -96,7 +95,7 @@ def user_choice():
     """
     Use zenity and radio dialog to make user choice.
     """
-    wm_value = getoutput('zenity --list --title="Choice your window manager" --radiolist --column "" --column "Linux Distribution Version" FALSE "Gnome" FALSE "KDE" False "LXDE" False "Xfce"')
+    wm_value = commands.getoutput('zenity --list --title="Choice your window manager" --radiolist --column "" --column "Linux Distribution Version" FALSE "Gnome" FALSE "KDE" False "LXDE" False "Xfce"')
 #   Use kdialog
 #   wm_value = getoutput('kdialog --list --title="Choice your window manager" --radiolist "Choice your window manager" Gnome Gnome off KDE KDE off LXDE LXDE off Xfce Xfce off')
     if not wm_value:
@@ -115,10 +114,30 @@ def select_pool(poollist):
     select_cmd = "zenity --list --title=\"Choice Scripts Pool You Want to Use\" --radiolist --column \"\" --column \"Scripts Pool Name\" %s" % show_pools
     #kdialog cmd
     #select_cmd = "kdialog --title=\"Choice Scripts Pool You Want to Use\" --radiolist \"Choice a Pool Name\" %s" % show_pools
-    select_pool = getoutput(select_cmd)
+    select_pool = commands.getoutput(select_cmd)
     return select_pool
 #}}}
                                              
+#{{{def select_defaultpool(poollist):
+def select_defaultpool(poollist):
+    import re
+    show_pools = ""
+    for pool in poollist:
+        show_pools += 'FALSE %s %s ' % (pool[0],re.escape(pool[1]))
+
+    select_cmd = ' '.join(["zenity",
+                          "--height=350",
+                          "--width=600",
+                          "--list",
+                          "--title=\"Choice Scripts Pool You Want to Use\"",
+                          "--radiolist",
+                          "--column \"\"",
+                          "--column \"Scripts Pool Name\"",
+                          "--column \"Description\"",
+                          "%s" % show_pools])
+    select_pool = commands.getoutput(select_cmd)
+    return select_pool
+#}}}
 
 class Tool:
     #{{{def __init__ (self, script, used=True):

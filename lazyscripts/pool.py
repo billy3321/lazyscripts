@@ -96,12 +96,22 @@ class ScriptsPool(object):
     @property
     def current_pkgsourcelist(self):
         from lazyscripts.env import get_distro_name, get_distro_version
-        filename = "lzs_%s_%s_%s.list" % (platform.machine(),
-                                          get_distro_name().lower(),
-                                          get_distro_version(get_distro_name()))
+        distro = get_distro_name()
+        if distro in ('ubuntu', 'debian', 'linuxmint'):
+            file_append = 'list'
+        elif distro in ('fedora', 'redhat', 'centos'):
+            file_append = 'repo'
+        else:
+        # The repository source update by command.
+            file_append = 'sh'
+        filename = "lzs_%s_%s_%s.%s" % (platform.machine(),
+                                          distro,
+                                          get_distro_version(distro),
+                                          file_append)
         filename = utils.ext_ospath_join(self.path, 'sources.d', filename)
+        keylist = utils.ext_ospath_join(self.path, 'sources.d', 'keylist.txt')
         if not os.path.exists(filename):    return None
-        return filename
+        return filename, keylist
     #}}}
 
     #{{{def __init__(self, path, recommands_list=None):

@@ -27,6 +27,7 @@ import shutil
 import time
 
 from lazyscripts import env
+from lazyscripts import distro
 
 #{{{def find_pkginfo(scripts, distro, version=None):
 def find_pkginfo(scripts, distro, version=None):
@@ -150,9 +151,8 @@ class ScriptsRunner(object):
         self.ui = ui
         self.cmd_queue = []
         self._scripts = []
-        self.distro = env.get_distro_name()
-        
-        self.pkgmgr = env.Register().pkgmgr
+        self.distro = distro.Distribution()
+        self.pkgmgr = self.distro.pkgmgr
     #}}}
 
     #{{{def set_scripts(self, scripts):
@@ -166,7 +166,7 @@ class ScriptsRunner(object):
         self.pool = pool
 
         # @FIXME: need to add key.
-        self.pkgmgr.update_sources_by(self.pool)
+        self.pkgmgr.update_sources(self.pool)
 
         # copy shlib.
         self._cpone2root(os.path.join(self.pool.path,'shlib'))
@@ -223,7 +223,7 @@ class ScriptsRunner(object):
     def prepare_pkgscmds(self):
         "prepare commands."
         (self.install_pkgs, self.remove_pkgs) = \
-                    find_pkginfo(self._scripts,self.distro)
+                    find_pkginfo(self._scripts,self.distro.name)
 
         self.cmd_queue.append(self.pkgmgr.make_cmd('update'))
 

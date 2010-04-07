@@ -33,9 +33,9 @@ def wm_desktop_session():
     """
     Check the DESKTOP_SESSION variable to distinguish window manager.
     """
-    wm_value = getenv('DESKTOP_SESSION').lower() 
-    if wm_value in ('gnome','kde','lxde','wmaker'):
-        return wm_value
+    wm_value = getenv('DESKTOP_SESSION') 
+    if wm_value in ('gnome','kde','lxde','LXDE','wmaker'):
+        return wm_value.lower()
     elif wm_value in ('xfce.desktop','xfce'):
         return 'xfce'
     else:

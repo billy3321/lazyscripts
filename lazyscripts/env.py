@@ -73,9 +73,6 @@ def get_distro_name():
         else:
             print "Lazyscripts not support your Linux distribution."
             sys.exit()
-    elif name == 'debian'
-        if commands.getoutput('uname -a | grep "Linux gos"'):
-            name = 'gos'
     elif name == 'SuSE':
         if commands.getoutput('cat /etc/SuSE-release | grep "openSUSE"'):
             name = 'opensuse'
@@ -117,7 +114,7 @@ def get_distro_codename(name):
 
 #{{{get_architecture()
 def get_architecture():
-    return platform.architecture()[1]
+    return platform.architecture()[0]
 #}}}
 
 #{{{get_laptop_info():
@@ -134,7 +131,6 @@ def get_laptop_info():
   prod_name = commands.getoutput(cmd % "system-product-name")
   return (manuf_name, prod_name)
 #}}}
-
 
 #{{{def get_all_users():
 def get_all_users():
@@ -245,19 +241,18 @@ def storageenv(path=None):
     "Save Bash Shell enviroment variabe."
     mkexport = lambda val: "export REAL_%s=%s" % \
                     (val.upper(),os.getenv(val.upper()))
-    distro = platform.dist()[0]
-    if not distro:
-        if os.path.exists('/etc/arch-release'):
-            distro = 'arch'
-        elif os.path.exists('/usr/bin/pkg') and commands.getoutput('cat /etc/release | grep "OpenSolaris"'):
-            distro = 'opensolaris'
+    distro = get_distro_name()
+    version = get_distro_version(distro)
+    platform_name = get_architecture()
 
     contents = [
     '#!/bin/bash',
     mkexport('USER'),
     mkexport('HOME'),
     mkexport('LANG'),
-    'export DISTRO_ID=%s' % distro
+    'export DISTRO_ID=%s'
+    'export DISTRO_VERSION=%s'
+    'export PLAT_NAME=%s' % (distro, version, platform_name)
     ]
     if not path:
         path = DEFAULT_RUNTIME_ROOT_DIR

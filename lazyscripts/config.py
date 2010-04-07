@@ -67,6 +67,7 @@ class Configuration(object):
 
         @param dict **kwds
         """
+        self._is_dirty = True
         if not self.parser.has_section('defaults'):
             self.parser.add_section('defaults')
         for key, val in kwds.items():
@@ -157,5 +158,12 @@ class Configuration(object):
          fp = open(self.filename,'wb')
          self.parser.write(fp)
          fp.close()
+    #}}}
+
+    #{{{def get_support_pools(self, distroname):
+    def get_support_pools_by(self, distroname):
+        for section in self.parser.sections():
+            if self.parser.has_option(section, distroname):
+                yield ((section[6:-1], self.parser.get(section, 'desc')))
     #}}}
 pass
