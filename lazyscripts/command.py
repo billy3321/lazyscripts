@@ -226,12 +226,17 @@ class PoolCmd(Command):
         distro = env.get_distro_name()
         distro_ver = env.get_distro_version(distro)
         if len(args) <= 1:
-            poolname = self.conf.get_default('pool')
-            if not poolname:
-                from lazyscripts.distro import Distribution
-                poolname = gui.select_defaultpool(Distribution().get_support_pools())
-                self.conf.set_default(pool=poolname)
-                self.conf.save()
+            # The default pool may not support another distribution.
+            #poolname = self.conf.get_default('pool')
+            #if not poolname:
+            from lazyscripts.distro import Distribution
+            poollist = Distribution.get_support_pools()
+            if len(poollist) > 1:
+                poolname = gui.select_defaultpool(poollist)
+            else:
+                poolname = poollist
+            self.conf.set_default(pool=poolname)
+            self.conf.save()
         else:
             poolname = args[1]
         if not self.conf.get_default('pool') == poolname:
