@@ -68,7 +68,7 @@ class AbstractPkgManager(object):
             shutil.copy(src, dest)
     #}}}
 
-    #{{{def update_sources_by_file(self, pool):
+    #{{{def update_sources_by_cmd(self, pool):
     def update_sources_by_cmd(self, pool):
         (src,keylist) = pool.current_pkgsourcelist()
         if not src: return False
@@ -88,7 +88,10 @@ class DebManager(AbstractPkgManager):
     CMDPREFIX_ADDKEY = 'apt-key add'
     SOURCELISTS_DIR = '/etc/apt/sources.list.d'
     SOURCELISTS_CFG = '/etc/apt/sources.list'
-    update_sources = update_sources_by_file
+    #}}}
+
+    #{{{def update_sources(self, pool):
+    def update_sources(self, pool): self.update_sources_by_file(pool)
     #}}}
 pass
 
@@ -104,7 +107,10 @@ class ZypperManager(AbstractPkgManager):
     CMDPREFIX_ADDKEY = ''
     SOURCELISTS_DIR = '/ect/zypp/repos.d'
     SOURCELISTS_CFG = '/etc/zypp/zypper.conf'
-    update_sources = update_sources_by_cmd
+    #}}}
+
+    #{{{def update_sources(self, pool):
+    def update_sources(self, pool): self.update_sources_by_cmd(pool)
     #}}}
 pass
 
@@ -120,7 +126,10 @@ class YumManager(AbstractPkgManager):
     CMDPREFIX_ADDKEY = 'rpm --import'
     SOURCELISTS_DIR = '/etc/yum.repo.d'
     SOURCELISTS_CFG = '/etc/yum.conf'
-    update_sources = update_sources_by_file
+    #}}}
+
+    #{{{def update_sources(self, pool):
+    def update_sources(self, pool): self.update_sources_by_file(pool)
     #}}}
 pass
 
@@ -136,7 +145,10 @@ class UrpmiManager(AbstractPkgManager):
     CMDPREFIX_ADDKEY = ''
     SOURCELISTS_DIR = ''
     SOURCELISTS_CFG = '/etc/urpmi/urpmi.cfg'
-    update_sources = update_sources_by_cmd
+    #}}}
+
+    #{{{def update_sources(self, pool):
+    def update_sources(self, pool): self.update_sources_by_cmd(pool)
     #}}}
 pass
 
@@ -152,7 +164,10 @@ class PkgManager(AbstractPkgManager):
     CMDPREFIX_ADDKEY = ''
     SOURCELISTS_DIR = ''
     SOURCELISTS_CFG = '/var/pkg/cfg_cache'
-    update_sources = update_sources_by_cmd
+    #}}}
+
+    #{{{def update_sources(self, pool):
+    def update_sources(self, pool): self.update_sources_by_cmd(pool)
     #}}}
 pass
 
@@ -168,7 +183,10 @@ class PacmanManager(AbstractPkgManager):
     CMDPREFIX_ADDKEY = ''
     SOURCELISTS_DIR = '/etc/pacman.d'
     SOURCELISTS_CFG = '/etc/pacman.conf'
-    update_sources = update_sources_by_cmd
+    #}}}
+
+    #{{{def update_sources(self, pool):
+    def update_sources(self, pool): self.update_sources_by_cmd(pool)
     #}}}
 pass
 
