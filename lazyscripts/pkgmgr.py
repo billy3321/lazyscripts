@@ -56,11 +56,27 @@ class AbstractPkgManager(object):
         (src,keylist) = pool.current_pkgsourcelist()
         if not src or not keylist : return False
 
-        key_urls = map(str.strip, open('keylist'))
-        key_urls = [ x.split('#')[0] for x in key_urls ]
-        for url in key_urls:
-            if url:
-                os.system('wget %s' % url)
+        #key_urls = map(str.strip, open(keylist))
+        #key_urls = [ x.split('#')[0] for x in key_urls ]
+        #for url in key_urls:
+        #    if url:
+        #        os.system('wget %s' % url)
+        import ConfigParser
+        key_config = ConfigParser.ConfigParser()
+        key_config.read(keylist)
+        for section in key_config.sections():
+            if section == 'Download':
+                key_urls = key_config.get('Download', 'urls').split('\n')
+                for url in key_urls:
+                    if url:
+                        os.system('wget %s' % url)
+            elif section[:9] == 'keyserver':
+                keysrv_url = key_config.get(section, 'url')
+                key_ids = key_config.get(section, 'ID').split('\n')
+                for key in key_ids:
+                    os.system('gpg --keyserver %s --recv-key %s' % (keysrv_url, key))
+                    os.system('gpg --export --armor %s > %s.gpg' % (key, key))
+
         os.system(self.make_cmd('addkey', '*'))
 
         dest = "%s/%s" % (self.SOURCELISTS_DIR, os.path.basename(src))
