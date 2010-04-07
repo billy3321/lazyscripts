@@ -43,7 +43,7 @@ class Distribution(object):
 
     #{{{def __init__(self):
     def __init__(self):
-        (self.name, self.version, self.codename) = platform.dist()
+        (self.name, self.version, self.codename) = platform.dist().lower()
         # Because built-in funciton may not recognize all distrobution.
         self._reduce_name()
         self._reduce_version()
@@ -65,7 +65,7 @@ class Distribution(object):
                  commands.getoutput('cat /etc/release | grep "OpenSolaris"'):
                 self.name = 'opensolaris'
             raise DistrobutionNotFound()
-        elif self.name == 'SuSE':
+        elif self.name == 'suse':
             if commands.getoutput('cat /etc/SuSE-release | grep "openSUSE"'):
                 self.name = 'opensuse'
         elif self.name == 'redhat':
