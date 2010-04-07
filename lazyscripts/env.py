@@ -101,7 +101,7 @@ def get_distro_codename(name):
 
 #{{{get_architecture()
 def get_architecture():
-    return platform.architecture()[1]
+    return platform.architecture()[0]
 #}}}
 
 #{{{get_laptop_info():
@@ -229,12 +229,9 @@ def storageenv(path=None):
     "Save Bash Shell enviroment variabe."
     mkexport = lambda val: "export REAL_%s=%s" % \
                     (val.upper(),os.getenv(val.upper()))
-    distro = platform.dist()[0]
-    if not distro:
-        if os.path.exists('/etc/arch-release'):
-            distro = 'arch'
-        elif os.path.exists('/usr/bin/pkg') and commands.getoutput('cat /etc/release | grep "OpenSolaris"'):
-            distro = 'opensolaris'
+    distro = get_distro_name()
+    version = get_distro_version(distro)
+    platform_name = get_architecture()
 
     contents = [
     '#!/bin/bash',
@@ -242,6 +239,8 @@ def storageenv(path=None):
     mkexport('HOME'),
     mkexport('LANG'),
     'export DISTRO_ID=%s' % distro
+    'export DISTRO_VERSION=%s' % version
+    'export PLAT_NAME=%s' % platform_name
     ]
     if not path:
         path = DEFAULT_RUNTIME_ROOT_DIR
