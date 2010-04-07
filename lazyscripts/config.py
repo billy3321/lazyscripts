@@ -164,6 +164,6 @@ class Configuration(object):
     def get_support_pools_by(self, distroname):
         for section in self.parser.sections():
             if self.parser.has_option(section, distroname):
-                yield ((section[6:-1], self.parser.get(section, 'desc')))
+                yield ((section[6:-1], self.parser.get(section, distroname)))
     #}}}
 pass
