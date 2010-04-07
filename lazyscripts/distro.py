@@ -43,7 +43,7 @@ class Distribution(object):
 
     #{{{def __init__(self):
     def __init__(self):
-        (self.name, self.version, self.codename) = platform.dist().lower()
+        (self.name, self.version, self.codename) = platform.dist()
         # Because built-in funciton may not recognize all distrobution.
         self._reduce_name()
         self._reduce_version()
@@ -58,6 +58,7 @@ class Distribution(object):
 
     #{{{def _reduce_name(self):
     def _reduce_name(self):
+        self.name = self.name.lower()
         if not self.name:
             if os.path.exists('/etc/arch-release'):
                 self.name = 'arch'
