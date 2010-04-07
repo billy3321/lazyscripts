@@ -90,8 +90,8 @@ class DebManager(AbstractPkgManager):
     SOURCELISTS_CFG = '/etc/apt/sources.list'
     #}}}
 
-    #{{{def update_sources(self, pool):
-    def update_sources(self, pool): self.update_sources_by_file(pool)
+    #{{{def __init__(self):
+    def __init__(self): self.updat_sources = self.update_sources_by_file
     #}}}
 pass
 
@@ -109,8 +109,8 @@ class ZypperManager(AbstractPkgManager):
     SOURCELISTS_CFG = '/etc/zypp/zypper.conf'
     #}}}
 
-    #{{{def update_sources(self, pool):
-    def update_sources(self, pool): self.update_sources_by_cmd(pool)
+    #{{{def __init__(self):
+    def __init__(self): self.updat_sources = self.update_sources_by_cmd
     #}}}
 pass
 
@@ -128,8 +128,8 @@ class YumManager(AbstractPkgManager):
     SOURCELISTS_CFG = '/etc/yum.conf'
     #}}}
 
-    #{{{def update_sources(self, pool):
-    def update_sources(self, pool): self.update_sources_by_file(pool)
+    #{{{def __init__(self):
+    def __init__(self): self.updat_sources = self.update_sources_by_file
     #}}}
 pass
 
@@ -147,8 +147,8 @@ class UrpmiManager(AbstractPkgManager):
     SOURCELISTS_CFG = '/etc/urpmi/urpmi.cfg'
     #}}}
 
-    #{{{def update_sources(self, pool):
-    def update_sources(self, pool): self.update_sources_by_cmd(pool)
+    #{{{def __init__(self):
+    def __init__(self): self.updat_sources = self.update_sources_by_cmd
     #}}}
 pass
 
@@ -166,8 +166,8 @@ class PkgManager(AbstractPkgManager):
     SOURCELISTS_CFG = '/var/pkg/cfg_cache'
     #}}}
 
-    #{{{def update_sources(self, pool):
-    def update_sources(self, pool): self.update_sources_by_cmd(pool)
+    #{{{def __init__(self):
+    def __init__(self): self.updat_sources = self.update_sources_by_cmd
     #}}}
 pass
 
@@ -185,8 +185,8 @@ class PacmanManager(AbstractPkgManager):
     SOURCELISTS_CFG = '/etc/pacman.conf'
     #}}}
 
-    #{{{def update_sources(self, pool):
-    def update_sources(self, pool): self.update_sources_by_cmd(pool)
+    #{{{def __init__(self):
+    def __init__(self): self.updat_sources = self.update_sources_by_cmd
     #}}}
 pass
 
