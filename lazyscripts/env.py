@@ -239,7 +239,7 @@ def storageenv(path=None):
     mkexport('LANG'),
     'export DISTRO_ID=%s'
     'export DISTRO_VERSION=%s'
-    'export PLAT_NAME=%s' % (distro version platform_name)
+    'export PLAT_NAME=%s' % (distro, version, platform_name)
     ]
     if not path:
         path = DEFAULT_RUNTIME_ROOT_DIR
