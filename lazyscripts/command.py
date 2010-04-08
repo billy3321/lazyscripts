@@ -231,8 +231,7 @@ class PoolCmd(Command):
             #if not poolname:
             from lazyscripts.distro import Distribution
             poollist = Distribution().get_support_pools()
-            tmp_poollist = poollist
-            if len(list(tmp_poollist)) > 1:
+            if len(poollist) > 1:
                 poolname = gui.select_defaultpool(poollist)
             else:
                 poolname = poollist
