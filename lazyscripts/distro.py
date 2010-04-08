@@ -18,6 +18,7 @@
 # Place, Suite 330, Boston, MA 02111-1307 USA
 import commands
 import platform
+import os
 
 from lazyscripts import env
 from lazyscripts import pkgmgr
