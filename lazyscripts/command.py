@@ -234,7 +234,7 @@ class PoolCmd(Command):
             if len(poollist) > 1:
                 poolname = gui.select_defaultpool(poollist)
             else:
-                poolname = poollist
+                poolname = poollist[0][0]
             self.conf.set_default(pool=poolname)
             self.conf.save()
         else:
