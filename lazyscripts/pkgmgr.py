@@ -107,7 +107,7 @@ class DebManager(AbstractPkgManager):
     #}}}
 
     #{{{def __init__(self):
-    def __init__(self): self.updat_sources = self.update_sources_by_file
+    def __init__(self): self.update_sources = self.update_sources_by_file
     #}}}
 pass
 
@@ -126,7 +126,7 @@ class ZypperManager(AbstractPkgManager):
     #}}}
 
     #{{{def __init__(self):
-    def __init__(self): self.updat_sources = self.update_sources_by_cmd
+    def __init__(self): self.update_sources = self.update_sources_by_cmd
     #}}}
 pass
 
@@ -145,7 +145,7 @@ class YumManager(AbstractPkgManager):
     #}}}
 
     #{{{def __init__(self):
-    def __init__(self): self.updat_sources = self.update_sources_by_file
+    def __init__(self): self.update_sources = self.update_sources_by_file
     #}}}
 pass
 
@@ -164,7 +164,7 @@ class UrpmiManager(AbstractPkgManager):
     #}}}
 
     #{{{def __init__(self):
-    def __init__(self): self.updat_sources = self.update_sources_by_cmd
+    def __init__(self): self.update_sources = self.update_sources_by_cmd
     #}}}
 pass
 
@@ -183,7 +183,7 @@ class PkgManager(AbstractPkgManager):
     #}}}
 
     #{{{def __init__(self):
-    def __init__(self): self.updat_sources = self.update_sources_by_cmd
+    def __init__(self): self.update_sources = self.update_sources_by_cmd
     #}}}
 pass
 
@@ -202,7 +202,7 @@ class PacmanManager(AbstractPkgManager):
     #}}}
 
     #{{{def __init__(self):
-    def __init__(self): self.updat_sources = self.update_sources_by_cmd
+    def __init__(self): self.update_sources = self.update_sources_by_cmd
     #}}}
 pass
 
