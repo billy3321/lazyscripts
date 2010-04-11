@@ -53,7 +53,7 @@ class AbstractPkgManager(object):
     #{{{def update_sources_by_file(self, pool):
     def update_sources_by_file(self, pool):
         from distutils.dep_util import newer
-        (src,keylist) = pool.current_pkgsourcelist()
+        (src,keylist) = pool.current_pkgsourcelist
         if not src or not keylist : return False
 
         #key_urls = map(str.strip, open(keylist))
@@ -86,7 +86,7 @@ class AbstractPkgManager(object):
 
     #{{{def update_sources_by_cmd(self, pool):
     def update_sources_by_cmd(self, pool):
-        (src,keylist) = pool.current_pkgsourcelist()
+        (src,keylist) = pool.current_pkgsourcelist
         if not src: return False
         os.system('bash %s' % src)
     #}}}
