@@ -74,8 +74,9 @@ class AbstractPkgManager(object):
                 keysrv_url = key_config.get(section, 'url')
                 key_ids = key_config.get(section, 'ID').split('\n')
                 for key in key_ids:
-                    os.system('gpg --keyserver %s --recv-key %s' % (keysrv_url, key))
-                    os.system('gpg --export --armor %s > %s.gpg' % (key, key))
+                    if key:
+                        os.system('gpg --keyserver %s --recv-key %s' % (keysrv_url, key))
+                        os.system('gpg --export --armor %s > %s.gpg' % (key, key))
 
         os.system(self.make_cmd('addkey', '*'))
 
