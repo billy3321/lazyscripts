@@ -62,6 +62,11 @@ class AbstractPkgManager(object):
         #    if url:
         #        os.system('wget %s' % url)
         import ConfigParser
+        import env.register_workspace
+        path = env.register_workspace('keys')
+        org_path = os.getcwd()
+        os.chdir(path)
+        os.system('rm -f *.gpg *.pub *.asc')
         key_config = ConfigParser.ConfigParser()
         key_config.read(keylist)
         for section in key_config.sections():
@@ -78,6 +83,7 @@ class AbstractPkgManager(object):
                     os.system('gpg --export --armor %s > %s.gpg' % (key, key))
 
         os.system(self.make_cmd('addkey', '*'))
+        os.chdir(org_path)
 
         dest = "%s/%s" % (self.SOURCELISTS_DIR, os.path.basename(src))
         if not os.path.exists(src) or newer(src, dest):

@@ -402,7 +402,7 @@ class MainWin:
     #{{{def confirm_close(self):
     def confirm_close(self):
         if self.complete or query_yes_no(_('Do you want to quit Lazyscripts?'), self.win):
-            rmtree('/tmp/lzs_root/')
+            if os.path.exists('/tmp/lzs_root/'): rmtree('/tmp/lzs_root/')
             gtk.main_quit()
             return True
         return False
@@ -465,7 +465,7 @@ class MainWin:
     #{{{def on_complete(self, data):
     def on_complete(self, data):
         self.final_page.term.feed(_('\n\x1b[1;36mLazyscripts - Linux Lazy Pack run finish!\x1b[1;32m   Have fun for Linux!\x1b[m\n'))
-        rmtree('/tmp/lzs_root/')
+        if os.path.exists('/tmp/lzs_root/'): rmtree('/tmp/lzs_root/')
 
         self.cancel_btn.set_label(gtk.STOCK_CLOSE)
         self.complete=True
