@@ -40,7 +40,7 @@ def get_realhome():
     path = os.path.join(DEFAULT_RUNTIME_ROOT_DIR, DEFAULT_STORAGED_ENV_FILE)
     if not os.path.exists(path):    return os.getenv('HOME')
     lines = open(path, 'r').readlines()
-    return ''.join(lines[2][17:]).replace('\n','')
+    return ''.join(lines[2].strip()[17:]) 
 #}}}
 
 #{{{def get_local():
@@ -92,7 +92,7 @@ def get_distro_version(name):
             version = commands.getoutput('cat /etc/release | grep "OpenSolaris" | cut -d " " -f 27')
     return version
 #}}}
-    
+
 #{{{get_distro_codename(name)
 def get_distro_codename(name):
     codename = platform.dist()[2]
