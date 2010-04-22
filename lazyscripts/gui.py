@@ -117,7 +117,7 @@ def select_pool(poollist):
     select_pool = commands.getoutput(select_cmd)
     return select_pool
 #}}}
-                                             
+
 #{{{def select_defaultpool(poollist):
 def select_defaultpool(poollist):
     import re

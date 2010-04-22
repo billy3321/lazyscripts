@@ -226,7 +226,7 @@ def prepare_runtimeenv():
 #{{{def storageenv(path=None):
 def storageenv(path=None):
     "Save Bash Shell enviroment variabe."
-    mkexport = lambda val: "export REAL_%s=%s" % \
+    mkexport = lambda val: 'export REAL_%s="%s"' % \
                     (val.upper(),os.getenv(val.upper()))
     distro = get_distro_name()
     version = get_distro_version(distro)
@@ -237,9 +237,9 @@ def storageenv(path=None):
     mkexport('USER'),
     mkexport('HOME'),
     mkexport('LANG'),
-    'export DISTRO_ID=%s'
-    'export DISTRO_VERSION=%s'
-    'export PLAT_NAME=%s' % (distro, version, platform_name)
+    'export DISTRO_ID="%s"\n'
+    'export DISTRO_VERSION="%s"\n'
+    'export PLAT_NAME="%s"\n' % (distro, version, platform_name)
     ]
     if not path:
         path = DEFAULT_RUNTIME_ROOT_DIR

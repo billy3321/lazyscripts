@@ -62,8 +62,8 @@ class AbstractPkgManager(object):
         #    if url:
         #        os.system('wget %s' % url)
         import ConfigParser
-        import env.register_workspace
-        path = env.register_workspace('keys')
+        from lazyscripts.env import resource_name
+        path = resource_name('keys')
         org_path = os.getcwd()
         os.chdir(path)
         os.system('rm -f *.gpg *.pub *.asc')
