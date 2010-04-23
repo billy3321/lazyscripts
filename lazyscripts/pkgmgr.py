@@ -29,8 +29,16 @@ import os
 import shutil
 
 class APTSourceListIsEmptyFile(Exception):    pass
-class PackageSystemNotFound(Exception):    pass
-class PackagesCommandNotSupport(Exception): pass
+class PackageSystemNotFound(Exception):
+    def __init__(self, distro):
+        self.error_msg = 'The Package System of %s is not support by Lazyscripts.' % distro
+    def __str__(self):
+        return self.error_msg
+class PackageCommandNotSupport(Exception):
+    def __init__(self, act):
+        self.error_msg = '%s command of your distribution is not support by Lazyscripts' % act
+    def __str__(self):
+        return self.error_msg
 
 class AbstractPkgManager(object):
     #{{{def make_cmd(self, act, argv=None):
@@ -43,7 +51,7 @@ class AbstractPkgManager(object):
         """
         attr = "CMDPREFIX_%s" % act.upper()
         if not hasattr(self, attr):
-            raise PackagesCommandNotSupport()
+            raise PackageCommandNotSupport(act)
         cmdprefix = getattr(self, attr)
         if not cmdprefix:    return None
         if not argv:    return cmdprefix
@@ -233,5 +241,5 @@ def get_pkgmgr(distro):
         return PacmanManager()
     elif distro == 'opensolaris':
         return PkgManager()
-    raise PackageSystemNotFound()
+    raise PackageSystemNotFound(distro)
 #}}}
