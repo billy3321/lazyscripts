@@ -5,6 +5,7 @@ import gettext
 import locale
 import time
 import thread
+import shutil
 
 import pygtk
 pygtk.require('2.0')
@@ -15,7 +16,6 @@ from lazyscripts import env
 from lazyscripts import pool as lzspool
 from lazyscripts import runner as lzsrunner
 from os import path as os_path
-from shutil import rmtree
 
 try:
     locale.setlocale (locale.LC_ALL, "")
@@ -404,8 +404,8 @@ class MainWin:
 
     #{{{def confirm_close(self):
     def confirm_close(self):
-        if self.complete or query_yes_no(_('Do you want to quit Lazyscripts?'), self.win):
-            if os.path.exists('/tmp/lzs_root/'): rmtree('/tmp/lzs_root/')
+        if self.complete or query_yes_no(_('Do you want to quit lazyscripts?'), self.win):
+            if os.path.exists('/tmp/lzs_root/'): shutil.rmtree('/tmp/lzs_root/')
             gtk.main_quit()
             return True
         return False
@@ -467,8 +467,8 @@ class MainWin:
 
     #{{{def on_complete(self, data):
     def on_complete(self, data):
-        self.final_page.term.feed(_('\n\x1b[1;36mLazyscripts - Linux Lazy Pack run finish!\x1b[1;32m   Have fun for Linux!\x1b[m\n'))
-        if os.path.exists('/tmp/lzs_root/'): rmtree('/tmp/lzs_root/')
+        self.final_page.term.feed(_('\n\x1b[1;36mLazyscripts - linux lazy pack run finish!\x1b[1;32m   have fun for linux!\x1b[m\n'))
+        if os.path.exists('/tmp/lzs_root/'): shutil.rmtree('/tmp/lzs_root/')
 
         self.cancel_btn.set_label(gtk.STOCK_CLOSE)
         self.complete=True
