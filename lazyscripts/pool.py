@@ -110,7 +110,7 @@ class ScriptsPool(object):
                                           file_append)
         filename = utils.ext_ospath_join(self.path, 'sources.d', filename)
         keylist = utils.ext_ospath_join(self.path, 'sources.d', 'keylist.txt')
-        if not os.path.exists(filename):    return None
+        if not os.path.exists(filename):    filename = None
         return filename, keylist
     #}}}
 

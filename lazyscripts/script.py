@@ -28,6 +28,9 @@ from lazyscripts import utils
 class DirectoryIsScriptDirError(Exception):
     "Raise exception when target direcoty is script dir already."
 
+class ScriptNotSupportSystemLang(Exception):
+    pass
+
 #{{{def create_scriptdesc(path, name, author):
 def create_scriptdesc(path, name, authors):
     tpl = "\n".join([
@@ -193,6 +196,8 @@ class Script(object):
                     setattr(self, attrname, attrs)
                 else:
                     setattr(self, attrname, attrs[0])
+        if not hasattr(self, 'name') or not hasattr(self, 'desc'):
+            raise ScriptNotSupportSystemLang
     #}}}
 
     #{{{def _init_attrs(self):
