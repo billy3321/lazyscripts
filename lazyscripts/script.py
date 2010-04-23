@@ -31,6 +31,8 @@ class DirectoryIsScriptDirError(Exception):
 class ScriptNotSupportSystemLang(Exception):
     def __init__(self, script_name, lang):
         self.error_msg = 'Script %s not support %s' % (script_name, lang)
+        from lazyscripts.gui import show_error
+        show_error(self.error_msg)
 
     def __str__(self):
         return self.error_msg

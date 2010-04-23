@@ -32,11 +32,15 @@ class APTSourceListIsEmptyFile(Exception):    pass
 class PackageSystemNotFound(Exception):
     def __init__(self, distro):
         self.error_msg = 'The Package System of %s is not support by Lazyscripts.' % distro
+        from lazyscripts.gui import show_error
+        show_error(self.error_msg)
     def __str__(self):
         return self.error_msg
 class PackageCommandNotSupport(Exception):
     def __init__(self, act):
         self.error_msg = '%s command of your distribution is not support by Lazyscripts' % act
+        from lazyscripts.gui import show_error
+        show_error(self.error_msg)
     def __str__(self):
         return self.error_msg
 
