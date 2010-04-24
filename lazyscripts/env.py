@@ -40,7 +40,7 @@ def get_realhome():
     path = os.path.join(DEFAULT_RUNTIME_ROOT_DIR, DEFAULT_STORAGED_ENV_FILE)
     if not os.path.exists(path):    return os.getenv('HOME')
     lines = open(path, 'r').readlines()
-    return ''.join(lines[2].strip()[18:-1]) 
+    return ''.join(lines[2].strip()[18:-1])
 #}}}
 
 #{{{def get_local():
@@ -60,7 +60,7 @@ def get_local():
 
 #{{{get_distro_name()
 def get_distro_name():
-    name = platform.dist()[0]
+    name = platform.dist()[0].lower()
     if not name:
         if os.path.exists('/etc/arch-release'):
             name = 'arch'
@@ -69,7 +69,7 @@ def get_distro_name():
         else:
             print "Lazyscripts not support your Linux distribution."
             sys.exit()
-    elif name == 'SuSE':
+    elif name == 'suse':
         if commands.getoutput('cat /etc/SuSE-release | grep "openSUSE"'):
             name = 'opensuse'
     elif name == 'redhat':
@@ -81,7 +81,7 @@ def get_distro_name():
         if os.path.exists('/etc/mandriva-release') and commands.getoutput('cat /etc/mandriva-release | grep "Mandriva"'):
             name = 'mandriva'
 
-    return name.lower()
+    return name
 #}}}
 
 #{{{get_distro_version(name)

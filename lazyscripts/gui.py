@@ -26,6 +26,9 @@ APP_NAME='Lazyscripts'
 gettext.bindtextdomain(APP_NAME, '/usr/share/locale')
 gettext.textdomain(APP_NAME)
 _ = gettext.gettext
+class UnknownWindowManager(Exception):
+    def __str__(self):
+        return 'Lazyscripts can\'t distinguish your window manager.'
 
 #{{{
 def query_yes_no(msg, parent=None):
