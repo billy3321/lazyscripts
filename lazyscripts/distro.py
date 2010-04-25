@@ -18,12 +18,14 @@
 # Place, Suite 330, Boston, MA 02111-1307 USA
 import commands
 import platform
+import os
 
 from lazyscripts import env
 from lazyscripts import pkgmgr
 
 class DistrobutionNotFound(Exception):
-    "The distrobution can not be detected."
+    def __str__(self):
+        return "The distrobution can not be detected."
 
 class Distribution(object):
 
@@ -58,14 +60,16 @@ class Distribution(object):
 
     #{{{def _reduce_name(self):
     def _reduce_name(self):
+        self.name = self.name.lower()
         if not self.name:
             if os.path.exists('/etc/arch-release'):
                 self.name = 'arch'
-            if os.path.exists('/usr/bin/pkg') and \
-                 commands.getoutput('cat /etc/release | grep "OpenSolaris"'):
+            elif os.path.exists('/usr/bin/pkg') and \
+                commands.getoutput('cat /etc/release | grep "OpenSolaris"'):
                 self.name = 'opensolaris'
-            raise DistrobutionNotFound()
-        elif self.name == 'SuSE':
+            else:
+                raise DistrobutionNotFound()
+        elif self.name == 'suse':
             if commands.getoutput('cat /etc/SuSE-release | grep "openSUSE"'):
                 self.name = 'opensuse'
         elif self.name == 'redhat':

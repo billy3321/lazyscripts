@@ -33,7 +33,7 @@ class DirectoryIsAScriptPoolError(Exception):
     "Raises exception when init a direcotry wich is a scripts pool."
 
 class NoI18nSectionError(Exception):
-    "Raises exception when get undefiend secion in pool/desc.ini"
+    "Raises exception when get undefiend section in pool/desc.ini"
 
 #{{{def create_pooldescfile(dirpath, maintainers=''):
 def create_pooldescfile(dirpath, maintainers=''):
@@ -110,7 +110,7 @@ class ScriptsPool(object):
                                           file_append)
         filename = utils.ext_ospath_join(self.path, 'sources.d', filename)
         keylist = utils.ext_ospath_join(self.path, 'sources.d', 'keylist.txt')
-        if not os.path.exists(filename):    return None
+        if not os.path.exists(filename):    filename = None
         return filename, keylist
     #}}}
 

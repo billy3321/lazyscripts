@@ -106,6 +106,9 @@ class Git(object):
             stderr_value = stderr_value.rstrip()
 
         if with_exceptions and status != 0:
+            if command == ['git', 'fetch', 'upstream']:
+               from lazyscripts.gui import show_error
+               show_error('Lazyscripts can\'t download scripts. \nMake sure your network is connected.')
             raise GitCommandError(command, status, stderr_value)
 
         if GIT_PYTHON_TRACE == 'full':

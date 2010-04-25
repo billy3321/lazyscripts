@@ -20,7 +20,7 @@
 
 get_pkgmgr - get package manager by distrobution name.
 
-    >>> pkgmgr = get_pkgmgr("Ubuntu")
+    >>> pkgmgr = get_pkgmgr("ubuntu")
     >>> pkgmgr.make_cmd('install', 'foo')
     "apt-get install foo"
 """
@@ -29,8 +29,20 @@ import os
 import shutil
 
 class APTSourceListIsEmptyFile(Exception):    pass
-class PackageSystemNotFound(Exception):    pass
-class PackagesCommandNotSupport(Exception): pass
+class PackageSystemNotFound(Exception):
+    def __init__(self, distro):
+        self.error_msg = 'The Package System of %s is not support by Lazyscripts.' % distro
+        from lazyscripts.gui import show_error
+        show_error(self.error_msg)
+    def __str__(self):
+        return self.error_msg
+class PackageCommandNotSupport(Exception):
+    def __init__(self, act):
+        self.error_msg = '%s command of your distribution is not support by Lazyscripts' % act
+        from lazyscripts.gui import show_error
+        show_error(self.error_msg)
+    def __str__(self):
+        return self.error_msg
 
 class AbstractPkgManager(object):
     #{{{def make_cmd(self, act, argv=None):
@@ -43,7 +55,7 @@ class AbstractPkgManager(object):
         """
         attr = "CMDPREFIX_%s" % act.upper()
         if not hasattr(self, attr):
-            raise PackagesCommandNotSupport()
+            raise PackageCommandNotSupport(act)
         cmdprefix = getattr(self, attr)
         if not cmdprefix:    return None
         if not argv:    return cmdprefix
@@ -53,7 +65,7 @@ class AbstractPkgManager(object):
     #{{{def update_sources_by_file(self, pool):
     def update_sources_by_file(self, pool):
         from distutils.dep_util import newer
-        (src,keylist) = pool.current_pkgsourcelist()
+        (src,keylist) = pool.current_pkgsourcelist
         if not src or not keylist : return False
 
         #key_urls = map(str.strip, open(keylist))
@@ -62,6 +74,11 @@ class AbstractPkgManager(object):
         #    if url:
         #        os.system('wget %s' % url)
         import ConfigParser
+        from lazyscripts.env import resource_name
+        path = resource_name('keys')
+        org_path = os.getcwd()
+        os.chdir(path)
+        os.system('rm -f *.gpg *.pub *.asc')
         key_config = ConfigParser.ConfigParser()
         key_config.read(keylist)
         for section in key_config.sections():
@@ -74,10 +91,12 @@ class AbstractPkgManager(object):
                 keysrv_url = key_config.get(section, 'url')
                 key_ids = key_config.get(section, 'ID').split('\n')
                 for key in key_ids:
-                    os.system('gpg --keyserver %s --recv-key %s' % (keysrv_url, key))
-                    os.system('gpg --export --armor %s > %s.gpg' % (key, key))
+                    if key:
+                        os.system('gpg --keyserver %s --recv-key %s' % (keysrv_url, key))
+                        os.system('gpg --export --armor %s > %s.gpg' % (key, key))
 
         os.system(self.make_cmd('addkey', '*'))
+        os.chdir(org_path)
 
         dest = "%s/%s" % (self.SOURCELISTS_DIR, os.path.basename(src))
         if not os.path.exists(src) or newer(src, dest):
@@ -86,7 +105,7 @@ class AbstractPkgManager(object):
 
     #{{{def update_sources_by_cmd(self, pool):
     def update_sources_by_cmd(self, pool):
-        (src,keylist) = pool.current_pkgsourcelist()
+        (src,keylist) = pool.current_pkgsourcelist
         if not src: return False
         os.system('bash %s' % src)
     #}}}
@@ -107,7 +126,7 @@ class DebManager(AbstractPkgManager):
     #}}}
 
     #{{{def __init__(self):
-    def __init__(self): self.updat_sources = self.update_sources_by_file
+    def __init__(self): self.update_sources = self.update_sources_by_file
     #}}}
 pass
 
@@ -126,7 +145,7 @@ class ZypperManager(AbstractPkgManager):
     #}}}
 
     #{{{def __init__(self):
-    def __init__(self): self.updat_sources = self.update_sources_by_cmd
+    def __init__(self): self.update_sources = self.update_sources_by_cmd
     #}}}
 pass
 
@@ -145,7 +164,7 @@ class YumManager(AbstractPkgManager):
     #}}}
 
     #{{{def __init__(self):
-    def __init__(self): self.updat_sources = self.update_sources_by_file
+    def __init__(self): self.update_sources = self.update_sources_by_file
     #}}}
 pass
 
@@ -164,7 +183,7 @@ class UrpmiManager(AbstractPkgManager):
     #}}}
 
     #{{{def __init__(self):
-    def __init__(self): self.updat_sources = self.update_sources_by_cmd
+    def __init__(self): self.update_sources = self.update_sources_by_cmd
     #}}}
 pass
 
@@ -183,7 +202,7 @@ class PkgManager(AbstractPkgManager):
     #}}}
 
     #{{{def __init__(self):
-    def __init__(self): self.updat_sources = self.update_sources_by_cmd
+    def __init__(self): self.update_sources = self.update_sources_by_cmd
     #}}}
 pass
 
@@ -202,7 +221,7 @@ class PacmanManager(AbstractPkgManager):
     #}}}
 
     #{{{def __init__(self):
-    def __init__(self): self.updat_sources = self.update_sources_by_cmd
+    def __init__(self): self.update_sources = self.update_sources_by_cmd
     #}}}
 pass
 
@@ -257,5 +276,5 @@ def get_pkgmgr(distro):
         return EmergeManager()
     elif distro == 'slackware':
         return SlackpkgManager()
-    raise PackageSystemNotFound()
+    raise PackageSystemNotFound(distro)
 #}}}
