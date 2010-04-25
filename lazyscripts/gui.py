@@ -407,7 +407,7 @@ class MainWin:
 
     #{{{def confirm_close(self):
     def confirm_close(self):
-        if self.complete or query_yes_no(_('Do you want to quit lazyscripts?'), self.win):
+        if self.complete or query_yes_no(_('Do you want to quit Lazyscripts?'), self.win):
             if os.path.exists('/tmp/lzs_root/'): shutil.rmtree('/tmp/lzs_root/')
             gtk.main_quit()
             return True
