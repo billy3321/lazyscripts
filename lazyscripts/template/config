@@ -22,20 +22,26 @@ linuxmint = 8
 [pool "suselize"]
 upstream = git://github.com/mrmoneyc/lzs_pool_suselize.git
 rev = master
-desc = mrmoneyc's debianlize scripts pool.
+desc = mrmoneyc's suselize scripts pool.
 opensuse = 11.1, 11.2, 11.3
 
 [pool "billys-redhatlize"]
 upstream = git://github.com/billy3321/lzs_pool_redhatlize.git
 rev = master
-desc = billy's debianlize scripts pool.
+desc = billy's redhatlize scripts pool.
 fedora = 11, 12
 centos = 5.3, 5.4
 
 [pool "kevin-redhatlize"]
 upstream = git://github.com/chiehwen/lzs_pool_redhatlize.git
 rev = master
-desc = kevin's debianlize scripts pool.
+desc = kevin's redhatlize scripts pool.
 fedora = 11, 12
 centos = 5.3, 5.4
+
+[pool "billys-redhatlize"]
+upstream = git://github.com/billy3321/lzs_pool_mandriva.git
+rev = master
+desc = billy's mandriva scripts pool.
+mandriva = 2009.1, 2010.0
 

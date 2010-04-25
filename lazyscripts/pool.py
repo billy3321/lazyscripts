@@ -33,7 +33,7 @@ class DirectoryIsAScriptPoolError(Exception):
     "Raises exception when init a direcotry wich is a scripts pool."
 
 class NoI18nSectionError(Exception):
-    "Raises exception when get undefiend secion in pool/desc.ini"
+    "Raises exception when get undefiend section in pool/desc.ini"
 
 #{{{def create_pooldescfile(dirpath, maintainers=''):
 def create_pooldescfile(dirpath, maintainers=''):

@@ -24,7 +24,8 @@ from lazyscripts import env
 from lazyscripts import pkgmgr
 
 class DistrobutionNotFound(Exception):
-    "The distrobution can not be detected."
+    def __str__(self):
+        return "The distrobution can not be detected."
 
 class Distribution(object):
 
