@@ -61,26 +61,35 @@ class Distribution(object):
     #{{{def _reduce_name(self):
     def _reduce_name(self):
         self.name = self.name.lower()
-        if not self.name:
+        if not name:
             if os.path.exists('/etc/arch-release'):
-                self.name = 'arch'
-            elif os.path.exists('/usr/bin/pkg') and \
-                commands.getoutput('cat /etc/release | grep "OpenSolaris"'):
-                self.name = 'opensolaris'
+                name = 'arch'
+            elif os.path.exists('/usr/bin/pkg') and commands.getoutput('cat /etc/release | grep "OpenSolaris"'):
+                name = 'opensolaris'
+            elif os.path.exists('/etc/redflag-release'):
+                name = 'redflag'
+            elif os.path.exists('/etc/slackware-version'):
+                name = 'slackware'
             else:
+                print "Lazyscripts not support your Linux distribution."
+                name = None
                 raise DistrobutionNotFound()
-        elif self.name == 'suse':
+        elif name == 'suse':
             if commands.getoutput('cat /etc/SuSE-release | grep "openSUSE"'):
-                self.name = 'opensuse'
-        elif self.name == 'redhat':
+                name = 'opensuse'
+        elif name == 'redhat':
             if commands.getoutput('cat /etc/redhat-release | grep "Red Hat"'):
-                self.name = 'redhat'
-            if commands.getoutput('cat /etc/redhat-release | grep "CentOS"'):
-                self.name = 'centos'
-        elif self.name == 'mandrake':
-            if os.path.exists('/etc/mandriva-release') and \
-               commands.getoutput('cat /etc/mandriva-release | grep "Mandriva"'):
-             self.name = 'mandriva'
+                name = 'redhat'
+            elif commands.getoutput('cat /etc/redhat-release | grep "CentOS"'):
+                name = 'centos'
+        elif name == 'mandrake':
+            if os.path.exists('/etc/mandriva-release') and commands.getoutput('cat /etc/mandriva-release | grep "Mandriva"'):
+                name = 'mandriva'
+            elif os.path.exists('/etc/pclinuxos-release') and commands.getoutput('cat /etc/pclinuxos-release | grep "PCLinuxOS"'):
+                name = 'pclinuxos'
+        elif name == 'gentoo':
+            if os.path.exists('/etc/sabayon-release'):
+                name = 'sabayon'
     #}}}
 
     #{{{def _reduce_version(self):

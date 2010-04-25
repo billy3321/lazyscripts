@@ -66,9 +66,9 @@ def get_distro_name():
             name = 'arch'
         elif os.path.exists('/usr/bin/pkg') and commands.getoutput('cat /etc/release | grep "OpenSolaris"'):
             name = 'opensolaris'
-        elif os.path.exists('/etc/redflag-release')
+        elif os.path.exists('/etc/redflag-release'):
             name = 'redflag'
-        elif os.path.exists('/etc/slackware-version')
+        elif os.path.exists('/etc/slackware-version'):
             name = 'slackware'
         else:
             print "Lazyscripts not support your Linux distribution."
