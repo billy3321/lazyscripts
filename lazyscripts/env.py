@@ -60,7 +60,10 @@ def get_local():
 
 #{{{get_distro_name()
 def get_distro_name():
-    name = platform.dist()[0].lower()
+    if platform.python_version() < '2.6.0':
+        name = platform.dist()[0].lower()
+    else:
+        name = platform.linux_distribution()[0].lower()
     if not name:
         if os.path.exists('/etc/arch-release'):
             name = 'arch'
@@ -95,7 +98,10 @@ def get_distro_name():
 
 #{{{get_distro_version(name)
 def get_distro_version(name):
-    version = platform.dist()[1]
+    if platform.python_version() < '2.6.0':
+        version = platform.dist()[1]
+    else:
+        version = platform.linux_distribution()[1]
     if not version:
         if name == 'opensolaris':
             version = commands.getoutput('cat /etc/release | grep "OpenSolaris" | cut -d " " -f 27')
