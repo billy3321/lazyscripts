@@ -20,12 +20,12 @@
 from os import getenv, path
 from commands import getoutput
 
-class UnknownWindowManager(Exception): 
-    def __repr__(self):
+class UnknownWindowManager(Exception):
+    def __str__(self):
         return 'Lazyscripts can\'t distinguish your window manager.'
 
 class UnknownDistribution(Exception):
-    def __repr__(self):
+    def __str__(self):
         return 'Lazyscripts can\'t distinguish your Linux distribution.'
 
 
@@ -33,7 +33,7 @@ def wm_desktop_session():
     """
     Check the DESKTOP_SESSION variable to distinguish window manager.
     """
-    wm_value = getenv('DESKTOP_SESSION') 
+    wm_value = getenv('DESKTOP_SESSION')
     if wm_value in ('gnome','kde','lxde','LXDE','wmaker'):
         return wm_value.lower()
     elif wm_value in ('xfce.desktop','xfce'):
