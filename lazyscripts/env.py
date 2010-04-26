@@ -73,6 +73,8 @@ def get_distro_name():
             name = 'redflag'
         elif os.path.exists('/etc/slackware-version'):
             name = 'slackware'
+        elif os.path.exists('/etc/linpus-release'):
+            name = 'linpus'
         else:
             print "Lazyscripts not support your Linux distribution."
             sys.exit()
@@ -109,6 +111,8 @@ def get_distro_version(name):
             version = commands.getoutput('cat /etc/sabayon-edition | cut -d " " -f 3')
         elif name == 'redflag':
             version = commands.getoutput('cat /etc/redflag-release | cut -d " " -f 4')
+        elif name == 'linpus':
+            version = commands.getoutput('cat /etc/linpus-release | cut -d " " -f 4')
     return version
 #}}}
 

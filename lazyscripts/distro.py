@@ -74,6 +74,8 @@ class Distribution(object):
                 name = 'redflag'
             elif os.path.exists('/etc/slackware-version'):
                 name = 'slackware'
+            elif os.path.exists('/etc/linpus-release'):
+                name = 'linpus'
             else:
                 print "Lazyscripts not support your Linux distribution."
                 name = None
@@ -100,6 +102,12 @@ class Distribution(object):
     def _reduce_version(self):
         if self.name == 'opensolaris' and not self.version:
             self.version = commands.getoutput('cat /etc/release | grep "OpenSolaris" | cut -d " " -f 27')
+        elif name == 'sabayon' :
+            self.version = commands.getoutput('cat /etc/sabayon-edition | cut -d " " -f 3')
+        elif name == 'redflag':
+            self.version = commands.getoutput('cat /etc/redflag-release | cut -d " " -f 4')
+        elif name == 'linpus':
+            self.version = commands.getoutput('cat /etc/linpus-release | cut -d " " -f 4')
     #}}}
 
     #{{{def get_support_pools(self):
