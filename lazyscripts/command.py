@@ -223,8 +223,6 @@ class PoolCmd(Command):
     def sync(self):
         print 10
         (opts, args) = self._getopts([optparse.make_option('-r', '--rev', dest='rev')])
-        distro = env.get_distro_name()
-        distro_ver = env.get_distro_version(distro)
         if len(args) <= 1:
             poolname = self._get_user_preferpool()
         else:

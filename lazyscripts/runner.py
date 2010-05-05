@@ -38,7 +38,7 @@ def find_pkginfo(scripts, distro, version=None):
     @return tuple (install_pkgs_list, remove_pkgs_list)
     """
     paths = [script.path for script in scripts]
-    # check the distrobution has another pkg info.
+    # check the distribution has another pkg info.
     distro = distro.lower()
     distro_dir = distro+'_def'
     if version:

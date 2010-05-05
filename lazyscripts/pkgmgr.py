@@ -81,6 +81,13 @@ class AbstractPkgManager(object):
         os.system('rm -f *.gpg *.pub *.asc')
         key_config = ConfigParser.ConfigParser()
         key_config.read(keylist)
+        progress_dialog_cmd = [
+             "zenity --progress --title='Lazyscripts'",
+             "--text='Download and import keys...'",
+             "--auto-close",
+             "--width=400"]
+        os.system('%s' % (' '.join(progress_dialog_cmd)))
+
         for section in key_config.sections():
             if section == 'Download':
                 key_urls = key_config.get('Download', 'urls').split('\n')

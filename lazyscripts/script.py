@@ -24,6 +24,7 @@ import os
 import platform
 
 from lazyscripts import utils
+from lazyscripts.distro import Distribution
 
 class DirectoryIsScriptDirError(Exception):
     "Raise exception when target direcoty is script dir already."
@@ -78,8 +79,8 @@ def create_scriptdesc(path, name, authors):
 
 #{{{def create_scriptpkgdesc(dir):
 def create_scriptpkgdesc(dir):
-    from lazyscripts.env import get_distro_name
-    dir = os.path.join(dir, get_distro_name()+'_def')
+    distro = Distribution()
+    dir = os.path.join(dir, distro.name+'_def')
     os.mkdir(dir)
     for e in ('install','remove'):
         filepath = os.path.join(dir, '%s.txt' % e)
@@ -216,11 +217,10 @@ class Script(object):
     #{{{def get_pkginfo(self):
     def get_pkginfo(self):
         def _read(query):
-            from lazyscripts.env import get_distro_name
-            distro = get_distro_name()
-            if not distro:    return ''
+            distro = Distribution()
+            if not distro.name:    return ''
 
-            query = utils.ext_ospath_join(self.path, distro, query)
+            query = utils.ext_ospath_join(self.path, distro.name, query)
             if not os.path.isfile(query):   return []
             return [ e for e in open(query, 'r').read().split('\n') if not e.startswith('#') and e]
 
