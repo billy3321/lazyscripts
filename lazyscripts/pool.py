@@ -28,6 +28,7 @@ import tempfile
 from lazyscripts import git
 from lazyscripts import utils
 from lazyscripts import script as lzsscript
+from lazyscripts.distro import Distribution
 
 class DirectoryIsAScriptPoolError(Exception):
     "Raises exception when init a direcotry wich is a scripts pool."
@@ -95,18 +96,16 @@ class ScriptsPool(object):
     #{{{def current_pkgsourcelist(self):
     @property
     def current_pkgsourcelist(self):
-        from lazyscripts.env import get_distro_name, get_distro_version
-        distro = get_distro_name()
-        if distro in ('ubuntu', 'debian', 'linuxmint'):
+        if self.distro.name in ('ubuntu', 'debian', 'linuxmint'):
             file_append = 'list'
-        elif distro in ('fedora', 'redhat', 'centos'):
+        elif self.distro.name in ('fedora', 'redhat', 'centos'):
             file_append = 'repo'
         else:
         # The repository source update by command.
             file_append = 'sh'
         filename = "lzs_%s_%s_%s.%s" % (platform.machine(),
-                                          distro,
-                                          get_distro_version(distro),
+                                          self.distro.name,
+                                          self.distro.version,
                                           file_append)
         filename = utils.ext_ospath_join(self.path, 'sources.d', filename)
         keylist = utils.ext_ospath_join(self.path, 'sources.d', 'keylist.txt')
@@ -118,8 +117,8 @@ class ScriptsPool(object):
     def __init__(self, path, recommands_list=None):
         self.path = path
         self.recommands_list = recommands_list
-        from lazyscripts.env import get_distro_name
-        self.dist = get_distro_name()
+        from lazyscripts.distro import Distribution
+        self.distro = Distribution()
         self.load()
     #}}}
 
@@ -131,7 +130,7 @@ class ScriptsPool(object):
                                e.istitle()]
         self._scripts = {}
         self.script_filters = {}
-        self.script_filters[self.dist] = True
+        self.script_filters[self.distro.name] = True
         self.parser = ConfigParser.ConfigParser()
         self.parser.read(os.path.join(self.path, 'desc.ini'))
         self.parser.read(os.path.join(self.path, 'recommands.ini'))

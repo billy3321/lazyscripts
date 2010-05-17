@@ -20,7 +20,6 @@ import commands
 import platform
 import os
 
-from lazyscripts import env
 from lazyscripts import pkgmgr
 
 class DistrobutionNotFound(Exception):
@@ -45,11 +44,14 @@ class Distribution(object):
 
     #{{{def __init__(self):
     def __init__(self):
+        # linux_distribution is insted of dist
+        # Ref: http://docs.python.org/library/platform.html
         if platform.python_version() < '2.6.0':
             (self.name, self.version, self.codename) = platform.dist()
         else:
             (self.name, self.version, self.codename) = platform.linux_distribution()
 
+        self.platform = platform.architecture()[0]
         # Because built-in funciton may not recognize all distrobution.
         self._reduce_name()
         self._reduce_version()
@@ -113,6 +115,7 @@ class Distribution(object):
     #{{{def get_support_pools(self):
     def get_support_pools(self):
         """Delegation layer"""
+        from lazyscripts import env
         conf = env.resource('config')
         return conf.get_support_pools_by(self.name)
     #}}}
