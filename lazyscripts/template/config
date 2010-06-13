@@ -41,7 +41,7 @@ lang = zh_TW
 upstream = git://github.com/billy3321/lzs_pool_redhatlize.git
 rev = master
 desc = billy's redhatlize scripts pool.
-fedora = 11, 12
+fedora = 11, 12, 13
 centos = 5.3, 5.4
 lang = zh_TW
 
