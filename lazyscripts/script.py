@@ -21,10 +21,9 @@
 
 import ConfigParser
 import os
-import platform
 
 from lazyscripts import utils
-from lazyscripts.distro import Distribution
+from lazyscripts import distro
 
 class DirectoryIsScriptDirError(Exception):
     "Raise exception when target direcoty is script dir already."
@@ -79,8 +78,7 @@ def create_scriptdesc(path, name, authors):
 
 #{{{def create_scriptpkgdesc(dir):
 def create_scriptpkgdesc(dir):
-    distro = Distribution()
-    dir = os.path.join(dir, distro.name+'_def')
+    dir = os.path.join(dir, distro.Distribution().name+'_def')
     os.mkdir(dir)
     for e in ('install','remove'):
         filepath = os.path.join(dir, '%s.txt' % e)
@@ -160,6 +158,8 @@ class Script(object):
         self.parser.read(os.path.join(path, self.DESC_DEFFILE))
 
         self.selected = False
+        self.name = 'Script has a initial name, please report bug to script maintainer'
+        self.desc = ''
         self.path = path
         self.id = os.path.basename(path)
         self.category = 'root'
@@ -191,10 +191,8 @@ class Script(object):
             if not optname[0:4] in self.I18N_ATTRS:
                 attrname = optname
             # skip if lang of attribute value is not we wanted.
-            elif optname[5:10] != self.lang.lower():  continue
-
-            # skip if attribute has set already.
-            if hasattr(self, attrname): continue
+            elif optname[5:10] != self.lang.lower():
+                continue
 
             if not attrname in ('maintainers','authors'):
                 setattr(self, attrname, self.parser.get('info',optname))
@@ -217,10 +215,10 @@ class Script(object):
     #{{{def get_pkginfo(self):
     def get_pkginfo(self):
         def _read(query):
-            distro = Distribution()
-            if not distro.name:    return ''
+            dist = distro.Distribution().name
+            if not dist:    return []
 
-            query = utils.ext_ospath_join(self.path, distro.name, query)
+            query = utils.ext_ospath_join(self.path, dist, query)
             if not os.path.isfile(query):   return []
             return [ e for e in open(query, 'r').read().split('\n') if not e.startswith('#') and e]
 

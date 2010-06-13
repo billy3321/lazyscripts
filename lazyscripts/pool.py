@@ -25,6 +25,7 @@ import platform
 import shutil
 import tempfile
 
+from lazyscripts import distro
 from lazyscripts import git
 from lazyscripts import utils
 from lazyscripts import script as lzsscript
@@ -96,20 +97,14 @@ class ScriptsPool(object):
     #{{{def current_pkgsourcelist(self):
     @property
     def current_pkgsourcelist(self):
-        if self.distro.name in ('ubuntu', 'debian', 'linuxmint'):
-            file_append = 'list'
-        elif self.distro.name in ('fedora', 'redhat', 'centos'):
-            file_append = 'repo'
-        else:
-        # The repository source update by command.
-            file_append = 'sh'
-        filename = "lzs_%s_%s_%s.%s" % (platform.machine(),
-                                          self.distro.name,
-                                          self.distro.version,
-                                          file_append)
-        filename = utils.ext_ospath_join(self.path, 'sources.d', filename)
-        keylist = utils.ext_ospath_join(self.path, 'sources.d', 'keylist.txt')
-        if not os.path.exists(filename):    filename = None
+
+        filename = utils.ext_ospath_join(self.path,
+                                        'sources.d',
+                                        self.dist.pkgsrc_name)
+        if not os.path.exists(filename):    return None
+        keylist = utils.ext_ospath_join(self.path,
+                                        'sources.d',
+                                        'keylist.txt')
         return filename, keylist
     #}}}
 
@@ -117,8 +112,7 @@ class ScriptsPool(object):
     def __init__(self, path, recommands_list=None):
         self.path = path
         self.recommands_list = recommands_list
-        from lazyscripts.distro import Distribution
-        self.distro = Distribution()
+        self.dist = distro.Distribution()
         self.load()
     #}}}
 
@@ -130,7 +124,8 @@ class ScriptsPool(object):
                                e.istitle()]
         self._scripts = {}
         self.script_filters = {}
-        self.script_filters[self.distro.name] = True
+
+        self.script_filters[self.dist.name] = True
         self.parser = ConfigParser.ConfigParser()
         self.parser.read(os.path.join(self.path, 'desc.ini'))
         self.parser.read(os.path.join(self.path, 'recommands.ini'))

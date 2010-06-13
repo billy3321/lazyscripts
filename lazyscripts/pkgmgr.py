@@ -25,8 +25,12 @@ get_pkgmgr - get package manager by distrobution name.
     "apt-get install foo"
 """
 
+import commands
+import ConfigParser
 import os
 import shutil
+
+from distutils.dep_util import newer
 
 class APTSourceListIsEmptyFile(Exception):    pass
 class PackageSystemNotFound(Exception):
@@ -62,49 +66,11 @@ class AbstractPkgManager(object):
         return "%s %s" % (cmdprefix, argv)
     #}}}
 
-    #{{{def update_sources_by_file(self, pool):
+    #{{{def update_sources_by(self, pool):
     def update_sources_by_file(self, pool):
-        from distutils.dep_util import newer
-        (src,keylist) = pool.current_pkgsourcelist
-        if not src or not keylist : return False
-
-        #key_urls = map(str.strip, open(keylist))
-        #key_urls = [ x.split('#')[0] for x in key_urls ]
-        #for url in key_urls:
-        #    if url:
-        #        os.system('wget %s' % url)
-        import ConfigParser
-        from lazyscripts.env import resource_name
-        path = resource_name('keys')
-        org_path = os.getcwd()
-        os.chdir(path)
-        os.system('rm -f *.gpg *.pub *.asc')
-        key_config = ConfigParser.ConfigParser()
-        key_config.read(keylist)
-        progress_dialog_cmd = [
-             "zenity --progress --title='Lazyscripts'",
-             "--text='Download and import keys...'",
-             "--auto-close",
-             "--width=400"]
-        os.system('%s' % (' '.join(progress_dialog_cmd)))
-
-        for section in key_config.sections():
-            if section == 'Download':
-                key_urls = key_config.get('Download', 'urls').split('\n')
-                for url in key_urls:
-                    if url:
-                        os.system('wget %s' % url)
-            elif section[:9] == 'keyserver':
-                keysrv_url = key_config.get(section, 'url')
-                key_ids = key_config.get(section, 'ID').split('\n')
-                for key in key_ids:
-                    if key:
-                        os.system('gpg --keyserver %s --recv-key %s' % (keysrv_url, key))
-                        os.system('gpg --export --armor %s > %s.gpg' % (key, key))
-
-        os.system(self.make_cmd('addkey', '*'))
-        os.chdir(org_path)
-
+        (src, keylist) = pool.current_pkgsourcelist
+        if not src: return False
+        self.addkeys(keylist)
         dest = "%s/%s" % (self.SOURCELISTS_DIR, os.path.basename(src))
         if not os.path.exists(src) or newer(src, dest):
             shutil.copy(src, dest)
@@ -114,9 +80,73 @@ class AbstractPkgManager(object):
     def update_sources_by_cmd(self, pool):
         (src,keylist) = pool.current_pkgsourcelist
         if not src: return False
-        os.system('bash %s' % src)
+        self.addkeys(keylist)
+        os.system(src)
     #}}}
-pass
+
+    #{{{def addkeys(self, keylist):
+    def addkeys(self, keylist):
+        """Add GPG key of package repo to verify packages.
+
+        @param str keylist a .ini file
+        """
+        #@FIXME: some package manager does not have key manager.
+        if not self.keymgr: return False
+        key_config = ConfigParser.ConfigParser()
+        key_config.read(keylist)
+        for section in key_config.sections():
+            if section == 'Download':
+                key_urls = key_config.get('Download', 'urls').split('\n')
+                for url in key_urls:
+                    if not url: continue
+                    self.keymgr.import_keyfile(url)
+            elif section[:9] == 'keyserver':
+                keysrv_url = key_config.get(section, 'url')
+                key_ids = key_config.get(section, 'id').split('\n')
+                for key in key_ids:
+                    if not key: continue
+                    self.keymgr.import_key_from_keyserver(keysrv_url, key)
+        #}}}
+    pass
+
+class DebKeyManager(object):
+    """APT Key Manager(Debian, Ubuntu, LinuxMint)
+    """
+    #{{{def has_key(self, key):
+    def has_key(self, key):
+        """check is key already imported
+
+        @param str key key string
+        @return bool True if the key exists
+        """
+        if commands.getoutput('apt-key list | grep -w %s' % key):
+            return True
+    #}}}
+
+    #{{{def import_key_from_keyserver(self, keysrv_url, keyid):
+    def import_key_from_keyserver(self, keysrv_url, keyid):
+        if not self.has_key(keyid):
+            os.system('apt-key adv --keyserver %s --recv-keys %s' % (keysrv_url, keyid))
+    #}}}
+
+    #{{{def import_keyfile(self, path):
+    def import_keyfile(self, path):
+        """Add key from http or file.
+
+        @param str path http url or file path (file is default)
+        """
+        if path.startswith('http://') or \
+           path.startswith('https://') or \
+           path.startswith('ftp://'):
+            os.system('wget -q %s -O- | apt-key add -' % path)
+        else:
+            os.system('apt-key add %s' % path)
+    #}}}
+
+    #{{{def remove_key(self, keyid):
+    def remove_key(self, keyid):
+        os.system('apt-key del %s' % keyid)
+    #}}}
 
 class DebManager(AbstractPkgManager):
     """Deb Package System Manager(Debian, Ubuntu, LinuxMint)
@@ -133,7 +163,10 @@ class DebManager(AbstractPkgManager):
     #}}}
 
     #{{{def __init__(self):
-    def __init__(self): self.update_sources = self.update_sources_by_file
+
+    def __init__(self):
+        self.update_sources = self.update_sources_by_file
+        self.keymgr = DebKeyManager()
     #}}}
 pass
 
@@ -176,6 +209,7 @@ class YumManager(AbstractPkgManager):
 pass
 
 class UrpmiManager(AbstractPkgManager):
+
     """Urpmi Package System Manager(Mandriva)
     """
     #{{{attrs
