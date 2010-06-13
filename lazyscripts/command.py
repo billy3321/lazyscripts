@@ -257,7 +257,8 @@ class PoolCmd(Command):
     #{{{def _ask_user_selectpool(self):
     def _ask_user_selectpool(self):
         conf = env.resource('config')
-        pools = conf.get_support_pools(distro.Distribution().name)
+        #pools = conf.get_support_pools(distro.Distribution().name)
+        pools = conf.get_support_pools(distro.Distribution().name, distro.Distribution().version, env.get_local())
         if len(pools) == 1:
             poolname = pools[0][0]
         else:

@@ -29,7 +29,6 @@ from lazyscripts import distro
 from lazyscripts import git
 from lazyscripts import utils
 from lazyscripts import script as lzsscript
-from lazyscripts.distro import Distribution
 
 class DirectoryIsAScriptPoolError(Exception):
     "Raises exception when init a direcotry wich is a scripts pool."
@@ -306,9 +305,9 @@ class GitScriptsPool(ScriptsPool):
                 pool.gitapi.remote('add', k, kwds[k])
                 print progress ; progress += 10
                 pool.gitapi.fetch(k)
-      	# get remote branch name.
-       	ret=pool.gitapi.branch('-r')
-    	branchs = [ e.replace('upstream/','').strip() for e in ret.split('\n')]
+        # get remote branch name.
+        ret=pool.gitapi.branch('-r')
+        branchs = [ e.replace('upstream/','').strip() for e in ret.split('\n')]
         for branch in branchs:
             print progress ; progress += 10
             pool.gitapi.checkout('upstream/%s' % branch, b=branch)

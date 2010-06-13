@@ -112,11 +112,4 @@ class Distribution(object):
             self.version = commands.getoutput('cat /etc/release | grep "OpenSolaris" | cut -d " " -f 27')
     #}}}
 
-    #{{{def get_support_pools(self):
-    def get_support_pools(self):
-        """Delegation layer"""
-        from lazyscripts import env
-        conf = env.resource('config')
-        return conf.get_support_pools_by(self.name)
-    #}}}
 pass
