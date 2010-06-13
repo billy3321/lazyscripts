@@ -11,6 +11,7 @@ Scripts:      decalar by each scripts
     zenity
     python-dev or python-devel
     python-distutils-extra
+    wget
 
 == Install & Usage
 
