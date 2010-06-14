@@ -148,6 +148,47 @@ class DebKeyManager(object):
         os.system('apt-key del %s' % keyid)
     #}}}
 
+class RpmKeyManager(object):
+    """RPM Key Manager(Fedora, CentOS, RedHat)
+    """
+    #{{{def has_key(self, key):
+    def has_key(self, key):
+        """check is key already imported
+
+        @param str key key string
+        @return bool True if the key exists
+        """
+        if commands.getoutput('rpm -qa gpg-pubkey | grep -w %s' % key):
+            return True
+    #}}}
+
+    #{{{def import_key_from_keyserver(self, keysrv_url, keyid):
+    def import_key_from_keyserver(self, keysrv_url, keyid):
+        if not self.has_key(keyid):
+            os.system('gpg --keyserver %s --recv-keys %s' % (keysrv_url, keyid))
+            os.system('gpg -a --export %s > %s' % (keysrv_url, keyid))
+            os.system('rpm --import %s' % keyid)
+    #}}}
+
+    #{{{def import_keyfile(self, path):
+    def import_keyfile(self, path):
+        """Add key from http or file.
+
+        @param str path http url or file path (file is default)
+        """
+        if path.startswith('http://') or \
+           path.startswith('https://') or \
+           path.startswith('ftp://'):
+            os.system('rpm --import %s' % path)
+        else:
+            os.system('rpm --import %s' % path)
+    #}}}
+
+    #{{{def remove_key(self, keyid):
+    def remove_key(self, keyid):
+        os.system('rpm -e gpg-pubkey-%s' % keyid)
+    #}}}
+
 class DebManager(AbstractPkgManager):
     """Deb Package System Manager(Debian, Ubuntu, LinuxMint)
     """
@@ -204,7 +245,10 @@ class YumManager(AbstractPkgManager):
     #}}}
 
     #{{{def __init__(self):
-    def __init__(self): self.update_sources = self.update_sources_by_file
+    def __init__(self):
+        self.update_sources = self.update_sources_by_file
+        self.keymgr = RpmKeyManager()                                        
+
     #}}}
 pass
 
