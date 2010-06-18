@@ -29,7 +29,7 @@ if [ $USER = "root" ]; then
             rm -rf rpmforge-release-0.3.6-1.el5.rf.x86_64.rpm
         fi
 
-        wget {PKG_URL}rpmforge-release-0.3.6-1.el5.rf.x86_64.rpm
+        wget ${PKG_URL}rpmforge-release-0.3.6-1.el5.rf.x86_64.rpm
         rpm -Uvh --nosignature rpmforge-release-0.3.6-1.el5.rf.x86_64.rpm
         yum check-update
         yum -y install gksu
