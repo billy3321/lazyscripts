@@ -12,6 +12,7 @@ Scripts:      decalar by each scripts
     python-dev or python-devel
     python-distutils-extra
     wget
+    git-core
 
 == Install & Usage
 
