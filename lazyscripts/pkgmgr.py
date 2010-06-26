@@ -84,7 +84,7 @@ class AbstractPkgManager(object):
         if not src: return False
         if self.keymgr:
             self.addkeys(keylist)
-        os.system(src)
+        os.system('bash %s' % src)
     #}}}
 
     #{{{def addkeys(self, keylist):
