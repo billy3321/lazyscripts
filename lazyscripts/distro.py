@@ -66,7 +66,7 @@ class Distribution(object):
         """
         if self.name in ('ubuntu', 'debian', 'linuxmint'):
             extend = 'list'
-        elif self.name in ('fedora', 'redhat', 'centos'):
+        elif self.name in ('fedora', 'redhat', 'centos','opensuse','suse','mandriva'):
             extend = 'sh'
         return "lzs_%s_%s_%s.%s" % (platform.machine(),
                                           self.name,

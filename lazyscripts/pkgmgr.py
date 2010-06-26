@@ -36,15 +36,17 @@ class APTSourceListIsEmptyFile(Exception):    pass
 class PackageSystemNotFound(Exception):
     def __init__(self, distro):
         self.error_msg = 'The Package System of %s is not support by Lazyscripts.' % distro
-        from lazyscripts.gui import show_error
-        show_error(self.error_msg)
+        os.system('zenity --error --text "%s"' % self.error_msg)
+        # from lazyscripts.gui import show_error
+        # show_error(self.error_msg)
     def __str__(self):
         return self.error_msg
 class PackageCommandNotSupport(Exception):
     def __init__(self, act):
         self.error_msg = '%s command of your distribution is not support by Lazyscripts' % act
-        from lazyscripts.gui import show_error
-        show_error(self.error_msg)
+        os.system('zenity --error --text "%s"' % self.error_msg)
+        # from lazyscripts.gui import show_error
+        # show_error(self.error_msg)
     def __str__(self):
         return self.error_msg
 
@@ -80,7 +82,8 @@ class AbstractPkgManager(object):
     def update_sources_by_cmd(self, pool):
         (src,keylist) = pool.current_pkgsourcelist
         if not src: return False
-        self.addkeys(keylist)
+        if self.keymgr:
+            self.addkeys(keylist)
         os.system(src)
     #}}}
 
@@ -226,7 +229,9 @@ class ZypperManager(AbstractPkgManager):
     #}}}
 
     #{{{def __init__(self):
-    def __init__(self): self.update_sources = self.update_sources_by_cmd
+    def __init__(self):
+        self.update_sources = self.update_sources_by_cmd
+        self.keymgr = None
     #}}}
 pass
 
@@ -268,7 +273,9 @@ class UrpmiManager(AbstractPkgManager):
     #}}}
 
     #{{{def __init__(self):
-    def __init__(self): self.update_sources = self.update_sources_by_cmd
+    def __init__(self):
+        self.update_sources = self.update_sources_by_cmd
+        self.keymgr = None
     #}}}
 pass
 
@@ -287,7 +294,9 @@ class PkgManager(AbstractPkgManager):
     #}}}
 
     #{{{def __init__(self):
-    def __init__(self): self.update_sources = self.update_sources_by_cmd
+    def __init__(self):
+        self.update_sources = self.update_sources_by_cmd
+        self.keymgr = None
     #}}}
 pass
 
@@ -306,7 +315,9 @@ class PacmanManager(AbstractPkgManager):
     #}}}
 
     #{{{def __init__(self):
-    def __init__(self): self.update_sources = self.update_sources_by_cmd
+    def __init__(self):
+        self.update_sources = self.update_sources_by_cmd
+        self.keymgr = None
     #}}}
 pass
 
