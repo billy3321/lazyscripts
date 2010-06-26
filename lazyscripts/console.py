@@ -21,12 +21,17 @@ import os
 import optparse
 import sys
 import commands
+import gettext
 
 from lazyscripts import command as lzscmd
 from lazyscripts import pool as lzspool
 from lazyscripts import env
 from lazyscripts import wm
 from lazyscripts import distro
+APP_NAME='Lazyscripts'
+gettext.bindtextdomain(APP_NAME, '/usr/share/locale')
+gettext.textdomain(APP_NAME)
+_ = gettext.gettext
 
 class LzsAdmin(cmd.Cmd):
 
@@ -106,7 +111,8 @@ def gui_run():
     win_mgr = wm.get_wminfo(dist)
 
     # argument process.
-    message_sudo="\"執行'Lazyscripts 懶人包' 會修改系統設定，並會安裝新軟體，所以需要系統管理員權限。 請輸入系統管理密碼，才能繼續執行。(在 Lazyscripts 下，預設這就是你登入系統時所用的密碼。)\""
+    message_sudo="\"執行'Lazyscripts 懶人包' 會修改系統設定，並會安裝新軟體，所以需要系統管理員權限。 請輸入系統管理密碼，才能繼續執行。(在 Linux 下，預設這就是你登入系統時所用的密碼。)\""
+    # message_sudo="_(\"Excuting Lazyscripts Lazy Pack will need Root permission to modified system setting and install new software. Please type in Root Password to continue.(The Password is used on logon screen by default under Linux.\")"
 
 #    prefix = 'gksu --message %s' % message_sudo
 
