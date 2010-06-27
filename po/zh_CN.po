@@ -1,0 +1,82 @@
+# Copyright (C) 2010 Lazyscripts
+# Yuren Ju <yurenju@gmail.com, 2009.
+# Hsin-Yi Chen <ossug.hychen@gmail.com>, 2010
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Lazyscripts 0.2.1\n"
+"POT-Creation-Date: 2010-03-13 21:59+CST\n"
+"PO-Revision-Date: 2010-03-13 21:59+CST\n"
+"Last-Translator: Hsin-Yi Chen <ossug.hychen@gmail.com>\n"
+"Language-Team: Simplified Chinese <ossug.hychen@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: lazyscripts/gui.py:158
+msgid "Items"
+msgstr "项目"
+
+#: lazyscripts/gui.py:198
+msgid "<b><big>Lazyscripts - Linux Lazy Pack"
+msgstr "<b><big>Lazyscripts - Linux 懒人包"
+
+#: lazyscripts/gui.py:199
+msgid ""
+", Linux end-user's good friend.</big></b>\n\n"
+"Please click on each categories and choice the items you want to apply\n"
+"from the list at left side.\n\n"
+msgstr ""
+"，Linux 新手的好朋友</big></b>\n"
+"帮你解决安装后烦人的小设定，安装一些好用软件，\n"
+"省去在茫茫网络中搜寻的时间\n"
+"\n"
+"请从左边的清单中，点选各个分类，选择你要套用的项目\n\n"
+
+#: lazyscripts/gui.py:200
+msgid ""
+"Copyright (C) 2010, Design and Developed by Lazyscripts Team\n"
+"\n"
+msgstr ""
+"Copyright (C) 2010, 由 Lazyscripts 开发团队共同设计、开发\n"
+"\n"
+
+#: lazyscripts/gui.py:201
+msgid "Project Lazyscripts - "
+msgstr "Lazyscripts 专案"
+
+#: lazyscripts/gui.py:216
+msgid "Execute action: \n"
+msgstr "开始执行: \n"
+
+#: lazyscripts/gui.py:329
+msgid "Lazyscripts - Simple is More."
+msgstr "Lazyscripts - 简单做更多"
+
+#: lazyscripts/gui.py:344
+msgid "Welcome"
+msgstr "欢迎使用"
+
+#: lazyscripts/gui.py:346
+msgid "Result"
+msgstr "执行结果"
+
+#: lazyscripts/gui.py:385
+msgid "Do you want to quit Lazyscripts?"
+msgstr "你是否要离开 Lazyscripts 懒人包？"
+
+#: lazyscripts/gui.py:418
+msgid "Linux Lazy Pack"
+msgstr "Linux 懒人包"
+
+#: lazyscripts/gui.py:448
+msgid ""
+"\n"
+"\033[1;36mLazyscripts - Linux Lazy Pack run finish!\033[1;32m   Have fun for Linux!\033[m\n"
+msgstr ""
+"\n"
+"[1;36mLazyscripts - Linux 懒人包执行完成！[1;32m   祝你使用 Linux 愉快！[m\n"

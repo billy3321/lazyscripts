@@ -84,15 +84,6 @@ class Configuration(object):
         return self.parser.get('defaults', key)
     #}}}
 
-    #{{{def get_support(self, distro, distro_ver):
-    def get_support(self, distro, distro_ver):
-        select_pool = []
-        for section in self.parser.sections():
-            if self.parser.has_option(section, distro) and distro_ver in self.parser.get(section, distro).split(', '):
-                select_pool.append(section[6:-1])
-        return select_pool
-    #}}}
-
     #{{{def set_pool(self, poolname, **kwds):
     def set_pool(self, poolname, **kwds):
         """add pool setting.
@@ -161,10 +152,12 @@ class Configuration(object):
     #}}}
 
     #{{{def get_support_pools(self, distroname):
-    def get_support_pools_by(self, distroname):
+    def get_support_pools(self, distro_name, distro_ver, lang):
         poollist = []
         for section in self.parser.sections():
-            if self.parser.has_option(section, distroname):
+            if self.parser.has_option(section, distro_name)\
+               and distro_ver in self.parser.get(section, distro_name).split(', ')\
+               and lang in self.parser.get(section, 'lang').split(', '):
                 poollist.append((section[6:-1], self.parser.get(section, 'desc')))
         return poollist
     #}}}

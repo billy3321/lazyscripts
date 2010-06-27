@@ -22,7 +22,6 @@
 import commands
 import ConfigParser
 import os
-import platform
 import shutil
 import time
 
@@ -165,7 +164,6 @@ class ScriptsRunner(object):
     def select_pool(self, pool):
         self.pool = pool
 
-        # @FIXME: need to add key.
         self.pkgmgr.update_sources(self.pool)
 
         # copy shlib.

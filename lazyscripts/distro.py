@@ -57,6 +57,23 @@ class Distribution(object):
         self._reduce_version()
     #}}}
 
+    #{{{def pkgsrc_name(self):
+    @property
+    def pkgsrc_name(self):
+        """The source list file name of Package Manager
+
+        @return str
+        """
+        if self.name in ('ubuntu', 'debian', 'linuxmint'):
+            extend = 'list'
+        elif self.name in ('fedora', 'redhat', 'centos', 'opensuse', 'suse', 'mandriva'):
+            extend = 'sh'
+        return "lzs_%s_%s_%s.%s" % (platform.machine(),
+                                          self.name,
+                                          self.version,
+                                          extend)
+    #}}}
+
     #{{{def pkgmgr(self):
     @property
     def pkgmgr(self):
@@ -66,8 +83,8 @@ class Distribution(object):
 
     #{{{def _reduce_name(self):
     def _reduce_name(self):
-        self.name = self.name.lower()
-        if not name:
+        self.name = self.name.lower().rstrip().lstrip()
+        if not self.name:
             if os.path.exists('/etc/arch-release'):
                 name = 'arch'
             elif os.path.exists('/usr/bin/pkg') and commands.getoutput('cat /etc/release | grep "OpenSolaris"'):
@@ -112,11 +129,4 @@ class Distribution(object):
             self.version = commands.getoutput('cat /etc/linpus-release | cut -d " " -f 4')
     #}}}
 
-    #{{{def get_support_pools(self):
-    def get_support_pools(self):
-        """Delegation layer"""
-        from lazyscripts import env
-        conf = env.resource('config')
-        return conf.get_support_pools_by(self.name)
-    #}}}
 pass

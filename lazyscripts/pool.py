@@ -25,16 +25,24 @@ import platform
 import shutil
 import tempfile
 
+from lazyscripts import distro
 from lazyscripts import git
 from lazyscripts import utils
 from lazyscripts import script as lzsscript
-from lazyscripts.distro import Distribution
 
 class DirectoryIsAScriptPoolError(Exception):
     "Raises exception when init a direcotry wich is a scripts pool."
 
 class NoI18nSectionError(Exception):
     "Raises exception when get undefiend section in pool/desc.ini"
+class RepositoriesFileNotFound(Exception):
+    def __init__(self, filename, distro, distro_version):
+        self.error_msg = 'The repositories file %s is not found.\nThe scripts pool may not support your distribution %s %s.' % (filename, distro, distro_version)
+        os.system('zenity --error --text "%s"' % self.error_msg)
+        # from lazyscripts.gui import show_error
+        # show_error(self.error_msg)
+    def __str__(self):
+        return self.error_msg
 
 #{{{def create_pooldescfile(dirpath, maintainers=''):
 def create_pooldescfile(dirpath, maintainers=''):
@@ -96,20 +104,15 @@ class ScriptsPool(object):
     #{{{def current_pkgsourcelist(self):
     @property
     def current_pkgsourcelist(self):
-        if self.distro.name in ('ubuntu', 'debian', 'linuxmint'):
-            file_append = 'list'
-        elif self.distro.name in ('fedora', 'redhat', 'centos'):
-            file_append = 'repo'
-        else:
-        # The repository source update by command.
-            file_append = 'sh'
-        filename = "lzs_%s_%s_%s.%s" % (platform.machine(),
-                                          self.distro.name,
-                                          self.distro.version,
-                                          file_append)
-        filename = utils.ext_ospath_join(self.path, 'sources.d', filename)
-        keylist = utils.ext_ospath_join(self.path, 'sources.d', 'keylist.txt')
-        if not os.path.exists(filename):    filename = None
+
+        filename = utils.ext_ospath_join(self.path,
+                                        'sources.d',
+                                        self.dist.pkgsrc_name)
+        if not os.path.exists(filename):
+            raise RepositoriesFileNotFound(filename, self.dist.name, self.dist.version)
+        keylist = utils.ext_ospath_join(self.path,
+                                        'sources.d',
+                                        'keylist.txt')
         return filename, keylist
     #}}}
 
@@ -117,8 +120,7 @@ class ScriptsPool(object):
     def __init__(self, path, recommands_list=None):
         self.path = path
         self.recommands_list = recommands_list
-        from lazyscripts.distro import Distribution
-        self.distro = Distribution()
+        self.dist = distro.Distribution()
         self.load()
     #}}}
 
@@ -130,7 +132,8 @@ class ScriptsPool(object):
                                e.istitle()]
         self._scripts = {}
         self.script_filters = {}
-        self.script_filters[self.distro.name] = True
+
+        self.script_filters[self.dist.name] = True
         self.parser = ConfigParser.ConfigParser()
         self.parser.read(os.path.join(self.path, 'desc.ini'))
         self.parser.read(os.path.join(self.path, 'recommands.ini'))
@@ -311,9 +314,9 @@ class GitScriptsPool(ScriptsPool):
                 pool.gitapi.remote('add', k, kwds[k])
                 print progress ; progress += 10
                 pool.gitapi.fetch(k)
-      	# get remote branch name.
-       	ret=pool.gitapi.branch('-r')
-    	branchs = [ e.replace('upstream/','').strip() for e in ret.split('\n')]
+        # get remote branch name.
+        ret=pool.gitapi.branch('-r')
+        branchs = [ e.replace('upstream/','').strip() for e in ret.split('\n')]
         for branch in branchs:
             print progress ; progress += 10
             pool.gitapi.checkout('upstream/%s' % branch, b=branch)
