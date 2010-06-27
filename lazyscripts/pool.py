@@ -35,6 +35,14 @@ class DirectoryIsAScriptPoolError(Exception):
 
 class NoI18nSectionError(Exception):
     "Raises exception when get undefiend section in pool/desc.ini"
+class RepositoriesFileNotFound(Exception):
+    def __init__(self, filename, distro, distro_version):
+        self.error_msg = 'The repositories file %s is not found.\nThe scripts pool may not support your distribution %s %s.' % (filename, distro, distro_version)
+        os.system('zenity --error --text "%s"' % self.error_msg)
+        # from lazyscripts.gui import show_error
+        # show_error(self.error_msg)
+    def __str__(self):
+        return self.error_msg
 
 #{{{def create_pooldescfile(dirpath, maintainers=''):
 def create_pooldescfile(dirpath, maintainers=''):
@@ -100,7 +108,8 @@ class ScriptsPool(object):
         filename = utils.ext_ospath_join(self.path,
                                         'sources.d',
                                         self.dist.pkgsrc_name)
-        if not os.path.exists(filename):    return None
+        if not os.path.exists(filename):
+            raise RepositoriesFileNotFound(filename, self.dist.name, self.dist.version)
         keylist = utils.ext_ospath_join(self.path,
                                         'sources.d',
                                         'keylist.txt')

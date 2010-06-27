@@ -37,6 +37,13 @@ desc = mrmoneyc's suselize scripts pool.
 opensuse = 11.1, 11.2, 11.3
 lang = zh_TW
 
+[pool "suselize-frFR"]
+upstream = git://github.com/billy3321/lzs_pool_suselize_frFR.git
+rev = master
+desc = billy3321's suselize scripts pool.
+opensuse = 11.1, 11.2, 11.3
+lang = fr_FR, en_US
+
 [pool "billys-redhatlize"]
 upstream = git://github.com/billy3321/lzs_pool_redhatlize.git
 rev = master
