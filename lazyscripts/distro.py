@@ -83,7 +83,7 @@ class Distribution(object):
 
     #{{{def _reduce_name(self):
     def _reduce_name(self):
-        self.name = self.name.lower().rstrip().lstrip()
+        self.name = self.name.lower().strip()
         if not self.name:
             if os.path.exists('/etc/arch-release'):
                 name = 'arch'
