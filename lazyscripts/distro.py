@@ -100,7 +100,7 @@ class Distribution(object):
                 self.name = 'redhat'
             if commands.getoutput('cat /etc/redhat-release | grep "CentOS"'):
                 self.name = 'centos'
-        elif self.name == 'mandrake':
+        elif self.name in ('mandrake', 'mandriva linux'):
             if os.path.exists('/etc/mandriva-release') and \
                commands.getoutput('cat /etc/mandriva-release | grep "Mandriva"'):
              self.name = 'mandriva'
