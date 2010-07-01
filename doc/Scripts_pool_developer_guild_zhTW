@@ -4,8 +4,48 @@
 簡介：
 
 Lazyscripts 是一款快速安裝軟體以及設定Linux的軟體。
-Lazyscripts 的程式碼使用 Python
+由於大部分的自由軟體撰寫者均為工程師，寫的程式也是
+出於自身的需求而寫成，有時較難以貼近使用者要求。因
+此各大論壇常常出現初學者求助的發問。
 
+Lazyscripts 希望可以讓使用者與開發者的距離更近。開
+發者只要用簡單的方式去編寫Scripts，把設定檔放好，其
+他的事情Lazyscripts會幫你處理好。而使用者只要簡單的
+下載Lazyscripts，勾選需要的設定並套用，就可以裝上好
+用的軟體並微調好Linux。
+
+歡迎加入Lazyscripts開發者的行列。您的努力，可以讓其
+他人推廣Linux更順利，也能省下重灌後的寶貴時間。
+
+===架構===
+
+首先介紹Scripts pool運作的架構
+
+         本地端                               Github
+                              (2)
+        Lazyscripts本體 -------------------> Scripts pool
+              | (1)                      ex: git://github.com/aminzai/
+              V                        /     lzs_pool_debianlize.git
+       ~/.lazyscripts/                /
+              |- config          (3) /
+              |- pools/             /
+                  |-debianlize  <---
+
+                  |(4)
+                  V
+              Make menu and GUI
+                  |(5)
+                  V
+                /tmp/lzs_root/
+                       |-lzs_storagedenv 
+                       |-taskscripts  <-- (6)
+                       |-shlib/
+
+
+
+
+
+Scripts
 
 
 
