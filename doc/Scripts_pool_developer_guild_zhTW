@@ -1,0 +1,82 @@
+
+===Scripts Pool 開發者使用手冊====
+
+簡介：
+
+Lazyscripts 是一款快速安裝軟體以及設定Linux的軟體。
+Lazyscripts 的程式碼使用 Python
+
+
+
+
+    """Script Data Object.
+
+    Every script is a directory, here is a sample and file disription.
+
+    script_dir/            - directory name is script id.
+        |- debian_def/     - the settings of spefic distribution, here
+        |   |                is Debian, you can add another directory as
+        |   |                new distribution.
+        |   |- source.txt  - unofficail source definitions.
+        |   |- install.txt - install these packages before excuting
+        |   |                       script if distribution is Debian.
+        |   |- remove.txt  - remove these packages before excuting
+        |                           script if distribution is Debian.
+        |
+        |- desc.ini        - defines information, attributes of script.
+        |- options.ini     - the options be supported by this script.
+        |- script          - excutable file as a script.
+    """
+    #}}}
+
+    #{{{attrs
+    "describe metadata of script."
+    DESC_DEFFILE = 'desc.ini'
+
+    "describe what options be supported."
+    OPTS_DEFFILE = 'opts.ini'
+
+    "describe what packages will be installed."
+    INSTALL_PKGS_DEFFILE = 'install_pkgs.ini'
+
+    "describe what packages will be removed."
+    REMOVE_PKGS_DEFFILE = 'remove_pkgs.ini'
+
+    "executeable script file name."
+    EXECUTE_FILE = 'script'
+
+    "default lang."
+    lang = 'en_US'
+
+
+
+        [info]
+        name[en_US] = name of scripts
+        desc[en_US] = long description
+        warn[en_US] = warning message
+        name[zh_TW] = name
+        desc[zh_TW] = long description
+        
+        license     = 
+        maintainers = 
+        authors     = 
+        
+        [attrs]
+        hide        = False
+        interact    = False
+        debian      = False
+        ubuntu      = False
+        linuxmint   = False
+        fedora      = False
+        centos      = False
+        redhat      = False
+        arch        = False
+        opensuse    = False
+        mandriva    = False
+        opensolaris = False
+        i386        = False
+        amd64       = False
+        arm         = False
+        
+
+
