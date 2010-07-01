@@ -41,7 +41,22 @@ Lazyscripts 希望可以讓使用者與開發者的距離更近。開
                        |-taskscripts  <-- (6)
                        |-shlib/
 
-
+ 運作流程如下：
+ 1.一開始lazyscripts會建立~/.lazyscripts目錄，裏面有config檔案。
+   config檔案裏面有目前所有Scripts pool的資料
+ 2.經由config裏面的設定，Lazyscripts將會找到適合目前Linux 
+   distribution的Scripts pool。如果有多個，將會跳出選單讓使用者
+   選取。
+ 3.經由git的協定將Scripts pool裏面的檔案取出，放到~/lazyscripts/poos/
+   裏面。每個Scripts pool將會有自己的資料夾。
+ 4.解析scripts pool裏面的desc.ini及各個資料，建構出GUI，選單，以
+   及各個選項。
+ 5.使用者執行Lazyscripts後，Lazyscripts會到/tmp/底下建立lzs_root
+   資料夾；內存有各個檔案。lzs_storagedenv會存有各個變數供Scripts
+   取用；shlib則是來自於scripts pool中的shlib資料夾，是Scripts pool
+   隨附的工具包。taskscripts則是主要執行的script,裏面是製造出來的
+   各個指令。lzs_root在安裝完成或取消時，都會刪除，以避免往後使用
+   的衝突。
 
 
 
