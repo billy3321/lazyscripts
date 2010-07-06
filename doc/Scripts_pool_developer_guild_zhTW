@@ -54,84 +54,118 @@ Lazyscripts 希望可以讓使用者與開發者的距離更近。開
  5.使用者執行Lazyscripts後，Lazyscripts會到/tmp/底下建立lzs_root
    資料夾；內存有各個檔案。lzs_storagedenv會存有各個變數供Scripts
    取用；shlib則是來自於scripts pool中的shlib資料夾，是Scripts pool
-   隨附的工具包。taskscripts則是主要執行的script,裏面是製造出來的
-   各個指令。lzs_root在安裝完成或取消時，都會刪除，以避免往後使用
-   的衝突。
+   隨附的工具包。remove.txt中定義的軟體包會先行移除，再來執行install.txt，
+   最後執行script做安裝後的設定。
+ 6.taskscripts則是主要執行的script,裏面是製造出來的各個指令。lzs_root
+   在安裝完成或取消時，都會刪除，以避免往後由不同使用者執行Lazyscripts
+   時，由於使用者不同而產生的衝突。
 
 
 
-Scripts
+Scripts pool架構
 
+   Scripts pool架構其實很簡單。只要照著說明將文件依格式編寫，然後放置
+   到指定的地方，就可以讓Lazyscripts解析並使用。以下先介紹Scripts pool
+   的文件架構，再來依序解釋文件內容。
 
+   以下以git://github.com/aminzai/lzs_pool_debianlize.git目錄結構做一解釋。
 
-    """Script Data Object.
-
-    Every script is a directory, here is a sample and file disription.
-
-    script_dir/            - directory name is script id.
-        |- debian_def/     - the settings of spefic distribution, here
-        |   |                is Debian, you can add another directory as
-        |   |                new distribution.
-        |   |- source.txt  - unofficail source definitions.
-        |   |- install.txt - install these packages before excuting
-        |   |                       script if distribution is Debian.
-        |   |- remove.txt  - remove these packages before excuting
-        |                           script if distribution is Debian.
+lzs_pool_debianlize/
+        |-README                          - 讀我檔案，裏面可以放一些使用說明或版權宣告。
+        |-desc.ini                        - 描述檔，內有此Scripts pool的名稱描述，圖示的定義，還有分類的翻譯
+        |-recommand.ini                   - 建議安裝清單。裏面定義的scripts會在開啟Lazyscripts時預先勾選好。
+        |-shlib/                          - 放置工具程式使用的目錄。執行Scripts前，整個目錄會被複製到/tmp/lzs_root/。因此裏面的程式可以在Scripts裏面引用。
+        |    |-shlib.bash                 - 可供引用的程式。在此例，shlib.bash提供bash程式使用的環境變數。debinstall.py則可解析安裝deb的相依性，使用apt-get先行滿足之。
+        |    |-debinstall.py
         |
-        |- desc.ini        - defines information, attributes of script.
-        |- options.ini     - the options be supported by this script.
-        |- script          - excutable file as a script.
-    """
-    #}}}
+        |-sources.d/                      - Scripts 安裝deb所需的套件庫來源。
+        |    |-keylist.txt                - 定義套件庫所需的金鑰。可從金鑰庫下載，或是直接上網下載匯入。
+        |    |-lzs_i686_ubuntu_10.04.list - 定義了i686 ubuntu 10.04 所需的套件庫來源。
+        |    |- .....
+        |
+        |-Multimedia/                     - 多媒體分類的scripts均放置在此目錄下。
+        |    |-non-free-codecs/           - 這是一個Script資料夾，裏面的各項資料均會定義為一個script。此例為non-free的影音支援
+        |    |      |- desc.ini           - 描述檔。此檔案定義了script所要顯示的名稱，描述，以及警告。另外亦描述了此Script可套用的發行套件(distribution)，作業系統platform(i386 or AMD64)，是否隱藏等等屬性。
+        |    |      |- options.ini        - script所支援的選項
+        |    |      |- script             - 安裝軟體後會執行此Script進行進一步的環境設定。
+        |    |      |- ubuntu_def/        - 特定發行套件的設定資料夾。在此例為ubuntu
+        |    |      |      |-source.txt   - 非官方的套件庫來源
+        |    |      |      |-remove.txt   - 執行此Script時所會移除的軟體包名稱。
+        |    |      |      |-install.txt  - 執行此Script時所會安裝得軟體包名稱。
+        |    |      |
+        |    |      |- debian_def/        - debian所使用的設定資料夾。
+        |    |             |- ....
+        |    |
+        |    |-free-codecs/               - free 的影音支援 Script 資料夾
+        |           |- ....
+        |- ....
 
-    #{{{attrs
-    "describe metadata of script."
-    DESC_DEFFILE = 'desc.ini'
+再來依次介紹Scripts pool中各檔案的內容格式。
 
-    "describe what options be supported."
-    OPTS_DEFFILE = 'opts.ini'
+README:
+    您高興就好。
 
-    "describe what packages will be installed."
-    INSTALL_PKGS_DEFFILE = 'install_pkgs.ini'
+desc.ini:
+[info]
+name[en_US] = Debianlize Linux distrobution scripts pool   - 英文名稱
+name[zh_TW] = Debianlize Linux 腳本源                      - 中文名稱
+desc[en_US] = support Debian, Ubuntu linux distrobution    - 英文描述
+desc[zh_TW] = 支援 Ubuntu Debian                           - 中文描述
+maintainers = 王綱民 Kang-Min Wang (Aminzai,阿民) <lagunawang -AT- gmail.com>,
+              Hsin Yi Chen <ossug.hychen -AT- gmail.com>   - 維護者資料
 
-    "describe what packages will be removed."
-    REMOVE_PKGS_DEFFILE = 'remove_pkgs.ini'
+[icon_path]                                                - 圖示相關設定
+Common=applications-other                                  - Common分類所使用的圖示名稱
+Productivity= applications-office                          - Productivity分類所使用的圖示名稱
 
-    "executeable script file name."
-    EXECUTE_FILE = 'script'
+[category]
+Common[zh_TW] = 共用                                       - Common此一分類所使用的繁體中文名稱
+Development[zh_TW] = 開發工具                              - Development 此一分類所使用的繁體中文名稱
 
-    "default lang."
-    lang = 'en_US'
+recommand.ini
 
+[Customize]                                                - Customizep這個分類
+purge-sysytem=                                             - 將會勾選purge-system這個script
+[Localization]                                             - Localization這個分類
+fonts-zhtw=                                                - 將會勾選fonts-zhtw這個script
 
+Multimedia/non-free-codecs/desc.ini
 
-        [info]
-        name[en_US] = name of scripts
-        desc[en_US] = long description
-        warn[en_US] = warning message
-        name[zh_TW] = name
-        desc[zh_TW] = long description
-        
-        license     = 
-        maintainers = 
-        authors     = 
-        
-        [attrs]
-        hide        = False
-        interact    = False
-        debian      = False
-        ubuntu      = False
-        linuxmint   = False
-        fedora      = False
-        centos      = False
-        redhat      = False
-        arch        = False
-        opensuse    = False
-        mandriva    = False
-        opensolaris = False
-        i386        = False
-        amd64       = False
-        arm         = False
-        
+[info]
+name[zh_tw] = 安裝 Non-Free 影音支援                       - 繁體中文名稱
+desc[zh_tw] = 選擇這個項目會幫你裝回這些常用的影音格式支援。建議考慮安裝。 - 繁體中文描述
+license = GPL                                              - 本Script所使用的license
+warn[zh_tw] = 因為各地專利及著作權法規的不同，此套件庫內的套件並非全部都保證可以合法使用，請使用者自行斟酌。 - 繁體中文警告
+desc[en_us] =                                              - 英文描述
+maintainers = Hychen <ossug.hychen -AT- gmail.com>         - 維護者
+authors = 洪任諭(PCMan) <pcman.tw -AT- gmail.com>          - 原先的作者
+name[en_us] = Install Non-Free Codecs support.             - 英文名稱
 
+[attrs]
+opensolaris = False                                        - 是否支援openSolaris: 否
+hide = True                                                - 是否隱藏此script: 是
+amd64 = True                                               - 是否支援amd64: 是
+interact = False                                           - 是否為互動式script? 否
+arm = False                                                - 是否支援arm? 否
+opensuse = False                                           - 是否支援openSUSE? 否
+i386 = True                                                - 是否支援i386? 是
+fedora = False                                             - 是否支援fedora? 是
+ubuntu = True                                              - 是否支援ubuntu? 是
+debian = False                                             - 是否支援debian? 否
+
+Multimedia/non-free-codecs/ubuntu_def/install.txt
+
+non-free-codecs                                            - 安裝 non-free-codecs
+libdvdcss2                                                 - 安裝 libdvdcss2
+
+Customize/remove-games/ubuntu_def/remove.txt 
+
+gnome-games-common                                         - 移除 gnome-games-common
+gbrainy                                                    - 移除 gbrainy
+
+根據Script directory中的內容，Lazyscripts在執行時會先將remove.txt中定義的
+軟體包先行移除；再來安裝install.txt中定義的軟體包，最後則是執行script進行
+最後的設定。
+
+desc.ini中定義為interactive的script會另外先行集中執行。
 
