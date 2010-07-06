@@ -1,5 +1,5 @@
 
-====Scripts Developer Guilde====
+==== Script Developer Guide ====
 
 
 
@@ -7,47 +7,47 @@
 
     """Script Data Object.
 
-    Every script is a directory, here is a sample and file disription.
+    Every script is a directory, here is a sample with file disriptions:
 
-    script_dir/            - directory name is script id.
-        |- debian_def/     - the settings of spefic distribution, here
-        |   |                is Debian, you can add another directory as
-        |   |                new distribution.
-        |   |- source.txt  - unofficail source definitions.
-        |   |- install.txt - install these packages before excuting
-        |   |                       script if distribution is Debian.
-        |   |- remove.txt  - remove these packages before excuting
-        |                           script if distribution is Debian.
+    script_dir/            - directory name which is also the script id.
+        |- debian_def/     - settings for specific distributions (here Debian)
+        |   |                it is possible to add several such directories
+        |   |
+        |   |- source.txt  - unofficial source definitions.
+        |   |- install.txt - list of packages to install before the script
+        |   |                is executed (Debian specific).
+        |   |- remove.txt  - list of packages to remove before the script
+        |                    is executed (Debian specific).
         |
-        |- desc.ini        - defines information, attributes of script.
-        |- options.ini     - the options be supported by this script.
-        |- script          - excutable file as a script.
+        |- desc.ini        - script metadata and attributes
+        |- options.ini     - options be supported by this script.
+        |- script          - script file, the one that will be executed
     """
     #}}}
 
     #{{{attrs
-    "describe metadata of script."
+    "contains the script metadata and attributes."
     DESC_DEFFILE = 'desc.ini'
 
-    "describe what options be supported."
+    "contains the supported script options."
     OPTS_DEFFILE = 'opts.ini'
 
-    "describe what packages will be installed."
+    "describes which packages must be installed."
     INSTALL_PKGS_DEFFILE = 'install_pkgs.ini'
 
-    "describe what packages will be removed."
+    "describes which packages must be removed."
     REMOVE_PKGS_DEFFILE = 'remove_pkgs.ini'
 
-    "executeable script file name."
+    "name of the script file."
     EXECUTE_FILE = 'script'
 
-    "default lang."
+    "default language code."
     lang = 'en_US'
 
 
 
         [info]
-        name[en_US] = name of scripts
+        name[en_US] = name of script
         desc[en_US] = long description
         warn[en_US] = warning message
         name[zh_TW] = name
