@@ -20,7 +20,7 @@ import commands
 import os
 import platform
 import locale
-import sys
+import gettext
 
 from lazyscripts import config
 from lazyscripts import distro
@@ -171,6 +171,12 @@ def resource(query):
 
 #{{{def prepare_runtimeenv():
 def prepare_runtimeenv():
+    try:
+        locale.setlocale (locale.LC_ALL, "")
+    except:
+        locale.setlocale (locale.LC_ALL, "en_US.UTF-8")
+
+    gettext.install("lazyscripts", localedir="/usr/share/locale")
     "prepare runtime enviroment which caches objects is generated."
     if not os.path.exists(DEFAULT_RUNTIME_ROOT_DIR):
         return os.mkdir(DEFAULT_RUNTIME_ROOT_DIR, 0755)

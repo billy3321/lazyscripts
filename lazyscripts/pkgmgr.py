@@ -37,20 +37,26 @@ class PackageSystemNotFound(Exception):
     def __init__(self, distro):
         self.error_msg = 'The Package System of %s is not support by Lazyscripts.' % distro
         os.system('zenity --error --text "%s"' % self.error_msg)
-        # from lazyscripts.gui import show_error
-        # show_error(self.error_msg)
     def __str__(self):
         return self.error_msg
 class PackageCommandNotSupport(Exception):
     def __init__(self, act):
         self.error_msg = '%s command of your distribution is not support by Lazyscripts' % act
         os.system('zenity --error --text "%s"' % self.error_msg)
-        # from lazyscripts.gui import show_error
-        # show_error(self.error_msg)
     def __str__(self):
         return self.error_msg
+class PackageManagerRequiresKeyManager(Exception):  pass
 
 class AbstractPkgManager(object):
+    """DO NOT USED DIRECTLY"""
+    #{{{attrs
+    "GPG Key Manager"
+    keymgr = None
+
+    "Requires GPG Key Manager to Add key for verifying."
+    requires_keymgr = False
+    #}}}
+
     #{{{def make_cmd(self, act, argv=None):
     def make_cmd(self, act, argv=None):
         """make a command of package by action.
@@ -93,8 +99,9 @@ class AbstractPkgManager(object):
 
         @param str keylist a .ini file
         """
-        #@FIXME: some package manager does not have key manager.
-        if not self.keymgr: return False
+        if not self.keymgr and self.requires_keymgr:
+            return False
+
         key_config = ConfigParser.ConfigParser()
         key_config.read(keylist)
         for section in key_config.sections():
@@ -109,8 +116,8 @@ class AbstractPkgManager(object):
                 for key in key_ids:
                     if not key: continue
                     self.keymgr.import_key_from_keyserver(keysrv_url, key)
-        #}}}
-    pass
+    #}}}
+pass
 
 class DebKeyManager(object):
     """APT Key Manager(Debian, Ubuntu, LinuxMint)
@@ -210,6 +217,7 @@ class DebManager(AbstractPkgManager):
 
     def __init__(self):
         self.update_sources = self.update_sources_by_file
+        self.requires_keymgr = True
         self.keymgr = DebKeyManager()
     #}}}
 pass
@@ -231,7 +239,6 @@ class ZypperManager(AbstractPkgManager):
     #{{{def __init__(self):
     def __init__(self):
         self.update_sources = self.update_sources_by_cmd
-        self.keymgr = None
     #}}}
 pass
 
@@ -251,14 +258,12 @@ class YumManager(AbstractPkgManager):
 
     #{{{def __init__(self):
     def __init__(self):
+        self.requires_keymgr = True
         self.update_sources = self.update_sources_by_file
-        self.keymgr = RpmKeyManager()                                        
-
     #}}}
 pass
 
 class UrpmiManager(AbstractPkgManager):
-
     """Urpmi Package System Manager(Mandriva)
     """
     #{{{attrs
@@ -267,7 +272,6 @@ class UrpmiManager(AbstractPkgManager):
     CMDPREFIX_INSTALL = 'urpmi --auto'
     CMDPREFIX_REMOVE = 'urpme --auto'
     CMDPREFIX_ADDREPO = 'urpmi.addmedia '
-    CMDPREFIX_ADDKEY = ''
     SOURCELISTS_DIR = ''
     SOURCELISTS_CFG = '/etc/urpmi/urpmi.cfg'
     #}}}
@@ -275,7 +279,6 @@ class UrpmiManager(AbstractPkgManager):
     #{{{def __init__(self):
     def __init__(self):
         self.update_sources = self.update_sources_by_cmd
-        self.keymgr = None
     #}}}
 pass
 
@@ -296,7 +299,6 @@ class PkgManager(AbstractPkgManager):
     #{{{def __init__(self):
     def __init__(self):
         self.update_sources = self.update_sources_by_cmd
-        self.keymgr = None
     #}}}
 pass
 
@@ -317,7 +319,6 @@ class PacmanManager(AbstractPkgManager):
     #{{{def __init__(self):
     def __init__(self):
         self.update_sources = self.update_sources_by_cmd
-        self.keymgr = None
     #}}}
 pass
 
