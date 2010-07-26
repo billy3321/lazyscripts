@@ -28,16 +28,6 @@ from lazyscripts import distro
 class DirectoryIsScriptDirError(Exception):
     "Raise exception when target direcoty is script dir already."
 
-class ScriptNotSupportSystemLang(Exception):
-    def __init__(self, script_name, lang):
-        self.error_msg = 'Script %s not support %s' % (script_name, lang)
-        from lazyscripts.gui import show_error
-        show_error(self.error_msg)
-
-    def __str__(self):
-        return self.error_msg
-
-
 #{{{def create_scriptdesc(path, name, author):
 def create_scriptdesc(path, name, authors):
     tpl = "\n".join([
@@ -56,24 +46,16 @@ def create_scriptdesc(path, name, authors):
         "interact    = False",
         "debian      = False",
         "ubuntu      = False",
-        "linuxmint   = False",
-        "fedora      = False",
-        "centos      = False",
-        "redhat      = False",
-        "arch        = False",
+        "fedroa      = False",
         "opensuse    = False",
-        "mandriva    = False",
         "opensolaris = False",
         "i386        = False",
         "amd64       = False",
         "arm         = False",
         ''
     ])
-    #with open(os.path.join(path,'desc.ini'),'w') as f:
-    #    f.write(tpl)
-    f = open(os.path.join(path,'desc.ini'),'w')
-    f.write(tpl)
-    f.close()
+    with open(os.path.join(path,'desc.ini'),'w') as f:
+        f.write(tpl)
 #}}}
 
 #{{{def create_scriptpkgdesc(dir):
@@ -82,11 +64,8 @@ def create_scriptpkgdesc(dir):
     os.mkdir(dir)
     for e in ('install','remove'):
         filepath = os.path.join(dir, '%s.txt' % e)
-        #with open(filepath, 'w') as f:
-        #    f.write("#pkg %s list\n" % e)
-        f = open(filepath, 'w')
-        f.write("#pkg %s list\n" % e)
-        f.close()
+        with open(filepath, 'w') as f:
+            f.write("#pkg %s list\n" % e)
 #}}}
 
 #{{{def is_scriptdir(path):
@@ -108,14 +87,14 @@ class Script(object):
     Every script is a directory, here is a sample and file disription.
 
     script_dir/            - directory name is script id.
-        |- debian/         - the settings of spefic distribution, here
+        |- debian/         - the settings of spefic distrobution, here
         |   |                is Debian, you can add another directory as
-        |   |                new distribution.
+        |   |                new distrobution.
         |   |- source.txt  - unofficail source definitions.
         |   |- install.txt - install these packages before excuting
-        |   |                       script if distribution is Debian.
+        |   |                       script if distrobution is Debian.
         |   |- remove.txt  - remove these packages before excuting
-        |                           script if distribution is Debian.
+        |                           script if distrobution is Debian.
         |
         |- desc.ini        - defines information, attributes of script.
         |- options.ini     - the options be supported by this script.
@@ -202,8 +181,6 @@ class Script(object):
                     setattr(self, attrname, attrs)
                 else:
                     setattr(self, attrname, attrs[0])
-        if not hasattr(self, 'name') or not hasattr(self, 'desc'):
-            raise ScriptNotSupportSystemLang(self.id, self.lang)
     #}}}
 
     #{{{def _init_attrs(self):

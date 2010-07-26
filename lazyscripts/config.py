@@ -141,14 +141,11 @@ class Configuration(object):
 
     #{{{def save(self):
     def save(self):
-         #if not self._is_dirty:
-         #    return False
+         if not self._is_dirty:
+             return False
          os.rename(self.filename, self.filename+'.bak')
-         #with open(self.filename,'wb') as fp:
-         #    self.parser.write(fp)
-         fp = open(self.filename,'wb')
-         self.parser.write(fp)
-         fp.close()
+         with open(self.filename,'wb') as fp:
+             self.parser.write(fp)
     #}}}
 
     #{{{def get_support_pools(self, distroname):
@@ -160,5 +157,6 @@ class Configuration(object):
                and lang in self.parser.get(section, 'lang').split(', '):
                 poollist.append((section[6:-1], self.parser.get(section, 'desc')))
         return poollist
+
     #}}}
 pass

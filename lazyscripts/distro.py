@@ -18,13 +18,11 @@
 # Place, Suite 330, Boston, MA 02111-1307 USA
 import commands
 import platform
-import os
 
 from lazyscripts import pkgmgr
 
 class DistrobutionNotFound(Exception):
-    def __str__(self):
-        return "The distrobution can not be detected."
+    "The distrobution can not be detected."
 
 class Distribution(object):
 
@@ -51,7 +49,6 @@ class Distribution(object):
         else:
             (self.name, self.version, self.codename) = platform.linux_distribution()
 
-        self.platform = platform.architecture()[0]
         # Because built-in funciton may not recognize all distrobution.
         self._reduce_name()
         self._reduce_version()
@@ -66,7 +63,7 @@ class Distribution(object):
         """
         if self.name in ('ubuntu', 'debian', 'linuxmint'):
             extend = 'list'
-        elif self.name in ('fedora', 'redhat', 'centos', 'opensuse', 'suse', 'mandriva'):
+        elif self.name in ('fedora', 'redhat', 'centos','opensuse','suse','mandriva'):
             extend = 'sh'
         return "lzs_%s_%s_%s.%s" % (platform.machine(),
                                           self.name,
@@ -86,47 +83,56 @@ class Distribution(object):
         self.name = self.name.lower().strip()
         if not self.name:
             if os.path.exists('/etc/arch-release'):
-                name = 'arch'
+                self.name = 'arch'
             elif os.path.exists('/usr/bin/pkg') and commands.getoutput('cat /etc/release | grep "OpenSolaris"'):
-                name = 'opensolaris'
+                self.name = 'opensolaris'
             elif os.path.exists('/etc/redflag-release'):
-                name = 'redflag'
+                if commands.getoutput('cat /etc/redflag-release | grep "RedFlag"'):
+                    self.name = 'redflag'
+                elif commands.getoutput('cat /etc/redflag-release | grep "Qomo"'):
+                    self.name = 'qomo'
             elif os.path.exists('/etc/slackware-version'):
-                name = 'slackware'
+                self.name = 'slackware'
             elif os.path.exists('/etc/linpus-release'):
-                name = 'linpus'
+                self.name = 'linpus'
+            elif os.path.exists('/etc/magic-release'):
+                self.name = 'magiclinux'
             else:
                 print "Lazyscripts not support your Linux distribution."
-                name = None
+                self.name = None
                 raise DistrobutionNotFound()
-        elif name == 'suse':
+        elif self.name == 'susE':
             if commands.getoutput('cat /etc/SuSE-release | grep "openSUSE"'):
-                name = 'opensuse'
-        elif name == 'redhat':
+                self.name = 'opensuse'
+        elif self.name == 'redhat':
             if commands.getoutput('cat /etc/redhat-release | grep "Red Hat"'):
-                name = 'redhat'
+                self.name = 'redhat'
             elif commands.getoutput('cat /etc/redhat-release | grep "CentOS"'):
-                name = 'centos'
+                self.name = 'centos'
         elif name == 'mandrake':
             if os.path.exists('/etc/mandriva-release') and commands.getoutput('cat /etc/mandriva-release | grep "Mandriva"'):
-                name = 'mandriva'
+                self.name = 'mandriva'
             elif os.path.exists('/etc/pclinuxos-release') and commands.getoutput('cat /etc/pclinuxos-release | grep "PCLinuxOS"'):
-                name = 'pclinuxos'
-        elif name == 'gentoo':
+                self.name = 'pclinuxos'
+        elif self.name == 'gentoo':
             if os.path.exists('/etc/sabayon-release'):
-                name = 'sabayon'
+                self.name = 'sabayon'
     #}}}
 
     #{{{def _reduce_version(self):
     def _reduce_version(self):
         if self.name == 'opensolaris' and not self.version:
             self.version = commands.getoutput('cat /etc/release | grep "OpenSolaris" | cut -d " " -f 27')
-        elif name == 'sabayon' :
+        elif self.name == 'sabayon' :
             self.version = commands.getoutput('cat /etc/sabayon-edition | cut -d " " -f 3')
-        elif name == 'redflag':
+        elif self.name == 'redflag':
             self.version = commands.getoutput('cat /etc/redflag-release | cut -d " " -f 4')
-        elif name == 'linpus':
+        elif self.name == 'qomo':
+            self.version = commands.getoutput('cat /etc/redflag-release | cut -d " " -f 2')
+        elif self.name == 'linpus':
             self.version = commands.getoutput('cat /etc/linpus-release | cut -d " " -f 4')
+        elif self.name == 'magiclinux':
+            self.version = commands.getoutput('cat /etc/ark-release')
     #}}}
 
 pass

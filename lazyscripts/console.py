@@ -20,18 +20,12 @@ import cmd
 import os
 import optparse
 import sys
-import commands
-import gettext
 
 from lazyscripts import command as lzscmd
+from lazyscripts import distro
 from lazyscripts import pool as lzspool
 from lazyscripts import env
-from lazyscripts import wm
-from lazyscripts import distro
-APP_NAME='Lazyscripts'
-gettext.bindtextdomain(APP_NAME, '/usr/share/locale')
-gettext.textdomain(APP_NAME)
-_ = gettext.gettext
+from lazyscripts import gui
 
 class LzsAdmin(cmd.Cmd):
 
@@ -42,7 +36,7 @@ class LzsAdmin(cmd.Cmd):
     #}}}
 
     def do_update(self, lines):
-        print "building scripts index..."
+        print _("console.lzsadmin.update.building_index")
         self._build_scripts_index()
 
     #{{{def _build_scripts_index(self):
@@ -58,11 +52,8 @@ class LzsAdmin(cmd.Cmd):
                     contents.append("%s/%s/%s - %s " % (poolname, cat, script.id, script.name))
 
         index_path = os.path.join(env.resource_name('caches'), 'SCRIPTS_INDEX')
-        #with open(index_path, 'w') as f:
-        #    f.write("\n".join(contents+['']))
-        f = open(index_path, 'w')
-        f.write("\n".join(contents+['']))
-        f.close()
+        with open(index_path, 'w') as f:
+            f.write("\n".join(contents+['']))
     #}}}
 
     def do_search(self, lines):
@@ -97,8 +88,9 @@ def run(args=None):
 
 #{{{def gui_run():
 def gui_run():
+    from lazyscripts import wm
     if os.getuid() == 0:
-        print "please do not run as root."
+        print _('console.gui_run.dont_run_as_root')
         sys.exit()
 
     env.register_workspace()
@@ -106,16 +98,13 @@ def gui_run():
     env.storageenv()
     dist = distro.Distribution().name
     if not dist:
-        print "distrobution no supported."
+        print _('console.gui_run.distro_is_not_supported')
         sys.exit()
-    win_mgr = wm.get_wminfo(dist)
+
+    message_sudo= _('console.gui_run.gksu_msg')
+    # prefix = 'gksu --message %s' % message_sudo
 
     # argument process.
-    message_sudo="\"執行'Lazyscripts 懶人包' 會修改系統設定，並會安裝新軟體，所以需要系統管理員權限。 請輸入系統管理密碼，才能繼續執行。(在 Linux 下，預設這就是你登入系統時所用的密碼。)\""
-    # message_sudo="_(\"Excuting Lazyscripts Lazy Pack will need Root permission to modified system setting and install new software. Please type in Root Password to continue.(The Password is used on logon screen by default under Linux.\")"
-
-#    prefix = 'gksu --message %s' % message_sudo
-
     parser = optparse.OptionParser()
     parser.add_option("-a", "--autosync",
 		action="store_true",
@@ -133,80 +122,19 @@ def gui_run():
           cmd = "lzs pool sync"
       else:
           cmd = "lzs pool sync --rev %s" % options.rev
-      #@FIXME show the progress dialog with fake progress status.
-      progress_dialog_cmd = [
-          "zenity --progress --title='Lazyscripts'",
-          "--text='Downloading scripts...'",
-          "--auto-close",
-          "--width=400"]
-      os.system("%s | %s" % (cmd, ' '.join(progress_dialog_cmd)))
-      #This command is use for debug.
-      #os.system(cmd)
+
+      gui.gtklib.show_progress(cmd,
+                        'Lazyscripts',
+                        _('console.gui_run.downloading_scripts'),
+                        80,
+                        400,
+                        True,
+                        True)
 
     if options.selection_list:
-        cmd = 'lzs gui run %s' % options.selection_list
-        guisudocmd = wm.make_guisudocmd(dist, win_mgr, cmd, message_sudo)
-#        cmd = "%s lzs gui run %s" % (prefix, options.selection_list)
+        cmd = "lzs gui run %s" % options.selection_list
     else:
-        cmd = 'lzs gui run'
-        guisudocmd = wm.make_guisudocmd(dist, win_mgr, cmd, message_sudo)
-#        cmd = "%s lzs gui run" % prefix
-    os.system(guisudocmd)
-#}}}
-
-#{{{def debinstall():
-def debinstall():
-    import re
-    class Package:
-        def __init__(self, filename):
-            self.filename=filename
-            stdo=os.popen('dpkg --info %s' % filename )
-            output=stdo.read()
-            stdo.close()
-            match=re.search('Package:(.*)', output)
-            if match:
-                self.name=match.group(1).strip()
-            else:
-                self.name=''
-
-            self.depends=[]
-
-            match=re.search('Depends:(.*)', output)
-            if match:
-                dep_line=match.group(1).strip()
-                deps=dep_line.split( ',' )
-                for dep in deps:
-                    if dep:
-                        self.depends.append( dep.split()[0] )
-
-    def find_package(pkgs, name):
-        for pkg in pkgs:
-            if pkg.name == name:
-                return True
-        return False
-
-    def get_all_depends(packages):
-        deps=[]
-        for pkg in packages:
-            for dep in pkg.depends:
-                if not dep in deps and not find_package(packages, dep):
-                    deps.append(dep)
-        return deps
-
-
-    n=len(sys.argv)
-    if n < 2:
-        exit(1)
-
-    filenames=sys.argv[1:]
-    packages=[]
-
-    for filename in filenames:
-        packages.append( Package(filename) )
-
-    all_deps=get_all_depends(packages)
-    print '正在嘗試安裝相依套件...'
-    os.system( 'apt-get -y --force-yes install %s' % ' '.join( all_deps ) )
-    print '開始安裝套件...'
-    os.system( "dpkg -i %s" % ' '.join(filenames) )
+        cmd = "lzs gui run"
+    gui_cmd = wm.WindowManager().make_guisudocmd(cmd, message_sudo)
+    os.system(gui_cmd)
 #}}}

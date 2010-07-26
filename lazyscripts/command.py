@@ -222,18 +222,13 @@ class PoolCmd(Command):
 
     #{{{def sync(self):
     def sync(self):
-        print 10
         (opts, args) = self._getopts([optparse.make_option('-r', '--rev', dest='rev')])
         if len(args) <= 1:
             poolname = self._get_user_preferpool()
         else:
             poolname = args[1]
-        if not self.conf.get_default('pool') == poolname:
-            self.conf.set_default(pool=poolname)
-            self.conf.save()
         print "Syncing pool %s" % poolname
         poolobj = self._load_pool(poolname)
-        print 100
         try:
             if opts.rev:
                 want_rev = opts.rev
@@ -248,17 +243,15 @@ class PoolCmd(Command):
 
     #{{{def _get_user_preferpool(self):
     def _get_user_preferpool(self):
-        #return self.conf.get_default('pool') or \
-        #       self._ask_user_selectpool()
-        # This is dev version, let developer can choice pool each time.
-        return self._ask_user_selectpool()
+        return self.conf.get_default('pool') or \
+               self._ask_user_selectpool()
     #}}}
 
     #{{{def _ask_user_selectpool(self):
     def _ask_user_selectpool(self):
         conf = env.resource('config')
-        #pools = conf.get_support_pools(distro.Distribution().name)
-        pools = conf.get_support_pools(distro.Distribution().name, distro.Distribution().version, env.get_local())
+        lang = env.get_local()
+        pools = conf.get_support_pools(distro.Distribution().name, distro.Distribution().version, lang)
         if len(pools) == 1:
             poolname = pools[0][0]
         else:
@@ -290,7 +283,7 @@ class GuiCmd(Command):
     #{{{def run(self):
     def run(self):
         if self.argc > 1:
-            gui.startgui(self.args[1])
+            gui.gtklib.startgui(self.args[1])
         else:
-            gui.startgui()
+            gui.gtklib.startgui()
     #}}}
