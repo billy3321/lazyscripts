@@ -44,14 +44,19 @@ class Distribution(object):
     def __init__(self):
         # linux_distribution is insted of dist
         # Ref: http://docs.python.org/library/platform.html
-        if platform.python_version() < '2.6.0':
-            (self.name, self.version, self.codename) = platform.dist()
-        else:
-            (self.name, self.version, self.codename) = platform.linux_distribution()
+        self.system = platform.system()
+        if self.system == 'Linux':
+            if platform.python_version() < '2.6.0':
+                (self.name, self.version, self.codename) = platform.dist()
+            else:
+                (self.name, self.version, self.codename) = platform.linux_distribution()
 
         # Because built-in funciton may not recognize all distrobution.
-        self._reduce_name()
-        self._reduce_version()
+            self._reduce_name()
+            self._reduce_version()
+        elif self.system == 'Darwin':
+            self.name = 'macosx'
+            self.version = platform.mac_ver()[0]
     #}}}
 
     #{{{def pkgsrc_name(self):
