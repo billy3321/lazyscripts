@@ -1,0 +1,171 @@
+
+===Scripts Pool 开发者使用手册====
+
+简介：
+
+Lazyscripts 是一款快速安装软体以及设定Linux的软体。
+由于大部分的自由软体撰写者均为工程师，写的程式也是
+出于自身的需求而写成，有时较难以贴近使用者要求。因
+此各大论坛常常出现初学者求助的发问。
+
+Lazyscripts 希望可以让使用者与开发者的距离更近。开
+发者只要用简单的方式去编写Scripts，把设定档放好，其
+他的事情Lazyscripts会帮你处理好。而使用者只要简单的
+下载Lazyscripts，勾选需要的设定并套用，就可以装上好
+用的软体并微调好Linux。
+
+欢迎加入Lazyscripts开发者的行列。您的努力，可以让其
+他人推广Linux更顺利，也能省下重灌后的宝贵时间。
+
+===架构===
+
+首先介绍Scripts pool运作的架构
+
+         本地端                               Github
+                              (2)
+        Lazyscripts本体 -------------------> Scripts pool
+              | (1)                      ex: git://github.com/aminzai/
+              V                        /     lzs_pool_debianlize.git
+       ~/.lazyscripts/                /
+              |- config          (3) /
+              |- pools/             /
+                  |-debianlize  <---
+
+                  |(4)
+                  V
+              Make menu and GUI
+                  |(5)
+                  V
+                /tmp/lzs_root/
+                       |-lzs_storagedenv 
+                       |-taskscripts  <-- (6)
+                       |-shlib/
+
+ 运作流程如下：
+ 1.一开始lazyscripts会建立~/.lazyscripts目录，里面有config档案。
+   config档案里面有目前所有Scripts pool的资料
+ 2.经由config里面的设定，Lazyscripts将会找到适合目前Linux 
+   distribution的Scripts pool。如果有多个，将会跳出选单让使用者
+   选取。
+ 3.经由git的协定将Scripts pool里面的档案取出，放到~/lazyscripts/poos/
+   里面。每个Scripts pool将会有自己的资料夹。
+ 4.解析scripts pool里面的desc.ini及各个资料，建构出GUI，选单，以
+   及各个选项。
+ 5.使用者执行Lazyscripts后，Lazyscripts会到/tmp/底下建立lzs_root
+   资料夹；内存有各个档案。lzs_storagedenv会存有各个变数供Scripts
+   取用；shlib则是来自于scripts pool中的shlib资料夹，是Scripts pool
+   随附的工具包。remove.txt中定义的软体包会先行移除，再来执行install.txt，
+   最后执行script做安装后的设定。
+ 6.taskscripts则是主要执行的script,里面是制造出来的各个指令。lzs_root
+   在安装完成或取消时，都会删除，以避免往后由不同使用者执行Lazyscripts
+   时，由于使用者不同而产生的冲突。
+
+
+
+Scripts pool架构
+
+   Scripts pool架构其实很简单。只要照着说明将文件依格式编写，然后放置
+   到指定的地方，就可以让Lazyscripts解析并使用。以下先介绍Scripts pool
+   的文件架构，再来依序解释文件内容。
+
+   以下以git://github.com/aminzai/lzs_pool_debianlize.git目录结构做一解释。
+
+lzs_pool_debianlize/
+        |-README                          - 读我档案，里面可以放一些使用说明或版权宣告。
+        |-desc.ini                        - 描述档，内有此Scripts pool的名称描述，图示的定义，还有分类的翻译
+        |-recommand.ini                   - 建议安装清单。里面定义的scripts会在开启Lazyscripts时预先勾选好。
+        |-shlib/                          - 放置工具程式使用的目录。执行Scripts前，整个目录会被复制到/tmp/lzs_root/。因此里面的程式可以在Scripts里面引用。
+        |    |-shlib.bash                 - 可供引用的程式。在此例，shlib.bash提供bash程式使用的环境变数。debinstall.py则可解析安装deb的相依性，使用apt-get先行满足之。
+        |    |-debinstall.py
+        |
+        |-sources.d/                      - Scripts 安装deb所需的套件库来源。
+        |    |-keylist.txt                - 定义套件库所需的金钥。可从金钥库下载，或是直接上网下载汇入。
+        |    |-lzs_i686_ubuntu_10.04.list - 定义了i686 ubuntu 10.04 所需的套件库来源。
+        |    |- .....
+        |
+        |-Multimedia/                     - 多媒体分类的scripts均放置在此目录下。
+        |    |-non-free-codecs/           - 这是一个Script资料夹，里面的各项资料均会定义为一个script。此例为non-free的影音支援
+        |    |      |- desc.ini           - 描述档。此档案定义了script所要显示的名称，描述，以及警告。另外亦描述了此Script可套用的发行套件(distribution)，作业系统platform(i386 or AMD64)，是否隐藏等等属性。
+        |    |      |- options.ini        - script所支援的选项
+        |    |      |- script             - 安装软体后会执行此Script进行进一步的环境设定。
+        |    |      |- ubuntu_def/        - 特定发行套件的设定资料夹。在此例为ubuntu
+        |    |      |      |-source.txt   - 非官方的套件库来源
+        |    |      |      |-remove.txt   - 执行此Script时所会移除的软体包名称。
+        |    |      |      |-install.txt  - 执行此Script时所会安装得软体包名称。
+        |    |      |
+        |    |      |- debian_def/        - debian所使用的设定资料夹。
+        |    |             |- ....
+        |    |
+        |    |-free-codecs/               - free 的影音支援 Script 资料夹
+        |           |- ....
+        |- ....
+
+再来依次介绍Scripts pool中各档案的内容格式。
+
+README:
+    您高兴就好。
+
+desc.ini:
+[info]
+name[en_US] = Debianlize Linux distrobution scripts pool   - 英文名称
+name[zh_TW] = Debianlize Linux 脚本源                      - 中文名称
+desc[en_US] = support Debian, Ubuntu linux distrobution    - 英文描述
+desc[zh_TW] = 支援 Ubuntu Debian                           - 中文描述
+maintainers = 王纲民 Kang-Min Wang (Aminzai,阿民) <lagunawang -AT- gmail.com>,
+              Hsin Yi Chen <ossug.hychen -AT- gmail.com>   - 维护者资料
+
+[icon_path]                                                - 图示相关设定
+Common=applications-other                                  - Common分类所使用的图示名称
+Productivity= applications-office                          - Productivity分类所使用的图示名称
+
+[category]
+Common[zh_TW] = 共用                                       - Common此一分类所使用的繁体中文名称
+Development[zh_TW] = 开发工具                              - Development 此一分类所使用的繁体中文名称
+
+recommand.ini
+
+[Customize]                                                - Customizep这个分类
+purge-sysytem=                                             - 将会勾选purge-system这个script
+[Localization]                                             - Localization这个分类
+fonts-zhtw=                                                - 将会勾选fonts-zhtw这个script
+
+Multimedia/non-free-codecs/desc.ini
+
+[info]
+name[zh_tw] = 安装 Non-Free 影音支援                       - 繁体中文名称
+desc[zh_tw] = 选择这个项目会帮你装回这些常用的影音格式支援。建议考虑安装。 - 繁体中文描述
+license = GPL                                              - 本Script所使用的license
+warn[zh_tw] = 因为各地专利及着作权法规的不同，此套件库内的套件并非全部都保证可以合法使用，请使用者自行斟酌。 - 繁体中文警告
+desc[en_us] =                                              - 英文描述
+maintainers = Hychen <ossug.hychen -AT- gmail.com>         - 维护者
+authors = 洪任谕(PCMan) <pcman.tw -AT- gmail.com>          - 原先的作者
+name[en_us] = Install Non-Free Codecs support.             - 英文名称
+
+[attrs]
+opensolaris = False                                        - 是否支援openSolaris: 否
+hide = True                                                - 是否隐藏此script: 是
+amd64 = True                                               - 是否支援amd64: 是
+interact = False                                           - 是否为互动式script? 否
+arm = False                                                - 是否支援arm? 否
+opensuse = False                                           - 是否支援openSUSE? 否
+i386 = True                                                - 是否支援i386? 是
+fedora = False                                             - 是否支援fedora? 是
+ubuntu = True                                              - 是否支援ubuntu? 是
+debian = False                                             - 是否支援debian? 否
+
+Multimedia/non-free-codecs/ubuntu_def/install.txt
+
+non-free-codecs                                            - 安装 non-free-codecs
+libdvdcss2                                                 - 安装 libdvdcss2
+
+Customize/remove-games/ubuntu_def/remove.txt 
+
+gnome-games-common                                         - 移除 gnome-games-common
+gbrainy                                                    - 移除 gbrainy
+
+根据Script directory中的内容，Lazyscripts在执行时会先将remove.txt中定义的
+软体包先行移除；再来安装install.txt中定义的软体包，最后则是执行script进行
+最后的设定。
+
+desc.ini中定义为interactive的script会另外先行集中执行。
+
