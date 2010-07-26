@@ -20,18 +20,12 @@ import cmd
 import os
 import optparse
 import sys
-import commands
-import gettext
 
 from lazyscripts import command as lzscmd
+from lazyscripts import distro
 from lazyscripts import pool as lzspool
 from lazyscripts import env
-from lazyscripts import wm
-from lazyscripts import distro
-APP_NAME='Lazyscripts'
-gettext.bindtextdomain(APP_NAME, '/usr/share/locale')
-gettext.textdomain(APP_NAME)
-_ = gettext.gettext
+from lazyscripts import gui
 
 class LzsAdmin(cmd.Cmd):
 
@@ -58,11 +52,8 @@ class LzsAdmin(cmd.Cmd):
                     contents.append("%s/%s/%s - %s " % (poolname, cat, script.id, script.name))
 
         index_path = os.path.join(env.resource_name('caches'), 'SCRIPTS_INDEX')
-        #with open(index_path, 'w') as f:
-        #    f.write("\n".join(contents+['']))
-        f = open(index_path, 'w')
-        f.write("\n".join(contents+['']))
-        f.close()
+        with open(index_path, 'w') as f:
+            f.write("\n".join(contents+['']))
     #}}}
 
     def do_search(self, lines):
@@ -97,6 +88,7 @@ def run(args=None):
 
 #{{{def gui_run():
 def gui_run():
+    from lazyscripts import wm
     if os.getuid() == 0:
         print _('console.gui_run.dont_run_as_root')
         sys.exit()
@@ -108,10 +100,9 @@ def gui_run():
     if not dist:
         print _('console.gui_run.distro_is_not_supported')
         sys.exit()
-    win_mgr = wm.get_wminfo(dist)
 
     message_sudo= _('console.gui_run.gksu_msg')
-    prefix = 'gksu --message %s' % message_sudo
+    # prefix = 'gksu --message %s' % message_sudo
 
     # argument process.
     parser = optparse.OptionParser()
@@ -141,12 +132,9 @@ def gui_run():
                         True)
 
     if options.selection_list:
-        cmd = 'lzs gui run %s' % options.selection_list
-        guisudocmd = wm.make_guisudocmd(dist, win_mgr, cmd, message_sudo)
-#        cmd = "%s lzs gui run %s" % (prefix, options.selection_list)
+        cmd = "lzs gui run %s" % options.selection_list
     else:
-        cmd = 'lzs gui run'
-        guisudocmd = wm.make_guisudocmd(dist, win_mgr, cmd, message_sudo)
-#        cmd = "%s lzs gui run" % prefix
-    os.system(guisudocmd)
+        cmd = "lzs gui run"
+    gui_cmd = wm.WindowManager().make_guisudocmd(cmd, message_sudo)
+    os.system(gui_cmd)
 #}}}

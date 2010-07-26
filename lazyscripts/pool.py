@@ -34,26 +34,17 @@ class DirectoryIsAScriptPoolError(Exception):
     "Raises exception when init a direcotry wich is a scripts pool."
 
 class NoI18nSectionError(Exception):
-    "Raises exception when get undefiend section in pool/desc.ini"
-class RepositoriesFileNotFound(Exception):
-    def __init__(self, filename, distro, distro_version):
-        self.error_msg = 'The repositories file %s is not found.\nThe scripts pool may not support your distribution %s %s.' % (filename, distro, distro_version)
-        os.system('zenity --error --text "%s"' % self.error_msg)
-        # from lazyscripts.gui import show_error
-        # show_error(self.error_msg)
-    def __str__(self):
-        return self.error_msg
+    "Raises exception when get undefiend secion in pool/desc.ini"
 
 #{{{def create_pooldescfile(dirpath, maintainers=''):
 def create_pooldescfile(dirpath, maintainers=''):
-    #with open(os.path.join(dirpath, 'desc.ini'),'w') as f:
-    f = open(os.path.join(dirpath, 'desc.ini'),'w')
-    f.write("\n".join([
-    '[info]',
-    'maintaners=%s' % maintainers,
-    '[icon_path]',
-    '[category]',
-    '']))
+    with open(os.path.join(dirpath, 'desc.ini'),'w') as f:
+        f.write("\n".join([
+        '[info]',
+        'maintaners=%s' % maintainers,
+        '[icon_path]',
+        '[category]',
+        '']))
 #}}}
 
 #{{{def is_scriptspool(dirpath):
@@ -104,12 +95,10 @@ class ScriptsPool(object):
     #{{{def current_pkgsourcelist(self):
     @property
     def current_pkgsourcelist(self):
-
         filename = utils.ext_ospath_join(self.path,
                                         'sources.d',
                                         self.dist.pkgsrc_name)
-        if not os.path.exists(filename):
-            raise RepositoriesFileNotFound(filename, self.dist.name, self.dist.version)
+        if not os.path.exists(filename):    return None
         keylist = utils.ext_ospath_join(self.path,
                                         'sources.d',
                                         'keylist.txt')
@@ -132,7 +121,6 @@ class ScriptsPool(object):
                                e.istitle()]
         self._scripts = {}
         self.script_filters = {}
-
         self.script_filters[self.dist.name] = True
         self.parser = ConfigParser.ConfigParser()
         self.parser.read(os.path.join(self.path, 'desc.ini'))
@@ -302,25 +290,19 @@ class GitScriptsPool(ScriptsPool):
             raise DirectoryIsAScriptPoolError(
                 "the directory %s is a scriptspool already." % dirpath)
 
-        progress = 20
-        print progress ; progress += 10
         pool = cls(dirpath)
         pool.gitapi.init()
 
-        # checkout local branch by each remote branch.
+	# checkout local branch by each remote branch.
         for k in kwds:
-            print progress ; progress += 10
             if k in ('upstream', 'origin') and kwds.has_key(k):
                 pool.gitapi.remote('add', k, kwds[k])
-                print progress ; progress += 10
                 pool.gitapi.fetch(k)
-        # get remote branch name.
-        ret=pool.gitapi.branch('-r')
-        branchs = [ e.replace('upstream/','').strip() for e in ret.split('\n')]
-        for branch in branchs:
-            print progress ; progress += 10
-            pool.gitapi.checkout('upstream/%s' % branch, b=branch)
-        print progress ; progress += 10
+		# get remote branch name.
+		ret=pool.gitapi.branch('-r')
+		branchs = [ e.replace('upstream/','').strip() for e in ret.split('\n')]
+		for branch in branchs:
+                	pool.gitapi.checkout('upstream/%s' % branch, b=branch)
 
         # if there is no desc.ini after pull remote respostiroy,
         # means this totally new, do initialization.

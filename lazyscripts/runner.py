@@ -37,7 +37,7 @@ def find_pkginfo(scripts, distro, version=None):
     @return tuple (install_pkgs_list, remove_pkgs_list)
     """
     paths = [script.path for script in scripts]
-    # check the distribution has another pkg info.
+    # check the distrobution has another pkg info.
     distro = distro.lower()
     distro_dir = distro+'_def'
     if version:
@@ -72,7 +72,6 @@ class TaskScript(file):
 
     #{{{attrs
     header = ["#!/bin/bash",
-              "set -o xtrace",
               "export LIB_ROOT=/tmp/lzs_root/shlib",
               "cd /tmp/lzs_root",
               "source %s" % env.DEFAULT_STORAGED_ENV_FILE]
@@ -125,11 +124,8 @@ class SelectionList(object):
     #{{{def save(self):
     def save(self):
         self._convert()
-        #with open(self.path, 'w') as fp:
-        #    self.parser.write(fp)
-        fp = open(self.path, 'w')
-        self.parser.write(fp)
-        fp.close()
+        with open(self.path, 'w') as fp:
+            self.parser.write(fp)
     #}}}
 
     #{{{def _convert(self):
@@ -191,11 +187,8 @@ class ScriptsRunner(object):
         self.prepare_scriptcmds()
 
         # create a taskscript.
-        #with TaskScript(self.cmd_queue) as t:
-        #    t.save()
-        t = TaskScript(self.cmd_queue)
-        t.save()
-        t.close()
+        with TaskScript(self.cmd_queue) as t:
+            t.save()
 
         # create a recommand.ini.
         self.save_selection()

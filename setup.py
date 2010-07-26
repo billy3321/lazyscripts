@@ -18,19 +18,21 @@
 # Place, Suite 330, Boston, MA 02111-1307 USA
 import glob
 import os
-import pkg_resources
 
 try:
-    from setuptools import *
+    from setuptools import find_packages
 except ImportError:
     print "please install python-setuptools first"
+
+from distutils.core import setup
+from distutils.command.install import install
 
 setup(
     name = 'Lazyscripts',
     version = '0.2.1',
-    description = 'The stupid scripts manager in Linux.',
+    description = 'The scripts manager in Linux.',
     long_description = """
-Lazyscripts is just a stupid script distrubtion tool and quick-installer in linux, which aims to provide a easy way to setup your working enviroment for people who need to install a new distrubution such as Debian,Ubuntu, or who want to have much better experiences in linux.
+Lazyscripts is just a scripts distrubtion tool and quick-installer in linux, which aims to provide a easy way to setup your working enviroment for people who need to install a new distrubution such as Debian,Ubuntu, or who want to have much better experiences in linux.
 
 The original idea is from LazyBuntu, made by PCman in Taiwan. we usually need the script to customize to get somthing better, but theses customization may very hard to end users who new to linux, even the experienced end users. so that is why the lazyscript project starts.
 """,
@@ -39,20 +41,12 @@ The original idea is from LazyBuntu, made by PCman in Taiwan. we usually need th
     license = 'GPLv2',
     url = 'http://www.lazyscripts.org',
     packages = find_packages(exclude=['tests']),
-
+    scripts = ['scripts/lzs','scripts/glzs'],
     test_suite = 'tests.suite',
     package_data = {
         # If any package contains *.txt or *.rst files, include them:
         '': ['config']
     },
-    data_files = [],
     zip_safe=False,
-    entry_points = """
-    [console_scripts]
-        lzs = lazyscripts.console:run
-        lzs-debinstall = lazyscripts.console:debinstall
-        lzs-pcvt = lazyscripts.lengacy:run
-    [gui_scripts]
-        glzs = lazyscripts.console:gui_run
-    """
+    cmdclass = {'install': install}
 )

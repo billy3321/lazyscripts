@@ -19,8 +19,9 @@
 
 from os import getenv, path
 from commands import getoutput
+from lazyscripts import distro
 
-class UnknownWindowManager(Exception): 
+class UnknownWindowManager(Exception):
     def __repr__(self):
         return 'Lazyscripts can\'t distinguish your window manager.'
 
@@ -28,101 +29,95 @@ class UnknownDistribution(Exception):
     def __repr__(self):
         return 'Lazyscripts can\'t distinguish your Linux distribution.'
 
+class WindowManager(object):
+    def __init__(self, dist=None):
+        if not dist:
+            dist = distro.Distribution().name
+        self.distro = dist
+        self.name = self.get_wminfo()
 
-def wm_desktop_session():
-    """
-    Check the DESKTOP_SESSION variable to distinguish window manager.
-    """
-    wm_value = getenv('DESKTOP_SESSION') 
-    if wm_value in ('gnome','kde','lxde','LXDE','wmaker'):
-        return wm_value.lower()
-    elif wm_value in ('xfce.desktop','xfce'):
-        return 'xfce'
-    else:
-        return wm_var_check()
+    def wm_desktop_session(self):
+        """
+        Check the DESKTOP_SESSION variable to distinguish window manager.
+        """
+        wm_value = getenv('DESKTOP_SESSION')
+        if wm_value in ('gnome','kde','lxde','LXDE','wmaker'):
+            return wm_value.lower()
+        elif wm_value in ('xfce.desktop','xfce'):
+            return 'xfce'
+        else:
+            return self.wm_var_check()
 
 
-def wm_var_check():
-    """
-    Check the existence of window manager unique variable.
-    """
-    if getenv('GNOME_DESKTOP_SESSION_ID'):
-        return 'gnome'
-    elif getenv('KDE_FULL_SESSION'):
-        return 'kde'
-    elif getenv('_LXSESSION_PID'):
-        return 'lxde'
-    elif getoutput('pstree | grep xfwm4'):
-        return 'xfce'
-    elif getoutput('pstree | grep WindowMaker'):
-        return 'wmaker'
-    else:
-        from lazyscripts.gui import user_choice
-        return user_choice()
+    def wm_var_check(self):
+        """
+        Check the existence of window manager unique variable.
+        """
+        if getenv('GNOME_DESKTOP_SESSION_ID'):
+            return 'gnome'
+        elif getenv('KDE_FULL_SESSION'):
+            return 'kde'
+        elif getenv('_LXSESSION_PID'):
+            return 'lxde'
+        elif getoutput('pstree | grep xfwm4'):
+            return 'xfce'
+        elif getoutput('pstree | grep WindowMaker'):
+            return 'wmaker'
+        else:
+            from lazyscripts.gui.gtklib import user_choice
+            return user_choice()
 
-def suse_windowmanager():
-    """
-    Check the WINDOWMANAGER enviroment variable to distinguish window manager.
-    WINDOWMANAGER variable only exist in SuSE Linux.
-    """
-    wm_value = getenv('WINDOWMANAGER')
-    if wm_value == '/usr/bin/gnome':
-        return 'gnome'
-    elif wm_value == '/usr/bin/startkde':
-        return 'kde'
-    elif wm_value == '/usr/bin/startxfce4':
-        return 'xfce'
-    else:
-        return wm_desktop_session()
+    def suse_windowmanager(self):
+        """
+        Check the WINDOWMANAGER enviroment variable to distinguish window manager.
+        WINDOWMANAGER variable only exist in SuSE Linux.
+        """
+        wm_value = getenv('WINDOWMANAGER')
+        if wm_value == '/usr/bin/gnome':
+            return 'gnome'
+        elif wm_value == '/usr/bin/startkde':
+            return 'kde'
+        elif wm_value == '/usr/bin/startxfce4':
+            return 'xfce'
+        else:
+            return self.wm_desktop_session()
 
-#def user_choice():
-#    """
-#    Use zenity and radio dialog to make user choice.
-#    """
-#    wm_value = getoutput('zenity --list --title="Choice your window manager" --radiolist --column "" --column "Linux Distribution Version" FALSE "Gnome" FALSE "KDE" False "LXDE" False "Xfce"')
-##   Use kdialog
-##   wm_value = getoutput('kdialog --list --title="Choice your window manager" --radiolist "Choice your window manager" Gnome Gnome off KDE KDE off LXDE LXDE off Xfce Xfce off')
-#    if not wm_value:
-#        raise UnknownWindowManager()
-#    else:
-#        return wm_value.lower()
+    def get_wminfo(self):
+        """
+        return gnome|kde|lxde|xfce
+        """
+        if self.distro in ('debian','ubuntu','fedora','centos','mandriva','mandrake','redhat','arch','linuxmint'):
+            return self.wm_desktop_session()
+        elif self.distro in ('opensuse','suse'):
+            return self.suse_windowmanager()
+        elif self.distro == 'opensolaris':
+            return self.wm_var_check()
+        else:
+            return 'unknown'
 
-def get_wminfo(distro):
-    """
-    return gnome|kde|lxde|xfce
-    """
-    if distro in ('debian','ubuntu','fedora','centos','mandriva','mandrake','redhat','arch','linuxmint'):
-        return wm_desktop_session()
-    elif distro in ('opensuse','suse'):
-        return suse_windowmanager()
-    elif distro == 'opensolaris':
-        return wm_var_check()
-    else:
-        return 'unknown'
-
-def make_guisudocmd(distro, wm, cmd, msg='""'):
-    """
-    return full guisudo command for running.
-    """
-    if distro in ('debian','ubuntu','arch','linuxmint','fedora'):
-        if wm in ('gnome','xfce','lxde','wmaker','unknown'):
-            return 'gksu --message %s "%s"' % (msg, cmd)
-        elif wm == 'kde':
-            if path.exists('/usr/bin/kdesudo'):
-                return 'kdesudo -c "%s"' % (cmd)
-            else:
+    def make_guisudocmd(self, cmd, msg='""'):
+        """
+        return full guisudo command for running.
+        """
+        if self.distro in ('debian','ubuntu','arch','linuxmint','fedora'):
+            if self.name in ('gnome','xfce','lxde','wmaker','unknown'):
+                return 'gksu --message %s "%s"' % (msg, cmd)
+            elif self.name == 'kde':
+                if path.exists('/usr/bin/kdesudo'):
+                    return 'kdesudo -c "%s"' % (cmd)
+                else:
+                    return 'kdesu -c "%s"' % (cmd)
+        elif self.distro in ('opensuse','suse'):
+            if self.name == 'gnome':
+                return 'gnomesu --command="%s"' % (cmd)
+            elif self.name == 'kde':
                 return 'kdesu -c "%s"' % (cmd)
-    elif distro in ('opensuse','suse'):
-        if wm == 'gnome':
-            return 'gnomesu --command="%s"' % (cmd)
-        elif wm == 'kde':
-            return 'kdesu -c "%s"' % (cmd)
-        elif wm in ('xfce','lxde'):
-            return 'xdg-su -c "%s"' % (cmd)
-    elif distro in ('mandrake','mandriva','opensolaris','redhat','centos'):
-        return 'gksu --message %s "%s"' % (msg, cmd)
-    else:
-        raise UnknownDistribution()
+            elif self.name in ('xfce','lxde'):
+                return 'xdg-su -c "%s"' % (cmd)
+        elif self.distro in ('mandrake','mandriva','opensolaris','redhat','centos'):
+            return 'gksu --message %s "%s"' % (msg, cmd)
+        else:
+            raise UnknownDistribution()
 
 
 

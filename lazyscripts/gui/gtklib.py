@@ -77,34 +77,6 @@ def show_error(msg, title=None, parent=None):
     dlg.destroy ()
 #}}}
 
-#{{{def user_choice():
-def user_choice():
-    """
-    Use zenity and radio dialog to make user choice.
-    """
-    wm_value = commands.getoutput('zenity --list --title="Choice your window manager" --radiolist --column "" --column "Linux Distribution Version" FALSE "Gnome" FALSE "KDE" False "LXDE" False "Xfce"')
-#   Use kdialog
-#   wm_value = getoutput('kdialog --list --title="Choice your window manager" --radiolist "Choice your window manager" Gnome Gnome off KDE KDE off LXDE LXDE off Xfce Xfce off')
-    if not wm_value:
-        raise UnknownWindowManager()
-    else:
-        return wm_value.lower()
-#}}}
-
-#{{{def select_pool(poollist):
-def select_pool(poollist):
-    show_pools = ""
-    for pool in poollist:
-        show_pools = show_pools + 'FALSE %s ' % pool
-        #This is for kdialog use
-        #show_pools = show_pools + '%s %s off ' % (pool, pool)
-    select_cmd = "zenity --list --title=\"Choice Scripts Pool You Want to Use\" --radiolist --column \"\" --column \"Scripts Pool Name\" %s" % show_pools
-    #kdialog cmd
-    #select_cmd = "kdialog --title=\"Choice Scripts Pool You Want to Use\" --radiolist \"Choice a Pool Name\" %s" % show_pools
-    select_pool = commands.getoutput(select_cmd)
-    return select_pool
-#}}}
-
 #{{{def select_defaultpool(poollist):
 def select_defaultpool(poollist):
     import re
@@ -130,8 +102,8 @@ def select_defaultpool(poollist):
     return select_pool
 #}}}
 
-#{{{def show_progress(cmd, titile, text, percentage, width, autoclose, autokill):
-def show_progress(cmd, titile, text, percentage, width, autoclose, autokill):
+#{{{def show_progress(cmd, title, text, percentage, width, autoclose, autokill):
+def show_progress(cmd, title, text, percentage, width, autoclose, autokill):
     progress_dialog_cmd = [
         "zenity --progress --title='%s'" % title,
         "--text='%s'" % text,
@@ -435,8 +407,8 @@ class MainWin:
                         '朱昱任 (Yuren Ju) <yurenju@gmail.com>',
                         '林哲瑋 (billy3321,雨蒼) <billy3321@gmail.com>',
                         '陳信屹 (Hychen) <ossug.hychen@gmail.com>',
-                        '王綱民 (Aminzai) <lagunawang@gmail.com>',
-                        '張君平 (mrmoneyc) <moneyc.net@gmail.com>'])
+                        '王綱民(Aminzai) <lagunawang@gmail.com>',
+                        '張君平(mrmoneyc) <moneyc.net@gmail.com>'])
         dlg.set_copyright('Copyright (C) 2010 by Lazyscripts project')
         dlg.set_license('GNU General Public License V2')
         dlg.set_comments(_('gui.gtklib.mainwin.about.comments'))
@@ -496,7 +468,7 @@ pass
 #{{{def startgui(recommands_list=None):
 def startgui(recommands_list=None):
     """
-    Launch the application.
+    launchs the application.
     """
     MainWin(recommands_list)
     gtk.main()
