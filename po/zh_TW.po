@@ -17,23 +17,6 @@ msgstr ""
 "X-Poedit-Country: TAIWAN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-<<<<<<< HEAD
-#: lazyscripts/gui.py:158
-msgid "Items"
-msgstr "項目"
-
-#: lazyscripts/gui.py:198
-msgid "<b><big>Lazyscripts - Linux Lazy Pack"
-msgstr "<b><big>Lazyscripts - Linux 懶人包"
-
-#: lazyscripts/gui.py:199
-msgid ""
-", Linux end-user's good friend.</big></b>\n\n"
-"Please click on each categories and choice the items you want to apply\n"
-"from the list at left side.\n\n"
-msgstr ""
-"，Linux 新手的好朋友</big></b>\n"
-=======
 #: lazyscripts/console.py:38
 msgid "console.lzsadmin.update.building_index"
 msgstr "正在建立腳本索引檔..."
@@ -81,59 +64,17 @@ msgstr ""
 "<b><big>Lazyscripts - 少就是多!</big></b>\n"
 "\n"
 "\n"
->>>>>>> 6274c8efbd53ee3be677f15a1e88bc081e7635ab
 "幫你解決安裝後煩人的小設定，安裝一些好用軟體，\n"
 "省去在茫茫網海中搜尋的時間。\n"
 "\n"
-"請從左邊的清單中，點選各個分類，選擇你要套用的項目。\n\n"
+"請從左邊的清單中，點選各個分類，選擇你要套用的項目。\n"
 
-<<<<<<< HEAD
-#: lazyscripts/gui.py:200
-msgid ""
-"Copyright (C) 2010, Design and Developed by Lazyscripts Team\n"
-"\n"
-=======
 #: lazyscripts/gui/gtklib.py:195
 msgid "gui.gtklib.welcomepage.markup.copyright\n"
->>>>>>> 6274c8efbd53ee3be677f15a1e88bc081e7635ab
 msgstr ""
 "Copyright (C) %s, 由 Lazyscripts 開發團隊共同設計、開發\n"
 "\n"
 
-<<<<<<< HEAD
-#: lazyscripts/gui.py:201
-msgid "Project Lazyscripts - "
-msgstr "Lazyscripts 專案"
-
-#: lazyscripts/gui.py:216
-msgid "Execute action: \n"
-msgstr "開始執行: \n"
-
-#: lazyscripts/gui.py:329
-msgid "Lazyscripts - Simple is More."
-msgstr "Lazyscripts - 簡單做更多"
-
-#: lazyscripts/gui.py:344
-msgid "Welcome"
-msgstr "歡迎使用"
-
-#: lazyscripts/gui.py:346
-msgid "Result"
-msgstr "執行結果"
-
-#: lazyscripts/gui.py:385
-msgid "Do you want to quit Lazyscripts?"
-msgstr "你是否要離開 Lazyscripts 懶人包？"
-
-#: lazyscripts/gui.py:418
-msgid "Linux Lazy Pack"
-msgstr "Linux 懶人包"
-
-#: lazyscripts/gui.py:448
-msgid ""
-"\n"
-"\033[1;36mLazyscripts - Linux Lazy Pack run finish!\033[1;32m   Have fun for Linux!\033[m\n"
-=======
 #: lazyscripts/gui/gtklib.py:196
 msgid "gui.gtklib.welcomepage.markup.project_web_prefix"
 msgstr "Lazyscripts 專案- "
@@ -170,7 +111,6 @@ msgstr "腳本管理工具"
 msgid ""
 "\n"
 "gui.gtklib.mainwin.complete.finished-install\n"
->>>>>>> 6274c8efbd53ee3be677f15a1e88bc081e7635ab
 msgstr ""
 "\n"
 "[1;36mLazyscripts - Linux 懶人包執行完成！[1;32m   祝你使用 Linux 愉快！[m\n"
