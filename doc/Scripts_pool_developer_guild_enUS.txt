@@ -1,78 +1,186 @@
+# -*- encoding=utf8 -*-
 
 ==== Script Developer Guide ====
 
+Abstract:
+
+Lazyscripts is a software which can use on install software and config
+setting on Linux. Most of the open source software developers are
+engineers, most of the programs are writen for engineers, sometimes
+can't make end-user satified. 
+
+Lazyscripts is comes from the reason -- to make the end-user and
+developers more closely. Developers can use simpily way to write
+scripts, and place the config files at the right place; other jobs
+can finished by Lazyscripts. And end-users can simpily install
+software which easy to use and config Linux by simpily download and install
+Lazyscripts, check the setting and apply it.
+
+Welcome to join Lazyscripts Developer Team. Your work can make another
+promoter more easy to promot Linux, and save the time to reinstall Linux.
+
+===Structure===
+
+At first, here we introduce the structure that Scripts pool work.
 
 
+         Local                                  Github
+                              (2)
+        Lazyscripts Core Program --------------> Scripts pool
+              | (1)                      ex: git://github.com/aminzai/
+              V                        /     lzs_pool_debianlize.git
+       ~/.lazyscripts/                /
+              |- config          (3) /
+              |- pools/             /
+                  |-debianlize  <---
+
+                  |(4)
+                  V
+              Make menu and GUI
+                  |(5)
+                  V
+                /tmp/lzs_root/
+                       |-lzs_storagedenv 
+                       |-taskscripts  <-- (6)
+                       |-shlib/
+
+The workflow:
+1. Lazyscripts will build a ~/.lazyscripts directory, which has a
+   config file. All the Scripts pool information are in the config file.
+2. Lazyscripts will find the scripts pool which suite for the Linux
+   Distribution which in use. If there has more than a scripts pool can
+   use, Lazyscripts will pop-up a list to make user choice.
+3. Lazyscripts will check out the files in Scripts pool through git, 
+   and put them into ~/lazyscripts/pools . Every Scripts pool will has
+   their own directory.
+4. Lazyscripts will analyze the desc.ini and the information in the
+   Scripts pool, construct GUI, menus and options.
+5. After the user click apply the button, Lazyscripts will download
+   the key for sources. Then Lazyscripts will build a lzs_root directory
+   which include all nessasary files under /tmp. lzs_storagedenv will
+   save each environment variation for Scripts, shlib directory comes
+   from shlib directory in scripts pool, is a toolkit use for this
+   scripts pool. The packages define in remove.txt will remove first, and
+   then install the packages define in install.txt. At last, Lazyscripts
+   will execute script to make a final config.
+6. The main script to execute is taskscripts. The command in the
+   taskscripts is product by Lazyscripts. After the execute finish or
+   cancel, lzs_root directory will delete, to avoid the permission conflict from
+   different user execute Lazyscripts.
 
 
-    """Script Data Object.
+Scripts pool structure
 
-    Every script is a directory, here is a sample with file disriptions:
+  The Scripts pool structure is really simple. Just follow the
+  instructions and the format to write the document or script, and
+  place them to right place, Lazyscripts will analyze and use it. The
+  following will introduce the structure of Scropts pool, and explain
+  the contain of documents.
 
-    script_dir/            - directory name which is also the script id.
-        |- debian_def/     - settings for specific distributions (here Debian)
-        |   |                it is possible to add several such directories
-        |   |
-        |   |- source.txt  - unofficial source definitions.
-        |   |- install.txt - list of packages to install before the script
-        |   |                is executed (Debian specific).
-        |   |- remove.txt  - list of packages to remove before the script
-        |                    is executed (Debian specific).
+  Here is the structure of git://github.com/aminzai/lzs_pool_debianlize.git
+
+
+ lzs_pool_debianlize/
+        |-README                          - README file, here can write some licence declare or discriptions.
+        |-desc.ini                        - description file. This file include the name and description, define of the icons, and translation of categories.
+        |-recommand.ini                   - Recommand list. The item defined in this file will pre-check at the time Lazyscripts launch.
+        |-shlib/                          - The directory to place toolkits. All the directory will be copy to /tmp/lzs_root before scripts execute. The scripts or tools inside can be used in any script.
+        |    |-shlib.bash                 - The toolkits. In this example, shlib.bash support environment variation for bash shell script,
+        |    |-debinstall.py                debinstall.py can analyze the depandency of deb files, and install the packages by apt-get.
         |
-        |- desc.ini        - script metadata and attributes
-        |- options.ini     - options be supported by this script.
-        |- script          - script file, the one that will be executed
-    """
-    #}}}
+        |-sources.d/                      - All the repository for install programes.
+        |    |-keylist.txt                - Defines the keys for repository. The keys can download from keyserver, or download and import it.
+        |    |-lzs_i686_ubuntu_10.04.list - This is the repository sources for ubuntu 10.04 and i386.
+        |    |- .....
+        |
+        |-Multimedia/                     - Scripts of Multimedia will place under this directory.
+        |    |-non-free-codecs/           - This is a script directory, all the file inside will defined as a script. In this example is non-free Multimedia support.
+        |    |      |- desc.ini           - Description file. This file defined the name, description, and warning of the script. This file also defined
+        |    |      |                       the supported distribution, platform, or attribute of hidden or interaction. 
+        |    |      |- options.ini        - The options support by this script.
+        |    |      |- script             - Lazyscripts will execute this script for post-install configuration.。
+        |    |      |- ubuntu_def/        - The setting directory of specific distribution. In this case is ubuntu.
+        |    |      |      |-source.txt   - source of non-official repository.
+        |    |      |      |-remove.txt   - The packages which will be removed.
+        |    |      |      |-install.txt  - The packages which will be installed.
+        |    |      |
+        |    |      |- debian_def/        - Setting directory of Debian
+        |    |             |- ....
+        |    |
+        |    |-free-codecs/               - Script directory of free-codecs.
+        |           |- ....
+        |- ....
 
-    #{{{attrs
-    "contains the script metadata and attributes."
-    DESC_DEFFILE = 'desc.ini'
+ Here will Introduce the format of the documents.
 
-    "contains the supported script options."
-    OPTS_DEFFILE = 'opts.ini'
+README:
+    Everything you want to.
 
-    "describes which packages must be installed."
-    INSTALL_PKGS_DEFFILE = 'install_pkgs.ini'
+desc.ini:
+[info]
+name[en_US] = Debianlize Linux distrobution scripts pool   - English name
+name[zh_TW] = Debianlize Linux 腳本源                      - Chinese name
+desc[en_US] = support Debian, Ubuntu linux distrobution    - English description
+desc[zh_TW] = 支援 Ubuntu Debian                           - Chinese description
+maintainers = 王綱民 Kang-Min Wang (Aminzai,阿民) <lagunawang -AT- gmail.com>,
+              Hsin Yi Chen <ossug.hychen -AT- gmail.com>   -  Maintainer information
 
-    "describes which packages must be removed."
-    REMOVE_PKGS_DEFFILE = 'remove_pkgs.ini'
+[icon_path]                                                - Setting
+of Icons
+Common=applications-other                                  - Icon used
+by Common category
+Productivity= applications-office                          - Icon used by Productivity category
 
-    "name of the script file."
-    EXECUTE_FILE = 'script'
+[category]
+Common[zh_TW] = 共用                                       - Chinese
+name of Common category
+Development[zh_TW] = 開發工具                              - Chinese
+name of Development category
 
-    "default language code."
-    lang = 'en_US'
+recommand.ini
 
+[Customize]                                                - Customize category
+purge-sysytem=                                             - purge-system will be checked
+[Localization]                                             - Localization category
+fonts-zhtw=                                                - fonts-zhtw will be checked
 
+Multimedia/non-free-codecs/desc.ini
 
-        [info]
-        name[en_US] = name of script
-        desc[en_US] = long description
-        warn[en_US] = warning message
-        name[zh_TW] = name
-        desc[zh_TW] = long description
-        
-        license     = 
-        maintainers = 
-        authors     = 
-        
-        [attrs]
-        hide        = False
-        interact    = False
-        debian      = False
-        ubuntu      = False
-        linuxmint   = False
-        fedora      = False
-        centos      = False
-        redhat      = False
-        arch        = False
-        opensuse    = False
-        mandriva    = False
-        opensolaris = False
-        i386        = False
-        amd64       = False
-        arm         = False
-        
+[info]
+name[zh_tw] = 安裝 Non-Free 影音支援                       - Chinese name
+desc[zh_tw] = 選擇這個項目會幫你裝回這些常用的影音格式支援。建議考慮安裝。 - Chinese description
+license = GPL                                              - The license used by the script.
+warn[zh_tw] = 因為各地專利及著作權法規的不同，此套件庫內的套件並非全部都保證可以合法使用，請使用者自行斟酌。 - Chinese warning
+desc[en_us] =                                              - English description
+maintainers = Hychen <ossug.hychen -AT- gmail.com>         - Maintainer information
+authors = 洪任諭(PCMan) <pcman.tw -AT- gmail.com>          - Author information
+name[en_us] = Install Non-Free Codecs support.             - English name
 
+[attrs]
+opensolaris = False                                        - openSolaris support: No
+hide = True                                                - Hide this script: Yes
+amd64 = True                                               - AMD64 support: Yes
+interact = False                                           - Does this script need to interact with user: No
+arm = False                                                - ARM support: No
+opensuse = False                                           - openSUSE support: No
+i386 = True                                                - i386 support: Yes
+fedora = False                                             - fedora support: Yes
+ubuntu = True                                              - ubuntu support: Yes
+debian = False                                             - debian support: No
 
+Multimedia/non-free-codecs/ubuntu_def/install.txt
+
+non-free-codecs                                            - install non-free-codecs
+libdvdcss2                                                 - install libdvdcss2
+
+Customize/remove-games/ubuntu_def/remove.txt 
+
+gnome-games-common                                         - remove gnome-games-common
+gbrainy                                                    - remove gbrainy
+
+According to the description in Script directory, Lazyscripts will
+remove the packages defined in remove.txt first, and then install the
+packages defined in install.txt. At last, Lazyscripts will do
+post-config through execute script.
+
+The script defined interact will be execute togather.

@@ -1,3 +1,4 @@
+# -*- encoding=utf8 -*-
 
 ===Scripts Pool 開發者使用手冊====
 

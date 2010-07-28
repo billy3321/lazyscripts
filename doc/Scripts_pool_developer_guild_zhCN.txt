@@ -1,3 +1,4 @@
+# -*- encoding=utf8 -*-
 
 ===Scripts Pool 开发者使用手册====
 
