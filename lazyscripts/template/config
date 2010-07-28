@@ -19,7 +19,7 @@ desc = aminzai's debianlize scripts pool.
 ubuntu = 9.10, 10.04
 debian = 5
 linuxmint = 8
-lang = zh_TW
+lang = zh_TW, en_US
 
 [pool "debianlize-zh_CN"]
 upstream = git://github.com/billy3321/lzs_pool_debianlize_zhCN.git
@@ -28,7 +28,7 @@ desc = billy3321's debianlize scripts pool of zhCN.
 ubuntu = 9.10, 10.04
 debian = 5
 linuxmint = 8
-lang = zh_CN
+lang = zh_CN, en_US
 
 [pool "suselize"]
 upstream = git://github.com/mrmoneyc/lzs_pool_suselize.git
