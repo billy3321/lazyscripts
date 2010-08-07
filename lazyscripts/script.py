@@ -133,7 +133,6 @@ class Script(object):
         """
         if lang:
             self.lang = lang
-        print self.lang
         self.parser = ConfigParser.ConfigParser()
         self.parser.read(os.path.join(path, self.DESC_DEFFILE))
 
