@@ -54,6 +54,8 @@ def get_local():
         local = locale.getlocal(locale.LC_ALL)
         if local:
             local = local[0]
+    if not gettext.find('lazyscripts',languages=[local]):
+        local = 'en_US'
     return local
 #}}}
 

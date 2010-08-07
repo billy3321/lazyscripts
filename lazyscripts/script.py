@@ -133,17 +133,24 @@ class Script(object):
         """
         if lang:
             self.lang = lang
+        print self.lang
         self.parser = ConfigParser.ConfigParser()
         self.parser.read(os.path.join(path, self.DESC_DEFFILE))
 
         self.selected = False
-        self.name = 'Script has a initial name, please report bug to script maintainer'
+        self.name = ''
         self.desc = ''
         self.path = path
         self.id = os.path.basename(path)
         self.category = 'root'
         self._init_info()
         self._init_attrs()
+        if not self.name:
+            self.lang = 'en_US'
+            self._init_info()
+            self._init_attrs()
+        if not self.name:
+            self.name = 'Script has a initial name, please report bug to script maintainer'
     #}}}
 
     #{{{def init_script(cls, path, name, author):
