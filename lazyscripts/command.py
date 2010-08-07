@@ -255,7 +255,7 @@ class PoolCmd(Command):
         if len(pools) == 1:
             poolname = pools[0][0]
         else:
-            poolname = gui.select_defaultpool(pools)
+            poolname = gui.gtklib.select_defaultpool(pools)
         self.conf.set_default(pool=poolname)
         self.conf.save()
         return poolname
