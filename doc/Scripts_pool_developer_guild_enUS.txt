@@ -22,15 +22,15 @@ easier.
 
 === Structure ===
 
-Lazyscripts works with script pools, in a similar way like package managers
-work with repositories. The script pools contains the scripts that will be
+Lazyscripts works with Script Pools, in a similar way like package managers
+work with repositories. The Script Pools contains the scripts that will be
 available for the end-users, including their metadata.
 
-Here is the structure of a script pool:
+Here is the structure of a Script Pool:
 
          Local                                  Github
                               (2)
-        Lazyscripts Core Program --------------> Script pool
+        Lazyscripts Core Program --------------> Script Pool
               | (1)                      ex: git://github.com/aminzai/
               V                        /     lzs_pool_debianlize.git
        ~/.lazyscripts/                /
@@ -50,24 +50,24 @@ Here is the structure of a script pool:
 
 When Lazyscripts runs for the first time, here is its workflow:
 1. Lazyscripts will build a "~/.lazyscripts" directory, which contains a
-   configuration file. All the script pools information will be held in
+   configuration file. All the Script Pools information will be held in
    this the configuration file.
-2. Lazyscripts will then find the script pools which matches the Linux
+2. Lazyscripts will then find the Script Pools which matches the Linux
    distribution on which it is running. If there is more than one such script
    pool, Lazyscripts will pop up a dialog with a list and let the user choose
    one.
-3. Lazyscripts will check out the files from the selected scripts pool through
-   git, and put them into "~/lazyscripts/pools". Every script pool has its own
+3. Lazyscripts will check out the files from the selected Script Pool through
+   git, and put them into "~/lazyscripts/pools". Every Script Pool has its own
    subdirectory.
 4. Lazyscripts will analyze the "desc.ini" from the pool to find the information 
-   about the script pool, then show the GUI, menus and options.
+   about the Script Pool, then show the GUI, menus and options.
 5. After the user has choosen one or several scripts to run by ticking the
    matching checkboxes, then clicked on the "Apply" button, Lazyscripts will
    download and import the repository keys required by the package manager.
    Then Lazyscripts will build a "lzs_root" directory in "/tmp", which includes all
    files necessary for running the scripts. In "lzs_storagedenv", each
    environment variable for scripts will be defined. A "shlib" directory comes from
-   the shlib directory from the scripts pool. It is a toolkit that provides shell
+   the shlib directory from the Script Pool. It is a toolkit that provides shell
    functions that can be used by the scripts at run-time.
    The package names defined in "remove.txt" will be removed first from the
    system, and the packages defined in "install.txt" will be installed. For
@@ -81,12 +81,12 @@ When Lazyscripts runs for the first time, here is its workflow:
    running Lazyscripts.
 
 
-==== Script pool structure ====
+==== Script Pool structure ====
 
-  The script pool structure is really simple. Just follow the
+  The Script Pool structure is really simple. Just follow the
   instructions and the format to write the metadata files or scripts, and
   place them in the right location. Lazyscripts will analyze these files and
-  use them. The following will introduce the structure of scripts pool, and
+  use them. The following will introduce the structure of Script Pool, and
   explain the contents of the files.
 
   Here is the structure of git://github.com/aminzai/lzs_pool_debianlize.git
@@ -94,7 +94,7 @@ When Lazyscripts runs for the first time, here is its workflow:
 
  lzs_pool_debianlize/
         |-README                          - README file, contains the general description and possibly the license of the pool
-        |-desc.ini                        - description file, contains the name and description of the script pool, specify the
+        |-desc.ini                        - description file, contains the name and description of the Script Pool, specify the
         |                                 the icons, and translation of category names.
         |-recommand.ini                   - Recommandation list. The items defined in this file will pre-checked at the time Lazyscripts is launched.
         |-shlib/                          - The directory to place toolkits. All the directory will be copy to /tmp/lzs_root before scripts execute. The scripts or tools inside can be used in any script.
@@ -126,7 +126,7 @@ When Lazyscripts runs for the first time, here is its workflow:
         |           |- ....
         |- ....
 
-==== Introduction of the script pool file formats ====
+==== Introduction of the Script Pool file formats ====
 
 README:
     Read-me file.
@@ -136,7 +136,7 @@ README:
 desc.ini:
 [info]
 # English name
-name[en_US] = Debianlize Linux distribution scripts pool   
+name[en_US] = Debianlize Linux distribution Script Pool   
 # Chinese name
 name[zh_TW] = Debianlize Linux 腳本源                      
 # English description
