@@ -252,6 +252,8 @@ class PoolCmd(Command):
         conf = env.resource('config')
         lang = env.get_local()
         pools = conf.get_support_pools(distro.Distribution().name, distro.Distribution().version, lang)
+        if not pools:
+            pools = conf.get_support_pools(distro.Distribution().name, distro.Distribution().version, 'en_US')
         if len(pools) == 1:
             poolname = pools[0][0]
         else:
