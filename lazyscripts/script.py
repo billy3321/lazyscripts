@@ -176,7 +176,7 @@ class Script(object):
             if not optname[0:4] in self.I18N_ATTRS:
                 attrname = optname
             # skip if lang of attribute value is not we wanted.
-            elif optname[5:10] != self.lang.lower():
+            elif optname[5:10].lower() != self.lang.lower():
                 continue
 
             if not attrname in ('maintainers','authors'):
