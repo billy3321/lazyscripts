@@ -54,13 +54,6 @@ def get_local():
         local = locale.getlocal(locale.LC_ALL)
         if local:
             local = local[0]
-    localedirs = ['', '/usr/share/locale', '/usr/local/share/locale']
-    find_locale = False
-    for localedir in localedirs:
-        if gettext.find('lazyscripts', localedir=localedir, languages=[local]):
-            find_locale = True
-    if not find_locale:
-        local = 'en_US'
     return local
 #}}}
 
