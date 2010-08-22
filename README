@@ -12,6 +12,7 @@ Scripts:      decalar by each scripts
     python-dev or python-devel
     python-gtk2 or python-gtk
     intltool
+    wget
 
 == Install & Usage
 
