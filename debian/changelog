@@ -1,0 +1,97 @@
+lazyscripts (1:0.2.3~git-37ff9ed) lucid; urgency=low
+
+  [changes]
+
+  * Fix an error cause zh_TW user can't run
+  * Script name and desc will switch to en_US if local name and desc not found.
+  * Add Germany language support.
+
+ -- Billy Zhe-Wei Lin, 林哲瑋 (billy3321, 雨蒼) <billy3321@gmail.com>  Sun, 22 Aug 2010 21:35:32 +0800
+
+lazyscripts (1:0.2.3~git-4f874e1) lucid; urgency=low
+
+  * Fix deb does not have any py files.
+
+ -- Hsin-Yi Chen (hychen) <ossug.hychen@gmail.com>  Sun, 25 Jul 2010 02:54:32 +0800
+
+lazyscripts (1:0.2.2~git-4a5e878) lucid; urgency=low
+
+  [changes]
+
+  * use stable branch scripts pool by default
+
+ -- Hsin-Yi Chen (hychen) <ossug.hychen@gmail.com>  Sat, 24 Jul 2010 23:33:04 +0800
+
+lazyscripts (1:0.2.2~git-4fc1e6c) lucid; urgency=low
+
+  [changes]
+
+  * zh_CN localization support
+
+ -- Hsin-Yi Chen (hychen) <ossug.hychen@gmail.com>  Sat, 24 Jul 2010 23:10:06 +0800
+
+lazyscripts (1:0.2.2) lucid; urgency=low
+
+   [changes]
+
+   * no changes for reupload.
+
+ -- Hsin-Yi Chen (hychen) <ossug.hychen@gmail.com>  Sat, 12 Jun 2010 20:28:52 +0800
+
+lazyscripts (0.2.1) lucid; urgency=low
+
+    [changes]
+
+    * correct software version
+
+ -- Hsin-Yi Chen (hychen) <ossug.hychen@gmail.com>  Sat, 12 Jun 2010 10:12:07 +0800
+
+lazyscripts (0.2) lucid; urgency=low
+
+    [changes]
+
+    * Add redhatlize distribution source update support
+
+    [bug gix]
+
+    * fix GPG of 3rd package repository does not be added automatically
+    * fix some distribution can not be recongize
+    * fix running aboort if script does not have desc or name colum.
+    * fix basepool test case abort.
+    * fix user's lazyscript directory can not create first running.
+
+ -- Hsin-Yi Chen (hychen) <ossug.hychen@gmail.com>  Sat, 12 Jun 2010 10:12:07 +0800
+
+lazyscripts (0.2.rc4hychen) lucid; urgency=low
+
+    [changes]
+
+    * add icons
+    * use distuils-extra. but ./setup install will not install po fiels and desktops.
+    * add zyper, urpmi, pacman, yum, opensolaris pkg support. (thanks to billy)
+
+    [bug fix]
+
+    * fix error in muilty users case.
+        ex: a user ran lazyscripts, and b ran lazyscripts will show error.
+            cause b has no permission to access runtime direcotry.
+    * fix pool sync faild because git pull compalin no branch specify
+    * fix asking pool selection when only 1 supported pool of user's distribution.
+    * fix distribution not found in opensolaris and arch.
+    * fix platform.dist can not recongnize some distribution.
+    * fix message typo of graphic interface..
+    * fix duplicate directory name of scritps in runiing root.
+    * fix the bug of git command on centos.
+        git checkout -bmaster upstream/master will cause error in centos.
+        the git need -b master not -bmaster.
+    * fix get_local error because the followoing(thanks to billy3321):
+        * language variable only exists in ubuntu/debian.
+        * the value of lang is zh_tw:zh.utf-8 in debian, and make the local settings wrong.
+
+ -- Hsin Yi Chen (hychen) <ossug.hychen@gmail.com>  Tue, 20 Apr 2010 00:42:18 +0800
+
+lazyscripts (0.2.rc3hychen) lucid; urgency=low
+
+  * Initial Release.
+
+ -- Hsin Yi Chen (hychen) <ossug.hychen@gmail.com>  Sat, 17 Apr 2010 22:13:22 +0800
