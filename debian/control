@@ -4,15 +4,18 @@ Priority: optional
 Maintainer: Billy Zhe-Wei Lin, 林哲瑋 (billy3321, 雨蒼) <billy3321@gmail.com>
 Build-Depends:
 	intltool,
+	cdbs (>= 0.4.49),
 	debhelper (>= 7.0.50~),
 	python-central (>= 0.5.6),
 	python-setuptools,
 	python-distutils-extra
+XB-Python-Version: >=2.6
 Standards-Version: 3.8.4
 Homepage: http://www.lazyscripts.org
 
 Package: lazyscripts
 Architecture: all
+XB-Python-Version: ${python:Versions}
 Depends:  python (>=2.6), python-gtk2, python-vte, git-core, zenity, sudo, gksu, wget,
  ${python:Depends},
  ${shlibs:Depends},

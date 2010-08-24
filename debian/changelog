@@ -1,3 +1,9 @@
+lazyscripts (1:0.2.3.5~lucid) lucid; urgency=low
+
+  * Fix an error cause launchpad not include py files.
+
+ -- Billy Zhe-Wei Lin, 林哲瑋 (billy3321, 雨蒼) <billy3321@gmail.com>  Tue, 24 Aug 2010 17:38:32 +0800
+
 lazyscripts (1:0.2.3.3~lucid) lucid; urgency=low
 
   * Modify the version to support lucid and karmic both.

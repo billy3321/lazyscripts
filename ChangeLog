@@ -1,3 +1,10 @@
+lazyscripts 0.2.3.5 (8/24/2010):
+
+    [changes]
+    * Fix the error cause zh_TW user can't open.
+    * Script pool and script now will use en_US if the translation not found.
+	* Add fr.po and de.po, fix some words in en.po.
+
 lazyscripts 0.2.1 (6/12/2010):
 
     [changes]
