@@ -31,7 +31,7 @@ msgstr "Distribution nicht unterstützt."
 
 #: lazyscripts/console.py:102
 msgid "console.gui_run.gksu_msg"
-msgstr "\"Lazyscripts muss Änderungen am System vornehmen und Software installieren. Hierfür werden Adminrechte benötigt. (Unter Ubuntu wirst du nach deinem Login-Passwort gefragt, unter anderen Distributionen evtl. nach dem root-Passwort.)"
+msgstr "\"Lazyscripts muss Änderungen am System vornehmen und Software installieren. Hierfür werden Adminrechte benötigt. (Unter Ubuntu wirst du nach deinem Login-Passwort gefragt, unter anderen Distributionen evtl. nach dem root-Passwort.)\""
 
 #: lazyscripts/console.py:126
 msgid "console.gui_run.downloading_scripts"
