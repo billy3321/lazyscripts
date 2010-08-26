@@ -243,8 +243,9 @@ class PoolCmd(Command):
 
     #{{{def _get_user_preferpool(self):
     def _get_user_preferpool(self):
-        return self.conf.get_default('pool') or \
-               self._ask_user_selectpool()
+        #return self.conf.get_default('pool') or \
+        #       self._ask_user_selectpool()
+        return self._ask_user_selectpool()
     #}}}
 
     #{{{def _ask_user_selectpool(self):
