@@ -55,7 +55,7 @@ def get_local():
         if local:
             local = local[0]
         if not find_localedir(local):
-            loacl = 'en_US'
+            local = 'en_US'
     return local
 #}}}
 
@@ -196,7 +196,7 @@ def prepare_runtimeenv():
     #    localedir = '/usr/local/share/locale'
     #else:
     #    localedir = '/usr/share/locale'
-    localedir = find_localedir(lang)
+    localedir = find_localedir(lang)[0]
 
     gettext.install("lazyscripts", localedir=localedir)
     "prepare runtime enviroment which caches objects is generated."
