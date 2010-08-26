@@ -104,14 +104,14 @@ class WindowManager(object):
                 return 'gksu --message %s "%s"' % (msg, cmd)
             elif self.name == 'kde':
                 if path.exists('/usr/bin/kdesudo'):
-                    return 'kdesudo -c "%s"' % (cmd)
+                    return 'kdesudo -d -c "%s"' % (cmd)
                 else:
-                    return 'kdesu -c "%s"' % (cmd)
+                    return 'kdesu -d -c "%s"' % (cmd)
         elif self.distro in ('opensuse','suse'):
             if self.name == 'gnome':
                 return 'gnomesu --command="%s"' % (cmd)
             elif self.name == 'kde':
-                return 'kdesu -c "%s"' % (cmd)
+                return 'kdesu -d -c "%s"' % (cmd)
             elif self.name in ('xfce','lxde'):
                 return 'xdg-su -c "%s"' % (cmd)
         elif self.distro in ('mandrake','mandriva','opensolaris','redhat','centos'):
