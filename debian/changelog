@@ -1,4 +1,15 @@
+lazyscripts (1:0.2.3.7~lucid) lucid; urgency=low
+
+  [changes]
+
+  * Fix the error cause de_DE user can't open.
+  * Lazyscripts now can switch language setting by enviroment LANG variation.
+
+ -- Billy Zhe-Wei Lin, 林哲瑋 (billy3321, 雨蒼) <billy3321@gmail.com>  Thu, 26 Aug 2010 18:28:01 +0800
+
 lazyscripts (1:0.2.3.5~lucid) lucid; urgency=low
+
+  [changes]
 
   * Fix an error cause launchpad not include py files.
 
@@ -6,11 +17,15 @@ lazyscripts (1:0.2.3.5~lucid) lucid; urgency=low
 
 lazyscripts (1:0.2.3.3~lucid) lucid; urgency=low
 
+  [changes]
+
   * Modify the version to support lucid and karmic both.
 
  -- Billy Zhe-Wei Lin, 林哲瑋 (billy3321, 雨蒼) <billy3321@gmail.com>  Sun, 22 Aug 2010 21:35:32 +0800
 
 lazyscripts (1:0.2.3.2) lucid; urgency=low
+
+  [changes]
 
   * Fix an error cause launchpad not accept.
 
@@ -27,6 +42,8 @@ lazyscripts (1:0.2.3.1) lucid; urgency=low
  -- Billy Zhe-Wei Lin, 林哲瑋 (billy3321, 雨蒼) <billy3321@gmail.com>  Sun, 22 Aug 2010 21:35:32 +0800
 
 lazyscripts (1:0.2.3~git-4f874e1) lucid; urgency=low
+
+  [changes]
 
   * Fix deb does not have any py files.
 

@@ -11,7 +11,7 @@ PYTHON=`which python`
 DESTDIR=/
 BUILDIR=$(CURDIR)/debian/lazyscripts
 PROJECT=lazyscripts
-VERSION=0.2.3.5
+VERSION=0.2.3.7
 
 all:
 	@echo "make source - Create source package"
