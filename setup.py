@@ -48,5 +48,6 @@ The original idea is from LazyBuntu, made by PCman in Taiwan. we usually need th
         '': ['config']
     },
     zip_safe=False,
-    cmdclass = {'install': install}
+    cmdclass = {'install': install},
+    data_files = []
 )
