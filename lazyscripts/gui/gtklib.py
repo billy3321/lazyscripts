@@ -114,6 +114,7 @@ def show_progress(cmd, title, text, percentage, width, autoclose, autokill):
     if autokill:
         progress_dialog_cmd.append("--auto-kill")
     os.system("%s | %s" % (cmd, ' '.join(progress_dialog_cmd)))
+    #os.system(cmd)
 #}}}
 
 class Tool:

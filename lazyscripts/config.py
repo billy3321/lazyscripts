@@ -71,7 +71,8 @@ class Configuration(object):
         if not self.parser.has_section('defaults'):
             self.parser.add_section('defaults')
         for key, val in kwds.items():
-            self.parser.set('defaults', key, val)
+            if self.parser.has_section('pool "%s"' % val):
+                self.parser.set('defaults', key, val)
     #}}}
 
     #{{{def get_default(self, key):
