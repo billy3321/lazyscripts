@@ -277,7 +277,7 @@ def get_pkgmgr(distro):
         return ZypperManager()
     elif distro in ('fedora','centos','redhat'):
         return YumManager()
-    elif distro in ('mandrake','mandriva'):
+    elif distro in ('mandrake','mandriva','mandriva linux'):
         return UrpmiManager()
     elif distro == 'arch':
         return PacmanManager()
