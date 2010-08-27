@@ -118,5 +118,5 @@ msgid ""
 "gui.gtklib.mainwin.complete.finished-install\n"
 msgstr ""
 "\n"
-"[1;36mLazyscripts - le lancement du scripts est terminé ![1;32m   Bon amusement avec Linux ![m\n"
+"[1;36mLazyscripts - le lancement des scripts est terminé ![1;32m   Bon amusement avec Linux ![m\n"
 
