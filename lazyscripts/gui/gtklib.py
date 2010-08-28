@@ -119,8 +119,9 @@ def show_progress(cmd, title, text, percentage, width, autoclose, autokill):
 
 class Tool:
     #{{{def __init__ (self, script, used=True):
-    def __init__ (self, script, used=True):
+    def __init__ (self, script, category, used=True):
         self.used = used
+        self.category = category
         self.script = script
     #}}}
 pass
@@ -292,7 +293,8 @@ class ToolListWidget:
             tool_page.img = self.pool.get_iconpath(category)
 
             for script in self.pool.scripts(category, lzs_loc):
-                tool = Tool (script, self.pool.recommand_script(category, script.id))
+                #tool = Tool (script, category, self.pool.recommand_script(category, script.id))
+                tool = Tool (script, category, False)
                 tool_page.tools.append(tool)
 
             tool_page.get_widget()
@@ -367,6 +369,11 @@ class MainWin:
         btn.connect('clicked', self.on_clear)
         hbox.pack_end(btn, False, True, 8)
 
+        btn=gtk.Button(stock=gtk.STOCK_OK)
+        self.default_btn=btn
+        btn.connect('clicked', self.on_default)
+        hbox.pack_end(btn, False, True, 8)
+
         vbox.pack_start(hbox, False, True, 2)
 
         win.set_default_size( 720, 540 )
@@ -408,8 +415,8 @@ class MainWin:
                         '朱昱任 (Yuren Ju) <yurenju@gmail.com>',
                         '林哲瑋 (billy3321,雨蒼) <billy3321@gmail.com>',
                         '陳信屹 (Hychen) <ossug.hychen@gmail.com>',
-                        '王綱民(Aminzai) <lagunawang@gmail.com>',
-                        '張君平(mrmoneyc) <moneyc.net@gmail.com>'])
+                        '王綱民 (Aminzai) <lagunawang@gmail.com>',
+                        '張君平 (mrmoneyc) <moneyc.net@gmail.com>'])
         dlg.set_copyright('Copyright (C) 2010 by Lazyscripts project')
         dlg.set_license('GNU General Public License V2')
         dlg.set_comments(_('gui.gtklib.mainwin.about.comments'))
@@ -464,6 +471,25 @@ class MainWin:
                 category.list.set(it, 0, False)
                 it = category.list.iter_next(it)
     #}}}
+    def on_default(self, btn):
+        for (id, name, category) in self.tool_list.list:
+            if category.__class__.__name__ != 'ToolPage':
+                continue
+            it = category.list.get_iter_first()
+            while True:
+                if it == None:
+                    break
+                app = category.list.get(it, 2)
+                if self.tool_list.pool.recommand_script(app[0].category, app[0].script.id):
+                    app[0].used = True
+                    category.list.set(it, 0, True)
+                else:
+                    app[0].used = False
+                    category.list.set(it, 0, False)
+                it = category.list.iter_next(it)
+        #for script in self.pool.scripts(category, lzs_loc):
+        #    tool = Tool(script, self.pool.recommand_script(category, script.id))
+        #    tool_page.tools.append(tool)
 pass
 
 #{{{def startgui(recommands_list=None):
