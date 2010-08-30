@@ -26,6 +26,9 @@ source:
 install:
 	$(PYTHON) setup.py install --root $(DESTDIR) $(COMPILE)
 
+run:
+	$(PATHON) -c "from lazyscripts import console; console.gui_run()"
+
 buildrpm:
 	$(PYTHON) setup.py bdist_rpm --post-install=rpm/postinstall --pre-uninstall=rpm/preuninstall
 
