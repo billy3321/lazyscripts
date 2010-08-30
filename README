@@ -6,12 +6,15 @@ Scripts:      decalar by each scripts
 == Required Packages
 
     python-setuptools
+    python-distutils-extra
     python-vte or vte
     gettext
     zenity
     python-dev or python-devel
     python-gtk2 or python-gtk
     intltool
+    wget
+    gksu or gnomesu or kdesu
 
 == Install & Usage
 
