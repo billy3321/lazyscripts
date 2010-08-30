@@ -10,7 +10,7 @@ desc = hychen's debianlize scripts pool.
 ubuntu = 9.10, 10.04
 debian = 5
 linuxmint = 8
-lang = zh_TW
+lang = 
 
 [pool "debianlize"]
 upstream = git://github.com/aminzai/lzs_pool_debianlize.git
