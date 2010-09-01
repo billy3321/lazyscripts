@@ -16,7 +16,7 @@ Homepage: http://www.lazyscripts.org
 Package: lazyscripts
 Architecture: all
 XB-Python-Version: ${python:Versions}
-Depends:  python (>=2.6), python-gtk2, python-vte, git-core, zenity, sudo, gksu, wget,
+Depends:  python (>=2.6), python-gtk2, python-vte, git-core, zenity, sudo, gksu, wget, python-setuptools
  ${python:Depends},
  ${shlibs:Depends},
  ${misc:Depends}
