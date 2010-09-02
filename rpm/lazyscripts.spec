@@ -1,12 +1,12 @@
 %define name lazyscripts
-%define version 0.2.3.7
+%define version 0.2.3.6
 %define release 1
 
 Summary: The scripts manager in Linux.
 Name: lazyscripts
-Version: 0.2.3.7
+Version: 0.2.3.6
 Release: 1
-Source: lazyscripts-0.2.3.7.tar.gz
+Source: lazyscripts-0.2.3.6.tar.gz
 License: GPLv2
 Group: System
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
