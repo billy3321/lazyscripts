@@ -95,13 +95,13 @@ def get_all_users():
         """
         # with open('/etc/passwd', 'r') as f:
         f = open('/etc/passwd', 'r')
-           for line in f:
-               userinfos = line.strip().split(':')
-               uid = int(userinfos[2])
-			# only want to get active users.
-               if uid < 1000 or uid > 65533:
-                   continue
-               yield userinfos
+        for line in f:
+           userinfos = line.strip().split(':')
+           uid = int(userinfos[2])
+           # only want to get active users.
+           if uid < 1000 or uid > 65533:
+               continue
+           yield userinfos
         f.close()
 #}}}
 
