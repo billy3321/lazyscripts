@@ -8,22 +8,49 @@ Upstream Author:
     Hsin-Yi Chen <ossug.hychen@gmail.com>
     Billy Zhe-Wei Lin, 林哲瑋 (billy3321, 雨蒼) <billy3321@gmail.com> 
 
-Copyright:
+Files: debian/*
+Copyright: (c) 2010, Hsin-Yi Chen (hychen) <ossug.hychen@gmail.com>
+	(C) 2010, Billy Zhe-Wei Lin, 林哲瑋 (billy3321, 雨蒼) <billy3321@gmail.com> 
+	(c) 2010, Thomas Goirand <zigo@debian.org>
+License: GPL-2
 
-    Copyright (C) 2010 Hsin-Yi Chen <ossug.hychen@gmail.com>
-    Copyright (C) 2010 Billy Zhe-Wei Lin, 林哲瑋 (billy3321, 雨蒼) <billy3321@gmail.com> 
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
 
-License:
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	GNU General Public License for more details.
 
-    GPL version 2
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
-The Debian packaging is:
+Files: *
+Copyright: (c) 2010, Hsin-Yi Chen <ossug.hychen@gmail.com>
+	(c) 2010, Billy Zhe-Wei Lin, 林哲瑋 (billy3321, 雨蒼) <billy3321@gmail.com> 
+License: GPL-2
 
-    Copyright (C) 2010 Hsin-Yi Chen (hychen) <ossug.hychen@gmail.com>
-    Copyright (C) 2010 Billy Zhe-Wei Lin, 林哲瑋 (billy3321, 雨蒼) <billy3321@gmail.com> 
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
 
-and is licensed under the GPL version 2,
-see `/usr/share/common-licenses/GPL-2'.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	GNU General Public License for more details.
 
-Please also look if there are files or directories which have a
-different copyright/license attached and list them here.
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+
+On Debian or Ubuntu systems, the complete text of the GNU General Public
+License v2 (GPL) can be found in /usr/share/common-licenses/GPL-2.
+
+### FIX THIS ###
+### EVERYTHING MUST BE ON THIS COPYRIGHT FILE ###
+### Please also look if there are files or directories which have a
+### different copyright/license attached and list them here.

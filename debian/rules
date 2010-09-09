@@ -1,19 +1,51 @@
 #!/usr/bin/make -f
 
-#!/usr/bin/make -f
-# -*- makefile -*-
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
 
 DEB_PYTHON_SYSTEM := pysupport
 
-include /usr/share/cdbs/1/rules/debhelper.mk
-include /usr/share/cdbs/1/class/python-distutils.mk
+build:
 
-clean::
+clean:
+	dh_testdir
+	dh_testroot
 	rm -rf build build-stamp configure-stamp build/ MANIFEST
-	dh_clean
-
-override_dh_auto_clean:
 	rm -rf $(CURDIR)/debian/python-module-stampdir
 	rm -rf $(CURDIR)/debian/stamp-patched
 	rm -rf $(CURDIR)/build
 	rm -rf $(CURDIR)/dist
+
+	dh_clean
+
+install:
+	dh_testdir
+	dh_testroot
+	dh_prep
+	python ./setup.py install --root $(CURDIR)/debian/lazyscripts
+	rm -rf $(CURDIR)/debian/lazyscripts/usr/lib/python2.5/site-packages/lazyscripts/*.pyc
+	rm -rf $(CURDIR)/debian/lazyscripts/usr/lib/python2.5/site-packages/lazyscripts/git/*.pyc
+	rm -rf $(CURDIR)/debian/lazyscripts/usr/lib/python2.5/site-packages/lazyscripts/gui/*.pyc
+	rm -rf $(CURDIR)/debian/lazyscripts/usr/lib/python2.5/site-packages/lazyscripts/pkgmgr.pyc
+	rm -rf $(CURDIR)/debian/lazyscripts/usr/lib/python2.5/site-packages/lazyscripts/template/__init__.pyc
+	rm -rf $(CURDIR)/debian/lazyscripts/usr/share/omf/Lazyscripts
+
+binary-indep: install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs
+	dh_installdocs
+	dh_installmanpages
+	dh_strip
+	dh_compress
+	dh_fixperms
+	dh_shlibdeps
+	dh_installdeb
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary-arch: install
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install

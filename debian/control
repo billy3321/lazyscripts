@@ -2,25 +2,18 @@ Source: lazyscripts
 Section: utils
 Priority: optional
 Maintainer: Billy Zhe-Wei Lin, 林哲瑋 (billy3321, 雨蒼) <billy3321@gmail.com>
-Build-Depends:
-	intltool,
-	cdbs (>= 0.4.49),
-	debhelper (>= 7.0.50~),
-	python-central (>= 0.5.6),
-	python-setuptools,
-	python-distutils-extra
+Build-Depends: intltool, debhelper (>= 7.0.50~),
+	python-central (>= 0.5.6), python-setuptools, python-distutils-extra, python-support
 XB-Python-Version: >=2.6
-Standards-Version: 3.8.4
+Standards-Version: 3.9.1
 Homepage: http://www.lazyscripts.org
 
 Package: lazyscripts
 Architecture: all
 XB-Python-Version: ${python:Versions}
-Depends:  python (>=2.6), python-gtk2, python-vte, git-core, zenity, sudo, gksu, wget, python-setuptools
- ${python:Depends},
- ${shlibs:Depends},
- ${misc:Depends}
-Description: A stupid scripts management tool
+Depends:  python (>=2.6), python-gtk2, python-vte, git-core, zenity, sudo, gksu, wget, python-setuptools,
+ ${python:Depends}, ${shlibs:Depends}, ${misc:Depends}
+Description: A stupid scripts management tool and non official package installer
  Lazyscripts is just a stupid script distrubtion tool and quick-installer
  in Linux, which aims to provide a easy way to setup your working environment
  for people who need to install a new distrubution such as Debian,Ubuntu,

@@ -1,0 +1,5 @@
+lazyscripts (0.2.3.7-1) lucid; urgency=low
+
+  * Initial release (Closes: #596229).
+
+ -- Thomas Goirand <zigo@debian.org>  Thu, 26 Aug 2010 18:28:01 +0800
