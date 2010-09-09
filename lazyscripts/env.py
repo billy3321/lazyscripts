@@ -93,14 +93,16 @@ def get_all_users():
 
         @return [$loginanme, $hiddenpwd, $uid, $gid, $real_name, $home_dir, $shell_path]
         """
-        with open('/etc/passwd', 'r') as f:
-                for line in f:
-                        userinfos = line.strip().split(':')
-                        uid = int(userinfos[2])
+        # with open('/etc/passwd', 'r') as f:
+        f = open('/etc/passwd', 'r')
+           for line in f:
+               userinfos = line.strip().split(':')
+               uid = int(userinfos[2])
 			# only want to get active users.
-                        if uid < 1000 or uid > 65533:
-                                continue
-                        yield userinfos
+               if uid < 1000 or uid > 65533:
+                   continue
+               yield userinfos
+        f.close()
 #}}}
 
 class Register:

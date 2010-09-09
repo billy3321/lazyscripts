@@ -28,9 +28,11 @@ def create_executablefile(path, lines):
     @param str filename file name
     @param list lines file content
     """
-    with open(path, 'w') as f:
-        f.write("\n".join(lines+['']))
-        os.chmod(path, 0755)
+    # with open(path, 'w') as f:
+    f = open(path, 'w')
+    f.write("\n".join(lines+['']))
+    f.close()
+    os.chmod(path, 0755)
 #}}}
 
 #{{{def ext_ospath_join(*paths):

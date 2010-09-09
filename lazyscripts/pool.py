@@ -38,13 +38,15 @@ class NoI18nSectionError(Exception):
 
 #{{{def create_pooldescfile(dirpath, maintainers=''):
 def create_pooldescfile(dirpath, maintainers=''):
-    with open(os.path.join(dirpath, 'desc.ini'),'w') as f:
-        f.write("\n".join([
-        '[info]',
-        'maintaners=%s' % maintainers,
-        '[icon_path]',
-        '[category]',
-        '']))
+    # with open(os.path.join(dirpath, 'desc.ini'),'w') as f:
+    f = open(os.path.join(dirpath, 'desc.ini'),'w')
+    f.write("\n".join([
+                '[info]',
+                'maintaners=%s' % maintainers,
+                '[icon_path]',
+                '[category]',
+                '']))
+    f.close()
 #}}}
 
 #{{{def is_scriptspool(dirpath):

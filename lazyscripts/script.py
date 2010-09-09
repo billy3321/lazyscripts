@@ -54,8 +54,10 @@ def create_scriptdesc(path, name, authors):
         "arm         = False",
         ''
     ])
-    with open(os.path.join(path,'desc.ini'),'w') as f:
-        f.write(tpl)
+    # with open(os.path.join(path,'desc.ini'),'w') as f:
+    f = open(os.path.join(path,'desc.ini'),'w')
+    f.write(tpl)
+    f.close()
 #}}}
 
 #{{{def create_scriptpkgdesc(dir):
@@ -64,8 +66,10 @@ def create_scriptpkgdesc(dir):
     os.mkdir(dir)
     for e in ('install','remove'):
         filepath = os.path.join(dir, '%s.txt' % e)
-        with open(filepath, 'w') as f:
-            f.write("#pkg %s list\n" % e)
+        # with open(filepath, 'w') as f:
+        f = open(filepath, 'w')
+        f.write("#pkg %s list\n" % e)
+        f.close()
 #}}}
 
 #{{{def is_scriptdir(path):

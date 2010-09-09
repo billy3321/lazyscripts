@@ -142,11 +142,14 @@ class Configuration(object):
 
     #{{{def save(self):
     def save(self):
-         if not self._is_dirty:
-             return False
+         #if not self._is_dirty:
+         #    return False
          os.rename(self.filename, self.filename+'.bak')
-         with open(self.filename,'wb') as fp:
-             self.parser.write(fp)
+         #with open(self.filename,'wb') as fp:
+         #    self.parser.write(fp)
+         fp = open(self.filename, 'wb')
+         self.parser.write(fp)
+         fp.close()
     #}}}
 
     #{{{def get_support_pools(self, distroname):
