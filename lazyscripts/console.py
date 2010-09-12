@@ -25,7 +25,7 @@ from lazyscripts import command as lzscmd
 from lazyscripts import distro
 from lazyscripts import pool as lzspool
 from lazyscripts import env
-from lazyscripts import gui
+from lazyscripts.gui import gtklib as ui
 
 class LzsAdmin(cmd.Cmd):
 
@@ -126,7 +126,7 @@ def gui_run():
       else:
           cmd = "lzs pool sync --rev %s" % options.rev
 
-      gui.gtklib.show_progress(cmd,
+      ui.show_progress(cmd,
                         'Lazyscripts',
                         _('console.gui_run.downloading_scripts'),
                         80,

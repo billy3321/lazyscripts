@@ -24,7 +24,7 @@ from lazyscripts import distro
 from lazyscripts import env
 from lazyscripts import pool
 from lazyscripts import script as lzsscript
-from lazyscripts import gui
+from lazyscripts.gui import gtklib as ui
 from lazyscripts import git
 
 class Command(object):
@@ -258,7 +258,7 @@ class PoolCmd(Command):
         if len(pools) == 1:
             poolname = pools[0][0]
         else:
-            poolname = gui.gtklib.select_defaultpool(pools)
+            poolname = ui.select_defaultpool(pools)
         self.conf.set_default(pool=poolname)
         self.conf.save()
         return poolname
@@ -286,7 +286,7 @@ class GuiCmd(Command):
     #{{{def run(self):
     def run(self):
         if self.argc > 1:
-            gui.gtklib.startgui(self.args[1])
+            ui.startgui(self.args[1])
         else:
-            gui.gtklib.startgui()
+            ui.startgui()
     #}}}
