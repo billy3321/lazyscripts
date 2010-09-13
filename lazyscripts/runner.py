@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- encoding=utf8 -*-
+# -*- encoding=utf-8 -*-
 #
 # Copyright © 2009 Hsin Yi Chen
 #
