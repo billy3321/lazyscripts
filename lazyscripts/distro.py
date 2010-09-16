@@ -108,6 +108,8 @@ class Distribution(object):
     def _reduce_version(self):
         if self.name == 'opensolaris' and not self.version:
             self.version = commands.getoutput('cat /etc/release | grep "OpenSolaris" | cut -d " " -f 27')
+        elif self.name == 'debian':
+            self.version = self.version.split('.')[0]
     #}}}
 
 pass

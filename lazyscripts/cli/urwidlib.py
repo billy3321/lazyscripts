@@ -211,3 +211,12 @@ def select_defaultpool(poollist):
         sys.stderr.write(exitstring+"\n")
     return exitcode
 
+class Tool:
+    #{{{def __init__ (self, script, used=True):
+    def __init__ (self, script, category, used=True):
+        self.used = used
+        self.category = category
+        self.script = script
+    #}}}
+pass
+
