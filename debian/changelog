@@ -1,3 +1,12 @@
+lazyscripts (1:0.2.3.8~lucid) lucid; urgency=low
+
+  [changes]
+
+  * Make user can select to use recommand options by their self.
+  * Support ubuntu 10.10
+
+ -- Billy Zhe-Wei Lin, 林哲瑋 (billy3321, 雨蒼) <billy3321@gmail.com>  Mon, 11 Oct 2010 09:39:41 +0800
+
 lazyscripts (1:0.2.3.7~lucid) lucid; urgency=low
 
   [changes]
