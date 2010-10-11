@@ -9,7 +9,7 @@ import pygtk
 pygtk.require('2.0')
 import gtk, gobject, vte
 import os, sys
-from lazyscripts import __VERSION__, __WEBURL__
+from lazyscripts import __VERSION__, __WEBURL__, __BUGLIST__, __MAIL__
 from lazyscripts import env
 from lazyscripts import pool as lzspool
 from lazyscripts import runner as lzsrunner
@@ -56,6 +56,26 @@ def query(msg, msg_type, button_type, assert_res=None, parent=None):
         return ret
     else:
         return ret == assert_res
+#}}}
+
+#{{{def show_msg(msg, title=None, parent=None):
+def show_msg(msg, title=None, parent=None):
+    """
+    display error message.
+
+    @param title str the title in dialog.
+    @parant
+    """
+    dlg = gtk.MessageDialog \
+            (parent, gtk.DIALOG_MODAL, \
+            gtk.MESSAGE_INFO, gtk.BUTTONS_OK)
+
+    if title:
+        dlg.set_title (title)
+    dlg.set_markup(msg)
+
+    dlg.run ()
+    dlg.destroy ()
 #}}}
 
 #{{{def show_error(msg, title=None, parent=None):
@@ -119,8 +139,9 @@ def show_progress(cmd, title, text, percentage, width, autoclose, autokill):
 
 class Tool:
     #{{{def __init__ (self, script, used=True):
-    def __init__ (self, script, used=True):
+    def __init__ (self, script, category, used=True):
         self.used = used
+        self.category = category
         self.script = script
     #}}}
 pass
@@ -286,13 +307,18 @@ class ToolListWidget:
     def load_tree(self, list_store):
         self.download_scripts()
         lzs_loc = env.get_local()
+        use_recommand = query_yes_no(_('gui.gtklib.toolpage.query_recommand'))
         for category in self.pool.categories():
             tool_page = ToolPage()
             tool_page.title = self.pool.get_i18n('category', category, lzs_loc)
             tool_page.img = self.pool.get_iconpath(category)
 
+
             for script in self.pool.scripts(category, lzs_loc):
-                tool = Tool (script, self.pool.recommand_script(category, script.id))
+                if use_recommand:
+                    tool = Tool (script, category, self.pool.recommand_script(category, script.id))
+                else:
+                    tool = Tool (script, category, False)
                 tool_page.tools.append(tool)
 
             tool_page.get_widget()
@@ -352,6 +378,10 @@ class MainWin:
         btn.connect('clicked', self.on_about)
         hbox.pack_start(btn, False, True, 2)
 
+        btn=gtk.Button(stock=gtk.STOCK_HELP)
+        btn.connect('clicked', self.on_help)
+        hbox.pack_start(btn, False, True, 2)
+
         btn=gtk.Button(stock=gtk.STOCK_APPLY)
         btn.connect('clicked', self.on_apply)
         hbox.pack_end(btn, False, True, 8)
@@ -367,12 +397,17 @@ class MainWin:
         btn.connect('clicked', self.on_clear)
         hbox.pack_end(btn, False, True, 8)
 
+        #btn=gtk.Button(stock=gtk.STOCK_REVERT_TO_SAVED)
+        btn=gtk.Button(stock=_('gui.gtklib.mainwin.reset_default_btn'))
+        self.default_btn=btn
+        btn.connect('clicked', self.on_default)
+        hbox.pack_end(btn, False, True, 8)
+
         vbox.pack_start(hbox, False, True, 2)
 
         win.set_default_size( 720, 540 )
         win.show_all()
         self.win=win
-
         self.pid=-1
         self.complete=False
     #}}}
@@ -391,7 +426,7 @@ class MainWin:
         return self.confirm_close()
     #}}}
 
-    #{{{
+    #{{{def on_cancel(self, btn):
     def on_cancel(self, btn):
         self.confirm_close()
     #}}}
@@ -408,14 +443,31 @@ class MainWin:
                         '朱昱任 (Yuren Ju) <yurenju@gmail.com>',
                         '林哲瑋 (billy3321,雨蒼) <billy3321@gmail.com>',
                         '陳信屹 (Hychen) <ossug.hychen@gmail.com>',
-                        '王綱民(Aminzai) <lagunawang@gmail.com>',
-                        '張君平(mrmoneyc) <moneyc.net@gmail.com>'])
+                        '王綱民 (Aminzai) <lagunawang@gmail.com>',
+                        '張君平 (mrmoneyc) <moneyc.net@gmail.com>'])
         dlg.set_copyright('Copyright (C) 2010 by Lazyscripts project')
         dlg.set_license('GNU General Public License V2')
         dlg.set_comments(_('gui.gtklib.mainwin.about.comments'))
         dlg.run()
         dlg.destroy()
     #}}}
+
+    #{{{def on_help(self, btn):
+    def on_help(self, btn):
+        msg = ' '.join(
+                  [_('gui.gtklib.mainwin.on_help.help_msg'),
+                   '\n\n',
+                   _('gui.gtklib.mainwin.on_help.report_bug'),
+                   '\n',
+                   '<a href="%s">%s</a>\n' % (__BUGLIST__, __BUGLIST__),
+                   '\n',
+                   _('gui.gtklib.mainwin.on_help.contact_us'),
+                   '\n',
+                   '<a href="mailto:%s">%s</a>' % (__MAIL__, __MAIL__)
+                  ])
+        show_msg(msg)
+    #}}}
+
 
     #{{{def on_apply(self, btn):
     def on_apply(self, btn):
@@ -463,6 +515,28 @@ class MainWin:
                 app[0].used = False
                 category.list.set(it, 0, False)
                 it = category.list.iter_next(it)
+    #}}}
+
+    #{{{def on_default(self, btn):
+    def on_default(self, btn):
+        for (id, name, category) in self.tool_list.list:
+            if category.__class__.__name__ != 'ToolPage':
+                continue
+            it = category.list.get_iter_first()
+            while True:
+                if it == None:
+                    break
+                app = category.list.get(it, 2)
+                if self.tool_list.pool.recommand_script(app[0].category, app[0].script.id):
+                    app[0].used = True
+                    category.list.set(it, 0, True)
+                else:
+                    app[0].used = False
+                    category.list.set(it, 0, False)
+                it = category.list.iter_next(it)
+        #for script in self.pool.scripts(category, lzs_loc):
+        #    tool = Tool(script, self.pool.recommand_script(category, script.id))
+        #    tool_page.tools.append(tool)
     #}}}
 pass
 
