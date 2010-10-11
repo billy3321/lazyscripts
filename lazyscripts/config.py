@@ -156,9 +156,11 @@ class Configuration(object):
     def get_support_pools(self, distro_name, distro_ver, lang):
         poollist = []
         for section in self.parser.sections():
+            distro_ver_list = [ s.strip() for s in self.parser.get(section, distro_name).split(',') ]
+            lang_list = [ s.strip() for s in self.parser.get(section, 'lang').split(',') ]
             if self.parser.has_option(section, distro_name)\
-               and distro_ver in self.parser.get(section, distro_name).split(', ')\
-               and lang in self.parser.get(section, 'lang').split(', '):
+               and distro_ver in distro_ver_list\
+               and lang in lang_list:
                 poollist.append((section[6:-1], self.parser.get(section, 'desc')))
         return poollist
 
