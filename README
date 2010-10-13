@@ -5,6 +5,7 @@ Scripts:      decalar by each scripts
 
 == Required Packages
 
+    git-core
     python-setuptools
     python-distutils-extra
     python-vte or vte
