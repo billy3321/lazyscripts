@@ -4,6 +4,7 @@
 #export DH_VERBOSE=1
 
 DEB_PYTHON_SYSTEM := pysupport
+DH_PYCENTRAL=include-links dh_pycentral
 
 build:
 
@@ -22,7 +23,7 @@ install:
 	dh_testdir
 	dh_testroot
 	dh_prep
-	python ./setup.py install --root $(CURDIR)/debian/lazyscripts
+	python ./setup.py install --root $(CURDIR)/debian/lazyscripts --install-layout=deb
 	rm -rf $(CURDIR)/debian/lazyscripts/usr/lib/python2.5/site-packages/lazyscripts/*.pyc
 	rm -rf $(CURDIR)/debian/lazyscripts/usr/lib/python2.5/site-packages/lazyscripts/git/*.pyc
 	rm -rf $(CURDIR)/debian/lazyscripts/usr/lib/python2.5/site-packages/lazyscripts/gui/*.pyc

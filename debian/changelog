@@ -1,3 +1,11 @@
+lazyscripts (1:0.2.3.8.5~maverick) maverick; urgency=low
+
+  [changes]
+
+  * Fix the problem make maverick build failed.(https://bugs.launchpad.net/soyuz/+bug/663171)
+
+ -- Billy Zhe-Wei Lin, 林哲瑋 (billy3321, 雨蒼) <billy3321@gmail.com>  Thu, 21 Oct 2010 17:27:10 +0800
+
 lazyscripts (1:0.2.3.8.2~maverick) maverick; urgency=low
 
   [changes]
