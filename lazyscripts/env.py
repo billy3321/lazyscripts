@@ -118,7 +118,7 @@ class Register:
     class __impl:
         """ Implementation of the singleton interface """
 
-        workspace = os.path.join(get_realhome(),'.lazyscripts')
+        workspace = os.path.join(get_realhome(),'.config', 'lazyscripts')
 
         pkgmgr = lzspkgmgr.get_pkgmgr(distro.Distribution().name)
 
