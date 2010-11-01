@@ -478,6 +478,7 @@ class MainWin:
         self.tool_list.left_pane.set_sensitive(False)
         self.apply_btn.set_sensitive(False)
         self.clear_btn.set_sensitive(False)
+        self.default_btn.set_sensitive(False)
 
         selected_scripts = []
         for page in self.tool_list.all_tools:
