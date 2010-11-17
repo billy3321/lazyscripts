@@ -53,6 +53,7 @@ class Distribution(object):
         # Because built-in funciton may not recognize all distrobution.
         self._reduce_name()
         self._reduce_version()
+        self._reduce_architecture()
     #}}}
 
     #{{{def pkgsrc_name(self):
@@ -111,5 +112,14 @@ class Distribution(object):
         elif self.name == 'debian':
             self.version = self.version.split('.')[0]
     #}}}
+
+    def _reduce_architecture(self):
+        arch = platform.architecture()[0]
+        if arch == '32bit':
+            self.architecture = 'i386'
+        elif arch == '64bit':
+            self.architecture = 'amd64'
+        else:
+            self.architecture = None
 
 pass

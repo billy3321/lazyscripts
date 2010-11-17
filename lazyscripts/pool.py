@@ -124,6 +124,9 @@ class ScriptsPool(object):
         self._scripts = {}
         self.script_filters = {}
         self.script_filters[self.dist.name] = True
+        if self.dist.architecture:
+            self.script_filters[self.dist.architecture] = True
+        self.script_filters['hide'] = False
         self.parser = ConfigParser.ConfigParser()
         self.parser.read(os.path.join(self.path, 'desc.ini'))
         self.parser.read(os.path.join(self.path, 'recommands.ini'))

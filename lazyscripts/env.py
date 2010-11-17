@@ -216,8 +216,11 @@ def storageenv(path=None):
     mkexport('USER'),
     mkexport('HOME'),
     mkexport('LANG'),
-    'export DISTRO_ID="%s"' % distro.Distribution().name
+    'export DISTRO_NAME="%s"' % distro.Distribution().name ,
+    'export DISTRO_VERSION="%s"' % distro.Distribution().version
     ]
+    if distro.Distribution().architecture:
+        contents.append('export DISTRO_ARCHITECTURE="%s"' % distro.Distribution().architecture)
     if not path:
         path = DEFAULT_RUNTIME_ROOT_DIR
     path = os.path.join(path, 'lzs_storagedenv')
