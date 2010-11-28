@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- encoding=utf8 -*-
+# -*- encoding=utf-8 -*-
 #
 # Copyright © 2010 Hsin Yi Chen
 #
@@ -300,11 +300,11 @@ def get_pkgmgr(distro):
     distro = distro.lower()
     if distro in ('debian','ubuntu','linuxmint'):
         return DebManager()
-    elif distro in ('suse linux','suse'):
+    elif distro in ('suse linux','suse', 'opensuse'):
         return ZypperManager()
     elif distro in ('fedora','centos','redhat','redflag'):
         return YumManager()
-    elif distro in ('mandrake','mandriva'):
+    elif distro in ('mandrake','mandriva','mandriva linux'):
         return UrpmiManager()
     elif distro == 'arch':
         return PacmanManager()

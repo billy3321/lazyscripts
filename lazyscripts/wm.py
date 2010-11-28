@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- encoding=utf8 -*-
+# -*- encoding=utf-8 -*-
 #
 # Copyright © 2010 Zhe-Wei Lin
 #
@@ -35,6 +35,12 @@ class WindowManager(object):
             dist = distro.Distribution().name
         self.distro = dist
         self.name = self.get_wminfo()
+
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return self.__str__()
 
     def wm_desktop_session(self):
         """
@@ -120,14 +126,14 @@ class WindowManager(object):
                 return 'gksu --message %s "%s"' % (msg, cmd)
             elif self.name == 'kde':
                 if path.exists('/usr/bin/kdesudo'):
-                    return 'kdesudo -c "%s"' % (cmd)
+                    return 'kdesudo -d -c "%s"' % (cmd)
                 else:
-                    return 'kdesu -c "%s"' % (cmd)
+                    return 'kdesu -d -c "%s"' % (cmd)
         elif self.distro in ('opensuse','suse'):
             if self.name == 'gnome':
                 return 'gnomesu --command="%s"' % (cmd)
             elif self.name == 'kde':
-                return 'kdesu -c "%s"' % (cmd)
+                return 'kdesu -d -c "%s"' % (cmd)
             elif self.name in ('xfce','lxde'):
                 return 'xdg-su -c "%s"' % (cmd)
         elif self.distro in ('mandrake','mandriva','opensolaris','redhat','centos'):

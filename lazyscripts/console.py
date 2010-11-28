@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- encoding=utf8 -*-
+# -*- encoding=utf-8 -*-
 #
 # Copyright © 2010 Hsin Yi Chen
 #
@@ -25,7 +25,7 @@ from lazyscripts import command as lzscmd
 from lazyscripts import distro
 from lazyscripts import pool as lzspool
 from lazyscripts import env
-from lazyscripts import gui
+from lazyscripts.gui import gtklib as ui
 
 class LzsAdmin(cmd.Cmd):
 
@@ -52,8 +52,11 @@ class LzsAdmin(cmd.Cmd):
                     contents.append("%s/%s/%s - %s " % (poolname, cat, script.id, script.name))
 
         index_path = os.path.join(env.resource_name('caches'), 'SCRIPTS_INDEX')
-        with open(index_path, 'w') as f:
-            f.write("\n".join(contents+['']))
+        #with open(index_path, 'w') as f:
+        #    f.write("\n".join(contents+['']))
+        f = open(index_path, 'w')
+        f.write("\n".join(contents+['']))
+        f.close()
     #}}}
 
     def do_search(self, lines):
@@ -123,7 +126,7 @@ def gui_run():
       else:
           cmd = "lzs pool sync --rev %s" % options.rev
 
-      gui.gtklib.show_progress(cmd,
+      ui.show_progress(cmd,
                         'Lazyscripts',
                         _('console.gui_run.downloading_scripts'),
                         80,

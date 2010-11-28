@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- encoding=utf8 -*-
+# -*- encoding=utf-8 -*-
 #
 # Copyright © 2010 Hsin Yi Chen
 #
@@ -24,7 +24,7 @@ from lazyscripts import distro
 from lazyscripts import env
 from lazyscripts import pool
 from lazyscripts import script as lzsscript
-from lazyscripts import gui
+from lazyscripts.gui import gtklib as ui
 from lazyscripts import git
 
 class Command(object):
@@ -243,8 +243,9 @@ class PoolCmd(Command):
 
     #{{{def _get_user_preferpool(self):
     def _get_user_preferpool(self):
-        return self.conf.get_default('pool') or \
-               self._ask_user_selectpool()
+        #return self.conf.get_default('pool') or \
+        #       self._ask_user_selectpool()
+        return self._ask_user_selectpool()
     #}}}
 
     #{{{def _ask_user_selectpool(self):
@@ -252,10 +253,12 @@ class PoolCmd(Command):
         conf = env.resource('config')
         lang = env.get_local()
         pools = conf.get_support_pools(distro.Distribution().name, distro.Distribution().version, lang)
+        if not pools:
+            pools = conf.get_support_pools(distro.Distribution().name, distro.Distribution().version, 'en_US')
         if len(pools) == 1:
             poolname = pools[0][0]
         else:
-            poolname = gui.select_defaultpool(pools)
+            poolname = ui.select_defaultpool(pools)
         self.conf.set_default(pool=poolname)
         self.conf.save()
         return poolname
@@ -283,7 +286,7 @@ class GuiCmd(Command):
     #{{{def run(self):
     def run(self):
         if self.argc > 1:
-            gui.gtklib.startgui(self.args[1])
+            ui.startgui(self.args[1])
         else:
-            gui.gtklib.startgui()
+            ui.startgui()
     #}}}

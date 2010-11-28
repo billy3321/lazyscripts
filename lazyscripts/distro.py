@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- encoding=utf8 -*-
+# -*- encoding=utf-8 -*-
 #
 # Copyright © 2010 Hsin Yi Chen
 #
@@ -17,6 +17,7 @@
 # this software; if not, write to the Free Software Foundation, Inc., 59 Temple
 # Place, Suite 330, Boston, MA 02111-1307 USA
 import commands
+import os
 import platform
 
 from lazyscripts import pkgmgr
@@ -57,6 +58,7 @@ class Distribution(object):
         elif self.system == 'Darwin':
             self.name = 'macosx'
             self.version = platform.mac_ver()[0]
+        self._reduce_architecture()
     #}}}
 
     #{{{def pkgsrc_name(self):
@@ -114,7 +116,7 @@ class Distribution(object):
                 self.name = 'redhat'
             elif commands.getoutput('cat /etc/redhat-release | grep "CentOS"'):
                 self.name = 'centos'
-        elif self.name == 'mandrake':
+        elif self.name in ('mandrake', 'mandriva linux'):
             if os.path.exists('/etc/mandriva-release') and commands.getoutput('cat /etc/mandriva-release | grep "Mandriva"'):
                 self.name = 'mandriva'
             elif os.path.exists('/etc/pclinuxos-release') and commands.getoutput('cat /etc/pclinuxos-release | grep "PCLinuxOS"'):
@@ -138,6 +140,17 @@ class Distribution(object):
             self.version = commands.getoutput('cat /etc/linpus-release | cut -d " " -f 4')
         elif self.name == 'magiclinux':
             self.version = commands.getoutput('cat /etc/ark-release')
+        elif self.name == 'debian':
+            self.version = self.version.split('.')[0]
     #}}}
+
+    def _reduce_architecture(self):
+        arch = platform.architecture()[0]
+        if arch == '32bit':
+            self.architecture = 'i386'
+        elif arch == '64bit':
+            self.architecture = 'amd64'
+        else:
+            self.architecture = None
 
 pass

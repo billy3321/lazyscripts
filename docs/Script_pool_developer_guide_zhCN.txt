@@ -1,5 +1,6 @@
+# -*- encoding=utf8 -*-
 
-===Scripts Pool 开发者使用手册====
+===Script Pool 开发者使用手册====
 
 简介：
 
@@ -19,11 +20,11 @@ Lazyscripts 希望可以让使用者与开发者的距离更近。开
 
 ===架构===
 
-首先介绍Scripts pool运作的架构
+首先介绍Script Pool运作的架构
 
          本地端                               Github
                               (2)
-        Lazyscripts本体 -------------------> Scripts pool
+        Lazyscripts本体 -------------------> Script Pool
               | (1)                      ex: git://github.com/aminzai/
               V                        /     lzs_pool_debianlize.git
        ~/.lazyscripts/                /
@@ -43,17 +44,17 @@ Lazyscripts 希望可以让使用者与开发者的距离更近。开
 
  运作流程如下：
  1.一开始lazyscripts会建立~/.lazyscripts目录，里面有config档案。
-   config档案里面有目前所有Scripts pool的资料
+   config档案里面有目前所有Script Pool的资料
  2.经由config里面的设定，Lazyscripts将会找到适合目前Linux 
-   distribution的Scripts pool。如果有多个，将会跳出选单让使用者
+   distribution的Script Pool。如果有多个，将会跳出选单让使用者
    选取。
- 3.经由git的协定将Scripts pool里面的档案取出，放到~/lazyscripts/poos/
-   里面。每个Scripts pool将会有自己的资料夹。
- 4.解析scripts pool里面的desc.ini及各个资料，建构出GUI，选单，以
+ 3.经由git的协定将Script Pool里面的档案取出，放到~/lazyscripts/poos/
+   里面。每个Script Pool将会有自己的资料夹。
+ 4.解析Script Pool里面的desc.ini及各个资料，建构出GUI，选单，以
    及各个选项。
  5.使用者执行Lazyscripts后，Lazyscripts会到/tmp/底下建立lzs_root
    资料夹；内存有各个档案。lzs_storagedenv会存有各个变数供Scripts
-   取用；shlib则是来自于scripts pool中的shlib资料夹，是Scripts pool
+   取用；shlib则是来自于Script Pool中的shlib资料夹，是Script Pool
    随附的工具包。remove.txt中定义的软体包会先行移除，再来执行install.txt，
    最后执行script做安装后的设定。
  6.taskscripts则是主要执行的script,里面是制造出来的各个指令。lzs_root
@@ -62,17 +63,17 @@ Lazyscripts 希望可以让使用者与开发者的距离更近。开
 
 
 
-Scripts pool架构
+Script Pool架构
 
-   Scripts pool架构其实很简单。只要照着说明将文件依格式编写，然后放置
-   到指定的地方，就可以让Lazyscripts解析并使用。以下先介绍Scripts pool
+   Script Pool架构其实很简单。只要照着说明将文件依格式编写，然后放置
+   到指定的地方，就可以让Lazyscripts解析并使用。以下先介绍Script Pool
    的文件架构，再来依序解释文件内容。
 
    以下以git://github.com/aminzai/lzs_pool_debianlize.git目录结构做一解释。
 
 lzs_pool_debianlize/
         |-README                          - 读我档案，里面可以放一些使用说明或版权宣告。
-        |-desc.ini                        - 描述档，内有此Scripts pool的名称描述，图示的定义，还有分类的翻译
+        |-desc.ini                        - 描述档，内有此Script Pool的名称描述，图示的定义，还有分类的翻译
         |-recommand.ini                   - 建议安装清单。里面定义的scripts会在开启Lazyscripts时预先勾选好。
         |-shlib/                          - 放置工具程式使用的目录。执行Scripts前，整个目录会被复制到/tmp/lzs_root/。因此里面的程式可以在Scripts里面引用。
         |    |-shlib.bash                 - 可供引用的程式。在此例，shlib.bash提供bash程式使用的环境变数。debinstall.py则可解析安装deb的相依性，使用apt-get先行满足之。
@@ -100,14 +101,14 @@ lzs_pool_debianlize/
         |           |- ....
         |- ....
 
-再来依次介绍Scripts pool中各档案的内容格式。
+再来依次介绍Script Pool中各档案的内容格式。
 
 README:
     您高兴就好。
 
 desc.ini:
 [info]
-name[en_US] = Debianlize Linux distrobution scripts pool   - 英文名称
+name[en_US] = Debianlize Linux distrobution Script Pool   - 英文名称
 name[zh_TW] = Debianlize Linux 脚本源                      - 中文名称
 desc[en_US] = support Debian, Ubuntu linux distrobution    - 英文描述
 desc[zh_TW] = 支援 Ubuntu Debian                           - 中文描述

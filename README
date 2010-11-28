@@ -1,57 +1,38 @@
 == License
 
 Core Program: GPLv2
-Scripts:      each script has its own license
-
-
+Scripts:      decalar by each scripts
 
 == Required Packages
 
+    git-core
     python-setuptools
+    python-distutils-extra
     python-vte or vte
     gettext
     zenity
     python-dev or python-devel
-    python-distutils-extra
+    python-gtk2 or python-gtk
+    intltool
     wget
-    git-core
+    gksu or gnomesu or kdesu
 
+== Install & Usage
 
+currently, please useing python setuptools to install.
 
-== Installation
+	user@hsot# sudo ./setup.py install
 
-Please use the python setup tools to install.
-
-	user@host# sudo ./setup.py install
-
-
-
-== Usage
-
-To run the GUI, use the following command:
-
-	user@host# glzs
-
-If it is the first time you run Lazyscripts, add "-a":
+run with graphic (with -a option if you running firstly)
 
 	user@host# glzs -a
 
-To run with the last selection
+run with last selection
 
 	user@host# glzs --selection last_selection.ini
 
-== Building a Debian package
-
-    user@host# ./scripts/build_deb $tagname
-
-    for example
-
-    user@host# ./scripts/build_deb v0.2rc4
-
-
-
-== More information
+== More
 
 Project Home:    http://www.lazyscripts.org
-Source Code:     http://github.com/hychen/lazyscripts/tree/master (Core Program)
-                 http://github.com/hychen/lzspool/tree/master (Scripts for Ubuntu)
+Source Code:     http://github.com/billy3321/lazyscript/tree/master (Core Program)
+                 http://github.com/aminzai/lzs_pool_debianlize/tree/master (Scripts for Ubuntu)

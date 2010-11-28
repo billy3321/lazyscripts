@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- encoding=utf8 -*-
+# -*- encoding=utf-8 -*-
 #
 # Copyright © 2010 Hsin Yi Chen
 #
@@ -54,8 +54,10 @@ def create_scriptdesc(path, name, authors):
         "arm         = False",
         ''
     ])
-    with open(os.path.join(path,'desc.ini'),'w') as f:
-        f.write(tpl)
+    # with open(os.path.join(path,'desc.ini'),'w') as f:
+    f = open(os.path.join(path,'desc.ini'),'w')
+    f.write(tpl)
+    f.close()
 #}}}
 
 #{{{def create_scriptpkgdesc(dir):
@@ -64,8 +66,10 @@ def create_scriptpkgdesc(dir):
     os.mkdir(dir)
     for e in ('install','remove'):
         filepath = os.path.join(dir, '%s.txt' % e)
-        with open(filepath, 'w') as f:
-            f.write("#pkg %s list\n" % e)
+        # with open(filepath, 'w') as f:
+        f = open(filepath, 'w')
+        f.write("#pkg %s list\n" % e)
+        f.close()
 #}}}
 
 #{{{def is_scriptdir(path):
@@ -137,13 +141,19 @@ class Script(object):
         self.parser.read(os.path.join(path, self.DESC_DEFFILE))
 
         self.selected = False
-        self.name = 'Script has a initial name, please report bug to script maintainer'
+        self.name = ''
         self.desc = ''
         self.path = path
         self.id = os.path.basename(path)
         self.category = 'root'
         self._init_info()
         self._init_attrs()
+        if not self.name:
+            self.lang = 'en_US'
+            self._init_info()
+            self._init_attrs()
+        if not self.name:
+            self.name = 'Script has a initial name, please report bug to script maintainer'
     #}}}
 
     #{{{def init_script(cls, path, name, author):
@@ -170,7 +180,7 @@ class Script(object):
             if not optname[0:4] in self.I18N_ATTRS:
                 attrname = optname
             # skip if lang of attribute value is not we wanted.
-            elif optname[5:10] != self.lang.lower():
+            elif optname[5:10].lower() != self.lang.lower():
                 continue
 
             if not attrname in ('maintainers','authors'):

@@ -1,13 +1,13 @@
 # lazyscripts is a script management tool.
 # Copyright (C) 2010 Lazyscripts Developers
 # Hsin-Yi Chen <ossug.hychen@gmail.com>, 2010.
-#
+# Hsin-Yi Chen (hychen) <ossug.hychen@gmail.com>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.2.1\n"
+"Project-Id-Version: 0.2.3.7\n"
 "POT-Creation-Date: 2010-07-04 19:48+CST\n"
-"PO-Revision-Date: 2010-07-04 20:22+0800\n"
-"Last-Translator: Hsin-Yi Chen (hychen) <ossug.hychen@gmail.com>\n"
+"PO-Revision-Date: 2010-07-06 22:46+0800\n"
+"Last-Translator: Vincent Petry <PVince81@lazyscripts.org>\n"
 "Language-Team: Lazyscripts Developers <lazyscripts-dev@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -17,99 +17,135 @@ msgstr ""
 "X-Poedit-Country: UNITED STATES\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: lazyscripts/console.py:38
+
+#: lazyscripts/console.py:39
 msgid "console.lzsadmin.update.building_index"
 msgstr "Building scripts index..."
 
-#: lazyscripts/console.py:91
+#: lazyscripts/console.py:93
 msgid "console.gui_run.dont_run_as_root"
-msgstr "Please do not run as root"
+msgstr "Please do not run as root."
 
-#: lazyscripts/console.py:99
+#: lazyscripts/console.py:101
 msgid "console.gui_run.distro_is_not_supported"
-msgstr "Distribution does be not supported"
+msgstr "Distribution is not supported."
 
-#: lazyscripts/console.py:102
+#: lazyscripts/console.py:104
 msgid "console.gui_run.gksu_msg"
-msgstr "\"Lazyscritps will modify system wide configuration and install softwares,the System Administor permission is required. (In Lazyscripts, the password is what you used for login)\""
+msgstr ""
+"\"Lazyscripts is about to modify the system wide configuration and install "
+"software. For this, the System Administrator permissions are required. (In "
+"Lazyscripts, the password is whichever you used when logging in)\""
 
-#: lazyscripts/console.py:126
+#: lazyscripts/console.py:128
 msgid "console.gui_run.downloading_scripts"
 msgstr "Downloading scripts..."
 
-#: lazyscripts/gui/gtklib.py:92
+#: lazyscripts/gui/gtklib.py:112
 msgid "gui.gtklib.select_defaultpool.title"
-msgstr "Please choice a scripts pool you want to use"
+msgstr "Please select the script pool you want to use."
 
-#: lazyscripts/gui/gtklib.py:95
+#: lazyscripts/gui/gtklib.py:115
 msgid "gui.gtklib.select_defaultpool.poolname"
-msgstr "Scripts Pool Name"
+msgstr "Script Pool Name"
 
-#: lazyscripts/gui/gtklib.py:96
+#: lazyscripts/gui/gtklib.py:116
 msgid "gui.gtklib.select_default.desc"
 msgstr "Description"
 
-#: lazyscripts/gui/gtklib.py:100
+#: lazyscripts/gui/gtklib.py:120
 msgid "gui.gtklib.select_defaultpool.abort_with_empty_retrunvalue"
-msgstr "Abort! scripts pool not found"
+msgstr "Aborted: script pool not found."
 
-#: lazyscripts/gui/gtklib.py:154
+#: lazyscripts/gui/gtklib.py:176
 msgid "gui.gtklib.toolpage.items"
 msgstr "Items"
 
-#: lazyscripts/gui/gtklib.py:194
-msgid "gui.gtklib.welcomepage.markup.desc\n"
+#: lazyscripts/gui/gtklib.py:216
+msgid ""
+"gui.gtklib.welcomepage.markup.desc\n"
 msgstr ""
 "<b><big>Lazyscripts - Simple is more!</big></b>\n"
 "\n"
 "\n"
-"To help you to fine tune system and install useful softwares after installed Linux.\n"
-"It saves your time for finding solutions in internet.\n"
+"This software helps you to fine tune your system and install useful software.\n"
+"It saves time by providing solutions for common use cases, which would otherwise\n"
+"require you to search the internet.\n"
 "\n"
-"Please click each catogry in left list and select which items you want to apply.\n"
+"Please choose a category in the list on the left, then select items in the\n"
+"right panel that you would like to install or apply.\n"
 
-#: lazyscripts/gui/gtklib.py:195
-msgid "gui.gtklib.welcomepage.markup.copyright\n"
+#: lazyscripts/gui/gtklib.py:217
+msgid ""
+"gui.gtklib.welcomepage.markup.copyright\n"
 msgstr ""
-"Copyright (C) %s, Design and developed by Lazyscripts Developers\n"
+"Copyright (C) %s, Designed and developed by Lazyscripts Developers.\n"
 "\n"
 
-#: lazyscripts/gui/gtklib.py:196
+#: lazyscripts/gui/gtklib.py:218
 msgid "gui.gtklib.welcomepage.markup.project_web_prefix"
 msgstr "Project Lazyscripts - "
 
-#: lazyscripts/gui/gtklib.py:211
-msgid "gui.gtklib.finalpage.execute_action\n"
+#: lazyscripts/gui/gtklib.py:233
+msgid ""
+"gui.gtklib.finalpage.execute_action\n"
 msgstr "Execute action: \n"
 
-#: lazyscripts/gui/gtklib.py:324
+#: lazyscripts/gui/gtklib.py:310
+msgid "gui.gtklib.toolpage.query_recommand"
+msgstr ""
+"Lazysripts has enabled some recommand options for you to install."
+"If it's the first time you use lazyscripts on a brand new Linux,"
+"we strongly recommend you use it.\n\n"
+"Do you want to apply the recommand options?"
+
+#: lazyscripts/gui/gtklib.py:351
 msgid "gui.gtklib.mainwin.title"
 msgstr "Lazyscripts"
 
-#: lazyscripts/gui/gtklib.py:340
+#: lazyscripts/gui/gtklib.py:367
 msgid "gui.gtklib.mainwin.welcome"
 msgstr "Welcome"
 
-#: lazyscripts/gui/gtklib.py:342
+#: lazyscripts/gui/gtklib.py:369
 msgid "gui.gtklib.mainwin.result"
 msgstr "Result"
 
-#: lazyscripts/gui/gtklib.py:381
-msgid "gui.gtklib.mainwin.confrim_close"
-msgstr "Do you realy want to quite?"
-
 #: lazyscripts/gui/gtklib.py:401
+msgid "gui.gtklib.mainwin.reset_default_btn"
+msgstr "Recommand Options"
+
+#: lazyscripts/gui/gtklib.py:417
+msgid "gui.gtklib.mainwin.confrim_close"
+msgstr "Do you really want to quit Lazyscripts?"
+
+#: lazyscripts/gui/gtklib.py:437
 msgid "gui.gtklib.mainwin.about.name"
 msgstr "Lazyscripts"
 
-#: lazyscripts/gui/gtklib.py:414
+#: lazyscripts/gui/gtklib.py:450
 msgid "gui.gtklib.mainwin.about.comments"
-msgstr "An useful script management tool"
+msgstr "An useful script-based management tool."
 
-#: lazyscripts/gui/gtklib.py:444
+#: lazyscripts/gui/gtklib.py:458
+msgid "gui.gtklib.mainwin.on_help.help_msg"
+msgstr "If you have any suggestions or ideas about lazyscripts,"
+"or you find lazyscripts doesn't work for your Linux,"
+"you can contact us via the following ways."
+
+#: lazyscripts/gui/gtklib.py:460
+msgid "gui.gtklib.mainwin.on_help.report_bug"
+msgstr "<b><big>Report Bugs</big></b>"
+
+#: lazyscripts/gui/gtklib.py:464
+msgid "gui.gtklib.mainwin.on_help.contact_us"
+msgstr "<b><big>Contact Us</big></b>"
+
+#: lazyscripts/gui/gtklib.py:497
 msgid ""
 "\n"
 "gui.gtklib.mainwin.complete.finished-install\n"
 msgstr ""
 "\n"
-"\033[1;36mLazyscripts - linux lazy pack run finish!\033[1;32m   have fun for linux!\033[m\n"
+"[1;36mLazyscripts - script run has finished![1;32m   Have fun with Linux![m\n"
+

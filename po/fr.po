@@ -1,0 +1,122 @@
+# lazyscripts is a script management tool.
+# Copyright (C) 2010 Lazyscripts Developers
+# Hsin-Yi Chen <ossug.hychen@gmail.com>, 2010.
+# Hsin-Yi Chen (hychen) <ossug.hychen@gmail.com>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.2.1\n"
+"POT-Creation-Date: 2010-08-23 18:30+0800\n"
+"PO-Revision-Date: 2010-08-23 18:30+0800\n"
+"Last-Translator: Vincent Petry <PVince81@lazyscripts.org>\n"
+"Language-Team: Lazyscripts Developers <lazyscripts-dev@googlegroups.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: lazyscripts/console.py:38
+msgid "console.lzsadmin.update.building_index"
+msgstr "Construction de l'index des scripts..."
+
+#: lazyscripts/console.py:91
+msgid "console.gui_run.dont_run_as_root"
+msgstr "Veuillez ne pas lancer en tant qu'utilisateur root"
+
+#: lazyscripts/console.py:99
+msgid "console.gui_run.distro_is_not_supported"
+msgstr "Distribution non-supportée"
+
+#: lazyscripts/console.py:102
+msgid "console.gui_run.gksu_msg"
+msgstr ""
+"\"Lazyscripts va modifier la configuration du système et installer "
+"des logiciels. Pour cela, les permissions administrateur sont requises."
+"(Dans Lazyscripts, le mot de passe est le même que celui utilisé lors de"
+"la première connexion)\""
+
+#: lazyscripts/console.py:126
+msgid "console.gui_run.downloading_scripts"
+msgstr "Téléchargement des scripts..."
+
+#: lazyscripts/gui/gtklib.py:92
+msgid "gui.gtklib.select_defaultpool.title"
+msgstr "Veuillez sélectionner la liste de scripts que vous voulez utiliser"
+
+#: lazyscripts/gui/gtklib.py:95
+msgid "gui.gtklib.select_defaultpool.poolname"
+msgstr "Nom de la liste de scripts"
+
+#: lazyscripts/gui/gtklib.py:96
+msgid "gui.gtklib.select_default.desc"
+msgstr "Description"
+
+#: lazyscripts/gui/gtklib.py:100
+msgid "gui.gtklib.select_defaultpool.abort_with_empty_retrunvalue"
+msgstr "Annulé : liste de scripts non trouvée"
+
+#: lazyscripts/gui/gtklib.py:154
+msgid "gui.gtklib.toolpage.items"
+msgstr "Éléments"
+
+#: lazyscripts/gui/gtklib.py:194
+msgid "gui.gtklib.welcomepage.markup.desc\n"
+msgstr ""
+"<b><big>Lazyscripts</big></b>\n"
+"\n"
+"\n"
+"Ce programme vous aide à ajuster votre système et à installer des applications utiles.\n"
+"Il fait économiser du temps en apportant des solutions aux cas d'utilisation\n"
+"les plus fréquents pour vous éviter d'avoir à chercher sur Internet.\n"
+"\n"
+"Veuillez sélectionner une catégorie dans la liste de gauche, puis sélectionnez\n"
+"un élément dans le panneau de droite que vous voulez installer ou appliquer.\n"
+
+#: lazyscripts/gui/gtklib.py:195
+msgid "gui.gtklib.welcomepage.markup.copyright\n"
+msgstr ""
+"Copyright (C) %s, Conçu et développé par l'équipe Lazyscripts\n"
+"\n"
+
+#: lazyscripts/gui/gtklib.py:196
+msgid "gui.gtklib.welcomepage.markup.project_web_prefix"
+msgstr "Projet Lazyscripts - "
+
+#: lazyscripts/gui/gtklib.py:211
+msgid "gui.gtklib.finalpage.execute_action\n"
+msgstr "Exécuter action : \n"
+
+#: lazyscripts/gui/gtklib.py:324
+msgid "gui.gtklib.mainwin.title"
+msgstr "Lazyscripts"
+
+#: lazyscripts/gui/gtklib.py:340
+msgid "gui.gtklib.mainwin.welcome"
+msgstr "Bienvenue"
+
+#: lazyscripts/gui/gtklib.py:342
+msgid "gui.gtklib.mainwin.result"
+msgstr "Résultats"
+
+#: lazyscripts/gui/gtklib.py:381
+msgid "gui.gtklib.mainwin.confrim_close"
+msgstr "Voulez-vous vraiment quitter ?"
+
+#: lazyscripts/gui/gtklib.py:401
+msgid "gui.gtklib.mainwin.about.name"
+msgstr "Lazyscripts"
+
+#: lazyscripts/gui/gtklib.py:414
+msgid "gui.gtklib.mainwin.about.comments"
+msgstr "Un outil de gestion utile basé sur des scripts"
+
+#: lazyscripts/gui/gtklib.py:444
+msgid ""
+"\n"
+"gui.gtklib.mainwin.complete.finished-install\n"
+msgstr ""
+"\n"
+"[1;36mLazyscripts - le lancement des scripts est terminé ![1;32m   Bon amusement avec Linux ![m\n"
+

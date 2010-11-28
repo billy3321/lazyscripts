@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- encoding=utf8 -*-
+# -*- encoding=utf-8 -*-
 #
 # Copyright © 2010 Hsin Yi Chen
 #
@@ -54,7 +54,21 @@ def get_local():
         local = locale.getlocal(locale.LC_ALL)
         if local:
             local = local[0]
+    if not find_localedir(local):
+        local = 'en_US'
     return local
+#}}}
+
+#{{{def find_localedir(local)
+def find_localedir(local):
+    localedirs = ['', '/usr/share/locale', '/usr/local/share/locale']
+    if not gettext._default_localedir in localedirs:
+        localedirs.append(gettext._default_localedir)
+    result = []
+    for localedir in localedirs:
+        if gettext.find('lazyscripts', localedir=localedir, languages=[local]):
+            result.append(localedir)
+    return result
 #}}}
 
 #{{{get_laptop_info():
@@ -79,14 +93,16 @@ def get_all_users():
 
         @return [$loginanme, $hiddenpwd, $uid, $gid, $real_name, $home_dir, $shell_path]
         """
-        with open('/etc/passwd', 'r') as f:
-                for line in f:
-                        userinfos = line.strip().split(':')
-                        uid = int(userinfos[2])
-			# only want to get active users.
-                        if uid < 1000 or uid > 65533:
-                                continue
-                        yield userinfos
+        # with open('/etc/passwd', 'r') as f:
+        f = open('/etc/passwd', 'r')
+        for line in f:
+           userinfos = line.strip().split(':')
+           uid = int(userinfos[2])
+           # only want to get active users.
+           if uid < 1000 or uid > 65533:
+               continue
+           yield userinfos
+        f.close()
 #}}}
 
 class Register:
@@ -102,7 +118,7 @@ class Register:
     class __impl:
         """ Implementation of the singleton interface """
 
-        workspace = os.path.join(get_realhome(),'.lazyscripts')
+        workspace = os.path.join(get_realhome(),'.config', 'lazyscripts')
 
         pkgmgr = lzspkgmgr.get_pkgmgr(distro.Distribution().name)
 
@@ -166,20 +182,25 @@ def resource(query):
 
 #{{{def prepare_runtimeenv():
 def prepare_runtimeenv():
-    try:
-        locale.setlocale (locale.LC_ALL, "")
-    except:
+    lang = get_local()
+    if lang == 'en_US':
         locale.setlocale (locale.LC_ALL, "en_US.UTF-8")
+    else:
+        try:
+            locale.setlocale (locale.LC_ALL, "")
+        except:
+            locale.setlocale (locale.LC_ALL, "en_US.UTF-8")
 
     # find module path, does it in /usr/local?
 
-    module_prefix = os.path.abspath(__file__)[:10]
-    if module_prefix == '/usr/local':
-        localedir = '/usr/local/share/locale'
-    else:
-        localedir = '/usr/share/locale'
+    #module_prefix = os.path.abspath(__file__)[:10]
+    #if module_prefix == '/usr/local':
+    #    localedir = '/usr/local/share/locale'
+    #else:
+    #    localedir = '/usr/share/locale'
+    localedir = find_localedir(lang)[0]
 
-    gettext.install("lazyscripts", localedir=localedir)
+    gettext.translation("lazyscripts", localedir=localedir, languages=[lang]).install(True)
     "prepare runtime enviroment which caches objects is generated."
     if not os.path.exists(DEFAULT_RUNTIME_ROOT_DIR):
         return os.mkdir(DEFAULT_RUNTIME_ROOT_DIR, 0755)
@@ -195,8 +216,11 @@ def storageenv(path=None):
     mkexport('USER'),
     mkexport('HOME'),
     mkexport('LANG'),
-    'export DISTRO_ID="%s"' % distro.Distribution().name
+    'export DISTRO_NAME="%s"' % distro.Distribution().name ,
+    'export DISTRO_VERSION="%s"' % distro.Distribution().version
     ]
+    if distro.Distribution().architecture:
+        contents.append('export DISTRO_ARCHITECTURE="%s"' % distro.Distribution().architecture)
     if not path:
         path = DEFAULT_RUNTIME_ROOT_DIR
     path = os.path.join(path, 'lzs_storagedenv')
