@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- encoding=utf8 -*-
+# -*- encoding=utf-8 -*-
 #
 # Copyright © 2009 Hsin Yi Chen
 #
@@ -125,8 +125,10 @@ class SelectionList(object):
     #{{{def save(self):
     def save(self):
         self._convert()
-        with open(self.path, 'w') as fp:
-            self.parser.write(fp)
+        # with open(self.path, 'w') as fp:
+        fp = open(self.path, 'w')
+        self.parser.write(fp)
+        fp.close()
     #}}}
 
     #{{{def _convert(self):
@@ -188,8 +190,10 @@ class ScriptsRunner(object):
         self.prepare_scriptcmds()
 
         # create a taskscript.
-        with TaskScript(self.cmd_queue) as t:
-            t.save()
+        # with TaskScript(self.cmd_queue) as t:
+        t = TaskScript(self.cmd_queue)
+        t.save()
+        t.close()
 
         # create a recommand.ini.
         self.save_selection()

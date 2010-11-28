@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- encoding=utf8 -*-
+# -*- encoding=utf-8 -*-
 #
 # Copyright © 2010 Hsin Yi Chen
 #
@@ -53,6 +53,7 @@ class Distribution(object):
         # Because built-in funciton may not recognize all distrobution.
         self._reduce_name()
         self._reduce_version()
+        self._reduce_architecture()
     #}}}
 
     #{{{def pkgsrc_name(self):
@@ -108,6 +109,17 @@ class Distribution(object):
     def _reduce_version(self):
         if self.name == 'opensolaris' and not self.version:
             self.version = commands.getoutput('cat /etc/release | grep "OpenSolaris" | cut -d " " -f 27')
+        elif self.name == 'debian':
+            self.version = self.version.split('.')[0]
     #}}}
+
+    def _reduce_architecture(self):
+        arch = platform.architecture()[0]
+        if arch == '32bit':
+            self.architecture = 'i386'
+        elif arch == '64bit':
+            self.architecture = 'amd64'
+        else:
+            self.architecture = None
 
 pass

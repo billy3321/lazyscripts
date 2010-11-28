@@ -5,13 +5,17 @@ Scripts:      decalar by each scripts
 
 == Required Packages
 
+    git-core
     python-setuptools
+    python-distutils-extra
     python-vte or vte
     gettext
     zenity
     python-dev or python-devel
     python-gtk2 or python-gtk
     intltool
+    wget
+    gksu or gnomesu or kdesu
 
 == Install & Usage
 
@@ -30,5 +34,5 @@ run with last selection
 == More
 
 Project Home:    http://www.lazyscripts.org
-Source Code:     http://github.com/hychen/lazyscript/tree/master (Core Program)
-                 http://github.com/hychen/lzspool/tree/master (Scripts for Ubuntu)
+Source Code:     http://github.com/billy3321/lazyscript/tree/master (Core Program)
+                 http://github.com/aminzai/lzs_pool_debianlize/tree/master (Scripts for Ubuntu)
