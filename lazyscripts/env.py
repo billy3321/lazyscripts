@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- encoding=utf8 -*-
+# -*- encoding=utf-8 -*-
 #
 # Copyright © 2010 Hsin Yi Chen
 #
@@ -93,14 +93,16 @@ def get_all_users():
 
         @return [$loginanme, $hiddenpwd, $uid, $gid, $real_name, $home_dir, $shell_path]
         """
-        with open('/etc/passwd', 'r') as f:
-                for line in f:
-                        userinfos = line.strip().split(':')
-                        uid = int(userinfos[2])
-			# only want to get active users.
-                        if uid < 1000 or uid > 65533:
-                                continue
-                        yield userinfos
+        # with open('/etc/passwd', 'r') as f:
+        f = open('/etc/passwd', 'r')
+        for line in f:
+           userinfos = line.strip().split(':')
+           uid = int(userinfos[2])
+           # only want to get active users.
+           if uid < 1000 or uid > 65533:
+               continue
+           yield userinfos
+        f.close()
 #}}}
 
 class Register:
@@ -116,7 +118,7 @@ class Register:
     class __impl:
         """ Implementation of the singleton interface """
 
-        workspace = os.path.join(get_realhome(),'.lazyscripts')
+        workspace = os.path.join(get_realhome(),'.config', 'lazyscripts')
 
         pkgmgr = lzspkgmgr.get_pkgmgr(distro.Distribution().name)
 
@@ -214,8 +216,11 @@ def storageenv(path=None):
     mkexport('USER'),
     mkexport('HOME'),
     mkexport('LANG'),
-    'export DISTRO_ID="%s"' % distro.Distribution().name
+    'export DISTRO_NAME="%s"' % distro.Distribution().name ,
+    'export DISTRO_VERSION="%s"' % distro.Distribution().version
     ]
+    if distro.Distribution().architecture:
+        contents.append('export DISTRO_ARCHITECTURE="%s"' % distro.Distribution().architecture)
     if not path:
         path = DEFAULT_RUNTIME_ROOT_DIR
     path = os.path.join(path, 'lzs_storagedenv')
