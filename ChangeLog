@@ -1,10 +1,18 @@
+lazyscripts 0.2.3.9 (1/18/2011):
+
+    [changes]
+    * Move the ~/.lazyscripts directory to ~/.config/lazyscripts. Thanks to
+	Tualatrix.
+    * Now the Hide flag will work.
+	* Hide the set default button while click apply.
+
 lazyscripts 0.2.3.8 (10/11/2010):
 
     [changes]
     * Support Ubuntu 10.10
     * Lazyscripts now can select to use recommand options or not
 
-lazyscripts 0.2.3.6 (8/26/2010):
+lazyscripts 0.2.3.7 (8/26/2010):
 
     [changes]
     * Fix the error cause de_DE user can't open.
