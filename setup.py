@@ -29,7 +29,7 @@ from distutils.command.install import install
 
 setup(
     name = 'Lazyscripts',
-    version = '0.2.3.7',
+    version = '0.2.3.9',
     description = 'The scripts manager in Linux.',
     long_description = """
 Lazyscripts is just a scripts distrubtion tool and quick-installer in linux, which aims to provide a easy way to setup your working enviroment for people who need to install a new distrubution such as Debian,Ubuntu, or who want to have much better experiences in linux.
