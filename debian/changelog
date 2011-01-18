@@ -1,3 +1,13 @@
+lazyscripts (1:0.2.3.9.1~maverick) maverick; urgency=low
+
+  [changes]
+
+  * Move the ~/.lazyscripts directory to ~/.config/lazyscripts. Thanks to Tualatrix.
+  * Now the Hide flag will work.
+  * Hide the set default button while click apply.
+
+ -- Billy Zhe-Wei Lin, 林哲瑋 (billy3321, 雨蒼) <billy3321@gmail.com>  Tue, 18 Jan 2011 09:27:17 +0800
+
 lazyscripts (1:0.2.3.8.5~maverick) maverick; urgency=low
 
   [changes]
