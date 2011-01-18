@@ -1,3 +1,11 @@
+lazyscripts 0.2.3.9 (1/18/2011):
+
+    [changes]
+    * Move the ~/.lazyscripts directory to ~/.config/lazyscripts. Thanks to
+	Tualatrix.
+    * Now the Hide flag will work.
+	* Hide the set default button while click apply.
+
 lazyscripts 0.2.3.7 (8/26/2010):
 
     [changes]
