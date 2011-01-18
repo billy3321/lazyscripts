@@ -26,14 +26,14 @@ upstream = git://github.com/mrmoneyc/lzs_pool_suselize.git
 rev = v0.2_stable
 desc = mrmoneyc's suselize Script Pool.
 opensuse = 11.1, 11.2, 11.3
-lang = zh_TW
+lang = zh_TW, en_US
 
 [pool "suselize-zhCN"]
-upstream = git://github.com/mrmoneyc/lzs_pool_suselize_zhCN.git
+upstream = git://github.com/billy3321/lzs_pool_suselize_zhCN.git
 rev = v0.2_stable
 desc = billy's suselize Script Pool for zhCN.
 opensuse = 11.1, 11.2, 11.3
-lang = zh_CN
+lang = zh_CN, en_US
 
 [pool "suselize-frFR"]
 upstream = git://github.com/billy3321/lzs_pool_suselize_frFR.git
