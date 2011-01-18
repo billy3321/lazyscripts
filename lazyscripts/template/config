@@ -6,7 +6,7 @@ pool =
 [pool "debianlize"]
 upstream = git://github.com/aminzai/lzs_pool_debianlize.git
 rev = v0.2_stable
-desc = aminzai's debianlize Script Pool.
+desc = aminzai's debianlize Script Pool.(Recommand)
 ubuntu = 9.10, 10.04, 10.10
 debian = 5
 linuxmint = 8
@@ -29,7 +29,7 @@ opensuse = 11.1, 11.2, 11.3
 lang = zh_TW, en_US
 
 [pool "suselize-zhCN"]
-upstream = git://github.com/mrmoneyc/lzs_pool_suselize_zhCN.git
+upstream = git://github.com/billy3321/lzs_pool_suselize_zhCN.git
 rev = v0.2_stable
 desc = billy's suselize Script Pool for zhCN.
 opensuse = 11.1, 11.2, 11.3
@@ -49,13 +49,6 @@ desc = billy's redhatlize Script Pool.
 opensuse = 11.1, 11.2, 11.3
 lang = fr_FR, en_US
 
-[pool "suselize-zhCN"]
-upstream = git://github.com/billy3321/lzs_pool_suselize_zhCN.git
-rev = v0.2_stable
-desc = billy3321's suselize Script Pool.
-opensuse = 11.1, 11.2, 11.3
-lang = zh_CN
-
 [pool "billys-redhatlize"]
 upstream = git://github.com/billy3321/lzs_pool_redhatlize.git
 rev = v0.2_stable
@@ -70,7 +63,7 @@ rev = v0.2_stable
 desc = billy's redhatlize Script Pool.
 fedora = 11, 12, 13
 centos = 5.3, 5.4
-lang = zh_CN
+lang = zh_CN, en_US
 
 [pool "billys-mandriva"]
 upstream = git://github.com/billy3321/lzs_pool_mandriva.git
