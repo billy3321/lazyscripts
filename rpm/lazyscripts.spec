@@ -1,12 +1,15 @@
 %define name lazyscripts
-%define version 0.2.3.6
+%define version 0.2.3.9
 %define release 1
 
 Summary: The scripts manager in Linux.
 Name: lazyscripts
-Version: 0.2.3.6
+Version: 0.2.3.9
 Release: 1
-Source: lazyscripts-0.2.3.6.tar.gz
+Source: lazyscripts-0.2.3.9.tar.gz
+Source1: lazyscripts.desktop
+Patch0: desktop.diff
+Patch1: desktop.in.diff
 License: GPLv2
 Group: System/Management
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -18,16 +21,22 @@ BuildRequires: rpm >= 4.0-1
 BuildRequires: python-setuptools
 BuildRequires: python-distutils-extra
 BuildRequires: intltool
+%if 0%{?suse_version}
+BuildRequires: update-desktop-files
+BuildRequires: -post-build-checks -rpmlint-Factory -brp-check-suse -rpmlint-mini
+%endif
 Requires: python, python-setuptools, vte, wget, zenity, git-core
 %if 0%{?mandriva_version} >= 2009
 Requires: pygtk2.0, python-vte, 
 %endif  
   
-%if 0%{?centos_version} >= 501   
+%if 0%{?centos_version} >= 501
+Requires: pygtk2 
 BuildRequires: python-devel
 %endif
 
-%if 0%{?fedora_version} >= 11  
+%if 0%{?fedora_version} >= 11
+Requires: pygtk2  
 BuildRequires: python-devel
 %endif
   
@@ -35,6 +44,10 @@ BuildRequires: python-devel
 Requires: python-gtk
 BuildRequires: python-devel
 %endif  
+
+%if 0%{?suse_version} > 1130  
+Requires: python-vte
+%endif
 
 %description
 
@@ -51,15 +64,16 @@ So that is why the Lazyscripts project starts.
 
 %prep
 %setup -n %{name}-%{version}
-
+%patch0
+%patch1
 %build
 python setup.py build
-
 %install
-python setup.py install --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
+python setup.py install --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES --prefix=/usr
+%__install -D -m0644 "%{SOURCE1}" "%{buildroot}%{_datadir}/applications/%{name}.desktop"
 
 %if 0%{?suse_version}
-# %suse_update_desktop_file lazyscripts System SystemSetup
+%suse_update_desktop_file lazyscripts System SystemSetup
 %endif
 
 %clean
@@ -68,5 +82,5 @@ rm -rf *.pyc
 
 %files -f INSTALLED_FILES
 %defattr(-,root,root)
-
+%doc README ChangeLog COPYING docs
 
