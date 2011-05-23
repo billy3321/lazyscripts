@@ -35,6 +35,12 @@ class WindowManager(object):
             dist = distro.Distribution().name
         self.distro = dist
         self.name = self.get_wminfo()
+        if self.distro == 'ubuntu' and \
+           distro.Distribution().version == '11.04' and \
+           self.name == 'gnome':
+            self.unity_check()
+
+        self.version = self.get_version()
 
     def __str__(self):
         return self.name
@@ -99,7 +105,7 @@ class WindowManager(object):
         elif self.distro == 'opensolaris':
             return self.wm_var_check()
         else:
-            return 'unknown'
+            return None 
 
     def make_guisudocmd(self, cmd, msg='""'):
         """
@@ -125,7 +131,31 @@ class WindowManager(object):
         else:
             raise UnknownDistribution()
 
+    def get_version(self):
+        if self.name in ('gnome', 'unity'):
+            return self.get_gnome_version()
+        elif self.name in ('kde'):
+            return self.get_kde_version()
+        else:
+            return 'unknown'
 
+    def get_gnome_version(self):
+        ver = getoutput('gnome-session --version').split()[1]
+        main_ver = ver.split('.')[0]
+        return main_ver
+
+    def get_kde_version(self):
+        ver = getenv('KDE_SESSION_VERSION')
+        return ver
+
+    def unity_check(self):
+        session = getenv('DESKTOP_SESSION').lower()
+        if session in ('gnome', 'unity-2d'):
+            self.name = 'unity'
+        elif session in ('gnome-2d', 'gnome-classic'):
+            self.name = 'gnome'
+        elif session in ('kde-plasma'):
+            self.name = 'kde'
 
 
 #END
