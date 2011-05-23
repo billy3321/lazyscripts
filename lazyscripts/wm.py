@@ -34,13 +34,17 @@ class WindowManager(object):
         if not dist:
             dist = distro.Distribution().name
         self.distro = dist
-        self.name = self.get_wminfo()
-        if self.distro == 'ubuntu' and \
-           distro.Distribution().version == '11.04' and \
-           self.name == 'gnome':
-            self.unity_check()
+        if self.is_under_X():
+            self.name = self.get_wminfo()
+            if self.distro == 'ubuntu' and \
+               distro.Distribution().version == '11.04' and \
+               self.name == 'gnome':
+                self.unity_check()
 
-        self.version = self.get_version()
+            self.version = self.get_version()
+        else:
+            self.name = 'console'
+            self.version = None
 
     def __str__(self):
         return self.name
@@ -156,6 +160,13 @@ class WindowManager(object):
             self.name = 'gnome'
         elif session in ('kde-plasma'):
             self.name = 'kde'
+
+    def is_under_X(self):
+        display = getenv('DISPLAY')
+        if display:
+            return True
+        else:
+            return False
 
 
 #END
