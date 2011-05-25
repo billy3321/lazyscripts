@@ -33,7 +33,7 @@ Here is the structure of a Script Pool:
         Lazyscripts Core Program --------------> Script Pool
               | (1)                      ex: git://github.com/aminzai/
               V                        /     lzs_pool_debianlize.git
-       ~/.lazyscripts/                /
+    ~/.config/lazyscripts             /
               |- config          (3) /
               |- pools/             /
                   |-debianlize  <---
@@ -49,7 +49,7 @@ Here is the structure of a Script Pool:
                        |-shlib/
 
 When Lazyscripts runs for the first time, here is its workflow:
-1. Lazyscripts will build a "~/.lazyscripts" directory, which contains a
+1. Lazyscripts will build a "~/.config/lazyscripts" directory, which contains a
    configuration file. All the Script Pools information will be held in
    this the configuration file.
 2. Lazyscripts will then find the Script Pools which matches the Linux
@@ -57,7 +57,7 @@ When Lazyscripts runs for the first time, here is its workflow:
    pool, Lazyscripts will pop up a dialog with a list and let the user choose
    one.
 3. Lazyscripts will check out the files from the selected Script Pool through
-   git, and put them into "~/lazyscripts/pools". Every Script Pool has its own
+   git, and put them into "~/.config/lazyscripts/pools". Every Script Pool has its own
    subdirectory.
 4. Lazyscripts will analyze the "desc.ini" from the pool to find the information 
    about the Script Pool, then show the GUI, menus and options.

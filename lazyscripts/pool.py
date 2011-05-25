@@ -123,6 +123,7 @@ class ScriptsPool(object):
                                e.istitle()]
         self._scripts = {}
         self.script_filters = {}
+        self.script_revert_filters = {}
         self.script_filters[self.dist.name] = True
         if self.dist.architecture:
             self.script_filters[self.dist.architecture] = True
@@ -262,7 +263,8 @@ class ScriptsPool(object):
 
             # skip if script is not avaliable with distro and
             # platform.
-            if not script.is_avaliable(self.script_filters):
+            if not script.is_avaliable(self.script_filters) and \
+               script.is_unavaliable(self.script_revert_filters):
                 continue
             script.category = set_id
             ret.append(script)
