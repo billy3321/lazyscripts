@@ -27,7 +27,7 @@ Lazyscripts 希望可以讓使用者與開發者的距離更近。開
         Lazyscripts本體 -------------------> Script Pool
               | (1)                      ex: git://github.com/aminzai/
               V                        /     lzs_pool_debianlize.git
-       ~/.lazyscripts/                /
+    ~/.config/lazyscripts/            /
               |- config          (3) /
               |- pools/             /
                   |-debianlize  <---
@@ -43,12 +43,12 @@ Lazyscripts 希望可以讓使用者與開發者的距離更近。開
                        |-shlib/
 
  運作流程如下：
- 1.一開始lazyscripts會建立~/.lazyscripts目錄，裏面有config檔案。
+ 1.一開始lazyscripts會建立~/.config/lazyscripts目錄，裏面有config檔案。
    config檔案裏面有目前所有Script Pool的資料
  2.經由config裏面的設定，Lazyscripts將會找到適合目前Linux 
    distribution的Script Pool。如果有多個，將會跳出選單讓使用者
    選取。
- 3.經由git的協定將Script Pool裏面的檔案取出，放到~/lazyscripts/poos/
+ 3.經由git的協定將Script Pool裏面的檔案取出，放到~/.config/lazyscripts/pools/
    裏面。每個Script Pool將會有自己的資料夾。
  4.解析Script Pool裏面的desc.ini及各個資料，建構出GUI，選單，以
    及各個選項。

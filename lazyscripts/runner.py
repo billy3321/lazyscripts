@@ -77,8 +77,9 @@ class TaskScript(file):
               "cd /tmp/lzs_root",
               "source %s" % env.DEFAULT_STORAGED_ENV_FILE]
 
-    footer = ['chown -R $REAL_USER:$REAL_HOME &> /dev/null',
-              'echo DONE!']
+    footer = ["apt-get -f install",
+              "chown -R $REAL_USER:$REAL_HOME &> /dev/null",
+              "echo DONE!"]
     #}}}
 
     #{{{def __init__(self, cmd_queue=[]):

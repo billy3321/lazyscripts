@@ -241,4 +241,13 @@ class Script(object):
             if getattr(self, attrname) != assertval:    return False
         return True
     #}}}
+
+    #{{{def is_avaliable(self, kwds)
+    def is_unavaliable(self, kwds):
+        for attrname, assertval in kwds.items():
+            attrname = attrname.lower()
+            if not hasattr(self, attrname): return True
+            if getattr(self, attrname) == assertval:    return False
+        return True
+    #}}}
 pass
