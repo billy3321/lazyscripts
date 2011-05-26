@@ -4,33 +4,42 @@ PYTHON_VERSION = '2.6.0'
 
 ### DISTRIBUTION
 # Debian base
-DISTRIBUTION_DEBIAN = 'debian'
-DISTRIBUTION_UBUNTU = 'ubuntu'
-DISTRIBUTION_LINUXMINT = 'linuxmint'
+DIST_DEBIAN = 'debian'
+DIST_UBUNTU = 'ubuntu'
+DIST_LINUXMINT = 'linuxmint'
 
-DISTRIBUTION_DEB_BASE = \
-        (DISTRIBUTION_DEBIAN,
-         DISTRIBUTION_UBUNTU,
-         DISTRIBUTION_LINUXMINT)
+DIST_DEB_BASE = \
+        (DIST_DEBIAN,
+         DIST_UBUNTU,
+         DIST_LINUXMINT)
 
 
 # RPM Base
-DISTRIBUTION_REDHAT = 'redhat'
-DISTRIBUTION_CENTOS = 'centos'
-DISTRIBUTION_FEDORA = 'fedora'
+DIST_REDHAT = 'redhat'
+DIST_CENTOS = 'centos'
+DIST_FEDORA = 'fedora'
 
-DISTRIBUTION_SUSE = 'suse'
-DISTRIBUTION_OPENSUSE = 'opensuse'
-DISTRIBUTION_MANDRIVA = 'mandriva'
+DIST_SUSE = 'suse'
+DIST_OPENSUSE = 'opensuse'
+DIST_MANDRIVA = 'mandriva'
 
-DISTRIBUTION_RPM_BASE = \
-        (DISTRIBUTION_REDHAT,
-         DISTRIBUTION_CENTOS,
-         DISTRIBUTION_FEDORA,
-         DISTRIBUTION_SUSE,
-         DISTRIBUTION_OPENSUSE,
-         DISTRIBUTION_MANDRIVA)
+DIST_RPM_BASE = \
+        (DIST_REDHAT,
+         DIST_CENTOS,
+         DIST_FEDORA,
+         DIST_SUSE,
+         DIST_OPENSUSE,
+         DIST_MANDRIVA)
+
+# BSD Base
+DIST_MACOSX = 'macosx'
 
 ### Architecture
-ARCHITECTURE_I386 = 'i386'
-ARCHITECTURE_AMD64 = 'amd64'
+ARCH_I386 = 'i386'
+ARCH_AMD64 = 'amd64'
+
+### System
+SYSTEM_LINUX = 'Linux'
+SYSTEM_MAC = 'Darwin'
+# not ready
+#SYSTEM_BSD = ''

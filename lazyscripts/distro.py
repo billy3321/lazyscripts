@@ -64,11 +64,9 @@ class Distribution(object):
 
         @return str
         """
-        #if self.name in ('ubuntu', 'debian', 'linuxmint'):
-        if self.name in DISTRIBUTION_DEB_BASE:
+        if self.name in DIST_DEB_BASE:
             extend = 'list'
-        #elif self.name in ('fedora', 'redhat', 'centos','opensuse','suse','mandriva'):
-        elif self.name in DISTRIBUTION_RPM_BASE:
+        elif self.name in DIST_RPM_BASE:
             extend = 'sh'
         return "lzs_%s_%s_%s.%s" % (platform.machine(),
                                           self.name,
@@ -96,32 +94,32 @@ class Distribution(object):
                 raise DistrobutionNotFound()
         elif self.name == 'susE':
             if commands.getoutput('cat /etc/SuSE-release | grep "openSUSE"'):
-                self.name = DISTRIBUTION_OPENSUSE
-        elif self.name == DISTRIBUTION_REDHAT:
+                self.name = DIST_OPENSUSE
+        elif self.name == DIST_REDHAT:
             if commands.getoutput('cat /etc/redhat-release | grep "Red Hat"'):
-                self.name = DISTRIBUTION_REDHAT
+                self.name = DIST_REDHAT
             if commands.getoutput('cat /etc/redhat-release | grep "CentOS"'):
-                self.name = DISTRIBUTION_CENTOS
+                self.name = DIST_CENTOS
         elif self.name in ('mandrake', 'mandriva linux'):
             if os.path.exists('/etc/mandriva-release') and \
                commands.getoutput('cat /etc/mandriva-release | grep "Mandriva"'):
-             self.name = DISTRIBUTION_MANDRIVA
+             self.name = DIST_MANDRIVA
     #}}}
 
     #{{{def _reduce_version(self):
     def _reduce_version(self):
         if self.name == 'opensolaris' and not self.version:
             self.version = commands.getoutput('cat /etc/release | grep "OpenSolaris" | cut -d " " -f 27')
-        elif self.name == DISTRIBUTION_DEBIAN:
+        elif self.name == DIST_DEBIAN:
             self.version = self.version.split('.')[0]
     #}}}
 
     def _reduce_architecture(self):
         arch = platform.architecture()[0]
         if arch == '32bit':
-            self.architecture = ARCHITECTURE_I386
+            self.architecture = ARCH_I386
         elif arch == '64bit':
-            self.architecture = ARCHITECTURE_AMD64
+            self.architecture = ARCH_AMD64
         else:
             self.architecture = None
 
