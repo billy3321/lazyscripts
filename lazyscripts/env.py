@@ -227,7 +227,7 @@ def storageenv(path=None):
         contents.append('export DISTRO_ARCHITECTURE="%s"' % distro.Distribution().architecture)
     if not path:
         path = DEFAULT_RUNTIME_ROOT_DIR
-    path = os.path.join(path, 'lzs_storagedenv')
+    path = os.path.join(path, DEFAULT_STORAGED_ENV_FILE)
     utils.create_executablefile(path, contents)
     return path
 #}}}
