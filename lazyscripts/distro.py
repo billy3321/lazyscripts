@@ -21,6 +21,7 @@ import os
 import platform
 
 from lazyscripts import pkgmgr
+from lazyscripts.constant import *
 
 class DistrobutionNotFound(Exception):
     "The distrobution can not be detected."
@@ -45,7 +46,7 @@ class Distribution(object):
     def __init__(self):
         # linux_distribution is insted of dist
         # Ref: http://docs.python.org/library/platform.html
-        if platform.python_version() < '2.6.0':
+        if platform.python_version() < PYTHON_VERSION:
             (self.name, self.version, self.codename) = platform.dist()
         else:
             (self.name, self.version, self.codename) = platform.linux_distribution()
@@ -63,9 +64,9 @@ class Distribution(object):
 
         @return str
         """
-        if self.name in ('ubuntu', 'debian', 'linuxmint'):
+        if self.name in DIST_DEB_BASE:
             extend = 'list'
-        elif self.name in ('fedora', 'redhat', 'centos','opensuse','suse','mandriva'):
+        elif self.name in DIST_RPM_BASE:
             extend = 'sh'
         return "lzs_%s_%s_%s.%s" % (platform.machine(),
                                           self.name,
@@ -93,32 +94,32 @@ class Distribution(object):
                 raise DistrobutionNotFound()
         elif self.name == 'susE':
             if commands.getoutput('cat /etc/SuSE-release | grep "openSUSE"'):
-                self.name = 'opensuse'
-        elif self.name == 'redhat':
+                self.name = DIST_OPENSUSE
+        elif self.name == DIST_REDHAT:
             if commands.getoutput('cat /etc/redhat-release | grep "Red Hat"'):
-                self.name = 'redhat'
+                self.name = DIST_REDHAT
             if commands.getoutput('cat /etc/redhat-release | grep "CentOS"'):
-                self.name = 'centos'
+                self.name = DIST_CENTOS
         elif self.name in ('mandrake', 'mandriva linux'):
             if os.path.exists('/etc/mandriva-release') and \
                commands.getoutput('cat /etc/mandriva-release | grep "Mandriva"'):
-             self.name = 'mandriva'
+             self.name = DIST_MANDRIVA
     #}}}
 
     #{{{def _reduce_version(self):
     def _reduce_version(self):
         if self.name == 'opensolaris' and not self.version:
             self.version = commands.getoutput('cat /etc/release | grep "OpenSolaris" | cut -d " " -f 27')
-        elif self.name == 'debian':
+        elif self.name == DIST_DEBIAN:
             self.version = self.version.split('.')[0]
     #}}}
 
     def _reduce_architecture(self):
         arch = platform.architecture()[0]
         if arch == '32bit':
-            self.architecture = 'i386'
+            self.architecture = ARCH_I386
         elif arch == '64bit':
-            self.architecture = 'amd64'
+            self.architecture = ARCH_AMD64
         else:
             self.architecture = None
 
