@@ -45,8 +45,8 @@ def get_realhome():
     return ''.join(lines[2][17:]).replace('\n','').replace('"','')
 #}}}
 
-#{{{def getLanguage():
-def getLanguage():
+#{{{def getLocale():
+def getLocale():
     lang = os.getenv('LANG')
     try:
         # zh_TW.UTF-8 or zh_TW:zh.UTF-8
@@ -183,7 +183,7 @@ def resource(query):
 
 #{{{def prepare_runtimeenv():
 def prepare_runtimeenv():
-    lang = getLanguage()
+    lang = getLocale()
     if lang == 'en_US':
         locale.setlocale (locale.LC_ALL, "en_US.UTF-8")
     else:
