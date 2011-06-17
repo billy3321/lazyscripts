@@ -91,7 +91,10 @@ class Distribution(object):
                 self.name = 'opensolaris'
             else:
                 raise DistrobutionNotFound()
-        elif self.name == 'susE':
+        elif self.name == 'ubuntu':
+            if os.path.exists('/etc/ezgo-release'):
+                self.name = 'ezgo'
+        elif self.name == 'suse':
             if commands.getoutput('cat /etc/SuSE-release | grep "openSUSE"'):
                 self.name = 'opensuse'
         elif self.name == 'redhat':
@@ -111,6 +114,8 @@ class Distribution(object):
             self.version = commands.getoutput('cat /etc/release | grep "OpenSolaris" | cut -d " " -f 27')
         elif self.name == 'debian':
             self.version = self.version.split('.')[0]
+        if self.name == 'ezgo':
+            self.version = commands.getoutput('cat /etc/ezgo-release | grep "Version" | cut -d ":" -f 2')
     #}}}
 
     def _reduce_architecture(self):
