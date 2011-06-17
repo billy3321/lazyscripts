@@ -251,7 +251,7 @@ class PoolCmd(Command):
     #{{{def _ask_user_selectpool(self):
     def _ask_user_selectpool(self):
         conf = env.resource('config')
-        lang = env.get_local()
+        lang = env.getLocale()
         pools = conf.get_support_pools(distro.Distribution().name, distro.Distribution().version, lang)
         if not pools:
             pools = conf.get_support_pools(distro.Distribution().name, distro.Distribution().version, 'en_US')

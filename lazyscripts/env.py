@@ -45,8 +45,8 @@ def get_realhome():
     return ''.join(lines[2][17:]).replace('\n','').replace('"','')
 #}}}
 
-#{{{def get_local():
-def get_local():
+#{{{def getLocale():
+def getLocale():
     lang = os.getenv('LANG')
     try:
         # zh_TW.UTF-8 or zh_TW:zh.UTF-8
@@ -183,7 +183,7 @@ def resource(query):
 
 #{{{def prepare_runtimeenv():
 def prepare_runtimeenv():
-    lang = get_local()
+    lang = getLocale()
     if lang == 'en_US':
         locale.setlocale (locale.LC_ALL, "en_US.UTF-8")
     else:
@@ -227,7 +227,7 @@ def storageenv(path=None):
         contents.append('export DISTRO_ARCHITECTURE="%s"' % distro.Distribution().architecture)
     if not path:
         path = DEFAULT_RUNTIME_ROOT_DIR
-    path = os.path.join(path, 'lzs_storagedenv')
+    path = os.path.join(path, DEFAULT_STORAGED_ENV_FILE)
     utils.create_executablefile(path, contents)
     return path
 #}}}
