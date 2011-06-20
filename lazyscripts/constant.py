@@ -6,12 +6,14 @@ PYTHON_VERSION = '2.6.0'
 # Debian base
 DIST_DEBIAN = 'debian'
 DIST_UBUNTU = 'ubuntu'
+DIST_EZGO   = 'ezgo'
 DIST_LINUXMINT = 'linuxmint'
 
 DIST_DEB_BASE = \
         (DIST_DEBIAN,
          DIST_UBUNTU,
-         DIST_LINUXMINT)
+         DIST_LINUXMINT,
+         DIST_EZGO)
 
 
 # RPM Base
@@ -33,6 +35,9 @@ DIST_RPM_BASE = \
 
 # BSD Base
 DIST_MACOSX = 'macosx'
+
+# Solaris Base
+DIST_OPENSOLARIS='opensolaris'
 
 ### Architecture
 ARCH_I386 = 'i386'

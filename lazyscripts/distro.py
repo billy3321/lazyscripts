@@ -89,13 +89,13 @@ class Distribution(object):
                 self.name = 'arch'
             elif os.path.exists('/usr/bin/pkg') and \
                 commands.getoutput('cat /etc/release | grep "OpenSolaris"'):
-                self.name = 'opensolaris'
+                self.name = DIST_OPENSOLARIS
             else:
                 raise DistrobutionNotFound()
-        elif self.name == 'ubuntu':
+        elif self.name == DIST_UBUNTU:
             if os.path.exists('/etc/ezgo-release'):
-                self.name = 'ezgo'
-        elif self.name == 'suse':
+                self.name = DIST_EZGO
+        elif self.name == DIST_SUSE:
             if commands.getoutput('cat /etc/SuSE-release | grep "openSUSE"'):
                 self.name = DIST_OPENSUSE
         elif self.name == DIST_REDHAT:
@@ -111,11 +111,11 @@ class Distribution(object):
 
     #{{{def _reduce_version(self):
     def _reduce_version(self):
-        if self.name == 'opensolaris' and not self.version:
+        if self.name == DIST_OPENSOLARIS and not self.version:
             self.version = commands.getoutput('cat /etc/release | grep "OpenSolaris" | cut -d " " -f 27')
         elif self.name == DIST_DEBIAN:
             self.version = self.version.split('.')[0]
-        if self.name == 'ezgo':
+        elif self.name == DIST_EZGO:
             self.version = commands.getoutput('cat /etc/ezgo-release | grep "Version" | cut -d ":" -f 2')
     #}}}
 
