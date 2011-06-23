@@ -197,7 +197,8 @@ class YumManager(AbstractPkgManager):
     CMDPREFIX_REMOVE = 'yum -y remove'
     CMDPREFIX_ADDREPO = ''
     CMDPREFIX_ADDKEY = 'rpm --import'
-    SOURCELISTS_DIR = '/etc/yum.repo.d'
+    #FIXME: the directory may change on different fedora.
+    SOURCELISTS_DIR = '/etc/yum.repos.d'
     SOURCELISTS_CFG = '/etc/yum.conf'
     #}}}
 
