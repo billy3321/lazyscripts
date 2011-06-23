@@ -66,7 +66,9 @@ class Distribution(object):
         """
         if self.name in DIST_DEB_BASE:
             extend = 'list'
-        elif self.name in DIST_RPM_BASE:
+        elif self.name in DIST_REDHAT_BASE:
+            extend = 'repo'
+        else:
             extend = 'sh'
         return "lzs_%s_%s_%s.%s" % (platform.machine(),
                                           self.name,

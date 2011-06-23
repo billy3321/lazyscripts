@@ -23,6 +23,10 @@ DIST_SUSE = 'suse'
 DIST_OPENSUSE = 'opensuse'
 DIST_MANDRIVA = 'mandriva'
 
+DIST_REDHAT_BASE = \
+        (DIST_REDHAT,
+         DIST_CENTOS,
+         DIST_FEDORA)
 DIST_RPM_BASE = \
         (DIST_REDHAT,
          DIST_CENTOS,
