@@ -306,7 +306,7 @@ class ToolListWidget:
     #{{{def load_tree(self, list_store):
     def load_tree(self, list_store):
         self.download_scripts()
-        lzs_loc = env.getLocale()
+        lzs_loc = env.get_locale()
         use_recommand = query_yes_no(_('gui.gtklib.toolpage.query_recommand'))
         for category in self.pool.categories():
             tool_page = ToolPage()
